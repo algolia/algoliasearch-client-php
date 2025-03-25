@@ -25,6 +25,7 @@ class SourceCommercetools extends AbstractModel implements ModelInterface, \Arra
         'url' => 'string',
         'projectKey' => 'string',
         'fallbackIsInStockValue' => 'bool',
+        'productQueryPredicate' => 'string',
         'customFields' => '\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields',
     ];
 
@@ -39,6 +40,7 @@ class SourceCommercetools extends AbstractModel implements ModelInterface, \Arra
         'url' => null,
         'projectKey' => null,
         'fallbackIsInStockValue' => null,
+        'productQueryPredicate' => null,
         'customFields' => null,
     ];
 
@@ -54,6 +56,7 @@ class SourceCommercetools extends AbstractModel implements ModelInterface, \Arra
         'url' => 'url',
         'projectKey' => 'projectKey',
         'fallbackIsInStockValue' => 'fallbackIsInStockValue',
+        'productQueryPredicate' => 'productQueryPredicate',
         'customFields' => 'customFields',
     ];
 
@@ -68,6 +71,7 @@ class SourceCommercetools extends AbstractModel implements ModelInterface, \Arra
         'url' => 'setUrl',
         'projectKey' => 'setProjectKey',
         'fallbackIsInStockValue' => 'setFallbackIsInStockValue',
+        'productQueryPredicate' => 'setProductQueryPredicate',
         'customFields' => 'setCustomFields',
     ];
 
@@ -82,6 +86,7 @@ class SourceCommercetools extends AbstractModel implements ModelInterface, \Arra
         'url' => 'getUrl',
         'projectKey' => 'getProjectKey',
         'fallbackIsInStockValue' => 'getFallbackIsInStockValue',
+        'productQueryPredicate' => 'getProductQueryPredicate',
         'customFields' => 'getCustomFields',
     ];
 
@@ -113,6 +118,9 @@ class SourceCommercetools extends AbstractModel implements ModelInterface, \Arra
         }
         if (isset($data['fallbackIsInStockValue'])) {
             $this->container['fallbackIsInStockValue'] = $data['fallbackIsInStockValue'];
+        }
+        if (isset($data['productQueryPredicate'])) {
+            $this->container['productQueryPredicate'] = $data['productQueryPredicate'];
         }
         if (isset($data['customFields'])) {
             $this->container['customFields'] = $data['customFields'];
@@ -316,6 +324,30 @@ class SourceCommercetools extends AbstractModel implements ModelInterface, \Arra
     public function setFallbackIsInStockValue($fallbackIsInStockValue)
     {
         $this->container['fallbackIsInStockValue'] = $fallbackIsInStockValue;
+
+        return $this;
+    }
+
+    /**
+     * Gets productQueryPredicate.
+     *
+     * @return null|string
+     */
+    public function getProductQueryPredicate()
+    {
+        return $this->container['productQueryPredicate'] ?? null;
+    }
+
+    /**
+     * Sets productQueryPredicate.
+     *
+     * @param null|string $productQueryPredicate Predicate to filter out specific products when indexing. For more information, see [Query Predicate](https://docs.commercetools.com/api/predicates/query).
+     *
+     * @return self
+     */
+    public function setProductQueryPredicate($productQueryPredicate)
+    {
+        $this->container['productQueryPredicate'] = $productQueryPredicate;
 
         return $this;
     }

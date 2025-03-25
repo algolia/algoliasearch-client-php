@@ -24,6 +24,7 @@ class SourceUpdateCommercetools extends AbstractModel implements ModelInterface,
         'locales' => 'string[]',
         'url' => 'string',
         'fallbackIsInStockValue' => 'bool',
+        'productQueryPredicate' => 'string',
         'customFields' => '\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields',
     ];
 
@@ -37,6 +38,7 @@ class SourceUpdateCommercetools extends AbstractModel implements ModelInterface,
         'locales' => null,
         'url' => null,
         'fallbackIsInStockValue' => null,
+        'productQueryPredicate' => null,
         'customFields' => null,
     ];
 
@@ -51,6 +53,7 @@ class SourceUpdateCommercetools extends AbstractModel implements ModelInterface,
         'locales' => 'locales',
         'url' => 'url',
         'fallbackIsInStockValue' => 'fallbackIsInStockValue',
+        'productQueryPredicate' => 'productQueryPredicate',
         'customFields' => 'customFields',
     ];
 
@@ -64,6 +67,7 @@ class SourceUpdateCommercetools extends AbstractModel implements ModelInterface,
         'locales' => 'setLocales',
         'url' => 'setUrl',
         'fallbackIsInStockValue' => 'setFallbackIsInStockValue',
+        'productQueryPredicate' => 'setProductQueryPredicate',
         'customFields' => 'setCustomFields',
     ];
 
@@ -77,6 +81,7 @@ class SourceUpdateCommercetools extends AbstractModel implements ModelInterface,
         'locales' => 'getLocales',
         'url' => 'getUrl',
         'fallbackIsInStockValue' => 'getFallbackIsInStockValue',
+        'productQueryPredicate' => 'getProductQueryPredicate',
         'customFields' => 'getCustomFields',
     ];
 
@@ -105,6 +110,9 @@ class SourceUpdateCommercetools extends AbstractModel implements ModelInterface,
         }
         if (isset($data['fallbackIsInStockValue'])) {
             $this->container['fallbackIsInStockValue'] = $data['fallbackIsInStockValue'];
+        }
+        if (isset($data['productQueryPredicate'])) {
+            $this->container['productQueryPredicate'] = $data['productQueryPredicate'];
         }
         if (isset($data['customFields'])) {
             $this->container['customFields'] = $data['customFields'];
@@ -275,6 +283,30 @@ class SourceUpdateCommercetools extends AbstractModel implements ModelInterface,
     public function setFallbackIsInStockValue($fallbackIsInStockValue)
     {
         $this->container['fallbackIsInStockValue'] = $fallbackIsInStockValue;
+
+        return $this;
+    }
+
+    /**
+     * Gets productQueryPredicate.
+     *
+     * @return null|string
+     */
+    public function getProductQueryPredicate()
+    {
+        return $this->container['productQueryPredicate'] ?? null;
+    }
+
+    /**
+     * Sets productQueryPredicate.
+     *
+     * @param null|string $productQueryPredicate Predicate to filter out specific products when indexing. For more information, see [Query Predicate](https://docs.commercetools.com/api/predicates/query).
+     *
+     * @return self
+     */
+    public function setProductQueryPredicate($productQueryPredicate)
+    {
+        $this->container['productQueryPredicate'] = $productQueryPredicate;
 
         return $this;
     }

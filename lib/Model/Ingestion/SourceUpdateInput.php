@@ -24,6 +24,7 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         'locales' => 'string[]',
         'url' => 'string',
         'fallbackIsInStockValue' => 'bool',
+        'productQueryPredicate' => 'string',
         'customFields' => '\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields',
         'uniqueIDColumn' => 'string',
         'method' => '\Algolia\AlgoliaSearch\Model\Ingestion\MethodType',
@@ -49,6 +50,7 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         'locales' => null,
         'url' => null,
         'fallbackIsInStockValue' => null,
+        'productQueryPredicate' => null,
         'customFields' => null,
         'uniqueIDColumn' => null,
         'method' => null,
@@ -75,6 +77,7 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         'locales' => 'locales',
         'url' => 'url',
         'fallbackIsInStockValue' => 'fallbackIsInStockValue',
+        'productQueryPredicate' => 'productQueryPredicate',
         'customFields' => 'customFields',
         'uniqueIDColumn' => 'uniqueIDColumn',
         'method' => 'method',
@@ -100,6 +103,7 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         'locales' => 'setLocales',
         'url' => 'setUrl',
         'fallbackIsInStockValue' => 'setFallbackIsInStockValue',
+        'productQueryPredicate' => 'setProductQueryPredicate',
         'customFields' => 'setCustomFields',
         'uniqueIDColumn' => 'setUniqueIDColumn',
         'method' => 'setMethod',
@@ -125,6 +129,7 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         'locales' => 'getLocales',
         'url' => 'getUrl',
         'fallbackIsInStockValue' => 'getFallbackIsInStockValue',
+        'productQueryPredicate' => 'getProductQueryPredicate',
         'customFields' => 'getCustomFields',
         'uniqueIDColumn' => 'getUniqueIDColumn',
         'method' => 'getMethod',
@@ -165,6 +170,9 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         }
         if (isset($data['fallbackIsInStockValue'])) {
             $this->container['fallbackIsInStockValue'] = $data['fallbackIsInStockValue'];
+        }
+        if (isset($data['productQueryPredicate'])) {
+            $this->container['productQueryPredicate'] = $data['productQueryPredicate'];
         }
         if (isset($data['customFields'])) {
             $this->container['customFields'] = $data['customFields'];
@@ -389,6 +397,30 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
     public function setFallbackIsInStockValue($fallbackIsInStockValue)
     {
         $this->container['fallbackIsInStockValue'] = $fallbackIsInStockValue;
+
+        return $this;
+    }
+
+    /**
+     * Gets productQueryPredicate.
+     *
+     * @return null|string
+     */
+    public function getProductQueryPredicate()
+    {
+        return $this->container['productQueryPredicate'] ?? null;
+    }
+
+    /**
+     * Sets productQueryPredicate.
+     *
+     * @param null|string $productQueryPredicate Predicate to filter out specific products when indexing. For more information, see [Query Predicate](https://docs.commercetools.com/api/predicates/query).
+     *
+     * @return self
+     */
+    public function setProductQueryPredicate($productQueryPredicate)
+    {
+        $this->container['productQueryPredicate'] = $productQueryPredicate;
 
         return $this;
     }

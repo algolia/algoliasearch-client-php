@@ -25,6 +25,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'url' => 'string',
         'projectKey' => 'string',
         'fallbackIsInStockValue' => 'bool',
+        'productQueryPredicate' => 'string',
         'customFields' => 'string[]',
         'storeHash' => 'string',
         'channel' => '\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceChannel',
@@ -57,6 +58,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'url' => null,
         'projectKey' => null,
         'fallbackIsInStockValue' => null,
+        'productQueryPredicate' => null,
         'customFields' => null,
         'storeHash' => null,
         'channel' => null,
@@ -90,6 +92,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'url' => 'url',
         'projectKey' => 'projectKey',
         'fallbackIsInStockValue' => 'fallbackIsInStockValue',
+        'productQueryPredicate' => 'productQueryPredicate',
         'customFields' => 'customFields',
         'storeHash' => 'storeHash',
         'channel' => 'channel',
@@ -122,6 +125,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'url' => 'setUrl',
         'projectKey' => 'setProjectKey',
         'fallbackIsInStockValue' => 'setFallbackIsInStockValue',
+        'productQueryPredicate' => 'setProductQueryPredicate',
         'customFields' => 'setCustomFields',
         'storeHash' => 'setStoreHash',
         'channel' => 'setChannel',
@@ -154,6 +158,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'url' => 'getUrl',
         'projectKey' => 'getProjectKey',
         'fallbackIsInStockValue' => 'getFallbackIsInStockValue',
+        'productQueryPredicate' => 'getProductQueryPredicate',
         'customFields' => 'getCustomFields',
         'storeHash' => 'getStoreHash',
         'channel' => 'getChannel',
@@ -203,6 +208,9 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         }
         if (isset($data['fallbackIsInStockValue'])) {
             $this->container['fallbackIsInStockValue'] = $data['fallbackIsInStockValue'];
+        }
+        if (isset($data['productQueryPredicate'])) {
+            $this->container['productQueryPredicate'] = $data['productQueryPredicate'];
         }
         if (isset($data['customFields'])) {
             $this->container['customFields'] = $data['customFields'];
@@ -481,6 +489,30 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
     public function setFallbackIsInStockValue($fallbackIsInStockValue)
     {
         $this->container['fallbackIsInStockValue'] = $fallbackIsInStockValue;
+
+        return $this;
+    }
+
+    /**
+     * Gets productQueryPredicate.
+     *
+     * @return null|string
+     */
+    public function getProductQueryPredicate()
+    {
+        return $this->container['productQueryPredicate'] ?? null;
+    }
+
+    /**
+     * Sets productQueryPredicate.
+     *
+     * @param null|string $productQueryPredicate Predicate to filter out specific products when indexing. For more information, see [Query Predicate](https://docs.commercetools.com/api/predicates/query).
+     *
+     * @return self
+     */
+    public function setProductQueryPredicate($productQueryPredicate)
+    {
+        $this->container['productQueryPredicate'] = $productQueryPredicate;
 
         return $this;
     }

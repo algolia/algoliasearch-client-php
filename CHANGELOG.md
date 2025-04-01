@@ -1,3 +1,7 @@
+## [4.18.1](https://github.com/algolia/algoliasearch-client-php/compare/4.18.0...4.18.1)
+
+- [a51683025e](https://github.com/algolia/api-clients-automation/commit/a51683025e) chore: deprecate mcm methods ([#4694](https://github.com/algolia/api-clients-automation/pull/4694)) by [@kai687](https://github.com/kai687/)
+
 ## [4.18.0](https://github.com/algolia/algoliasearch-client-php/compare/4.17.0...4.18.0)
 
 - [c3addb449](https://github.com/algolia/api-clients-automation/commit/c3addb449) feat(specs): add CT Query predicate property ([#4654](https://github.com/algolia/api-clients-automation/pull/4654)) by [@morganleroi](https://github.com/morganleroi/)

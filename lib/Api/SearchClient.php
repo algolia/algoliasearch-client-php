@@ -319,6 +319,8 @@ class SearchClient
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|CreatedAtResponse
+     *
+     * @deprecated
      */
     public function assignUserId($xAlgoliaUserID, $assignUserIdParams, $requestOptions = [])
     {
@@ -406,6 +408,8 @@ class SearchClient
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|CreatedAtResponse
+     *
+     * @deprecated
      */
     public function batchAssignUserIds($xAlgoliaUserID, $batchAssignUserIdsParams, $requestOptions = [])
     {
@@ -1602,6 +1606,8 @@ class SearchClient
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|GetTopUserIdsResponse
+     *
+     * @deprecated
      */
     public function getTopUserIds($requestOptions = [])
     {
@@ -1623,6 +1629,8 @@ class SearchClient
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|UserId
+     *
+     * @deprecated
      */
     public function getUserId($userID, $requestOptions = [])
     {
@@ -1660,6 +1668,8 @@ class SearchClient
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|HasPendingMappingsResponse
+     *
+     * @deprecated
      */
     public function hasPendingMappings($getClusters = null, $requestOptions = [])
     {
@@ -1704,6 +1714,8 @@ class SearchClient
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|ListClustersResponse
+     *
+     * @deprecated
      */
     public function listClusters($requestOptions = [])
     {
@@ -1756,6 +1768,8 @@ class SearchClient
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|ListUserIdsResponse
+     *
+     * @deprecated
      */
     public function listUserIds($page = null, $hitsPerPage = null, $requestOptions = [])
     {
@@ -1929,6 +1943,8 @@ class SearchClient
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|RemoveUserIdResponse
+     *
+     * @deprecated
      */
     public function removeUserId($userID, $requestOptions = [])
     {
@@ -2617,6 +2633,8 @@ class SearchClient
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|SearchUserIdsResponse
+     *
+     * @deprecated
      */
     public function searchUserIds($searchUserIdsParams, $requestOptions = [])
     {

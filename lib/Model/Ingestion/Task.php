@@ -282,6 +282,9 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         if (!isset($this->container['createdAt']) || null === $this->container['createdAt']) {
             $invalidProperties[] = "'createdAt' can't be null";
         }
+        if (!isset($this->container['updatedAt']) || null === $this->container['updatedAt']) {
+            $invalidProperties[] = "'updatedAt' can't be null";
+        }
 
         return $invalidProperties;
     }
@@ -684,7 +687,7 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     /**
      * Gets updatedAt.
      *
-     * @return null|string
+     * @return string
      */
     public function getUpdatedAt()
     {
@@ -694,7 +697,7 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     /**
      * Sets updatedAt.
      *
-     * @param null|string $updatedAt date of last update in RFC 3339 format
+     * @param string $updatedAt date of last update in RFC 3339 format
      *
      * @return self
      */

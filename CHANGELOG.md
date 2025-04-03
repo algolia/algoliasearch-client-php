@@ -1,3 +1,7 @@
+## [4.18.2](https://github.com/algolia/algoliasearch-client-php/compare/4.18.1...4.18.2)
+
+- [ac400354a9](https://github.com/algolia/api-clients-automation/commit/ac400354a9) fix(specs): make the updateAt non-null in ingestion ([#4697](https://github.com/algolia/api-clients-automation/pull/4697)) by [@millotp](https://github.com/millotp/)
+
 ## [4.18.1](https://github.com/algolia/algoliasearch-client-php/compare/4.18.0...4.18.1)
 
 - [a51683025e](https://github.com/algolia/api-clients-automation/commit/a51683025e) chore: deprecate mcm methods ([#4694](https://github.com/algolia/api-clients-automation/pull/4694)) by [@kai687](https://github.com/kai687/)

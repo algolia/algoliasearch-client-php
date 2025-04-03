@@ -65,7 +65,7 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'numericAttributesForFiltering' => 'string[]',
         'separatorsToIndex' => 'string',
         'searchableAttributes' => 'string[]',
-        'userData' => 'object',
+        'userData' => 'mixed',
         'customNormalization' => 'array<string,array<string,string>>',
         'attributeForDistinct' => 'string',
         'maxFacetHits' => 'int',
@@ -1876,7 +1876,7 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
     /**
      * Gets userData.
      *
-     * @return null|object
+     * @return null|mixed
      */
     public function getUserData()
     {
@@ -1886,7 +1886,7 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
     /**
      * Sets userData.
      *
-     * @param null|object $userData An object with custom data.  You can store up to 32kB as custom data.
+     * @param null|mixed $userData An object with custom data.  You can store up to 32kB as custom data.
      *
      * @return self
      */

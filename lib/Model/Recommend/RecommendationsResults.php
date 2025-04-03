@@ -43,7 +43,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'renderingContent' => '\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent',
         'serverTimeMS' => 'int',
         'serverUsed' => 'string',
-        'userData' => 'object',
+        'userData' => 'mixed',
         'queryID' => 'string',
         'automaticInsights' => 'bool',
         'page' => 'int',
@@ -967,7 +967,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
     /**
      * Gets userData.
      *
-     * @return null|object
+     * @return null|mixed
      */
     public function getUserData()
     {
@@ -977,7 +977,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
     /**
      * Sets userData.
      *
-     * @param null|object $userData An object with custom data.  You can store up to 32kB as custom data.
+     * @param null|mixed $userData An object with custom data.  You can store up to 32kB as custom data.
      *
      * @return self
      */

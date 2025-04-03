@@ -63,7 +63,7 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'numericAttributesForFiltering' => 'string[]',
         'separatorsToIndex' => 'string',
         'searchableAttributes' => 'string[]',
-        'userData' => 'object',
+        'userData' => 'mixed',
         'customNormalization' => 'array<string,array<string,string>>',
         'attributeForDistinct' => 'string',
         'maxFacetHits' => 'int',
@@ -1874,7 +1874,7 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Gets userData.
      *
-     * @return null|object
+     * @return null|mixed
      */
     public function getUserData()
     {
@@ -1884,7 +1884,7 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets userData.
      *
-     * @param null|object $userData An object with custom data.  You can store up to 32kB as custom data.
+     * @param null|mixed $userData An object with custom data.  You can store up to 32kB as custom data.
      *
      * @return self
      */

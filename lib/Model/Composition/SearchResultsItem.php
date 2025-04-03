@@ -43,7 +43,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
         'renderingContent' => '\Algolia\AlgoliaSearch\Model\Composition\RenderingContent',
         'serverTimeMS' => 'int',
         'serverUsed' => 'string',
-        'userData' => 'object',
+        'userData' => 'mixed',
         'queryID' => 'string',
         'automaticInsights' => 'bool',
         'page' => 'int',
@@ -1012,7 +1012,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets userData.
      *
-     * @return null|object
+     * @return null|mixed
      */
     public function getUserData()
     {
@@ -1022,7 +1022,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets userData.
      *
-     * @param null|object $userData An object with custom data.  You can store up to 32kB as custom data.
+     * @param null|mixed $userData An object with custom data.  You can store up to 32kB as custom data.
      *
      * @return self
      */

@@ -890,7 +890,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets image.
      *
-     * @param string $image shortname of the image, as returned by the referential
+     * @param string $image name of the connector
      *
      * @return self
      */

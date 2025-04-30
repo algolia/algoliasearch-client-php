@@ -25,7 +25,7 @@ use GuzzleHttp\Psr7\Query;
  */
 class QuerySuggestionsClient
 {
-    public const VERSION = '4.18.4';
+    public const VERSION = '4.18.5';
 
     /**
      * @var ApiWrapperInterface

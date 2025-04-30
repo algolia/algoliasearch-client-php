@@ -1,3 +1,7 @@
+## [4.18.5](https://github.com/algolia/algoliasearch-client-php/compare/4.18.4...4.18.5)
+
+- [53ac749807](https://github.com/algolia/api-clients-automation/commit/53ac749807) chore(deps): dependencies 2025-04-28 ([#4785](https://github.com/algolia/api-clients-automation/pull/4785)) by [@algolia-bot](https://github.com/algolia-bot/)
+
 ## [4.18.4](https://github.com/algolia/algoliasearch-client-php/compare/4.18.3...4.18.4)
 
 - [369c14232](https://github.com/algolia/api-clients-automation/commit/369c14232) fix(specs): condition cant be numeric filter ([#4726](https://github.com/algolia/api-clients-automation/pull/4726)) by [@kai687](https://github.com/kai687/)

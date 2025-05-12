@@ -270,6 +270,9 @@ class InsightsClient
     /**
      * Deletes all events related to the specified user token from events metrics and analytics. The deletion is asynchronous, and processed within 48 hours. To delete a personalization user profile, see `Delete a user profile` in the Personalization API.
      *
+     * Required API Key ACLs:
+     *  - deleteObject
+     *
      * @param string $userToken      User token for which to delete all associated events. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      */
@@ -301,6 +304,9 @@ class InsightsClient
 
     /**
      * Sends a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB.
+     *
+     * Required API Key ACLs:
+     *  - search
      *
      * @param array|InsightsEvents $insightsEvents insightsEvents (required)
      *                                             - $insightsEvents['events'] => (array) Click and conversion events.  **All** events must be valid, otherwise the API returns an error. (required)

@@ -21,7 +21,7 @@ use GuzzleHttp\Psr7\Query;
  */
 class InsightsClient
 {
-    public const VERSION = '4.18.5';
+    public const VERSION = '4.19.0';
 
     /**
      * @var ApiWrapperInterface

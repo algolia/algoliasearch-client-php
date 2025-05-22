@@ -21,9 +21,11 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     protected static $modelTypes = [
         'runID' => 'string',
+        'eventID' => 'string',
         'data' => 'object[]',
         'events' => '\Algolia\AlgoliaSearch\Model\Ingestion\Event[]',
         'message' => 'string',
+        'createdAt' => 'string',
     ];
 
     /**
@@ -33,9 +35,11 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     protected static $modelFormats = [
         'runID' => null,
+        'eventID' => null,
         'data' => null,
         'events' => null,
         'message' => null,
+        'createdAt' => null,
     ];
 
     /**
@@ -46,9 +50,11 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     protected static $attributeMap = [
         'runID' => 'runID',
+        'eventID' => 'eventID',
         'data' => 'data',
         'events' => 'events',
         'message' => 'message',
+        'createdAt' => 'createdAt',
     ];
 
     /**
@@ -58,9 +64,11 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     protected static $setters = [
         'runID' => 'setRunID',
+        'eventID' => 'setEventID',
         'data' => 'setData',
         'events' => 'setEvents',
         'message' => 'setMessage',
+        'createdAt' => 'setCreatedAt',
     ];
 
     /**
@@ -70,9 +78,11 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     protected static $getters = [
         'runID' => 'getRunID',
+        'eventID' => 'getEventID',
         'data' => 'getData',
         'events' => 'getEvents',
         'message' => 'getMessage',
+        'createdAt' => 'getCreatedAt',
     ];
 
     /**
@@ -92,6 +102,9 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
         if (isset($data['runID'])) {
             $this->container['runID'] = $data['runID'];
         }
+        if (isset($data['eventID'])) {
+            $this->container['eventID'] = $data['eventID'];
+        }
         if (isset($data['data'])) {
             $this->container['data'] = $data['data'];
         }
@@ -100,6 +113,9 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
         }
         if (isset($data['message'])) {
             $this->container['message'] = $data['message'];
+        }
+        if (isset($data['createdAt'])) {
+            $this->container['createdAt'] = $data['createdAt'];
         }
     }
 
@@ -206,6 +222,30 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
     }
 
     /**
+     * Gets eventID.
+     *
+     * @return null|string
+     */
+    public function getEventID()
+    {
+        return $this->container['eventID'] ?? null;
+    }
+
+    /**
+     * Sets eventID.
+     *
+     * @param null|string $eventID universally unique identifier (UUID) of an event
+     *
+     * @return self
+     */
+    public function setEventID($eventID)
+    {
+        $this->container['eventID'] = $eventID;
+
+        return $this;
+    }
+
+    /**
      * Gets data.
      *
      * @return null|object[]
@@ -273,6 +313,30 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
     public function setMessage($message)
     {
         $this->container['message'] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Gets createdAt.
+     *
+     * @return null|string
+     */
+    public function getCreatedAt()
+    {
+        return $this->container['createdAt'] ?? null;
+    }
+
+    /**
+     * Sets createdAt.
+     *
+     * @param null|string $createdAt date of creation in RFC 3339 format
+     *
+     * @return self
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->container['createdAt'] = $createdAt;
 
         return $this;
     }

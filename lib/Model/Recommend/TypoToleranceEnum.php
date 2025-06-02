@@ -20,6 +20,10 @@ class TypoToleranceEnum
 
     public const STRICT = 'strict';
 
+    public const TRUE = 'true';
+
+    public const FALSE = 'false';
+
     /**
      * Gets allowable values of the enum.
      *
@@ -30,6 +34,8 @@ class TypoToleranceEnum
         return [
             self::MIN,
             self::STRICT,
+            self::TRUE,
+            self::FALSE,
         ];
     }
 }

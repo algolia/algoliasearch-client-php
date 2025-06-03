@@ -24,6 +24,8 @@ class TransformationCreate extends AbstractModel implements ModelInterface, \Arr
     protected static $modelTypes = [
         'code' => 'string',
         'name' => 'string',
+        'type' => '\Algolia\AlgoliaSearch\Model\Ingestion\TransformationType',
+        'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\TransformationInput',
         'description' => 'string',
         'authenticationIDs' => 'string[]',
     ];
@@ -36,6 +38,8 @@ class TransformationCreate extends AbstractModel implements ModelInterface, \Arr
     protected static $modelFormats = [
         'code' => null,
         'name' => null,
+        'type' => null,
+        'input' => null,
         'description' => null,
         'authenticationIDs' => null,
     ];
@@ -49,6 +53,8 @@ class TransformationCreate extends AbstractModel implements ModelInterface, \Arr
     protected static $attributeMap = [
         'code' => 'code',
         'name' => 'name',
+        'type' => 'type',
+        'input' => 'input',
         'description' => 'description',
         'authenticationIDs' => 'authenticationIDs',
     ];
@@ -61,6 +67,8 @@ class TransformationCreate extends AbstractModel implements ModelInterface, \Arr
     protected static $setters = [
         'code' => 'setCode',
         'name' => 'setName',
+        'type' => 'setType',
+        'input' => 'setInput',
         'description' => 'setDescription',
         'authenticationIDs' => 'setAuthenticationIDs',
     ];
@@ -73,6 +81,8 @@ class TransformationCreate extends AbstractModel implements ModelInterface, \Arr
     protected static $getters = [
         'code' => 'getCode',
         'name' => 'getName',
+        'type' => 'getType',
+        'input' => 'getInput',
         'description' => 'getDescription',
         'authenticationIDs' => 'getAuthenticationIDs',
     ];
@@ -96,6 +106,12 @@ class TransformationCreate extends AbstractModel implements ModelInterface, \Arr
         }
         if (isset($data['name'])) {
             $this->container['name'] = $data['name'];
+        }
+        if (isset($data['type'])) {
+            $this->container['type'] = $data['type'];
+        }
+        if (isset($data['input'])) {
+            $this->container['input'] = $data['input'];
         }
         if (isset($data['description'])) {
             $this->container['description'] = $data['description'];
@@ -165,11 +181,14 @@ class TransformationCreate extends AbstractModel implements ModelInterface, \Arr
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['code']) || null === $this->container['code']) {
-            $invalidProperties[] = "'code' can't be null";
-        }
         if (!isset($this->container['name']) || null === $this->container['name']) {
             $invalidProperties[] = "'name' can't be null";
+        }
+        if (!isset($this->container['type']) || null === $this->container['type']) {
+            $invalidProperties[] = "'type' can't be null";
+        }
+        if (!isset($this->container['input']) || null === $this->container['input']) {
+            $invalidProperties[] = "'input' can't be null";
         }
 
         return $invalidProperties;
@@ -189,7 +208,9 @@ class TransformationCreate extends AbstractModel implements ModelInterface, \Arr
     /**
      * Gets code.
      *
-     * @return string
+     * @return null|string
+     *
+     * @deprecated
      */
     public function getCode()
     {
@@ -199,9 +220,11 @@ class TransformationCreate extends AbstractModel implements ModelInterface, \Arr
     /**
      * Sets code.
      *
-     * @param string $code the source code of the transformation
+     * @param null|string $code It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.
      *
      * @return self
+     *
+     * @deprecated
      */
     public function setCode($code)
     {
@@ -230,6 +253,54 @@ class TransformationCreate extends AbstractModel implements ModelInterface, \Arr
     public function setName($name)
     {
         $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets type.
+     *
+     * @return TransformationType
+     */
+    public function getType()
+    {
+        return $this->container['type'] ?? null;
+    }
+
+    /**
+     * Sets type.
+     *
+     * @param TransformationType $type type
+     *
+     * @return self
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets input.
+     *
+     * @return TransformationInput
+     */
+    public function getInput()
+    {
+        return $this->container['input'] ?? null;
+    }
+
+    /**
+     * Sets input.
+     *
+     * @param TransformationInput $input input
+     *
+     * @return self
+     */
+    public function setInput($input)
+    {
+        $this->container['input'] = $input;
 
         return $this;
     }

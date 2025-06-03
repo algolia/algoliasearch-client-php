@@ -8,11 +8,13 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * TransformationTry Class Doc Comment.
+ * TransformationCode Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Input for a transformation that contains the source code of the transformation.
  */
-class TransformationTry extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TransformationCode extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -21,8 +23,6 @@ class TransformationTry extends AbstractModel implements ModelInterface, \ArrayA
      */
     protected static $modelTypes = [
         'code' => 'string',
-        'sampleRecord' => 'object',
-        'authentications' => '\Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationCreate[]',
     ];
 
     /**
@@ -32,8 +32,6 @@ class TransformationTry extends AbstractModel implements ModelInterface, \ArrayA
      */
     protected static $modelFormats = [
         'code' => null,
-        'sampleRecord' => null,
-        'authentications' => null,
     ];
 
     /**
@@ -44,8 +42,6 @@ class TransformationTry extends AbstractModel implements ModelInterface, \ArrayA
      */
     protected static $attributeMap = [
         'code' => 'code',
-        'sampleRecord' => 'sampleRecord',
-        'authentications' => 'authentications',
     ];
 
     /**
@@ -55,8 +51,6 @@ class TransformationTry extends AbstractModel implements ModelInterface, \ArrayA
      */
     protected static $setters = [
         'code' => 'setCode',
-        'sampleRecord' => 'setSampleRecord',
-        'authentications' => 'setAuthentications',
     ];
 
     /**
@@ -66,8 +60,6 @@ class TransformationTry extends AbstractModel implements ModelInterface, \ArrayA
      */
     protected static $getters = [
         'code' => 'getCode',
-        'sampleRecord' => 'getSampleRecord',
-        'authentications' => 'getAuthentications',
     ];
 
     /**
@@ -86,12 +78,6 @@ class TransformationTry extends AbstractModel implements ModelInterface, \ArrayA
     {
         if (isset($data['code'])) {
             $this->container['code'] = $data['code'];
-        }
-        if (isset($data['sampleRecord'])) {
-            $this->container['sampleRecord'] = $data['sampleRecord'];
-        }
-        if (isset($data['authentications'])) {
-            $this->container['authentications'] = $data['authentications'];
         }
     }
 
@@ -158,9 +144,6 @@ class TransformationTry extends AbstractModel implements ModelInterface, \ArrayA
         if (!isset($this->container['code']) || null === $this->container['code']) {
             $invalidProperties[] = "'code' can't be null";
         }
-        if (!isset($this->container['sampleRecord']) || null === $this->container['sampleRecord']) {
-            $invalidProperties[] = "'sampleRecord' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -180,8 +163,6 @@ class TransformationTry extends AbstractModel implements ModelInterface, \ArrayA
      * Gets code.
      *
      * @return string
-     *
-     * @deprecated
      */
     public function getCode()
     {
@@ -191,63 +172,13 @@ class TransformationTry extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets code.
      *
-     * @param string $code It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.
+     * @param string $code the source code of the transformation
      *
      * @return self
-     *
-     * @deprecated
      */
     public function setCode($code)
     {
         $this->container['code'] = $code;
-
-        return $this;
-    }
-
-    /**
-     * Gets sampleRecord.
-     *
-     * @return object
-     */
-    public function getSampleRecord()
-    {
-        return $this->container['sampleRecord'] ?? null;
-    }
-
-    /**
-     * Sets sampleRecord.
-     *
-     * @param object $sampleRecord the record to apply the given code to
-     *
-     * @return self
-     */
-    public function setSampleRecord($sampleRecord)
-    {
-        $this->container['sampleRecord'] = $sampleRecord;
-
-        return $this;
-    }
-
-    /**
-     * Gets authentications.
-     *
-     * @return null|AuthenticationCreate[]
-     */
-    public function getAuthentications()
-    {
-        return $this->container['authentications'] ?? null;
-    }
-
-    /**
-     * Sets authentications.
-     *
-     * @param null|AuthenticationCreate[] $authentications authentications
-     *
-     * @return self
-     */
-    public function setAuthentications($authentications)
-    {
-        $this->container['authentications'] = $authentications;
 
         return $this;
     }

@@ -24,6 +24,12 @@ class Action
 
     public const PARTIAL_UPDATE_OBJECT_NO_CREATE = 'partialUpdateObjectNoCreate';
 
+    public const DELETE_OBJECT = 'deleteObject';
+
+    public const DELETE = 'delete';
+
+    public const CLEAR = 'clear';
+
     /**
      * Gets allowable values of the enum.
      *
@@ -36,6 +42,9 @@ class Action
             self::UPDATE_OBJECT,
             self::PARTIAL_UPDATE_OBJECT,
             self::PARTIAL_UPDATE_OBJECT_NO_CREATE,
+            self::DELETE_OBJECT,
+            self::DELETE,
+            self::CLEAR,
         ];
     }
 }

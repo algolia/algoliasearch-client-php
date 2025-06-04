@@ -23,7 +23,7 @@ use GuzzleHttp\Psr7\Query;
  */
 class CompositionClient
 {
-    public const VERSION = '4.19.0';
+    public const VERSION = '4.20.0';
 
     /**
      * @var ApiWrapperInterface

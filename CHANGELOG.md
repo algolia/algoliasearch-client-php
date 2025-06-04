@@ -1,3 +1,13 @@
+## [4.20.0](https://github.com/algolia/algoliasearch-client-php/compare/4.19.0...4.20.0)
+
+- [9db03b532b](https://github.com/algolia/api-clients-automation/commit/9db03b532b) fix(specs): typo ([#4854](https://github.com/algolia/api-clients-automation/pull/4854)) by [@kai687](https://github.com/kai687/)
+- [969cae23ab](https://github.com/algolia/api-clients-automation/commit/969cae23ab) fix(specs): change fileSize to int64 type ([#4877](https://github.com/algolia/api-clients-automation/pull/4877)) by [@millotp](https://github.com/millotp/)
+- [90b49b1e1b](https://github.com/algolia/api-clients-automation/commit/90b49b1e1b) feat(specs): add global push endpoint ([#4855](https://github.com/algolia/api-clients-automation/pull/4855)) by [@shortcuts](https://github.com/shortcuts/)
+- [cf416e6b91](https://github.com/algolia/api-clients-automation/commit/cf416e6b91) fix(specs): updated watchResponse ([#4879](https://github.com/algolia/api-clients-automation/pull/4879)) by [@shortcuts](https://github.com/shortcuts/)
+- [06ad06e4a8](https://github.com/algolia/api-clients-automation/commit/06ad06e4a8) feat(specs): update transformation specs for no-code ([#4901](https://github.com/algolia/api-clients-automation/pull/4901)) by [@mehmetaligok](https://github.com/mehmetaligok/)
+- [4ec0e13e28](https://github.com/algolia/api-clients-automation/commit/4ec0e13e28) fix(specs): more indexing actions to push ([#4930](https://github.com/algolia/api-clients-automation/pull/4930)) by [@shortcuts](https://github.com/shortcuts/)
+- [1951e4d127](https://github.com/algolia/api-clients-automation/commit/1951e4d127) fix(specs): wrong ACL for getSettings ([#4933](https://github.com/algolia/api-clients-automation/pull/4933)) by [@kai687](https://github.com/kai687/)
+
 ## [4.19.0](https://github.com/algolia/algoliasearch-client-php/compare/4.18.5...4.19.0)
 
 - [bebb56e0b9](https://github.com/algolia/api-clients-automation/commit/bebb56e0b9) fix(specs): add x-acl to insights endpoints ([#4822](https://github.com/algolia/api-clients-automation/pull/4822)) by [@kai687](https://github.com/kai687/)

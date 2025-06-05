@@ -39,7 +39,7 @@ use GuzzleHttp\Psr7\Query;
  */
 class AnalyticsClient
 {
-    public const VERSION = '4.20.0';
+    public const VERSION = '4.21.0';
 
     /**
      * @var ApiWrapperInterface

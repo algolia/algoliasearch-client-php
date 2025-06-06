@@ -2,6 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Http;
 
+use GuzzleHttp\Utils;
 use Algolia\AlgoliaSearch\Http\Psr7\Response;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ConnectException;
@@ -44,7 +45,7 @@ final class GuzzleHttpClient implements HttpClientInterface
 
     private static function buildClient(array $config = [])
     {
-        $handlerStack = new HandlerStack(\GuzzleHttp\choose_handler());
+        $handlerStack = new HandlerStack(Utils::chooseHandler());
         $handlerStack->push(Middleware::prepareBody(), 'prepare_body');
         $config = array_merge(['handler' => $handlerStack], $config);
 

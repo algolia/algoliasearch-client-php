@@ -31,6 +31,11 @@ class CompositionClient
     protected $api;
 
     /**
+     * @var IngestionClient
+     */
+    protected $ingestionTransporter;
+
+    /**
      * @var CompositionConfig
      */
     protected $config;
@@ -67,7 +72,9 @@ class CompositionClient
             self::getClusterHosts($config)
         );
 
-        return new static($apiWrapper, $config);
+        $client = new static($apiWrapper, $config);
+
+        return $client;
     }
 
     /**

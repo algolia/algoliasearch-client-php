@@ -33,6 +33,11 @@ class QuerySuggestionsClient
     protected $api;
 
     /**
+     * @var IngestionClient
+     */
+    protected $ingestionTransporter;
+
+    /**
      * @var QuerySuggestionsConfig
      */
     protected $config;
@@ -72,7 +77,9 @@ class QuerySuggestionsClient
             self::getClusterHosts($config)
         );
 
-        return new static($apiWrapper, $config);
+        $client = new static($apiWrapper, $config);
+
+        return $client;
     }
 
     /**

@@ -29,6 +29,11 @@ class InsightsClient
     protected $api;
 
     /**
+     * @var IngestionClient
+     */
+    protected $ingestionTransporter;
+
+    /**
      * @var InsightsConfig
      */
     protected $config;
@@ -68,7 +73,9 @@ class InsightsClient
             self::getClusterHosts($config)
         );
 
-        return new static($apiWrapper, $config);
+        $client = new static($apiWrapper, $config);
+
+        return $client;
     }
 
     /**

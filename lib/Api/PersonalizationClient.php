@@ -31,6 +31,11 @@ class PersonalizationClient
     protected $api;
 
     /**
+     * @var IngestionClient
+     */
+    protected $ingestionTransporter;
+
+    /**
      * @var PersonalizationConfig
      */
     protected $config;
@@ -70,7 +75,9 @@ class PersonalizationClient
             self::getClusterHosts($config)
         );
 
-        return new static($apiWrapper, $config);
+        $client = new static($apiWrapper, $config);
+
+        return $client;
     }
 
     /**

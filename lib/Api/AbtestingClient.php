@@ -35,6 +35,11 @@ class AbtestingClient
     protected $api;
 
     /**
+     * @var IngestionClient
+     */
+    protected $ingestionTransporter;
+
+    /**
      * @var AbtestingConfig
      */
     protected $config;
@@ -74,7 +79,9 @@ class AbtestingClient
             self::getClusterHosts($config)
         );
 
-        return new static($apiWrapper, $config);
+        $client = new static($apiWrapper, $config);
+
+        return $client;
     }
 
     /**

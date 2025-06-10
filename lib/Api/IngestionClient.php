@@ -77,6 +77,11 @@ class IngestionClient
     protected $api;
 
     /**
+     * @var IngestionClient
+     */
+    protected $ingestionTransporter;
+
+    /**
      * @var IngestionConfig
      */
     protected $config;
@@ -116,7 +121,9 @@ class IngestionClient
             self::getClusterHosts($config)
         );
 
-        return new static($apiWrapper, $config);
+        $client = new static($apiWrapper, $config);
+
+        return $client;
     }
 
     /**

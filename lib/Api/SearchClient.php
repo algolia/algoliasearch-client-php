@@ -5,6 +5,7 @@
 namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
+use Algolia\AlgoliaSearch\Configuration\IngestionConfig;
 use Algolia\AlgoliaSearch\Configuration\SearchConfig;
 use Algolia\AlgoliaSearch\Exceptions\ExceededRetriesException;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
@@ -92,6 +93,11 @@ class SearchClient
     protected $api;
 
     /**
+     * @var IngestionClient
+     */
+    protected $ingestionTransporter;
+
+    /**
      * @var SearchConfig
      */
     protected $config;
@@ -128,7 +134,23 @@ class SearchClient
             self::getClusterHosts($config)
         );
 
-        return new static($apiWrapper, $config);
+        $client = new static($apiWrapper, $config);
+
+        if (null !== $config->getTransformationRegion()) {
+            $ingestionConfig = IngestionConfig::create($config->getAppId(), $config->getAlgoliaApiKey(), $config->getTransformationRegion());
+
+            if ($hosts = $config->getHosts()) {
+                if ($config->getHasFullHosts()) {
+                    $ingestionConfig = $ingestionConfig->setFullHosts($hosts);
+                } else {
+                    $ingestionConfig = $ingestionConfig->setHosts($hosts);
+                }
+            }
+
+            $client->ingestionTransporter = IngestionClient::createWithConfig($ingestionConfig);
+        }
+
+        return $client;
     }
 
     /**
@@ -3015,6 +3037,27 @@ class SearchClient
     }
 
     /**
+     * Helper: Similar to the `saveObjects` method but requires a Push connector
+     * (https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/connectors/push/)
+     * to be created first, in order to transform records before indexing them to Algolia. The
+     * `region` must have been passed to the client instantiation method.
+     *
+     * @param string $indexName      the `indexName` to replace `objects` in
+     * @param array  $objects        the array of `objects` to store in the given Algolia `indexName`
+     * @param bool   $waitForTasks   Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
+     * @param array  $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
+     * @param array  $requestOptions Request options
+     */
+    public function saveObjectsWithTransformation($indexName, $objects, $waitForTasks = false, $batchSize = 1000, $requestOptions = [])
+    {
+        if (null == $this->ingestionTransporter) {
+            throw new \InvalidArgumentException('`setTransformationRegion` must have been called before calling this method.');
+        }
+
+        return $this->ingestionTransporter->push($indexName, ['action' => 'addObject', 'records' => $objects], $waitForTasks, $requestOptions);
+    }
+
+    /**
      * Helper: Deletes every records for the given objectIDs. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objectIDs in it.
      *
      * @param string $indexName      the `indexName` to delete `objectIDs` from
@@ -3047,6 +3090,28 @@ class SearchClient
     public function partialUpdateObjects($indexName, $objects, $createIfNotExists, $waitForTasks = false, $batchSize = 1000, $requestOptions = [])
     {
         return $this->chunkedBatch($indexName, $objects, (true == $createIfNotExists) ? 'partialUpdateObject' : 'partialUpdateObjectNoCreate', $waitForTasks, $batchSize, $requestOptions);
+    }
+
+    /**
+     * Helper: Similar to the `partialUpdateObjects` method but requires a Push connector
+     * (https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/connectors/push/)
+     * to be created first, in order to transform records before indexing them to Algolia. The
+     * `region` must have been passed to the client instantiation method.
+     *
+     * @param string $indexName         the `indexName` to replace `objects` in
+     * @param array  $objects           the array of `objects` to store in the given Algolia `indexName`
+     * @param bool   $createIfNotExists To be provided if non-existing objects are passed, otherwise, the call will fail..
+     * @param bool   $waitForTasks      Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
+     * @param array  $batchSize         The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
+     * @param array  $requestOptions    Request options
+     */
+    public function partialUpdateObjectsWithTransformation($indexName, $objects, $createIfNotExists, $waitForTasks = false, $batchSize = 1000, $requestOptions = [])
+    {
+        if (null == $this->ingestionTransporter) {
+            throw new \InvalidArgumentException('`setTransformationRegion` must have been called before calling this method.');
+        }
+
+        return $this->ingestionTransporter->push($indexName, ['action' => (true == $createIfNotExists) ? 'partialUpdateObject' : 'partialUpdateObjectNoCreate', 'records' => $objects], $waitForTasks, $requestOptions);
     }
 
     /**

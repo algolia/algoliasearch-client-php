@@ -47,6 +47,11 @@ class AnalyticsClient
     protected $api;
 
     /**
+     * @var IngestionClient
+     */
+    protected $ingestionTransporter;
+
+    /**
      * @var AnalyticsConfig
      */
     protected $config;
@@ -86,7 +91,9 @@ class AnalyticsClient
             self::getClusterHosts($config)
         );
 
-        return new static($apiWrapper, $config);
+        $client = new static($apiWrapper, $config);
+
+        return $client;
     }
 
     /**

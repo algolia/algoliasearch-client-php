@@ -359,8 +359,8 @@ class IngestionClient
      * @param array|TransformationCreate $transformationCreate Request body for creating a transformation. (required)
      *                                                         - $transformationCreate['code'] => (string) It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.
      *                                                         - $transformationCreate['name'] => (string) The uniquely identified name of your transformation. (required)
-     *                                                         - $transformationCreate['type'] => (array)  (required)
-     *                                                         - $transformationCreate['input'] => (array)  (required)
+     *                                                         - $transformationCreate['type'] => (array)
+     *                                                         - $transformationCreate['input'] => (array)
      *                                                         - $transformationCreate['description'] => (string) A descriptive name for your transformation of what it does.
      *                                                         - $transformationCreate['authenticationIDs'] => (array) The authentications associated with the current transformation.
      *
@@ -2322,7 +2322,9 @@ class IngestionClient
      *  - editSettings
      *
      * @param array|TransformationTry $transformationTry transformationTry (required)
-     *                                                   - $transformationTry['code'] => (string) It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code. (required)
+     *                                                   - $transformationTry['code'] => (string) It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.
+     *                                                   - $transformationTry['type'] => (array)
+     *                                                   - $transformationTry['input'] => (array)
      *                                                   - $transformationTry['sampleRecord'] => (array) The record to apply the given code to. (required)
      *                                                   - $transformationTry['authentications'] => (array)
      *
@@ -2359,7 +2361,9 @@ class IngestionClient
      *
      * @param string                  $transformationID  Unique identifier of a transformation. (required)
      * @param array|TransformationTry $transformationTry transformationTry (required)
-     *                                                   - $transformationTry['code'] => (string) It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code. (required)
+     *                                                   - $transformationTry['code'] => (string) It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.
+     *                                                   - $transformationTry['type'] => (array)
+     *                                                   - $transformationTry['input'] => (array)
      *                                                   - $transformationTry['sampleRecord'] => (array) The record to apply the given code to. (required)
      *                                                   - $transformationTry['authentications'] => (array)
      *
@@ -2670,8 +2674,8 @@ class IngestionClient
      * @param array|TransformationCreate $transformationCreate transformationCreate (required)
      *                                                         - $transformationCreate['code'] => (string) It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.
      *                                                         - $transformationCreate['name'] => (string) The uniquely identified name of your transformation. (required)
-     *                                                         - $transformationCreate['type'] => (array)  (required)
-     *                                                         - $transformationCreate['input'] => (array)  (required)
+     *                                                         - $transformationCreate['type'] => (array)
+     *                                                         - $transformationCreate['input'] => (array)
      *                                                         - $transformationCreate['description'] => (string) A descriptive name for your transformation of what it does.
      *                                                         - $transformationCreate['authenticationIDs'] => (array) The authentications associated with the current transformation.
      *

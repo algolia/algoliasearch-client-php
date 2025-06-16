@@ -1814,12 +1814,13 @@ class IngestionClient
      *
      * @see PushTaskPayload
      *
-     * @param bool  $watch          When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param bool   $watch              When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding. (optional)
+     * @param string $referenceIndexName This is required when targeting an index that does not have a push connector setup (e.g. a tmp index), but you wish to attach another index's transformation to it (e.g. the source index name). (optional)
+     * @param array  $requestOptions     the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|WatchResponse
      */
-    public function push($indexName, $pushTaskPayload, $watch = null, $requestOptions = [])
+    public function push($indexName, $pushTaskPayload, $watch = null, $referenceIndexName = null, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
@@ -1841,6 +1842,10 @@ class IngestionClient
 
         if (null !== $watch) {
             $queryParameters['watch'] = $watch;
+        }
+
+        if (null !== $referenceIndexName) {
+            $queryParameters['referenceIndexName'] = $referenceIndexName;
         }
 
         // path params

@@ -403,9 +403,6 @@ class BrowseResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['processingTimeMS']) || null === $this->container['processingTimeMS']) {
-            $invalidProperties[] = "'processingTimeMS' can't be null";
-        }
         if (!isset($this->container['hits']) || null === $this->container['hits']) {
             $invalidProperties[] = "'hits' can't be null";
         }
@@ -829,7 +826,7 @@ class BrowseResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Gets processingTimeMS.
      *
-     * @return int
+     * @return null|int
      */
     public function getProcessingTimeMS()
     {
@@ -839,7 +836,7 @@ class BrowseResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets processingTimeMS.
      *
-     * @param int $processingTimeMS time the server took to process the request, in milliseconds
+     * @param null|int $processingTimeMS time the server took to process the request, in milliseconds
      *
      * @return self
      */

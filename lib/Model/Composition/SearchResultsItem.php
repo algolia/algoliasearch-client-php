@@ -403,9 +403,6 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['processingTimeMS']) || null === $this->container['processingTimeMS']) {
-            $invalidProperties[] = "'processingTimeMS' can't be null";
-        }
         if (!isset($this->container['page']) || null === $this->container['page']) {
             $invalidProperties[] = "'page' can't be null";
         }
@@ -844,7 +841,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets processingTimeMS.
      *
-     * @return int
+     * @return null|int
      */
     public function getProcessingTimeMS()
     {
@@ -854,7 +851,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets processingTimeMS.
      *
-     * @param int $processingTimeMS time the server took to process the request, in milliseconds
+     * @param null|int $processingTimeMS time the server took to process the request, in milliseconds
      *
      * @return self
      */

@@ -6,6 +6,8 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\IngestionConfig;
+use Algolia\AlgoliaSearch\Exceptions\ExceededRetriesException;
+use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Model\Ingestion\Authentication;
 use Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationCreate;
 use Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationCreateResponse;
@@ -2822,6 +2824,76 @@ class IngestionClient
         }
 
         return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Helper: Chunks the given `objects` list in subset of 1000 elements max in order to make it fit in `batch` requests.
+     *
+     * @param string $indexName          the `indexName` to replace `objects` in
+     * @param array  $objects            the array of `objects` to store in the given Algolia `indexName`
+     * @param array  $action             the `batch` `action` to perform on the given array of `objects`, defaults to `addObject`
+     * @param bool   $waitForTasks       whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
+     * @param array  $batchSize          The size of the chunk of `objects`. The number of `push` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
+     * @param array  $referenceIndexName This is required when targeting an index that does not have a push connector setup (e.g. a tmp index), but you wish to attach another index's transformation to it (e.g. the source index name).
+     * @param array  $requestOptions     Request options
+     */
+    public function chunkedPush(
+        $indexName,
+        $objects,
+        $action = 'addObject',
+        $waitForTasks = true,
+        $referenceIndexName = null,
+        $batchSize = 1000,
+        $requestOptions = []
+    ) {
+        $responses = [];
+        $records = [];
+        $count = 0;
+
+        foreach ($objects as $object) {
+            $records[] = $object;
+
+            if (sizeof($records) === $batchSize || $count === sizeof($objects) - 1) {
+                $responses[] = $this->push($indexName, ['action' => $action, 'records' => $records], false, $referenceIndexName, $requestOptions);
+                $records = [];
+            }
+
+            ++$count;
+        }
+
+        if (!empty($records)) {
+            $responses[] = $this->push($indexName, ['action' => $action, 'records' => $records], false, $referenceIndexName, $requestOptions);
+        }
+
+        if ($waitForTasks && !empty($responses)) {
+            $timeoutCalculation = 'Algolia\AlgoliaSearch\Support\Helpers::linearTimeout';
+
+            foreach ($responses as $response) {
+                $this->waitForTask($indexName, $response['taskID']);
+                $retry = 0;
+
+                while ($retry < 50) {
+                    try {
+                        $resp = $this->getEvent($response->runID, $response->eventID);
+
+                        break;
+                    } catch (NotFoundException $e) {
+                        if (404 === $e->getCode()) {
+                            return null;
+                        }
+                    }
+
+                    ++$retry;
+                    usleep(
+                        call_user_func_array($timeoutCalculation, [$this->config->getWaitTaskTimeBeforeRetry(), $retry])
+                    );
+                }
+
+                throw new ExceededRetriesException('Maximum number of retries (50) exceeded.');
+            }
+        }
+
+        return $responses;
     }
 
     private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)

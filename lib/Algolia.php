@@ -14,7 +14,7 @@ use Psr\SimpleCache\CacheInterface;
 
 final class Algolia
 {
-    public const VERSION = '4.22.0';
+    public const VERSION = '4.23.0';
 
     /**
      * Holds an instance of the simple cache repository (PSR-16).

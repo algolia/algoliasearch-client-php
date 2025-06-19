@@ -2959,6 +2959,73 @@ class SearchClient
     }
 
     /**
+     * Helper: Similar to the `replaceAllObjects` method but requires a Push connector (https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/connectors/push/) to be created first, in order to transform records before indexing them to Algolia. The `region` must have been passed to the client instantiation method.
+     *
+     * @param string $indexName      the `indexName` to replace `objects` in
+     * @param array  $objects        the array of `objects` to store in the given Algolia `indexName`
+     * @param array  $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
+     * @param array  $requestOptions Request options
+     * @param mixed  $scopes
+     */
+    public function replaceAllObjectsWithTransformation($indexName, $objects, $batchSize = 1000, $scopes = ['settings', 'rules', 'synonyms'], $requestOptions = [])
+    {
+        if (null == $this->ingestionTransporter) {
+            throw new \InvalidArgumentException('`setTransformationRegion` must have been called before calling this method.');
+        }
+
+        $tmpIndexName = $indexName.'_tmp_'.rand(10000000, 99999999);
+
+        try {
+            $copyOperationResponse = $this->operationIndex(
+                $indexName,
+                [
+                    'operation' => 'copy',
+                    'destination' => $tmpIndexName,
+                    'scope' => $scopes,
+                ],
+                $requestOptions
+            );
+
+            $watchResponses = $this->ingestionTransporter->chunkedPush($tmpIndexName, $objects, 'addObject', true, $batchSize, $indexName, $requestOptions);
+
+            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID']);
+
+            $copyOperationResponse = $this->operationIndex(
+                $indexName,
+                [
+                    'operation' => 'copy',
+                    'destination' => $tmpIndexName,
+                    'scope' => $scopes,
+                ],
+                $requestOptions
+            );
+
+            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID']);
+
+            $moveOperationResponse = $this->operationIndex(
+                $tmpIndexName,
+                [
+                    'operation' => 'move',
+                    'destination' => $indexName,
+                ],
+                $requestOptions
+            );
+
+            $this->waitForTask($tmpIndexName, $moveOperationResponse['taskID']);
+
+            return [
+                'copyOperationResponse' => $copyOperationResponse,
+                'watchResponses' => $watchResponses,
+                'moveOperationResponse' => $moveOperationResponse,
+            ];
+        } catch (\Throwable $e) {
+            $this->deleteIndex($tmpIndexName);
+
+            throw $e;
+        }
+    }
+
+    /**
      * Helper: Replace all objects in an index using a temporary one.
      * See https://api-clients-automation.netlify.app/docs/add-new-api-client#5-helpers for implementation details.
      *

@@ -2842,8 +2842,8 @@ class IngestionClient
         $objects,
         $action = 'addObject',
         $waitForTasks = true,
-        $referenceIndexName = null,
         $batchSize = 1000,
+        $referenceIndexName = null,
         $requestOptions = []
     ) {
         $responses = [];
@@ -2852,6 +2852,7 @@ class IngestionClient
 
         foreach ($objects as $object) {
             $records[] = $object;
+            $ok = false;
 
             if (sizeof($records) === $batchSize || $count === sizeof($objects) - 1) {
                 $responses[] = $this->push($indexName, ['action' => $action, 'records' => $records], false, $referenceIndexName, $requestOptions);
@@ -2869,18 +2870,17 @@ class IngestionClient
             $timeoutCalculation = 'Algolia\AlgoliaSearch\Support\Helpers::linearTimeout';
 
             foreach ($responses as $response) {
-                $this->waitForTask($indexName, $response['taskID']);
                 $retry = 0;
 
                 while ($retry < 50) {
                     try {
-                        $resp = $this->getEvent($response->runID, $response->eventID);
+                        $this->getEvent($response['runID'], $response['eventID']);
+
+                        $ok = true;
 
                         break;
                     } catch (NotFoundException $e) {
-                        if (404 === $e->getCode()) {
-                            return null;
-                        }
+                        // just retry
                     }
 
                     ++$retry;
@@ -2889,7 +2889,9 @@ class IngestionClient
                     );
                 }
 
-                throw new ExceededRetriesException('Maximum number of retries (50) exceeded.');
+                if (false === $ok) {
+                    throw new ExceededRetriesException('Maximum number of retries (50) exceeded.');
+                }
             }
         }
 

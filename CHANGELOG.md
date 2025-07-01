@@ -1,3 +1,8 @@
+## [4.24.0](https://github.com/algolia/algoliasearch-client-php/compare/4.23.0...4.24.0)
+
+- [d1e9835e53](https://github.com/algolia/api-clients-automation/commit/d1e9835e53) chore(deps): dependencies 2025-06-30 ([#5031](https://github.com/algolia/api-clients-automation/pull/5031)) by [@algolia-bot](https://github.com/algolia-bot/)
+- [791a0c045d](https://github.com/algolia/api-clients-automation/commit/791a0c045d) feat(specs): abtesting winsorizedAmount ([#5053](https://github.com/algolia/api-clients-automation/pull/5053)) by [@cdhawke](https://github.com/cdhawke/)
+
 ## [4.23.0](https://github.com/algolia/algoliasearch-client-php/compare/4.22.0...4.23.0)
 
 - [a2ebbf496c](https://github.com/algolia/api-clients-automation/commit/a2ebbf496c) feat(clients): add `replaceAllObjectsWithTransformation` ([#5008](https://github.com/algolia/api-clients-automation/pull/5008)) by [@shortcuts](https://github.com/shortcuts/)

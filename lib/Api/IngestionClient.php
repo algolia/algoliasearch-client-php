@@ -1939,7 +1939,7 @@ class IngestionClient
     }
 
     /**
-     * Runs all tasks linked to a source, only available for Shopify sources. It will create 1 run per task.
+     * Runs all tasks linked to a source, only available for Shopify, BigCommerce and commercetools sources. Creates one run per task.
      *
      * Required API Key ACLs:
      *  - addObject
@@ -1948,9 +1948,9 @@ class IngestionClient
      *
      * @param string                 $sourceID         Unique identifier of a source. (required)
      * @param array|RunSourcePayload $runSourcePayload (optional)
-     *                                                 - $runSourcePayload['indexToInclude'] => (array) List of index names to include in reidexing/update.
-     *                                                 - $runSourcePayload['indexToExclude'] => (array) List of index names to exclude in reidexing/update.
-     *                                                 - $runSourcePayload['entityIDs'] => (array) List of entityID to update.
+     *                                                 - $runSourcePayload['indexToInclude'] => (array) List of index names to include in reindex/update.
+     *                                                 - $runSourcePayload['indexToExclude'] => (array) List of index names to exclude in reindex/update.
+     *                                                 - $runSourcePayload['entityIDs'] => (array) List of entityIDs to update.
      *                                                 - $runSourcePayload['entityType'] => (array)
      *
      * @see RunSourcePayload

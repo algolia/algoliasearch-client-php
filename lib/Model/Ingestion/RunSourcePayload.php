@@ -188,7 +188,7 @@ class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAc
     /**
      * Sets indexToInclude.
      *
-     * @param null|string[] $indexToInclude list of index names to include in reidexing/update
+     * @param null|string[] $indexToInclude list of index names to include in reindex/update
      *
      * @return self
      */
@@ -212,7 +212,7 @@ class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAc
     /**
      * Sets indexToExclude.
      *
-     * @param null|string[] $indexToExclude list of index names to exclude in reidexing/update
+     * @param null|string[] $indexToExclude list of index names to exclude in reindex/update
      *
      * @return self
      */
@@ -236,7 +236,7 @@ class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAc
     /**
      * Sets entityIDs.
      *
-     * @param null|string[] $entityIDs list of entityID to update
+     * @param null|string[] $entityIDs list of entityIDs to update
      *
      * @return self
      */

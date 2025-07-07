@@ -1,3 +1,8 @@
+## [4.24.1](https://github.com/algolia/algoliasearch-client-php/compare/4.24.0...4.24.1)
+
+- [4c9416a9fe](https://github.com/algolia/api-clients-automation/commit/4c9416a9fe) fix(specs): update sourceRun docs ([#5057](https://github.com/algolia/api-clients-automation/pull/5057)) by [@DevinCodes](https://github.com/DevinCodes/)
+- [754efceb80](https://github.com/algolia/api-clients-automation/commit/754efceb80) fix(specs): allow one sided rule validity ([#5060](https://github.com/algolia/api-clients-automation/pull/5060)) by [@millotp](https://github.com/millotp/)
+
 ## [4.24.0](https://github.com/algolia/algoliasearch-client-php/compare/4.23.0...4.24.0)
 
 - [d1e9835e53](https://github.com/algolia/api-clients-automation/commit/d1e9835e53) chore(deps): dependencies 2025-06-30 ([#5031](https://github.com/algolia/api-clients-automation/pull/5031)) by [@algolia-bot](https://github.com/algolia-bot/)

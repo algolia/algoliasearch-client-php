@@ -35,6 +35,7 @@ use Algolia\AlgoliaSearch\Model\Ingestion\RunListResponse;
 use Algolia\AlgoliaSearch\Model\Ingestion\RunResponse;
 use Algolia\AlgoliaSearch\Model\Ingestion\RunSourcePayload;
 use Algolia\AlgoliaSearch\Model\Ingestion\RunSourceResponse;
+use Algolia\AlgoliaSearch\Model\Ingestion\RunTaskPayload;
 use Algolia\AlgoliaSearch\Model\Ingestion\Source;
 use Algolia\AlgoliaSearch\Model\Ingestion\SourceCreate;
 use Algolia\AlgoliaSearch\Model\Ingestion\SourceCreateResponse;
@@ -1952,6 +1953,7 @@ class IngestionClient
      *                                                 - $runSourcePayload['indexToExclude'] => (array) List of index names to exclude in reindex/update.
      *                                                 - $runSourcePayload['entityIDs'] => (array) List of entityIDs to update.
      *                                                 - $runSourcePayload['entityType'] => (array)
+     *                                                 - $runSourcePayload['runMetadata'] => (array) Additional information that will be passed to the created runs.
      *
      * @see RunSourcePayload
      *
@@ -1993,12 +1995,17 @@ class IngestionClient
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string $taskID         Unique identifier of a task. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string               $taskID         Unique identifier of a task. (required)
+     * @param array|RunTaskPayload $runTaskPayload (optional)
+     *                                             - $runTaskPayload['runMetadata'] => (array) Additional information that will be passed to the created run
+     *
+     * @see RunTaskPayload
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|RunResponse
      */
-    public function runTask($taskID, $requestOptions = [])
+    public function runTask($taskID, $runTaskPayload = null, $requestOptions = [])
     {
         // verify the required parameter 'taskID' is set
         if (!isset($taskID)) {
@@ -2010,7 +2017,7 @@ class IngestionClient
         $resourcePath = '/2/tasks/{taskID}/run';
         $queryParameters = [];
         $headers = [];
-        $httpBody = null;
+        $httpBody = isset($runTaskPayload) ? $runTaskPayload : [];
 
         // path params
         if (null !== $taskID) {
@@ -2032,14 +2039,19 @@ class IngestionClient
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string $taskID         Unique identifier of a task. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string               $taskID         Unique identifier of a task. (required)
+     * @param array|RunTaskPayload $runTaskPayload (optional)
+     *                                             - $runTaskPayload['runMetadata'] => (array) Additional information that will be passed to the created run
+     *
+     * @see RunTaskPayload
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|RunResponse
      *
      * @deprecated
      */
-    public function runTaskV1($taskID, $requestOptions = [])
+    public function runTaskV1($taskID, $runTaskPayload = null, $requestOptions = [])
     {
         // verify the required parameter 'taskID' is set
         if (!isset($taskID)) {
@@ -2051,7 +2063,7 @@ class IngestionClient
         $resourcePath = '/1/tasks/{taskID}/run';
         $queryParameters = [];
         $headers = [];
-        $httpBody = null;
+        $httpBody = isset($runTaskPayload) ? $runTaskPayload : [];
 
         // path params
         if (null !== $taskID) {

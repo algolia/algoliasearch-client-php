@@ -8,11 +8,11 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * RunSourcePayload Class Doc Comment.
+ * RunTaskPayload Class Doc Comment.
  *
  * @category Class
  */
-class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class RunTaskPayload extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -20,10 +20,6 @@ class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $modelTypes = [
-        'indexToInclude' => 'string[]',
-        'indexToExclude' => 'string[]',
-        'entityIDs' => 'string[]',
-        'entityType' => '\Algolia\AlgoliaSearch\Model\Ingestion\EntityType',
         'runMetadata' => 'array<string,mixed>',
     ];
 
@@ -33,10 +29,6 @@ class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $modelFormats = [
-        'indexToInclude' => null,
-        'indexToExclude' => null,
-        'entityIDs' => null,
-        'entityType' => null,
         'runMetadata' => null,
     ];
 
@@ -47,10 +39,6 @@ class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $attributeMap = [
-        'indexToInclude' => 'indexToInclude',
-        'indexToExclude' => 'indexToExclude',
-        'entityIDs' => 'entityIDs',
-        'entityType' => 'entityType',
         'runMetadata' => 'runMetadata',
     ];
 
@@ -60,10 +48,6 @@ class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $setters = [
-        'indexToInclude' => 'setIndexToInclude',
-        'indexToExclude' => 'setIndexToExclude',
-        'entityIDs' => 'setEntityIDs',
-        'entityType' => 'setEntityType',
         'runMetadata' => 'setRunMetadata',
     ];
 
@@ -73,10 +57,6 @@ class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $getters = [
-        'indexToInclude' => 'getIndexToInclude',
-        'indexToExclude' => 'getIndexToExclude',
-        'entityIDs' => 'getEntityIDs',
-        'entityType' => 'getEntityType',
         'runMetadata' => 'getRunMetadata',
     ];
 
@@ -94,18 +74,6 @@ class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAc
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['indexToInclude'])) {
-            $this->container['indexToInclude'] = $data['indexToInclude'];
-        }
-        if (isset($data['indexToExclude'])) {
-            $this->container['indexToExclude'] = $data['indexToExclude'];
-        }
-        if (isset($data['entityIDs'])) {
-            $this->container['entityIDs'] = $data['entityIDs'];
-        }
-        if (isset($data['entityType'])) {
-            $this->container['entityType'] = $data['entityType'];
-        }
         if (isset($data['runMetadata'])) {
             $this->container['runMetadata'] = $data['runMetadata'];
         }
@@ -184,102 +152,6 @@ class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAc
     }
 
     /**
-     * Gets indexToInclude.
-     *
-     * @return null|string[]
-     */
-    public function getIndexToInclude()
-    {
-        return $this->container['indexToInclude'] ?? null;
-    }
-
-    /**
-     * Sets indexToInclude.
-     *
-     * @param null|string[] $indexToInclude list of index names to include in reindex/update
-     *
-     * @return self
-     */
-    public function setIndexToInclude($indexToInclude)
-    {
-        $this->container['indexToInclude'] = $indexToInclude;
-
-        return $this;
-    }
-
-    /**
-     * Gets indexToExclude.
-     *
-     * @return null|string[]
-     */
-    public function getIndexToExclude()
-    {
-        return $this->container['indexToExclude'] ?? null;
-    }
-
-    /**
-     * Sets indexToExclude.
-     *
-     * @param null|string[] $indexToExclude list of index names to exclude in reindex/update
-     *
-     * @return self
-     */
-    public function setIndexToExclude($indexToExclude)
-    {
-        $this->container['indexToExclude'] = $indexToExclude;
-
-        return $this;
-    }
-
-    /**
-     * Gets entityIDs.
-     *
-     * @return null|string[]
-     */
-    public function getEntityIDs()
-    {
-        return $this->container['entityIDs'] ?? null;
-    }
-
-    /**
-     * Sets entityIDs.
-     *
-     * @param null|string[] $entityIDs list of entityIDs to update
-     *
-     * @return self
-     */
-    public function setEntityIDs($entityIDs)
-    {
-        $this->container['entityIDs'] = $entityIDs;
-
-        return $this;
-    }
-
-    /**
-     * Gets entityType.
-     *
-     * @return null|EntityType
-     */
-    public function getEntityType()
-    {
-        return $this->container['entityType'] ?? null;
-    }
-
-    /**
-     * Sets entityType.
-     *
-     * @param null|EntityType $entityType entityType
-     *
-     * @return self
-     */
-    public function setEntityType($entityType)
-    {
-        $this->container['entityType'] = $entityType;
-
-        return $this;
-    }
-
-    /**
      * Gets runMetadata.
      *
      * @return null|array<string,mixed>
@@ -292,7 +164,7 @@ class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAc
     /**
      * Sets runMetadata.
      *
-     * @param null|array<string,mixed> $runMetadata additional information that will be passed to the created runs
+     * @param null|array<string,mixed> $runMetadata additional information that will be passed to the created run
      *
      * @return self
      */

@@ -22,7 +22,7 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     protected static $modelTypes = [
         'addToCartCount' => 'int',
         'addToCartRate' => 'float',
-        'averageClickPosition' => 'int',
+        'averageClickPosition' => 'float',
         'clickCount' => 'int',
         'clickThroughRate' => 'float',
         'conversionCount' => 'int',
@@ -50,7 +50,7 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     protected static $modelFormats = [
         'addToCartCount' => null,
         'addToCartRate' => 'double',
-        'averageClickPosition' => null,
+        'averageClickPosition' => 'double',
         'clickCount' => null,
         'clickThroughRate' => 'double',
         'conversionCount' => null,
@@ -387,7 +387,7 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     /**
      * Gets averageClickPosition.
      *
-     * @return null|int
+     * @return null|float
      */
     public function getAverageClickPosition()
     {
@@ -397,7 +397,7 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     /**
      * Sets averageClickPosition.
      *
-     * @param null|int $averageClickPosition [Average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position) for this variant.
+     * @param null|float $averageClickPosition [Average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position) for this variant.
      *
      * @return self
      */

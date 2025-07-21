@@ -436,7 +436,7 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Sets getRankingInfo.
      *
-     * @param null|bool $getRankingInfo whether the search response should include detailed ranking information
+     * @param null|bool $getRankingInfo whether the run response should include detailed ranking information
      *
      * @return self
      */
@@ -748,7 +748,7 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Sets queryLanguages.
      *
-     * @param null|SupportedLanguage[] $queryLanguages Languages for language-specific query processing steps such as plurals, stop-word removal, and word-detection dictionaries.  This setting sets a default list of languages used by the `removeStopWords` and `ignorePlurals` settings. This setting also sets a dictionary for word detection in the logogram-based [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) languages. To support this, you must place the CJK language **first**.  **You should always specify a query language.** If you don't specify an indexing language, the search engine uses all [supported languages](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/), or the languages you specified with the `ignorePlurals` or `removeStopWords` parameters. This can lead to unexpected search results. For more information, see [Language-specific configuration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/).
+     * @param null|SupportedLanguage[] $queryLanguages Languages for language-specific query processing steps such as plurals, stop-word removal, and word-detection dictionaries This setting sets a default list of languages used by the `removeStopWords` and `ignorePlurals` settings. This setting also sets a dictionary for word detection in the logogram-based [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) languages. To support this, you must place the CJK language **first** **You should always specify a query language.** If you don't specify an indexing language, the search engine uses all [supported languages](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/), or the languages you specified with the `ignorePlurals` or `removeStopWords` parameters. This can lead to unexpected search results. For more information, see [Language-specific configuration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/).
      *
      * @return self
      */
@@ -772,7 +772,7 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Sets naturalLanguages.
      *
-     * @param null|SupportedLanguage[] $naturalLanguages ISO language codes that adjust settings that are useful for processing natural language queries (as opposed to keyword searches):  - Sets `removeStopWords` and `ignorePlurals` to the list of provided languages. - Sets `removeWordsIfNoResults` to `allOptional`. - Adds a `natural_language` attribute to `ruleContexts` and `analyticsTags`.
+     * @param null|SupportedLanguage[] $naturalLanguages ISO language codes that adjust settings that are useful for processing natural language queries (as opposed to keyword searches) - Sets `removeStopWords` and `ignorePlurals` to the list of provided languages. - Sets `removeWordsIfNoResults` to `allOptional`. - Adds a `natural_language` attribute to `ruleContexts` and `analyticsTags`.
      *
      * @return self
      */
@@ -796,7 +796,7 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Sets enableRules.
      *
-     * @param null|bool $enableRules whether to enable rules
+     * @param null|bool $enableRules whether to enable composition rules
      *
      * @return self
      */
@@ -820,7 +820,7 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Sets ruleContexts.
      *
-     * @param null|string[] $ruleContexts Assigns a rule context to the search query.  [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) are strings that you can use to trigger matching rules.
+     * @param null|string[] $ruleContexts Assigns a rule context to the run query [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) are strings that you can use to trigger matching rules.
      *
      * @return self
      */
@@ -868,7 +868,7 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Sets clickAnalytics.
      *
-     * @param null|bool $clickAnalytics Whether to include a `queryID` attribute in the response.  The query ID is a unique identifier for a search query and is required for tracking [click and conversion events](https://www.algolia.com/guides/sending-events/getting-started/).
+     * @param null|bool $clickAnalytics Whether to include a `queryID` attribute in the response The query ID is a unique identifier for a search query and is required for tracking [click and conversion events](https://www.algolia.com/guides/sending-events/getting-started/).
      *
      * @return self
      */
@@ -940,7 +940,7 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Sets enableABTest.
      *
-     * @param null|bool $enableABTest whether to enable A/B testing for this search
+     * @param null|bool $enableABTest Whether to enable index level A/B testing for this run request. If the composition mixes multiple indices, the A/B test is ignored.
      *
      * @return self
      */
@@ -964,7 +964,7 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Sets enableReRanking.
      *
-     * @param null|bool $enableReRanking Whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/).  This setting only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard.
+     * @param null|bool $enableReRanking Whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/) This setting only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard.
      *
      * @return self
      */

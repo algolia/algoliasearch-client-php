@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Total monetary value of this event in units of `currency`.
+ * @description Total monetary value of this event in units of `currency`. This should be equal to the sum of `price` times `quantity`.
  */
 class Value extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

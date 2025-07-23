@@ -2861,49 +2861,50 @@ class IngestionClient
         $responses = [];
         $records = [];
         $count = 0;
+        $offset = 0;
+        $waitBatchSize = (int) ($batchSize / 10);
+        if ($waitBatchSize < 1) {
+            $waitBatchSize = $batchSize;
+        }
 
         foreach ($objects as $object) {
             $records[] = $object;
             $ok = false;
+            ++$count;
 
-            if (sizeof($records) === $batchSize || $count === sizeof($objects) - 1) {
+            if (sizeof($records) === $batchSize || $count === sizeof($objects)) {
                 $responses[] = $this->push($indexName, ['action' => $action, 'records' => $records], false, $referenceIndexName, $requestOptions);
                 $records = [];
             }
 
-            ++$count;
-        }
+            if ($waitForTasks && !empty($responses) && (0 === sizeof($responses) % $waitBatchSize || $count === sizeof($objects))) {
+                $timeoutCalculation = 'Algolia\AlgoliaSearch\Support\Helpers::linearTimeout';
 
-        if (!empty($records)) {
-            $responses[] = $this->push($indexName, ['action' => $action, 'records' => $records], false, $referenceIndexName, $requestOptions);
-        }
+                foreach (array_slice($responses, $offset, $waitBatchSize) as $response) {
+                    $retry = 0;
 
-        if ($waitForTasks && !empty($responses)) {
-            $timeoutCalculation = 'Algolia\AlgoliaSearch\Support\Helpers::linearTimeout';
+                    while ($retry < 50) {
+                        try {
+                            $this->getEvent($response['runID'], $response['eventID']);
 
-            foreach ($responses as $response) {
-                $retry = 0;
+                            $ok = true;
 
-                while ($retry < 50) {
-                    try {
-                        $this->getEvent($response['runID'], $response['eventID']);
+                            break;
+                        } catch (NotFoundException $e) {
+                            // just retry
+                        }
 
-                        $ok = true;
-
-                        break;
-                    } catch (NotFoundException $e) {
-                        // just retry
+                        ++$retry;
+                        usleep(
+                            call_user_func_array($timeoutCalculation, [$this->config->getWaitTaskTimeBeforeRetry(), $retry])
+                        );
                     }
 
-                    ++$retry;
-                    usleep(
-                        call_user_func_array($timeoutCalculation, [$this->config->getWaitTaskTimeBeforeRetry(), $retry])
-                    );
+                    if (false === $ok) {
+                        throw new ExceededRetriesException('Maximum number of retries (50) exceeded.');
+                    }
                 }
-
-                if (false === $ok) {
-                    throw new ExceededRetriesException('Maximum number of retries (50) exceeded.');
-                }
+                $offset = $offset + $waitBatchSize;
             }
         }
 

@@ -193,7 +193,7 @@ final class Helpers
      *
      * @return float|int
      */
-    private static function linearTimeout($defaultTimeout, $retries)
+    public static function linearTimeout($defaultTimeout, $retries)
     {
         // minimum between timeout and 200 milliseconds * number of retries
         // Convert into microseconds for usleep (* 1000)

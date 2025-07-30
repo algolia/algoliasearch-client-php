@@ -3027,7 +3027,7 @@ class SearchClient
 
     /**
      * Helper: Replace all objects in an index using a temporary one.
-     * See https://api-clients-automation.netlify.app/docs/add-new-api-client#5-helpers for implementation details.
+     * See https://api-clients-automation.netlify.app/docs/custom-helpers/#replaceallobjects for implementation details.
      *
      * @param string $indexName      the `indexName` to replace `objects` in
      * @param array  $objects        the array of `objects` to store in the given Algolia `indexName`

@@ -27,6 +27,7 @@ class Hit extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
         'snippetResult' => 'array<string,\Algolia\AlgoliaSearch\Model\Composition\SnippetResult>',
         'rankingInfo' => '\Algolia\AlgoliaSearch\Model\Composition\HitRankingInfo',
         'distinctSeqID' => 'int',
+        'extra' => '\Algolia\AlgoliaSearch\Model\Composition\HitMetadata',
     ];
 
     /**
@@ -40,6 +41,7 @@ class Hit extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
         'snippetResult' => null,
         'rankingInfo' => null,
         'distinctSeqID' => null,
+        'extra' => null,
     ];
 
     /**
@@ -54,6 +56,7 @@ class Hit extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
         'snippetResult' => '_snippetResult',
         'rankingInfo' => '_rankingInfo',
         'distinctSeqID' => '_distinctSeqID',
+        'extra' => '_extra',
     ];
 
     /**
@@ -67,6 +70,7 @@ class Hit extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
         'snippetResult' => 'setSnippetResult',
         'rankingInfo' => 'setRankingInfo',
         'distinctSeqID' => 'setDistinctSeqID',
+        'extra' => 'setExtra',
     ];
 
     /**
@@ -80,6 +84,7 @@ class Hit extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
         'snippetResult' => 'getSnippetResult',
         'rankingInfo' => 'getRankingInfo',
         'distinctSeqID' => 'getDistinctSeqID',
+        'extra' => 'getExtra',
     ];
 
     /**
@@ -110,6 +115,9 @@ class Hit extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
         }
         if (isset($data['distinctSeqID'])) {
             $this->container['distinctSeqID'] = $data['distinctSeqID'];
+        }
+        if (isset($data['extra'])) {
+            $this->container['extra'] = $data['extra'];
         }
     }
 
@@ -307,6 +315,30 @@ class Hit extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
     public function setDistinctSeqID($distinctSeqID)
     {
         $this->container['distinctSeqID'] = $distinctSeqID;
+
+        return $this;
+    }
+
+    /**
+     * Gets extra.
+     *
+     * @return null|HitMetadata
+     */
+    public function getExtra()
+    {
+        return $this->container['extra'] ?? null;
+    }
+
+    /**
+     * Sets extra.
+     *
+     * @param null|HitMetadata $extra extra
+     *
+     * @return self
+     */
+    public function setExtra($extra)
+    {
+        $this->container['extra'] = $extra;
 
         return $this;
     }

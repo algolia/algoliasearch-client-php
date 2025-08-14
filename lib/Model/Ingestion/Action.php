@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  *
  * @category Class
  *
- * @description Type of indexing operation.
+ * @description Which indexing operation to perform:  - `addObject`: adds records to an index.    Equivalent to the \"Add a new record (with auto-generated object ID)\" operation. - `updateObject`: adds or replaces records in an index.    Equivalent to the \"Add or replace a record\" operation. - `partialUpdateObject`: adds or updates attributes within records.    Equivalent to the \"Add or update attributes\" operation with the `createIfNoExists` parameter set to true.    (If a record with the specified `objectID` doesn't exist in the specified index, this action creates adds the record to the index) - `partialUpdateObjectNoCreate`: same as `partialUpdateObject`, but with `createIfNoExists` set to false.    (A record isn't added to the index if its `objectID` doesn't exist) - `deleteObject`: delete records from an index.   Equivalent to the \"Delete a record\" operation. - `delete`. Delete an index. Equivalent to the \"Delete an index\" operation. - `clear`: delete all records from an index. Equivalent to the \"Delete all records from an index operation\".
  */
 class Action
 {

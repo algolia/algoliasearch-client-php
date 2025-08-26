@@ -28,6 +28,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'updatedAt' => 'string',
         'createdAt' => 'string',
         'endAt' => 'string',
+        'stoppedAt' => 'string',
         'name' => 'string',
         'status' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\Status',
         'variants' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\Variant[]',
@@ -45,6 +46,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'updatedAt' => null,
         'createdAt' => null,
         'endAt' => null,
+        'stoppedAt' => null,
         'name' => null,
         'status' => null,
         'variants' => null,
@@ -63,6 +65,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'updatedAt' => 'updatedAt',
         'createdAt' => 'createdAt',
         'endAt' => 'endAt',
+        'stoppedAt' => 'stoppedAt',
         'name' => 'name',
         'status' => 'status',
         'variants' => 'variants',
@@ -80,6 +83,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'updatedAt' => 'setUpdatedAt',
         'createdAt' => 'setCreatedAt',
         'endAt' => 'setEndAt',
+        'stoppedAt' => 'setStoppedAt',
         'name' => 'setName',
         'status' => 'setStatus',
         'variants' => 'setVariants',
@@ -97,6 +101,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'updatedAt' => 'getUpdatedAt',
         'createdAt' => 'getCreatedAt',
         'endAt' => 'getEndAt',
+        'stoppedAt' => 'getStoppedAt',
         'name' => 'getName',
         'status' => 'getStatus',
         'variants' => 'getVariants',
@@ -129,6 +134,9 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         }
         if (isset($data['endAt'])) {
             $this->container['endAt'] = $data['endAt'];
+        }
+        if (isset($data['stoppedAt'])) {
+            $this->container['stoppedAt'] = $data['stoppedAt'];
         }
         if (isset($data['name'])) {
             $this->container['name'] = $data['name'];
@@ -335,6 +343,30 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     public function setEndAt($endAt)
     {
         $this->container['endAt'] = $endAt;
+
+        return $this;
+    }
+
+    /**
+     * Gets stoppedAt.
+     *
+     * @return null|string
+     */
+    public function getStoppedAt()
+    {
+        return $this->container['stoppedAt'] ?? null;
+    }
+
+    /**
+     * Sets stoppedAt.
+     *
+     * @param null|string $stoppedAt date and time when the A/B test was stopped, in RFC 3339 format
+     *
+     * @return self
+     */
+    public function setStoppedAt($stoppedAt)
+    {
+        $this->container['stoppedAt'] = $stoppedAt;
 
         return $this;
     }

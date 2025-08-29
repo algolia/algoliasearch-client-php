@@ -46,6 +46,7 @@ use Algolia\AlgoliaSearch\Model\Ingestion\Task;
 use Algolia\AlgoliaSearch\Model\Ingestion\TaskCreate;
 use Algolia\AlgoliaSearch\Model\Ingestion\TaskCreateResponse;
 use Algolia\AlgoliaSearch\Model\Ingestion\TaskCreateV1;
+use Algolia\AlgoliaSearch\Model\Ingestion\TaskReplace;
 use Algolia\AlgoliaSearch\Model\Ingestion\TaskSearch;
 use Algolia\AlgoliaSearch\Model\Ingestion\TaskUpdate;
 use Algolia\AlgoliaSearch\Model\Ingestion\TaskUpdateResponse;
@@ -1940,6 +1941,60 @@ class IngestionClient
     }
 
     /**
+     * Fully updates a task by its ID, use partialUpdateTask if you only want to update a subset of fields.
+     *
+     * @param string            $taskID      Unique identifier of a task. (required)
+     * @param array|TaskReplace $taskReplace taskReplace (required)
+     *                                       - $taskReplace['destinationID'] => (string) Universally unique identifier (UUID) of a destination resource. (required)
+     *                                       - $taskReplace['action'] => (array)  (required)
+     *                                       - $taskReplace['subscriptionAction'] => (array)
+     *                                       - $taskReplace['cron'] => (string) Cron expression for the task's schedule.
+     *                                       - $taskReplace['enabled'] => (bool) Whether the task is enabled.
+     *                                       - $taskReplace['failureThreshold'] => (int) Maximum accepted percentage of failures for a task run to finish successfully.
+     *                                       - $taskReplace['input'] => (array)
+     *                                       - $taskReplace['cursor'] => (string) Date of the last cursor in RFC 3339 format.
+     *                                       - $taskReplace['notifications'] => (array)
+     *                                       - $taskReplace['policies'] => (array)
+     *
+     * @see TaskReplace
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TaskUpdateResponse
+     */
+    public function replaceTask($taskID, $taskReplace, $requestOptions = [])
+    {
+        // verify the required parameter 'taskID' is set
+        if (!isset($taskID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `replaceTask`.'
+            );
+        }
+        // verify the required parameter 'taskReplace' is set
+        if (!isset($taskReplace)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskReplace` is required when calling `replaceTask`.'
+            );
+        }
+
+        $resourcePath = '/2/tasks/{taskID}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $taskReplace;
+
+        // path params
+        if (null !== $taskID) {
+            $resourcePath = str_replace(
+                '{taskID}',
+                ObjectSerializer::toPathValue($taskID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
      * Runs all tasks linked to a source, only available for Shopify, BigCommerce and commercetools sources. Creates one run per task.
      *
      * Required API Key ACLs:
@@ -2584,7 +2639,7 @@ class IngestionClient
     }
 
     /**
-     * Updates a task by its ID.
+     * Partially updates a task by its ID.
      *
      * @param string           $taskID     Unique identifier of a task. (required)
      * @param array|TaskUpdate $taskUpdate taskUpdate (required)

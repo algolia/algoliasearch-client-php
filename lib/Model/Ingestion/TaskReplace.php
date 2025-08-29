@@ -8,13 +8,13 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * TaskUpdate Class Doc Comment.
+ * TaskReplace Class Doc Comment.
  *
  * @category Class
  *
- * @description API request body for partially updating a task.
+ * @description API request body for updating a task.
  */
-class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TaskReplace extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -23,11 +23,13 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     protected static $modelTypes = [
         'destinationID' => 'string',
-        'cron' => 'string',
-        'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput',
-        'enabled' => 'bool',
+        'action' => '\Algolia\AlgoliaSearch\Model\Ingestion\ActionType',
         'subscriptionAction' => '\Algolia\AlgoliaSearch\Model\Ingestion\ActionType',
+        'cron' => 'string',
+        'enabled' => 'bool',
         'failureThreshold' => 'int',
+        'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput',
+        'cursor' => 'string',
         'notifications' => '\Algolia\AlgoliaSearch\Model\Ingestion\Notifications',
         'policies' => '\Algolia\AlgoliaSearch\Model\Ingestion\Policies',
     ];
@@ -39,11 +41,13 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     protected static $modelFormats = [
         'destinationID' => null,
-        'cron' => null,
-        'input' => null,
-        'enabled' => null,
+        'action' => null,
         'subscriptionAction' => null,
+        'cron' => null,
+        'enabled' => null,
         'failureThreshold' => null,
+        'input' => null,
+        'cursor' => null,
         'notifications' => null,
         'policies' => null,
     ];
@@ -56,11 +60,13 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     protected static $attributeMap = [
         'destinationID' => 'destinationID',
-        'cron' => 'cron',
-        'input' => 'input',
-        'enabled' => 'enabled',
+        'action' => 'action',
         'subscriptionAction' => 'subscriptionAction',
+        'cron' => 'cron',
+        'enabled' => 'enabled',
         'failureThreshold' => 'failureThreshold',
+        'input' => 'input',
+        'cursor' => 'cursor',
         'notifications' => 'notifications',
         'policies' => 'policies',
     ];
@@ -72,11 +78,13 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     protected static $setters = [
         'destinationID' => 'setDestinationID',
-        'cron' => 'setCron',
-        'input' => 'setInput',
-        'enabled' => 'setEnabled',
+        'action' => 'setAction',
         'subscriptionAction' => 'setSubscriptionAction',
+        'cron' => 'setCron',
+        'enabled' => 'setEnabled',
         'failureThreshold' => 'setFailureThreshold',
+        'input' => 'setInput',
+        'cursor' => 'setCursor',
         'notifications' => 'setNotifications',
         'policies' => 'setPolicies',
     ];
@@ -88,11 +96,13 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     protected static $getters = [
         'destinationID' => 'getDestinationID',
-        'cron' => 'getCron',
-        'input' => 'getInput',
-        'enabled' => 'getEnabled',
+        'action' => 'getAction',
         'subscriptionAction' => 'getSubscriptionAction',
+        'cron' => 'getCron',
+        'enabled' => 'getEnabled',
         'failureThreshold' => 'getFailureThreshold',
+        'input' => 'getInput',
+        'cursor' => 'getCursor',
         'notifications' => 'getNotifications',
         'policies' => 'getPolicies',
     ];
@@ -114,20 +124,26 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         if (isset($data['destinationID'])) {
             $this->container['destinationID'] = $data['destinationID'];
         }
-        if (isset($data['cron'])) {
-            $this->container['cron'] = $data['cron'];
-        }
-        if (isset($data['input'])) {
-            $this->container['input'] = $data['input'];
-        }
-        if (isset($data['enabled'])) {
-            $this->container['enabled'] = $data['enabled'];
+        if (isset($data['action'])) {
+            $this->container['action'] = $data['action'];
         }
         if (isset($data['subscriptionAction'])) {
             $this->container['subscriptionAction'] = $data['subscriptionAction'];
         }
+        if (isset($data['cron'])) {
+            $this->container['cron'] = $data['cron'];
+        }
+        if (isset($data['enabled'])) {
+            $this->container['enabled'] = $data['enabled'];
+        }
         if (isset($data['failureThreshold'])) {
             $this->container['failureThreshold'] = $data['failureThreshold'];
+        }
+        if (isset($data['input'])) {
+            $this->container['input'] = $data['input'];
+        }
+        if (isset($data['cursor'])) {
+            $this->container['cursor'] = $data['cursor'];
         }
         if (isset($data['notifications'])) {
             $this->container['notifications'] = $data['notifications'];
@@ -195,7 +211,16 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     public function listInvalidProperties()
     {
-        return [];
+        $invalidProperties = [];
+
+        if (!isset($this->container['destinationID']) || null === $this->container['destinationID']) {
+            $invalidProperties[] = "'destinationID' can't be null";
+        }
+        if (!isset($this->container['action']) || null === $this->container['action']) {
+            $invalidProperties[] = "'action' can't be null";
+        }
+
+        return $invalidProperties;
     }
 
     /**
@@ -212,7 +237,7 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
     /**
      * Gets destinationID.
      *
-     * @return null|string
+     * @return string
      */
     public function getDestinationID()
     {
@@ -222,7 +247,7 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
     /**
      * Sets destinationID.
      *
-     * @param null|string $destinationID universally unique identifier (UUID) of a destination resource
+     * @param string $destinationID universally unique identifier (UUID) of a destination resource
      *
      * @return self
      */
@@ -234,73 +259,25 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
     }
 
     /**
-     * Gets cron.
+     * Gets action.
      *
-     * @return null|string
+     * @return ActionType
      */
-    public function getCron()
+    public function getAction()
     {
-        return $this->container['cron'] ?? null;
+        return $this->container['action'] ?? null;
     }
 
     /**
-     * Sets cron.
+     * Sets action.
      *
-     * @param null|string $cron cron expression for the task's schedule
+     * @param ActionType $action action
      *
      * @return self
      */
-    public function setCron($cron)
+    public function setAction($action)
     {
-        $this->container['cron'] = $cron;
-
-        return $this;
-    }
-
-    /**
-     * Gets input.
-     *
-     * @return null|TaskInput
-     */
-    public function getInput()
-    {
-        return $this->container['input'] ?? null;
-    }
-
-    /**
-     * Sets input.
-     *
-     * @param null|TaskInput $input input
-     *
-     * @return self
-     */
-    public function setInput($input)
-    {
-        $this->container['input'] = $input;
-
-        return $this;
-    }
-
-    /**
-     * Gets enabled.
-     *
-     * @return null|bool
-     */
-    public function getEnabled()
-    {
-        return $this->container['enabled'] ?? null;
-    }
-
-    /**
-     * Sets enabled.
-     *
-     * @param null|bool $enabled whether the task is enabled
-     *
-     * @return self
-     */
-    public function setEnabled($enabled)
-    {
-        $this->container['enabled'] = $enabled;
+        $this->container['action'] = $action;
 
         return $this;
     }
@@ -330,6 +307,54 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
     }
 
     /**
+     * Gets cron.
+     *
+     * @return null|string
+     */
+    public function getCron()
+    {
+        return $this->container['cron'] ?? null;
+    }
+
+    /**
+     * Sets cron.
+     *
+     * @param null|string $cron cron expression for the task's schedule
+     *
+     * @return self
+     */
+    public function setCron($cron)
+    {
+        $this->container['cron'] = $cron;
+
+        return $this;
+    }
+
+    /**
+     * Gets enabled.
+     *
+     * @return null|bool
+     */
+    public function getEnabled()
+    {
+        return $this->container['enabled'] ?? null;
+    }
+
+    /**
+     * Sets enabled.
+     *
+     * @param null|bool $enabled whether the task is enabled
+     *
+     * @return self
+     */
+    public function setEnabled($enabled)
+    {
+        $this->container['enabled'] = $enabled;
+
+        return $this;
+    }
+
+    /**
      * Gets failureThreshold.
      *
      * @return null|int
@@ -349,6 +374,54 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
     public function setFailureThreshold($failureThreshold)
     {
         $this->container['failureThreshold'] = $failureThreshold;
+
+        return $this;
+    }
+
+    /**
+     * Gets input.
+     *
+     * @return null|TaskInput
+     */
+    public function getInput()
+    {
+        return $this->container['input'] ?? null;
+    }
+
+    /**
+     * Sets input.
+     *
+     * @param null|TaskInput $input input
+     *
+     * @return self
+     */
+    public function setInput($input)
+    {
+        $this->container['input'] = $input;
+
+        return $this;
+    }
+
+    /**
+     * Gets cursor.
+     *
+     * @return null|string
+     */
+    public function getCursor()
+    {
+        return $this->container['cursor'] ?? null;
+    }
+
+    /**
+     * Sets cursor.
+     *
+     * @param null|string $cursor date of the last cursor in RFC 3339 format
+     *
+     * @return self
+     */
+    public function setCursor($cursor)
+    {
+        $this->container['cursor'] = $cursor;
 
         return $this;
     }

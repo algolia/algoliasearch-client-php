@@ -1463,11 +1463,12 @@ class SearchClient
      *  - settings
      *
      * @param string $indexName      Name of the index on which to perform the operation. (required)
+     * @param int    $getVersion     When set to 2, the endpoint will not include `synonyms` in the response. This parameter is here for backward compatibility. (optional, default to 1)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|SettingsResponse
      */
-    public function getSettings($indexName, $requestOptions = [])
+    public function getSettings($indexName, $getVersion = null, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
@@ -1480,6 +1481,10 @@ class SearchClient
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
+
+        if (null !== $getVersion) {
+            $queryParameters['getVersion'] = $getVersion;
+        }
 
         // path params
         if (null !== $indexName) {

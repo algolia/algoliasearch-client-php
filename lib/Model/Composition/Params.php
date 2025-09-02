@@ -46,6 +46,7 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'analyticsTags' => 'string[]',
         'enableABTest' => 'bool',
         'enableReRanking' => 'bool',
+        'injectedItems' => 'array<string,\Algolia\AlgoliaSearch\Model\Composition\ExternalInjectedItem>',
     ];
 
     /**
@@ -80,6 +81,7 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'analyticsTags' => null,
         'enableABTest' => null,
         'enableReRanking' => null,
+        'injectedItems' => null,
     ];
 
     /**
@@ -115,6 +117,7 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'analyticsTags' => 'analyticsTags',
         'enableABTest' => 'enableABTest',
         'enableReRanking' => 'enableReRanking',
+        'injectedItems' => 'injectedItems',
     ];
 
     /**
@@ -149,6 +152,7 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'analyticsTags' => 'setAnalyticsTags',
         'enableABTest' => 'setEnableABTest',
         'enableReRanking' => 'setEnableReRanking',
+        'injectedItems' => 'setInjectedItems',
     ];
 
     /**
@@ -183,6 +187,7 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'analyticsTags' => 'getAnalyticsTags',
         'enableABTest' => 'getEnableABTest',
         'enableReRanking' => 'getEnableReRanking',
+        'injectedItems' => 'getInjectedItems',
     ];
 
     /**
@@ -276,6 +281,9 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         }
         if (isset($data['enableReRanking'])) {
             $this->container['enableReRanking'] = $data['enableReRanking'];
+        }
+        if (isset($data['injectedItems'])) {
+            $this->container['injectedItems'] = $data['injectedItems'];
         }
     }
 
@@ -971,6 +979,30 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     public function setEnableReRanking($enableReRanking)
     {
         $this->container['enableReRanking'] = $enableReRanking;
+
+        return $this;
+    }
+
+    /**
+     * Gets injectedItems.
+     *
+     * @return null|array<string,ExternalInjectedItem>
+     */
+    public function getInjectedItems()
+    {
+        return $this->container['injectedItems'] ?? null;
+    }
+
+    /**
+     * Sets injectedItems.
+     *
+     * @param null|array<string,ExternalInjectedItem> $injectedItems a list of extenrally injected objectID groups into from an external source
+     *
+     * @return self
+     */
+    public function setInjectedItems($injectedItems)
+    {
+        $this->container['injectedItems'] = $injectedItems;
 
         return $this;
     }

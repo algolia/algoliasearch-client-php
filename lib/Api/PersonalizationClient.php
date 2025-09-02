@@ -91,9 +91,9 @@ class PersonalizationClient
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $url = null !== $config->getRegion() && '' !== $config->getRegion() ?
-                str_replace('{region}', $config->getRegion(), 'personalization.{region}.algolia.com') :
-                '';
+            $url = null !== $config->getRegion() && '' !== $config->getRegion()
+                ? str_replace('{region}', $config->getRegion(), 'personalization.{region}.algolia.com')
+                : '';
             $clusterHosts = ClusterHosts::create($url);
         }
 

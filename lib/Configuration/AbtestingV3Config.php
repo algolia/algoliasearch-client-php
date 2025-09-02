@@ -18,8 +18,8 @@ class AbtestingV3Config extends ConfigWithRegion
             null !== $region && !in_array($region, $allowedRegions, true)
         ) {
             throw new AlgoliaException(
-                '`region` must be one of the following: '.
-                    implode(', ', $allowedRegions)
+                '`region` must be one of the following: '
+                    .implode(', ', $allowedRegions)
             );
         }
 

@@ -63,8 +63,8 @@ final class ApiWrapper implements ApiWrapperInterface
         $this->http = $http;
         $this->clusterHosts = $clusterHosts;
         $this->config = $config;
-        $this->requestOptionsFactory =
-            $RqstOptsFactory ?: new RequestOptionsFactory($config);
+        $this->requestOptionsFactory
+            = $RqstOptsFactory ?: new RequestOptionsFactory($config);
         $this->logger = $logger ?: Algolia::getLogger();
         if (defined('JSON_UNESCAPED_UNICODE')) {
             // `JSON_UNESCAPED_UNICODE` is introduced in PHP 5.4.0
@@ -238,8 +238,8 @@ final class ApiWrapper implements ApiWrapperInterface
                 null === $response->getReasonPhrase()
                 || '' === $response->getReasonPhrase()
             ) {
-                $reason =
-                    $statusCode >= 500
+                $reason
+                    = $statusCode >= 500
                         ? 'Internal Server Error'
                         : 'Unreachable Host';
             }

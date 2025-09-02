@@ -656,10 +656,10 @@ class Uri implements UriInterface
         }
 
         return preg_replace_callback(
-            '/(?:[^'.
-                self::$charUnreserved.
-                self::$charSubDelims.
-                '%:@\/]++|%(?![A-Fa-f0-9]{2}))/',
+            '/(?:[^'
+                .self::$charUnreserved
+                .self::$charSubDelims
+                .'%:@\/]++|%(?![A-Fa-f0-9]{2}))/',
             [$this, 'rawurlencodeMatchZero'],
             $path
         );
@@ -681,10 +681,10 @@ class Uri implements UriInterface
         }
 
         return preg_replace_callback(
-            '/(?:[^'.
-                self::$charUnreserved.
-                self::$charSubDelims.
-                '%:@\/\?]++|%(?![A-Fa-f0-9]{2}))/',
+            '/(?:[^'
+                .self::$charUnreserved
+                .self::$charSubDelims
+                .'%:@\/\?]++|%(?![A-Fa-f0-9]{2}))/',
             [$this, 'rawurlencodeMatchZero'],
             $str
         );
@@ -714,8 +714,8 @@ class Uri implements UriInterface
             }
         } elseif (isset($this->path[0]) && '/' !== $this->path[0]) {
             @trigger_error(
-                'The path of a URI with an authority must start with a slash "/" or be empty. Automagically fixing the URI '.
-                    'by adding a leading slash to the path is deprecated since version 1.4 and will throw an exception instead.',
+                'The path of a URI with an authority must start with a slash "/" or be empty. Automagically fixing the URI '
+                    .'by adding a leading slash to the path is deprecated since version 1.4 and will throw an exception instead.',
                 E_USER_DEPRECATED
             );
             $this->path = '/'.$this->path;

@@ -58,8 +58,8 @@ final class AlgoliaAgent
             if (defined('\GuzzleHttp\ClientInterface::VERSION')) {
                 $segments['Guzzle'] = ClientInterface::VERSION;
             } else {
-                $segments['Guzzle'] =
-                    ClientInterface::MAJOR_VERSION;
+                $segments['Guzzle']
+                    = ClientInterface::MAJOR_VERSION;
             }
         }
 

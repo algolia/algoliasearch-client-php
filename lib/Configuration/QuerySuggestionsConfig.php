@@ -19,8 +19,8 @@ class QuerySuggestionsConfig extends ConfigWithRegion
             || (null !== $region && !in_array($region, $allowedRegions, true))
         ) {
             throw new AlgoliaException(
-                '`region` is required and must be one of the following: '.
-                    implode(', ', $allowedRegions)
+                '`region` is required and must be one of the following: '
+                    .implode(', ', $allowedRegions)
             );
         }
 

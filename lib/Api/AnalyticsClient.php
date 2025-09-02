@@ -107,9 +107,9 @@ class AnalyticsClient
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $url = null !== $config->getRegion() && '' !== $config->getRegion() ?
-                str_replace('{region}', $config->getRegion(), 'analytics.{region}.algolia.com') :
-                'analytics.algolia.com';
+            $url = null !== $config->getRegion() && '' !== $config->getRegion()
+                ? str_replace('{region}', $config->getRegion(), 'analytics.{region}.algolia.com')
+                : 'analytics.algolia.com';
             $clusterHosts = ClusterHosts::create($url);
         }
 

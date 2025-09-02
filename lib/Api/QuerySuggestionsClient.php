@@ -93,9 +93,9 @@ class QuerySuggestionsClient
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $url = null !== $config->getRegion() && '' !== $config->getRegion() ?
-                str_replace('{region}', $config->getRegion(), 'query-suggestions.{region}.algolia.com') :
-                '';
+            $url = null !== $config->getRegion() && '' !== $config->getRegion()
+                ? str_replace('{region}', $config->getRegion(), 'query-suggestions.{region}.algolia.com')
+                : '';
             $clusterHosts = ClusterHosts::create($url);
         }
 

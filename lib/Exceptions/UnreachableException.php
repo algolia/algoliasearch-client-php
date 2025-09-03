@@ -8,7 +8,7 @@ final class UnreachableException extends AlgoliaException
     {
         if (!$message) {
             $message
-                = 'Impossible to connect, please check your Algolia Application Id.';
+                = 'Impossible to connect, please check your Algolia Application Id. If the error persists, please visit our help center https://alg.li/support-unreachable-hosts or reach out to the Algolia Support team: https://alg.li/support';
         }
 
         parent::__construct($message, $code, $previous);

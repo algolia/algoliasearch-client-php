@@ -1773,11 +1773,12 @@ class IngestionClient
      * @param int   $page           Page number of the paginated API response. (optional)
      * @param array $sort           Property by which to sort the list of transformations. (optional)
      * @param array $order          Sort order of the response, ascending or descending. (optional)
+     * @param array $type           Whether to filter the list of transformations by the type of transformation. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|ListTransformationsResponse
      */
-    public function listTransformations($itemsPerPage = null, $page = null, $sort = null, $order = null, $requestOptions = [])
+    public function listTransformations($itemsPerPage = null, $page = null, $sort = null, $order = null, $type = null, $requestOptions = [])
     {
         $resourcePath = '/1/transformations';
         $queryParameters = [];
@@ -1798,6 +1799,10 @@ class IngestionClient
 
         if (null !== $order) {
             $queryParameters['order'] = $order;
+        }
+
+        if (null !== $type) {
+            $queryParameters['type'] = $type;
         }
 
         return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);

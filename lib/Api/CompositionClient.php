@@ -6,10 +6,21 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\CompositionConfig;
+use Algolia\AlgoliaSearch\Model\Composition\BatchParams;
+use Algolia\AlgoliaSearch\Model\Composition\Composition;
+use Algolia\AlgoliaSearch\Model\Composition\CompositionRule;
+use Algolia\AlgoliaSearch\Model\Composition\CompositionRulesBatchParams;
+use Algolia\AlgoliaSearch\Model\Composition\GetTaskResponse;
+use Algolia\AlgoliaSearch\Model\Composition\ListCompositionsResponse;
+use Algolia\AlgoliaSearch\Model\Composition\MultipleBatchResponse;
 use Algolia\AlgoliaSearch\Model\Composition\RequestBody;
+use Algolia\AlgoliaSearch\Model\Composition\RulesMultipleBatchResponse;
+use Algolia\AlgoliaSearch\Model\Composition\SearchCompositionRulesParams;
+use Algolia\AlgoliaSearch\Model\Composition\SearchCompositionRulesResponse;
 use Algolia\AlgoliaSearch\Model\Composition\SearchForFacetValuesRequest;
 use Algolia\AlgoliaSearch\Model\Composition\SearchForFacetValuesResponse;
 use Algolia\AlgoliaSearch\Model\Composition\SearchResponse;
+use Algolia\AlgoliaSearch\Model\Composition\TaskIDResponse;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
@@ -119,6 +130,635 @@ class CompositionClient
     }
 
     /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customDelete($path, $parameters = null, $requestOptions = [])
+    {
+        // verify the required parameter 'path' is set
+        if (!isset($path)) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customDelete`.'
+            );
+        }
+
+        $resourcePath = '/{path}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        if (null !== $parameters) {
+            $queryParameters = $parameters;
+        }
+
+        // path params
+        if (null !== $path) {
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customGet($path, $parameters = null, $requestOptions = [])
+    {
+        // verify the required parameter 'path' is set
+        if (!isset($path)) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customGet`.'
+            );
+        }
+
+        $resourcePath = '/{path}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        if (null !== $parameters) {
+            $queryParameters = $parameters;
+        }
+
+        // path params
+        if (null !== $path) {
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customPost($path, $parameters = null, $body = null, $requestOptions = [])
+    {
+        // verify the required parameter 'path' is set
+        if (!isset($path)) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customPost`.'
+            );
+        }
+
+        $resourcePath = '/{path}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = isset($body) ? $body : [];
+
+        if (null !== $parameters) {
+            $queryParameters = $parameters;
+        }
+
+        // path params
+        if (null !== $path) {
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customPut($path, $parameters = null, $body = null, $requestOptions = [])
+    {
+        // verify the required parameter 'path' is set
+        if (!isset($path)) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customPut`.'
+            );
+        }
+
+        $resourcePath = '/{path}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = isset($body) ? $body : [];
+
+        if (null !== $parameters) {
+            $queryParameters = $parameters;
+        }
+
+        // path params
+        if (null !== $path) {
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Delete a composition from the current Algolia application.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param string $compositionID  Unique Composition ObjectID. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TaskIDResponse
+     */
+    public function deleteComposition($compositionID, $requestOptions = [])
+    {
+        // verify the required parameter 'compositionID' is set
+        if (!isset($compositionID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `compositionID` is required when calling `deleteComposition`.'
+            );
+        }
+
+        $resourcePath = '/1/compositions/{compositionID}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        // path params
+        if (null !== $compositionID) {
+            $resourcePath = str_replace(
+                '{compositionID}',
+                ObjectSerializer::toPathValue($compositionID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Delete a Composition Rule from the specified Composition ID.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param string $compositionID  Unique Composition ObjectID. (required)
+     * @param string $objectID       Unique identifier of a rule object. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TaskIDResponse
+     */
+    public function deleteCompositionRule($compositionID, $objectID, $requestOptions = [])
+    {
+        // verify the required parameter 'compositionID' is set
+        if (!isset($compositionID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `compositionID` is required when calling `deleteCompositionRule`.'
+            );
+        }
+        // verify the required parameter 'objectID' is set
+        if (!isset($objectID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `objectID` is required when calling `deleteCompositionRule`.'
+            );
+        }
+
+        $resourcePath = '/1/compositions/{compositionID}/rules/{objectID}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        // path params
+        if (null !== $compositionID) {
+            $resourcePath = str_replace(
+                '{compositionID}',
+                ObjectSerializer::toPathValue($compositionID),
+                $resourcePath
+            );
+        }
+
+        // path params
+        if (null !== $objectID) {
+            $resourcePath = str_replace(
+                '{objectID}',
+                ObjectSerializer::toPathValue($objectID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Retrieve a single composition in the current Algolia application.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *  - settings
+     *
+     * @param string $compositionID  Unique Composition ObjectID. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|Composition
+     */
+    public function getComposition($compositionID, $requestOptions = [])
+    {
+        // verify the required parameter 'compositionID' is set
+        if (!isset($compositionID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `compositionID` is required when calling `getComposition`.'
+            );
+        }
+
+        $resourcePath = '/1/compositions/{compositionID}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        // path params
+        if (null !== $compositionID) {
+            $resourcePath = str_replace(
+                '{compositionID}',
+                ObjectSerializer::toPathValue($compositionID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Retrieves a rule by its ID. To find the object ID of rules, use the [`search` operation](#tag/Rules/operation/searchRules).
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *  - settings
+     *
+     * @param string $compositionID  Unique Composition ObjectID. (required)
+     * @param string $objectID       Unique identifier of a rule object. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|CompositionRule
+     */
+    public function getRule($compositionID, $objectID, $requestOptions = [])
+    {
+        // verify the required parameter 'compositionID' is set
+        if (!isset($compositionID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `compositionID` is required when calling `getRule`.'
+            );
+        }
+        // verify the required parameter 'objectID' is set
+        if (!isset($objectID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `objectID` is required when calling `getRule`.'
+            );
+        }
+
+        $resourcePath = '/1/compositions/{compositionID}/rules/{objectID}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        // path params
+        if (null !== $compositionID) {
+            $resourcePath = str_replace(
+                '{compositionID}',
+                ObjectSerializer::toPathValue($compositionID),
+                $resourcePath
+            );
+        }
+
+        // path params
+        if (null !== $objectID) {
+            $resourcePath = str_replace(
+                '{objectID}',
+                ObjectSerializer::toPathValue($objectID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Checks the status of a given task.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *  - settings
+     *  - addObject
+     *  - deleteObject
+     *  - deleteIndex
+     *
+     * @param string $compositionID  Unique Composition ObjectID. (required)
+     * @param int    $taskID         Unique task identifier. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|GetTaskResponse
+     */
+    public function getTask($compositionID, $taskID, $requestOptions = [])
+    {
+        // verify the required parameter 'compositionID' is set
+        if (!isset($compositionID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `compositionID` is required when calling `getTask`.'
+            );
+        }
+        // verify the required parameter 'taskID' is set
+        if (!isset($taskID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `getTask`.'
+            );
+        }
+
+        $resourcePath = '/1/compositions/{compositionID}/task/{taskID}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        // path params
+        if (null !== $compositionID) {
+            $resourcePath = str_replace(
+                '{compositionID}',
+                ObjectSerializer::toPathValue($compositionID),
+                $resourcePath
+            );
+        }
+
+        // path params
+        if (null !== $taskID) {
+            $resourcePath = str_replace(
+                '{taskID}',
+                ObjectSerializer::toPathValue($taskID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Lists all compositions in the current Algolia application.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *  - settings
+     *
+     * @param int   $page           Requested page of the API response. If `null`, the API response is not paginated. (optional)
+     * @param int   $hitsPerPage    Number of hits per page. (optional, default to 100)
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|ListCompositionsResponse
+     */
+    public function listCompositions($page = null, $hitsPerPage = null, $requestOptions = [])
+    {
+        $resourcePath = '/1/compositions';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        if (null !== $page) {
+            $queryParameters['page'] = $page;
+        }
+
+        if (null !== $hitsPerPage) {
+            $queryParameters['hitsPerPage'] = $hitsPerPage;
+        }
+
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Adds, updates, or deletes compositions with a single API request.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param array|BatchParams $batchParams batchParams (required)
+     *                                       - $batchParams['requests'] => (array)  (required)
+     *
+     * @see BatchParams
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|MultipleBatchResponse
+     */
+    public function multipleBatch($batchParams, $requestOptions = [])
+    {
+        // verify the required parameter 'batchParams' is set
+        if (!isset($batchParams)) {
+            throw new \InvalidArgumentException(
+                'Parameter `batchParams` is required when calling `multipleBatch`.'
+            );
+        }
+
+        $resourcePath = '/1/compositions/*/batch';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $batchParams;
+
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Upsert a composition in the current Algolia application.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param string            $compositionID Unique Composition ObjectID. (required)
+     * @param array|Composition $composition   composition (required)
+     *                                         - $composition['objectID'] => (string) Composition unique identifier. (required)
+     *                                         - $composition['name'] => (string) Composition name. (required)
+     *                                         - $composition['description'] => (string) Composition description.
+     *                                         - $composition['behavior'] => (array)  (required)
+     *
+     * @see Composition
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TaskIDResponse
+     */
+    public function putComposition($compositionID, $composition, $requestOptions = [])
+    {
+        // verify the required parameter 'compositionID' is set
+        if (!isset($compositionID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `compositionID` is required when calling `putComposition`.'
+            );
+        }
+        // verify the required parameter 'composition' is set
+        if (!isset($composition)) {
+            throw new \InvalidArgumentException(
+                'Parameter `composition` is required when calling `putComposition`.'
+            );
+        }
+
+        $resourcePath = '/1/compositions/{compositionID}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $composition;
+
+        // path params
+        if (null !== $compositionID) {
+            $resourcePath = str_replace(
+                '{compositionID}',
+                ObjectSerializer::toPathValue($compositionID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Upsert a Composition Rule for the specified composition ID.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param string                $compositionID   Unique Composition ObjectID. (required)
+     * @param string                $objectID        Unique identifier of a rule object. (required)
+     * @param array|CompositionRule $compositionRule compositionRule (required)
+     *                                               - $compositionRule['objectID'] => (string) Composition rule unique identifier. (required)
+     *                                               - $compositionRule['conditions'] => (array) Conditions that trigger a composition rule. (required)
+     *                                               - $compositionRule['consequence'] => (array)  (required)
+     *                                               - $compositionRule['description'] => (string) Description of the rule's purpose to help you distinguish between different rules.
+     *                                               - $compositionRule['enabled'] => (bool) Whether the rule is active.
+     *                                               - $compositionRule['validity'] => (array) Time periods when the rule is active.
+     *                                               - $compositionRule['tags'] => (array) A list of tags.
+     *
+     * @see CompositionRule
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TaskIDResponse
+     */
+    public function putCompositionRule($compositionID, $objectID, $compositionRule, $requestOptions = [])
+    {
+        // verify the required parameter 'compositionID' is set
+        if (!isset($compositionID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `compositionID` is required when calling `putCompositionRule`.'
+            );
+        }
+        // verify the required parameter 'objectID' is set
+        if (!isset($objectID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `objectID` is required when calling `putCompositionRule`.'
+            );
+        }
+        // verify the required parameter 'compositionRule' is set
+        if (!isset($compositionRule)) {
+            throw new \InvalidArgumentException(
+                'Parameter `compositionRule` is required when calling `putCompositionRule`.'
+            );
+        }
+
+        $resourcePath = '/1/compositions/{compositionID}/rules/{objectID}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $compositionRule;
+
+        // path params
+        if (null !== $compositionID) {
+            $resourcePath = str_replace(
+                '{compositionID}',
+                ObjectSerializer::toPathValue($compositionID),
+                $resourcePath
+            );
+        }
+
+        // path params
+        if (null !== $objectID) {
+            $resourcePath = str_replace(
+                '{objectID}',
+                ObjectSerializer::toPathValue($objectID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Create or update or delete multiple composition rules.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param string                            $compositionID Unique Composition ObjectID. (required)
+     * @param array|CompositionRulesBatchParams $rules         rules (required)
+     *                                                         - $rules['requests'] => (array)
+     *
+     * @see CompositionRulesBatchParams
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|RulesMultipleBatchResponse
+     */
+    public function saveRules($compositionID, $rules, $requestOptions = [])
+    {
+        // verify the required parameter 'compositionID' is set
+        if (!isset($compositionID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `compositionID` is required when calling `saveRules`.'
+            );
+        }
+        // verify the required parameter 'rules' is set
+        if (!isset($rules)) {
+            throw new \InvalidArgumentException(
+                'Parameter `rules` is required when calling `saveRules`.'
+            );
+        }
+
+        $resourcePath = '/1/compositions/{compositionID}/rules/batch';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $rules;
+
+        // path params
+        if (null !== $compositionID) {
+            $resourcePath = str_replace(
+                '{compositionID}',
+                ObjectSerializer::toPathValue($compositionID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
      * Runs a query on a single composition and returns matching results.
      *
      * Required API Key ACLs:
@@ -164,6 +804,53 @@ class CompositionClient
         }
 
         return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, true);
+    }
+
+    /**
+     * Searches for composition rules in your index.
+     *
+     * Required API Key ACLs:
+     *  - settings
+     *
+     * @param string                             $compositionID                Unique Composition ObjectID. (required)
+     * @param array|SearchCompositionRulesParams $searchCompositionRulesParams searchCompositionRulesParams (optional)
+     *                                                                         - $searchCompositionRulesParams['query'] => (string) Search query for rules.
+     *                                                                         - $searchCompositionRulesParams['anchoring'] => (array)
+     *                                                                         - $searchCompositionRulesParams['context'] => (string) Only return composition rules that match the context (exact match).
+     *                                                                         - $searchCompositionRulesParams['page'] => (int) Requested page of the API response.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
+     *                                                                         - $searchCompositionRulesParams['hitsPerPage'] => (int) Maximum number of hits per page.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
+     *                                                                         - $searchCompositionRulesParams['enabled'] => (bool) If `true`, return only enabled composition rules. If `false`, return only inactive composition rules. By default, _all_ composition rules are returned.
+     *
+     * @see SearchCompositionRulesParams
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|SearchCompositionRulesResponse
+     */
+    public function searchCompositionRules($compositionID, $searchCompositionRulesParams = null, $requestOptions = [])
+    {
+        // verify the required parameter 'compositionID' is set
+        if (!isset($compositionID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `compositionID` is required when calling `searchCompositionRules`.'
+            );
+        }
+
+        $resourcePath = '/1/compositions/{compositionID}/rules/search';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = isset($searchCompositionRulesParams) ? $searchCompositionRulesParams : [];
+
+        // path params
+        if (null !== $compositionID) {
+            $resourcePath = str_replace(
+                '{compositionID}',
+                ObjectSerializer::toPathValue($compositionID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**

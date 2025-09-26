@@ -22,6 +22,8 @@ class ActionType
 
     public const PARTIAL = 'partial';
 
+    public const PARTIAL_NO_CREATE = 'partialNoCreate';
+
     public const APPEND = 'append';
 
     /**
@@ -35,6 +37,7 @@ class ActionType
             self::REPLACE,
             self::SAVE,
             self::PARTIAL,
+            self::PARTIAL_NO_CREATE,
             self::APPEND,
         ];
     }

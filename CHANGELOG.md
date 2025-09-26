@@ -1,3 +1,7 @@
+## [4.30.0](https://github.com/algolia/algoliasearch-client-php/compare/4.29.0...4.30.0)
+
+- [ad51f60561](https://github.com/algolia/api-clients-automation/commit/ad51f60561) feat(specs): add partialNoCreate action to ingestion specs ([#5389](https://github.com/algolia/api-clients-automation/pull/5389)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [4.29.0](https://github.com/algolia/algoliasearch-client-php/compare/4.28.0...4.29.0)
 
 - [ca25c44e2](https://github.com/algolia/api-clients-automation/commit/ca25c44e2) chore(deps): dependencies 2025-09-08 ([#5310](https://github.com/algolia/api-clients-automation/pull/5310)) by [@algolia-bot](https://github.com/algolia-bot/)

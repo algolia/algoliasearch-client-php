@@ -8,11 +8,13 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * Injection Class Doc Comment.
+ * Deduplication Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Deduplication configures the methods used to resolve duplicate items between main search results and injected group results.
  */
-class Injection extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Deduplication extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -20,9 +22,7 @@ class Injection extends AbstractModel implements ModelInterface, \ArrayAccess, \
      * @var string[]
      */
     protected static $modelTypes = [
-        'main' => '\Algolia\AlgoliaSearch\Model\Composition\Main',
-        'injectedItems' => '\Algolia\AlgoliaSearch\Model\Composition\InjectedItem[]',
-        'deduplication' => '\Algolia\AlgoliaSearch\Model\Composition\Deduplication',
+        'positioning' => '\Algolia\AlgoliaSearch\Model\Composition\DedupPositioning',
     ];
 
     /**
@@ -31,9 +31,7 @@ class Injection extends AbstractModel implements ModelInterface, \ArrayAccess, \
      * @var string[]
      */
     protected static $modelFormats = [
-        'main' => null,
-        'injectedItems' => null,
-        'deduplication' => null,
+        'positioning' => null,
     ];
 
     /**
@@ -43,9 +41,7 @@ class Injection extends AbstractModel implements ModelInterface, \ArrayAccess, \
      * @var string[]
      */
     protected static $attributeMap = [
-        'main' => 'main',
-        'injectedItems' => 'injectedItems',
-        'deduplication' => 'deduplication',
+        'positioning' => 'positioning',
     ];
 
     /**
@@ -54,9 +50,7 @@ class Injection extends AbstractModel implements ModelInterface, \ArrayAccess, \
      * @var string[]
      */
     protected static $setters = [
-        'main' => 'setMain',
-        'injectedItems' => 'setInjectedItems',
-        'deduplication' => 'setDeduplication',
+        'positioning' => 'setPositioning',
     ];
 
     /**
@@ -65,9 +59,7 @@ class Injection extends AbstractModel implements ModelInterface, \ArrayAccess, \
      * @var string[]
      */
     protected static $getters = [
-        'main' => 'getMain',
-        'injectedItems' => 'getInjectedItems',
-        'deduplication' => 'getDeduplication',
+        'positioning' => 'getPositioning',
     ];
 
     /**
@@ -84,14 +76,8 @@ class Injection extends AbstractModel implements ModelInterface, \ArrayAccess, \
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['main'])) {
-            $this->container['main'] = $data['main'];
-        }
-        if (isset($data['injectedItems'])) {
-            $this->container['injectedItems'] = $data['injectedItems'];
-        }
-        if (isset($data['deduplication'])) {
-            $this->container['deduplication'] = $data['deduplication'];
+        if (isset($data['positioning'])) {
+            $this->container['positioning'] = $data['positioning'];
         }
     }
 
@@ -155,8 +141,8 @@ class Injection extends AbstractModel implements ModelInterface, \ArrayAccess, \
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['main']) || null === $this->container['main']) {
-            $invalidProperties[] = "'main' can't be null";
+        if (!isset($this->container['positioning']) || null === $this->container['positioning']) {
+            $invalidProperties[] = "'positioning' can't be null";
         }
 
         return $invalidProperties;
@@ -174,73 +160,25 @@ class Injection extends AbstractModel implements ModelInterface, \ArrayAccess, \
     }
 
     /**
-     * Gets main.
+     * Gets positioning.
      *
-     * @return Main
+     * @return DedupPositioning
      */
-    public function getMain()
+    public function getPositioning()
     {
-        return $this->container['main'] ?? null;
+        return $this->container['positioning'] ?? null;
     }
 
     /**
-     * Sets main.
+     * Sets positioning.
      *
-     * @param Main $main main
+     * @param DedupPositioning $positioning positioning
      *
      * @return self
      */
-    public function setMain($main)
+    public function setPositioning($positioning)
     {
-        $this->container['main'] = $main;
-
-        return $this;
-    }
-
-    /**
-     * Gets injectedItems.
-     *
-     * @return null|InjectedItem[]
-     */
-    public function getInjectedItems()
-    {
-        return $this->container['injectedItems'] ?? null;
-    }
-
-    /**
-     * Sets injectedItems.
-     *
-     * @param null|InjectedItem[] $injectedItems list of injected items of the current Composition
-     *
-     * @return self
-     */
-    public function setInjectedItems($injectedItems)
-    {
-        $this->container['injectedItems'] = $injectedItems;
-
-        return $this;
-    }
-
-    /**
-     * Gets deduplication.
-     *
-     * @return null|Deduplication
-     */
-    public function getDeduplication()
-    {
-        return $this->container['deduplication'] ?? null;
-    }
-
-    /**
-     * Sets deduplication.
-     *
-     * @param null|Deduplication $deduplication deduplication
-     *
-     * @return self
-     */
-    public function setDeduplication($deduplication)
-    {
-        $this->container['deduplication'] = $deduplication;
+        $this->container['positioning'] = $positioning;
 
         return $this;
     }

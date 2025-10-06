@@ -293,7 +293,7 @@ class AnalyticsClient
     }
 
     /**
-     * Retrieves the add-to-cart rate for all your searches with at least one add-to-cart event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  The rate is the number of add-to-cart conversion events divided by the number of tracked searches. A search is tracked if it returns a queryID (`clickAnalytics` is `true`). This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`.  **There's a difference between a 0 and null add-to-cart rate when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, the add-to-cart rate is null. - **0** mean there _were_ queries but no [add-to-cart events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.
+     * Retrieves the add-to-cart rate for all your searches with at least one add-to-cart event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  The rate is the number of add-to-cart conversion events divided by the number of tracked searches. A search is tracked if it returns a queryID (`clickAnalytics` is `true`). This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`.  **There's a difference between a 0 and null add-to-cart rate when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, the add-to-cart rate is null. - **0** mean there _were_ queries but no [add-to-cart events](https://www.algolia.com/doc/guides/sending-events/getting-started) were received.
      *
      * Required API Key ACLs:
      *  - analytics
@@ -301,7 +301,7 @@ class AnalyticsClient
      * @param string $index          Index name. (required)
      * @param string $startDate      Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param string $endDate        End date of the period to analyze, in `YYYY-MM-DD` format. (optional)
-     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|GetAddToCartRateResponse
@@ -340,7 +340,7 @@ class AnalyticsClient
     }
 
     /**
-     * Retrieves the average click position of your search results, including a daily breakdown.  The average click position is the average of all clicked search result positions. For example, if users only ever click on the first result for any search, the average click position is 1. By default, the analyzed period includes the last eight days including the current day.  An average of `null` when `clickAnalytics` is enabled means Algolia didn't receive any [click events](https://www.algolia.com/doc/guides/sending-events/getting-started/) for the queries. The average is `null` until Algolia receives at least one click event.
+     * Retrieves the average click position of your search results, including a daily breakdown.  The average click position is the average of all clicked search result positions. For example, if users only ever click on the first result for any search, the average click position is 1. By default, the analyzed period includes the last eight days including the current day.  An average of `null` when `clickAnalytics` is enabled means Algolia didn't receive any [click events](https://www.algolia.com/doc/guides/sending-events/getting-started) for the queries. The average is `null` until Algolia receives at least one click event.
      *
      * Required API Key ACLs:
      *  - analytics
@@ -348,7 +348,7 @@ class AnalyticsClient
      * @param string $index          Index name. (required)
      * @param string $startDate      Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param string $endDate        End date of the period to analyze, in `YYYY-MM-DD` format. (optional)
-     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|GetAverageClickPositionResponse
@@ -387,7 +387,7 @@ class AnalyticsClient
     }
 
     /**
-     * Retrieves the positions in the search results and their associated number of clicks.  This lets you check how many clicks the first, second, or tenth search results receive.  An average of `0` when `clickAnalytics` is enabled means Algolia didn't receive any [click events](https://www.algolia.com/doc/guides/sending-events/getting-started/) for the queries.
+     * Retrieves the positions in the search results and their associated number of clicks.  This lets you check how many clicks the first, second, or tenth search results receive.  An average of `0` when `clickAnalytics` is enabled means Algolia didn't receive any [click events](https://www.algolia.com/doc/guides/sending-events/getting-started) for the queries.
      *
      * Required API Key ACLs:
      *  - analytics
@@ -395,7 +395,7 @@ class AnalyticsClient
      * @param string $index          Index name. (required)
      * @param string $startDate      Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param string $endDate        End date of the period to analyze, in `YYYY-MM-DD` format. (optional)
-     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|GetClickPositionsResponse
@@ -434,7 +434,7 @@ class AnalyticsClient
     }
 
     /**
-     * Retrieves the click-through rate (CTR) for all your searches with at least one click event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  **There's a difference between a 0 and null CTR when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, CTR is null. - **0** mean there _were_ queries but no [click events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.
+     * Retrieves the click-through rate (CTR) for all your searches with at least one click event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  **There's a difference between a 0 and null CTR when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, CTR is null. - **0** mean there _were_ queries but no [click events](https://www.algolia.com/doc/guides/sending-events/getting-started) were received.
      *
      * Required API Key ACLs:
      *  - analytics
@@ -442,7 +442,7 @@ class AnalyticsClient
      * @param string $index          Index name. (required)
      * @param string $startDate      Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param string $endDate        End date of the period to analyze, in `YYYY-MM-DD` format. (optional)
-     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|GetClickThroughRateResponse
@@ -481,7 +481,7 @@ class AnalyticsClient
     }
 
     /**
-     * Retrieves the conversion rate (CR) for all your searches with at least one conversion event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  **There's a difference between a 0 and null CR when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, CR is null. - **0** mean there _were_ queries but no [conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.
+     * Retrieves the conversion rate (CR) for all your searches with at least one conversion event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  **There's a difference between a 0 and null CR when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, CR is null. - **0** mean there _were_ queries but no [conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started) were received.
      *
      * Required API Key ACLs:
      *  - analytics
@@ -489,7 +489,7 @@ class AnalyticsClient
      * @param string $index          Index name. (required)
      * @param string $startDate      Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param string $endDate        End date of the period to analyze, in `YYYY-MM-DD` format. (optional)
-     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|GetConversionRateResponse
@@ -536,7 +536,7 @@ class AnalyticsClient
      * @param string $index          Index name. (required)
      * @param string $startDate      Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param string $endDate        End date of the period to analyze, in `YYYY-MM-DD` format. (optional)
-     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|GetNoClickRateResponse
@@ -583,7 +583,7 @@ class AnalyticsClient
      * @param string $index          Index name. (required)
      * @param string $startDate      Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param string $endDate        End date of the period to analyze, in `YYYY-MM-DD` format. (optional)
-     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|GetNoResultsRateResponse
@@ -622,7 +622,7 @@ class AnalyticsClient
     }
 
     /**
-     * Retrieves the purchase rate for all your searches with at least one purchase event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  The rate is the number of purchase conversion events divided by the number of tracked searches. A search is tracked if it returns a query ID (`clickAnalytics` is `true`). This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`.  **There's a difference between a 0 and null purchase rate when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, the purchase rate is null. - **0** mean there _were_ queries but no [purchase conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.
+     * Retrieves the purchase rate for all your searches with at least one purchase event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  The rate is the number of purchase conversion events divided by the number of tracked searches. A search is tracked if it returns a query ID (`clickAnalytics` is `true`). This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`.  **There's a difference between a 0 and null purchase rate when `clickAnalytics` is enabled:**  - **Null** means there were no queries: since Algolia didn't receive any events, the purchase rate is null. - **0** mean there _were_ queries but no [purchase conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started) were received.
      *
      * Required API Key ACLs:
      *  - analytics
@@ -630,7 +630,7 @@ class AnalyticsClient
      * @param string $index          Index name. (required)
      * @param string $startDate      Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param string $endDate        End date of the period to analyze, in `YYYY-MM-DD` format. (optional)
-     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|GetPurchaseRateResponse
@@ -677,7 +677,7 @@ class AnalyticsClient
      * @param string $index          Index name. (required)
      * @param string $startDate      Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param string $endDate        End date of the period to analyze, in `YYYY-MM-DD` format. (optional)
-     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|GetRevenue
@@ -724,7 +724,7 @@ class AnalyticsClient
      * @param string $index          Index name. (required)
      * @param string $startDate      Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param string $endDate        End date of the period to analyze, in `YYYY-MM-DD` format. (optional)
-     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|GetSearchesCountResponse
@@ -773,7 +773,7 @@ class AnalyticsClient
      * @param string $endDate        End date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param int    $limit          Number of items to return. (optional, default to 10)
      * @param int    $offset         Position of the first item to return. (optional, default to 0)
-     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|GetSearchesNoClicksResponse
@@ -830,7 +830,7 @@ class AnalyticsClient
      * @param string $endDate        End date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param int    $limit          Number of items to return. (optional, default to 10)
      * @param int    $offset         Position of the first item to return. (optional, default to 0)
-     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|GetSearchesNoResultsResponse
@@ -919,7 +919,7 @@ class AnalyticsClient
      * @param string $endDate        End date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param int    $limit          Number of items to return. (optional, default to 10)
      * @param int    $offset         Position of the first item to return. (optional, default to 0)
-     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|GetTopCountriesResponse
@@ -977,7 +977,7 @@ class AnalyticsClient
      * @param string $endDate        End date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param int    $limit          Number of items to return. (optional, default to 10)
      * @param int    $offset         Position of the first item to return. (optional, default to 0)
-     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|GetTopFilterAttributesResponse
@@ -1040,7 +1040,7 @@ class AnalyticsClient
      * @param string $endDate        End date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param int    $limit          Number of items to return. (optional, default to 10)
      * @param int    $offset         Position of the first item to return. (optional, default to 0)
-     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|GetTopFilterForAttributeResponse
@@ -1106,7 +1106,7 @@ class AnalyticsClient
     }
 
     /**
-     * Retrieves the 1,000 most frequently used filters for a search that didn't return any results.  To get the most frequent searches without results, use the [Retrieve searches without results](#tag/search/operation/getSearchesNoResults) operation.
+     * Retrieves the 1,000 most frequently used filters for a search that didn't return any results.  To get the most frequent searches without results, use the [Retrieve searches without results](https://www.algolia.com/doc/rest-api/analytics/get-searches-no-results) operation.
      *
      * Required API Key ACLs:
      *  - analytics
@@ -1117,7 +1117,7 @@ class AnalyticsClient
      * @param string $endDate        End date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param int    $limit          Number of items to return. (optional, default to 10)
      * @param int    $offset         Position of the first item to return. (optional, default to 0)
-     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|GetTopFiltersNoResultsResponse
@@ -1168,7 +1168,7 @@ class AnalyticsClient
     }
 
     /**
-     * Retrieves the object IDs of the 1,000 most frequent search results.  If you set the `clickAnalytics` query parameter to true, the response also includes:  - Tracked searches count. Tracked searches are Search API requests with the `clickAnalytics` parameter set to `true`. This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`. - Click count - Click-through rate (CTR) - Conversion count - Conversion rate (CR) - Average click position  If you set the `revenueAnalytics` parameter to `true`, the response also includes:  - Add-to-cart count - Add-to-cart rate (ATCR) - Purchase count - Purchase rate - Revenue details for each currency  **There's a difference between 0% rates and null rates:**  - **Null** means there were no queries: since Algolia didn't receive any events, the rates (CTR, CR, ATCR, purchase rate) are null. - **0% rates** mean there _were_ queries but no [click or conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.
+     * Retrieves the object IDs of the 1,000 most frequent search results.  If you set the `clickAnalytics` query parameter to true, the response also includes:  - Tracked searches count. Tracked searches are Search API requests with the `clickAnalytics` parameter set to `true`. This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`. - Click count - Click-through rate (CTR) - Conversion count - Conversion rate (CR) - Average click position  If you set the `revenueAnalytics` parameter to `true`, the response also includes:  - Add-to-cart count - Add-to-cart rate (ATCR) - Purchase count - Purchase rate - Revenue details for each currency  **There's a difference between 0% rates and null rates:**  - **Null** means there were no queries: since Algolia didn't receive any events, the rates (CTR, CR, ATCR, purchase rate) are null. - **0% rates** mean there _were_ queries but no [click or conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started) were received.
      *
      * Required API Key ACLs:
      *  - analytics
@@ -1181,7 +1181,7 @@ class AnalyticsClient
      * @param string $endDate          End date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param int    $limit            Number of items to return. (optional, default to 10)
      * @param int    $offset           Position of the first item to return. (optional, default to 0)
-     * @param string $tags             Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param string $tags             Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments). (optional)
      * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|GetTopHitsResponse
@@ -1240,7 +1240,7 @@ class AnalyticsClient
     }
 
     /**
-     * Returns the most popular searches. For each search, it also includes the average number of hits.  If you set the `clickAnalytics` query parameter to `true`, the response also includes  - Tracked searches count. Tracked searches are Search API requests with the `clickAnalytics` parameter set to `true`. This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`. - Click count - Click-through rate (CTR) - Conversion count - Conversion rate (CR) - Average click position  If you set the `revenueAnalytics` query parameter to `true`, the response also includes:  - Add-to-cart count - Add-to-cart rate (ATCR) - Purchase count - Purchase rate - Revenue details for each currency  **There's a difference between 0% rates and null rates:**  - **Null** means there were no queries: since Algolia didn't receive any events, the rates (CTR, CR, ATCR, purchase rate) are null. - **0% rates** mean there _were_ queries but no [click or conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started/) were received.
+     * Returns the most popular searches. For each search, it also includes the average number of hits.  If you set the `clickAnalytics` query parameter to `true`, the response also includes  - Tracked searches count. Tracked searches are Search API requests with the `clickAnalytics` parameter set to `true`. This differs from the response's `count`, which shows the overall number of searches, including those where `clickAnalytics` is `false`. - Click count - Click-through rate (CTR) - Conversion count - Conversion rate (CR) - Average click position  If you set the `revenueAnalytics` query parameter to `true`, the response also includes:  - Add-to-cart count - Add-to-cart rate (ATCR) - Purchase count - Purchase rate - Revenue details for each currency  **There's a difference between 0% rates and null rates:**  - **Null** means there were no queries: since Algolia didn't receive any events, the rates (CTR, CR, ATCR, purchase rate) are null. - **0% rates** mean there _were_ queries but no [click or conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started) were received.
      *
      * Required API Key ACLs:
      *  - analytics
@@ -1254,7 +1254,7 @@ class AnalyticsClient
      * @param array  $direction        Sorting direction of the results: ascending or descending. (optional)
      * @param int    $limit            Number of items to return. (optional, default to 10)
      * @param int    $offset           Position of the first item to return. (optional, default to 0)
-     * @param string $tags             Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param string $tags             Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments). (optional)
      * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|GetTopSearchesResponse
@@ -1325,7 +1325,7 @@ class AnalyticsClient
      * @param string $index          Index name. (required)
      * @param string $startDate      Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param string $endDate        End date of the period to analyze, in `YYYY-MM-DD` format. (optional)
-     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|GetUsersCountResponse

@@ -324,7 +324,7 @@ class ApiKey extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Sets maxQueriesPerIPPerHour.
      *
-     * @param null|int $maxQueriesPerIPPerHour Maximum number of API requests allowed per IP address or [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) per hour.  If this limit is reached, the API returns an error with status code `429`. By default, there's no limit.
+     * @param null|int $maxQueriesPerIPPerHour Maximum number of API requests allowed per IP address or [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken) per hour.  If this limit is reached, the API returns an error with status code `429`. By default, there's no limit.
      *
      * @return self
      */

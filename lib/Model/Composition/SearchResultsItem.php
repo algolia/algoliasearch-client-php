@@ -1043,7 +1043,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets queryID.
      *
-     * @param null|string $queryID Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/).
+     * @param null|string $queryID Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics).
      *
      * @return self
      */

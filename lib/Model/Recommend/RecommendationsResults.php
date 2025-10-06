@@ -998,7 +998,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
     /**
      * Sets queryID.
      *
-     * @param null|string $queryID Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/).
+     * @param null|string $queryID Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics).
      *
      * @return self
      */

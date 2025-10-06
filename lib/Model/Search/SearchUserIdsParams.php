@@ -196,7 +196,7 @@ class SearchUserIdsParams extends AbstractModel implements ModelInterface, \Arra
     /**
      * Sets query.
      *
-     * @param string $query Query to search. The search is a prefix search with [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) enabled. An empty query will retrieve all users.
+     * @param string $query query
      *
      * @return self
      */

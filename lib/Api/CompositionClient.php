@@ -416,7 +416,7 @@ class CompositionClient
     }
 
     /**
-     * Retrieves a rule by its ID. To find the object ID of rules, use the [`search` operation](#tag/Rules/operation/searchRules).
+     * Retrieves a rule by its ID.  To find the object ID of a rule, use the [`search` operation](https://www.algolia.com/doc/rest-api/composition/search-composition-rules).
      *
      * Required API Key ACLs:
      *  - editSettings
@@ -641,7 +641,7 @@ class CompositionClient
     }
 
     /**
-     * Upsert a Composition Rule for the specified composition ID.
+     * If a composition rule with the provided ID already exists, it's replaced. Otherwise, a new one is added.
      *
      * Required API Key ACLs:
      *  - editSettings
@@ -817,8 +817,8 @@ class CompositionClient
      *                                                                         - $searchCompositionRulesParams['query'] => (string) Search query for rules.
      *                                                                         - $searchCompositionRulesParams['anchoring'] => (array)
      *                                                                         - $searchCompositionRulesParams['context'] => (string) Only return composition rules that match the context (exact match).
-     *                                                                         - $searchCompositionRulesParams['page'] => (int) Requested page of the API response.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
-     *                                                                         - $searchCompositionRulesParams['hitsPerPage'] => (int) Maximum number of hits per page.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
+     *                                                                         - $searchCompositionRulesParams['page'] => (int) Requested page of the API response.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
+     *                                                                         - $searchCompositionRulesParams['hitsPerPage'] => (int) Maximum number of hits per page.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
      *                                                                         - $searchCompositionRulesParams['enabled'] => (bool) If `true`, return only enabled composition rules. If `false`, return only inactive composition rules. By default, _all_ composition rules are returned.
      *
      * @see SearchCompositionRulesParams

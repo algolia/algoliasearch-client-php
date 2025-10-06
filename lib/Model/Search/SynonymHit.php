@@ -303,7 +303,7 @@ class SynonymHit extends AbstractModel implements ModelInterface, \ArrayAccess, 
     /**
      * Sets input.
      *
-     * @param null|string $input Word or phrase to appear in query strings (for [`onewaysynonym`s](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/one-way-synonyms/)).
+     * @param null|string $input Word or phrase to appear in query strings (for [`onewaysynonym`s](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/one-way-synonyms)).
      *
      * @return self
      */
@@ -327,7 +327,7 @@ class SynonymHit extends AbstractModel implements ModelInterface, \ArrayAccess, 
     /**
      * Sets word.
      *
-     * @param null|string $word Word or phrase to appear in query strings (for [`altcorrection1` and `altcorrection2`](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-alternative-corrections/)).
+     * @param null|string $word Word or phrase to appear in query strings (for [`altcorrection1` and `altcorrection2`](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-alternative-corrections)).
      *
      * @return self
      */
@@ -375,7 +375,7 @@ class SynonymHit extends AbstractModel implements ModelInterface, \ArrayAccess, 
     /**
      * Sets placeholder.
      *
-     * @param null|string $placeholder [Placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/) to be put inside records.
+     * @param null|string $placeholder [Placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders) to be put inside records.
      *
      * @return self
      */
@@ -399,7 +399,7 @@ class SynonymHit extends AbstractModel implements ModelInterface, \ArrayAccess, 
     /**
      * Sets replacements.
      *
-     * @param null|string[] $replacements Query words that will match the [placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/).
+     * @param null|string[] $replacements Query words that will match the [placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders).
      *
      * @return self
      */

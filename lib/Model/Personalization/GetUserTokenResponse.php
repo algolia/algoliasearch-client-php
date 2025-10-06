@@ -192,7 +192,7 @@ class GetUserTokenResponse extends AbstractModel implements ModelInterface, \Arr
     /**
      * Sets userToken.
      *
-     * @param string $userToken Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).
+     * @param string $userToken Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken).
      *
      * @return self
      */

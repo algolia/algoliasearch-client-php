@@ -85,7 +85,7 @@ use GuzzleHttp\Psr7\Query;
  */
 class SearchClient
 {
-    public const VERSION = '4.30.0';
+    public const VERSION = '4.31.0';
 
     /**
      * @var ApiWrapperInterface

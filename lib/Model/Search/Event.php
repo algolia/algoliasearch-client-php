@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description An event describe a step of the task execution flow..
+ * @description An event describe a step of the task execution flow.
  */
 class Event extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

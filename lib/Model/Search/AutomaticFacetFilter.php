@@ -236,7 +236,7 @@ class AutomaticFacetFilter extends AbstractModel implements ModelInterface, \Arr
     /**
      * Sets disjunctive.
      *
-     * @param null|bool $disjunctive Whether the filter is disjunctive or conjunctive.  If true the filter has multiple matches, multiple occurences are combined with the logical `OR` operation. If false, multiple occurences are combined with the logical `AND` operation.
+     * @param null|bool $disjunctive Whether the filter is disjunctive or conjunctive.  If true the filter has multiple matches, multiple occurrences are combined with the logical `OR` operation. If false, multiple occurrences are combined with the logical `AND` operation.
      *
      * @return self
      */

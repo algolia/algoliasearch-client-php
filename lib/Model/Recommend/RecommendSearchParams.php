@@ -1406,7 +1406,7 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
     /**
      * Sets clickAnalytics.
      *
-     * @param null|bool $clickAnalytics Whether to include a `queryID` attribute in the response The query ID is a unique identifier for a search query and is required for tracking [click and conversion events](https://www.algolia.com/guides/sending-events/getting-started).
+     * @param null|bool $clickAnalytics Whether to include a `queryID` attribute in the response The query ID is a unique identifier for a search query and is required for tracking [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started).
      *
      * @return self
      */

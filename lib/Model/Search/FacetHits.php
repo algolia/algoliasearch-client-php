@@ -240,7 +240,7 @@ class FacetHits extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Sets count.
      *
-     * @param int $count Number of records with this facet value. [The count may be approximated](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-).
+     * @param int $count Number of records with this facet value. [The count may be approximated](https://support.algolia.com/hc/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate).
      *
      * @return self
      */

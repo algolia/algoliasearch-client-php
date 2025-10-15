@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  <a href="https://www.algolia.com/doc/libraries/php/" target="_blank">Documentation</a>  •
+  <a href="https://www.algolia.com/doc/libraries/sdk/install#php" target="_blank">Documentation</a>  •
   <a href="https://github.com/algolia/scout-extended" target="_blank">Laravel</a>  •
   <a href="https://github.com/algolia/search-bundle" target="_blank">Symfony</a>  •
   <a href="https://discourse.algolia.com" target="_blank">Community Forum</a>  •
@@ -72,7 +72,7 @@ $response = $client->search(
 var_dump($response);
 ```
 
-For full documentation, visit the **[Algolia PHP API Client](https://www.algolia.com/doc/libraries/php/)**.
+For full documentation, visit the **[Algolia PHP API Client](https://www.algolia.com/doc/libraries/sdk/install#php)**.
 
 ## ❓ Troubleshooting
 

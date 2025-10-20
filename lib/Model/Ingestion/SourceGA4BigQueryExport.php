@@ -11,6 +11,8 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  * SourceGA4BigQueryExport Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Specific configuration attributes of a `ga4BigqueryExport` source.
  */
 class SourceGA4BigQueryExport extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

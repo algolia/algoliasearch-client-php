@@ -11,6 +11,8 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  * SourceUpdateDocker Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Specific configuration attributes of a `docker` source.
  */
 class SourceUpdateDocker extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

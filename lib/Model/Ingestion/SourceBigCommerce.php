@@ -11,6 +11,8 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  * SourceBigCommerce Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Specific configuration attributes of a `bigcommerce` source.
  */
 class SourceBigCommerce extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

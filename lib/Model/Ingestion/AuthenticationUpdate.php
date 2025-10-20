@@ -24,7 +24,6 @@ class AuthenticationUpdate extends AbstractModel implements ModelInterface, \Arr
     protected static $modelTypes = [
         'type' => '\Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationType',
         'name' => 'string',
-        'platform' => '\Algolia\AlgoliaSearch\Model\Ingestion\Platform',
         'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\AuthInputPartial',
     ];
 
@@ -36,7 +35,6 @@ class AuthenticationUpdate extends AbstractModel implements ModelInterface, \Arr
     protected static $modelFormats = [
         'type' => null,
         'name' => null,
-        'platform' => null,
         'input' => null,
     ];
 
@@ -49,7 +47,6 @@ class AuthenticationUpdate extends AbstractModel implements ModelInterface, \Arr
     protected static $attributeMap = [
         'type' => 'type',
         'name' => 'name',
-        'platform' => 'platform',
         'input' => 'input',
     ];
 
@@ -61,7 +58,6 @@ class AuthenticationUpdate extends AbstractModel implements ModelInterface, \Arr
     protected static $setters = [
         'type' => 'setType',
         'name' => 'setName',
-        'platform' => 'setPlatform',
         'input' => 'setInput',
     ];
 
@@ -73,7 +69,6 @@ class AuthenticationUpdate extends AbstractModel implements ModelInterface, \Arr
     protected static $getters = [
         'type' => 'getType',
         'name' => 'getName',
-        'platform' => 'getPlatform',
         'input' => 'getInput',
     ];
 
@@ -96,9 +91,6 @@ class AuthenticationUpdate extends AbstractModel implements ModelInterface, \Arr
         }
         if (isset($data['name'])) {
             $this->container['name'] = $data['name'];
-        }
-        if (isset($data['platform'])) {
-            $this->container['platform'] = $data['platform'];
         }
         if (isset($data['input'])) {
             $this->container['input'] = $data['input'];
@@ -221,30 +213,6 @@ class AuthenticationUpdate extends AbstractModel implements ModelInterface, \Arr
     public function setName($name)
     {
         $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets platform.
-     *
-     * @return null|Platform
-     */
-    public function getPlatform()
-    {
-        return $this->container['platform'] ?? null;
-    }
-
-    /**
-     * Sets platform.
-     *
-     * @param null|Platform $platform platform
-     *
-     * @return self
-     */
-    public function setPlatform($platform)
-    {
-        $this->container['platform'] = $platform;
 
         return $this;
     }

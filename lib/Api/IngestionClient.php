@@ -2496,7 +2496,6 @@ class IngestionClient
      * @param array|AuthenticationUpdate $authenticationUpdate authenticationUpdate (required)
      *                                                         - $authenticationUpdate['type'] => (array)
      *                                                         - $authenticationUpdate['name'] => (string) Descriptive name for the resource.
-     *                                                         - $authenticationUpdate['platform'] => (array)
      *                                                         - $authenticationUpdate['input'] => (array)
      *
      * @see AuthenticationUpdate

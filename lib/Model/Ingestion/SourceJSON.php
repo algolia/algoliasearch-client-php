@@ -11,6 +11,8 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  * SourceJSON Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Specific configuration attributes of a `json` source.
  */
 class SourceJSON extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

@@ -11,6 +11,8 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  * SourceUpdateShopify Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Specific configuration attributes of a `shopify` source.
  */
 class SourceUpdateShopify extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

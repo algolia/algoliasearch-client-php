@@ -11,6 +11,8 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  * SourceCommercetools Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Specific configuration attributes of a `commercetools` source.
  */
 class SourceCommercetools extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

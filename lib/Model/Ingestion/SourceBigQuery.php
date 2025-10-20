@@ -11,6 +11,8 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  * SourceBigQuery Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Specific configuration attributes of a `bigquery` source.
  */
 class SourceBigQuery extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

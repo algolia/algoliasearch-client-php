@@ -11,6 +11,8 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  * SourceCSV Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Specific configuration attributes of a `csv` source.
  */
 class SourceCSV extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

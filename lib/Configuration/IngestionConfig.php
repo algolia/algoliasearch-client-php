@@ -29,6 +29,13 @@ class IngestionConfig extends ConfigWithRegion
         return parent::create($appId, $apiKey, $region);
     }
 
+    public function setWaitTaskTimeBeforeRetry($waitTaskTimeBeforeRetry)
+    {
+        $this->config['waitTaskTimeBeforeRetry'] = $waitTaskTimeBeforeRetry;
+
+        return $this;
+    }
+
     public function getWaitTaskTimeBeforeRetry()
     {
         return $this->config['waitTaskTimeBeforeRetry'];

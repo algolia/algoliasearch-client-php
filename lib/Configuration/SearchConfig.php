@@ -21,6 +21,13 @@ class SearchConfig extends Configuration
         return new static($config);
     }
 
+    public function setWaitTaskTimeBeforeRetry($waitTaskTimeBeforeRetry)
+    {
+        $this->config['waitTaskTimeBeforeRetry'] = $waitTaskTimeBeforeRetry;
+
+        return $this;
+    }
+
     public function getWaitTaskTimeBeforeRetry()
     {
         return $this->config['waitTaskTimeBeforeRetry'];

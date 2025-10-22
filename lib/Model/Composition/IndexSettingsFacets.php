@@ -8,13 +8,13 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * Facets Class Doc Comment.
+ * IndexSettingsFacets Class Doc Comment.
  *
  * @category Class
  *
  * @description Order of facet names.
  */
-class Facets extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class IndexSettingsFacets extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.

@@ -22,7 +22,7 @@ class FacetOrdering extends AbstractModel implements ModelInterface, \ArrayAcces
      * @var string[]
      */
     protected static $modelTypes = [
-        'facets' => '\Algolia\AlgoliaSearch\Model\Composition\Facets',
+        'facets' => '\Algolia\AlgoliaSearch\Model\Composition\IndexSettingsFacets',
         'values' => 'array<string,\Algolia\AlgoliaSearch\Model\Composition\Value>',
     ];
 
@@ -164,7 +164,7 @@ class FacetOrdering extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Gets facets.
      *
-     * @return null|Facets
+     * @return null|IndexSettingsFacets
      */
     public function getFacets()
     {
@@ -174,7 +174,7 @@ class FacetOrdering extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Sets facets.
      *
-     * @param null|Facets $facets facets
+     * @param null|IndexSettingsFacets $facets facets
      *
      * @return self
      */

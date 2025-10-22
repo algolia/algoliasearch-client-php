@@ -1,3 +1,9 @@
+## [4.32.0](https://github.com/algolia/algoliasearch-client-php/compare/4.31.1...4.32.0)
+
+- [7f9de7cd9](https://github.com/algolia/api-clients-automation/commit/7f9de7cd9) fix(specs): ingestion small fix + added source input descriptions ([#5515](https://github.com/algolia/api-clients-automation/pull/5515)) by [@sbellone](https://github.com/sbellone/)
+- [68bbcbb4e](https://github.com/algolia/api-clients-automation/commit/68bbcbb4e) feat(php): add `setWaitTaskTimeBeforeRetry` method for Search and Ingestion clients ([#5514](https://github.com/algolia/api-clients-automation/pull/5514)) by [@louisfisch](https://github.com/louisfisch/)
+- [7287faaa7](https://github.com/algolia/api-clients-automation/commit/7287faaa7) feat(specs): add `facets` query parameter available at run time ([#5486](https://github.com/algolia/api-clients-automation/pull/5486)) by [@ClaraMuller](https://github.com/ClaraMuller/)
+
 ## [4.31.1](https://github.com/algolia/algoliasearch-client-php/compare/4.31.0...4.31.1)
 
 - [9a92b3269](https://github.com/algolia/api-clients-automation/commit/9a92b3269) chore(deps): dependencies 2025-10-13 ([#5453](https://github.com/algolia/api-clients-automation/pull/5453)) by [@algolia-bot](https://github.com/algolia-bot/)

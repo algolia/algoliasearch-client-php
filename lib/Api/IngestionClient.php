@@ -283,6 +283,11 @@ class IngestionClient
     /**
      * Creates a new task.
      *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
      * @param array|TaskCreate $taskCreate Request body for creating a task. (required)
      *                                     - $taskCreate['sourceID'] => (string) Universally uniqud identifier (UUID) of a source. (required)
      *                                     - $taskCreate['destinationID'] => (string) Universally unique identifier (UUID) of a destination resource. (required)
@@ -322,6 +327,11 @@ class IngestionClient
     /**
      * Creates a new task using the v1 endpoint, please use `createTask` instead.
      *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
      * @param array|TaskCreateV1 $taskCreate Request body for creating a task. (required)
      *                                       - $taskCreate['sourceID'] => (string) Universally uniqud identifier (UUID) of a source. (required)
      *                                       - $taskCreate['destinationID'] => (string) Universally unique identifier (UUID) of a destination resource. (required)
@@ -359,6 +369,11 @@ class IngestionClient
 
     /**
      * Creates a new transformation.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
      *
      * @param array|TransformationCreate $transformationCreate Request body for creating a transformation. (required)
      *                                                         - $transformationCreate['code'] => (string) It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.
@@ -669,6 +684,11 @@ class IngestionClient
     /**
      * Deletes a task by its ID.
      *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
      * @param string $taskID         Unique identifier of a task. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -702,6 +722,11 @@ class IngestionClient
 
     /**
      * Deletes a task by its ID using the v1 endpoint, please use `deleteTask` instead.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
      *
      * @param string $taskID         Unique identifier of a task. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -738,6 +763,11 @@ class IngestionClient
 
     /**
      * Deletes a transformation by its ID.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
      *
      * @param string $transformationID Unique identifier of a transformation. (required)
      * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -1948,6 +1978,11 @@ class IngestionClient
     /**
      * Fully updates a task by its ID, use partialUpdateTask if you only want to update a subset of fields.
      *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
      * @param string            $taskID      Unique identifier of a task. (required)
      * @param array|TaskReplace $taskReplace taskReplace (required)
      *                                       - $taskReplace['destinationID'] => (string) Universally unique identifier (UUID) of a destination resource. (required)
@@ -2645,6 +2680,11 @@ class IngestionClient
     /**
      * Partially updates a task by its ID.
      *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
      * @param string           $taskID     Unique identifier of a task. (required)
      * @param array|TaskUpdate $taskUpdate taskUpdate (required)
      *                                     - $taskUpdate['destinationID'] => (string) Universally unique identifier (UUID) of a destination resource.
@@ -2697,6 +2737,11 @@ class IngestionClient
     /**
      * Updates a task by its ID using the v1 endpoint, please use `updateTask` instead.
      *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
      * @param string             $taskID     Unique identifier of a task. (required)
      * @param array|TaskUpdateV1 $taskUpdate taskUpdate (required)
      *                                       - $taskUpdate['destinationID'] => (string) Universally unique identifier (UUID) of a destination resource.
@@ -2747,6 +2792,11 @@ class IngestionClient
 
     /**
      * Updates a transformation by its ID.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
      *
      * @param string                     $transformationID     Unique identifier of a transformation. (required)
      * @param array|TransformationCreate $transformationCreate transformationCreate (required)

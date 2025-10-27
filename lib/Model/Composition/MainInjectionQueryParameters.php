@@ -71,6 +71,7 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
         'facets' => 'string[]',
         'hitsPerPage' => 'int',
         'maxValuesPerFacet' => 'int',
+        'renderingContent' => '\Algolia\AlgoliaSearch\Model\Composition\RenderingContent',
         'sortFacetValuesBy' => 'string',
         'sumOrFiltersScores' => 'bool',
     ];
@@ -132,6 +133,7 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
         'facets' => null,
         'hitsPerPage' => null,
         'maxValuesPerFacet' => null,
+        'renderingContent' => null,
         'sortFacetValuesBy' => null,
         'sumOrFiltersScores' => null,
     ];
@@ -194,6 +196,7 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
         'facets' => 'facets',
         'hitsPerPage' => 'hitsPerPage',
         'maxValuesPerFacet' => 'maxValuesPerFacet',
+        'renderingContent' => 'renderingContent',
         'sortFacetValuesBy' => 'sortFacetValuesBy',
         'sumOrFiltersScores' => 'sumOrFiltersScores',
     ];
@@ -255,6 +258,7 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
         'facets' => 'setFacets',
         'hitsPerPage' => 'setHitsPerPage',
         'maxValuesPerFacet' => 'setMaxValuesPerFacet',
+        'renderingContent' => 'setRenderingContent',
         'sortFacetValuesBy' => 'setSortFacetValuesBy',
         'sumOrFiltersScores' => 'setSumOrFiltersScores',
     ];
@@ -316,6 +320,7 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
         'facets' => 'getFacets',
         'hitsPerPage' => 'getHitsPerPage',
         'maxValuesPerFacet' => 'getMaxValuesPerFacet',
+        'renderingContent' => 'getRenderingContent',
         'sortFacetValuesBy' => 'getSortFacetValuesBy',
         'sumOrFiltersScores' => 'getSumOrFiltersScores',
     ];
@@ -486,6 +491,9 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
         }
         if (isset($data['maxValuesPerFacet'])) {
             $this->container['maxValuesPerFacet'] = $data['maxValuesPerFacet'];
+        }
+        if (isset($data['renderingContent'])) {
+            $this->container['renderingContent'] = $data['renderingContent'];
         }
         if (isset($data['sortFacetValuesBy'])) {
             $this->container['sortFacetValuesBy'] = $data['sortFacetValuesBy'];
@@ -1787,6 +1795,30 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
     public function setMaxValuesPerFacet($maxValuesPerFacet)
     {
         $this->container['maxValuesPerFacet'] = $maxValuesPerFacet;
+
+        return $this;
+    }
+
+    /**
+     * Gets renderingContent.
+     *
+     * @return null|RenderingContent
+     */
+    public function getRenderingContent()
+    {
+        return $this->container['renderingContent'] ?? null;
+    }
+
+    /**
+     * Sets renderingContent.
+     *
+     * @param null|RenderingContent $renderingContent renderingContent
+     *
+     * @return self
+     */
+    public function setRenderingContent($renderingContent)
+    {
+        $this->container['renderingContent'] = $renderingContent;
 
         return $this;
     }

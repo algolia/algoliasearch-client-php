@@ -25,8 +25,8 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'page' => 'int',
         'getRankingInfo' => 'bool',
         'relevancyStrictness' => 'int',
-        'facets' => 'string[]',
         'facetFilters' => '\Algolia\AlgoliaSearch\Model\Composition\FacetFilters',
+        'facets' => 'string[]',
         'optionalFilters' => '\Algolia\AlgoliaSearch\Model\Composition\OptionalFilters',
         'numericFilters' => '\Algolia\AlgoliaSearch\Model\Composition\NumericFilters',
         'hitsPerPage' => 'int',
@@ -61,8 +61,8 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'page' => null,
         'getRankingInfo' => null,
         'relevancyStrictness' => null,
-        'facets' => null,
         'facetFilters' => null,
+        'facets' => null,
         'optionalFilters' => null,
         'numericFilters' => null,
         'hitsPerPage' => null,
@@ -98,8 +98,8 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'page' => 'page',
         'getRankingInfo' => 'getRankingInfo',
         'relevancyStrictness' => 'relevancyStrictness',
-        'facets' => 'facets',
         'facetFilters' => 'facetFilters',
+        'facets' => 'facets',
         'optionalFilters' => 'optionalFilters',
         'numericFilters' => 'numericFilters',
         'hitsPerPage' => 'hitsPerPage',
@@ -134,8 +134,8 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'page' => 'setPage',
         'getRankingInfo' => 'setGetRankingInfo',
         'relevancyStrictness' => 'setRelevancyStrictness',
-        'facets' => 'setFacets',
         'facetFilters' => 'setFacetFilters',
+        'facets' => 'setFacets',
         'optionalFilters' => 'setOptionalFilters',
         'numericFilters' => 'setNumericFilters',
         'hitsPerPage' => 'setHitsPerPage',
@@ -170,8 +170,8 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'page' => 'getPage',
         'getRankingInfo' => 'getGetRankingInfo',
         'relevancyStrictness' => 'getRelevancyStrictness',
-        'facets' => 'getFacets',
         'facetFilters' => 'getFacetFilters',
+        'facets' => 'getFacets',
         'optionalFilters' => 'getOptionalFilters',
         'numericFilters' => 'getNumericFilters',
         'hitsPerPage' => 'getHitsPerPage',
@@ -224,11 +224,11 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         if (isset($data['relevancyStrictness'])) {
             $this->container['relevancyStrictness'] = $data['relevancyStrictness'];
         }
-        if (isset($data['facets'])) {
-            $this->container['facets'] = $data['facets'];
-        }
         if (isset($data['facetFilters'])) {
             $this->container['facetFilters'] = $data['facetFilters'];
+        }
+        if (isset($data['facets'])) {
+            $this->container['facets'] = $data['facets'];
         }
         if (isset($data['optionalFilters'])) {
             $this->container['optionalFilters'] = $data['optionalFilters'];
@@ -488,30 +488,6 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     }
 
     /**
-     * Gets facets.
-     *
-     * @return null|string[]
-     */
-    public function getFacets()
-    {
-        return $this->container['facets'] ?? null;
-    }
-
-    /**
-     * Sets facets.
-     *
-     * @param null|string[] $facets Facets for which to retrieve facet values that match the search criteria and the number of matching facet values To retrieve all facets, use the wildcard character `*`. For more information, see [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts).
-     *
-     * @return self
-     */
-    public function setFacets($facets)
-    {
-        $this->container['facets'] = $facets;
-
-        return $this;
-    }
-
-    /**
      * Gets facetFilters.
      *
      * @return null|FacetFilters
@@ -531,6 +507,30 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     public function setFacetFilters($facetFilters)
     {
         $this->container['facetFilters'] = $facetFilters;
+
+        return $this;
+    }
+
+    /**
+     * Gets facets.
+     *
+     * @return null|string[]
+     */
+    public function getFacets()
+    {
+        return $this->container['facets'] ?? null;
+    }
+
+    /**
+     * Sets facets.
+     *
+     * @param null|string[] $facets Facets for which to retrieve facet values that match the search criteria and the number of matching facet values To retrieve all facets, use the wildcard character `*`. To retrieve disjunctive facets lists, annotate any facets with the `disjunctive` modifier. For more information, see [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts) and [disjunctive faceting for Smart Groups](https://www.algolia.com/doc/guides/managing-results/compositions/search-based-groups#facets-including-disjunctive-faceting).
+     *
+     * @return self
+     */
+    public function setFacets($facets)
+    {
+        $this->container['facets'] = $facets;
 
         return $this;
     }

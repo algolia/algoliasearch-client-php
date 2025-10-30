@@ -12,8 +12,6 @@ use Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsRequest;
 use Algolia\AlgoliaSearch\Model\Abtesting\EstimateABTestRequest;
 use Algolia\AlgoliaSearch\Model\Abtesting\EstimateABTestResponse;
 use Algolia\AlgoliaSearch\Model\Abtesting\ListABTestsResponse;
-use Algolia\AlgoliaSearch\Model\Abtesting\ScheduleABTestResponse;
-use Algolia\AlgoliaSearch\Model\Abtesting\ScheduleABTestsRequest;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
@@ -459,41 +457,6 @@ class AbtestingClient
         }
 
         return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
-    }
-
-    /**
-     * Schedule an A/B test to be started at a later time.
-     *
-     * Required API Key ACLs:
-     *  - editSettings
-     *
-     * @param array|ScheduleABTestsRequest $scheduleABTestsRequest scheduleABTestsRequest (required)
-     *                                                             - $scheduleABTestsRequest['name'] => (string) A/B test name. (required)
-     *                                                             - $scheduleABTestsRequest['variants'] => (array) A/B test variants. (required)
-     *                                                             - $scheduleABTestsRequest['scheduledAt'] => (string) Date and time when the A/B test is scheduled to start, in RFC 3339 format. (required)
-     *                                                             - $scheduleABTestsRequest['endAt'] => (string) End date and time of the A/B test, in RFC 3339 format. (required)
-     *
-     * @see ScheduleABTestsRequest
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|ScheduleABTestResponse
-     */
-    public function scheduleABTest($scheduleABTestsRequest, $requestOptions = [])
-    {
-        // verify the required parameter 'scheduleABTestsRequest' is set
-        if (!isset($scheduleABTestsRequest)) {
-            throw new \InvalidArgumentException(
-                'Parameter `scheduleABTestsRequest` is required when calling `scheduleABTest`.'
-            );
-        }
-
-        $resourcePath = '/2/abtests/schedule';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = $scheduleABTestsRequest;
-
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**

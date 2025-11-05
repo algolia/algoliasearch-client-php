@@ -26,6 +26,7 @@ class BoughtTogetherQuery extends AbstractModel implements ModelInterface, \Arra
         'queryParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendSearchParams',
         'model' => '\Algolia\AlgoliaSearch\Model\Recommend\FbtModel',
         'objectID' => 'string',
+        'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams',
     ];
 
     /**
@@ -40,6 +41,7 @@ class BoughtTogetherQuery extends AbstractModel implements ModelInterface, \Arra
         'queryParameters' => null,
         'model' => null,
         'objectID' => null,
+        'fallbackParameters' => null,
     ];
 
     /**
@@ -55,6 +57,7 @@ class BoughtTogetherQuery extends AbstractModel implements ModelInterface, \Arra
         'queryParameters' => 'queryParameters',
         'model' => 'model',
         'objectID' => 'objectID',
+        'fallbackParameters' => 'fallbackParameters',
     ];
 
     /**
@@ -69,6 +72,7 @@ class BoughtTogetherQuery extends AbstractModel implements ModelInterface, \Arra
         'queryParameters' => 'setQueryParameters',
         'model' => 'setModel',
         'objectID' => 'setObjectID',
+        'fallbackParameters' => 'setFallbackParameters',
     ];
 
     /**
@@ -83,6 +87,7 @@ class BoughtTogetherQuery extends AbstractModel implements ModelInterface, \Arra
         'queryParameters' => 'getQueryParameters',
         'model' => 'getModel',
         'objectID' => 'getObjectID',
+        'fallbackParameters' => 'getFallbackParameters',
     ];
 
     /**
@@ -116,6 +121,9 @@ class BoughtTogetherQuery extends AbstractModel implements ModelInterface, \Arra
         }
         if (isset($data['objectID'])) {
             $this->container['objectID'] = $data['objectID'];
+        }
+        if (isset($data['fallbackParameters'])) {
+            $this->container['fallbackParameters'] = $data['fallbackParameters'];
         }
     }
 
@@ -346,6 +354,30 @@ class BoughtTogetherQuery extends AbstractModel implements ModelInterface, \Arra
     public function setObjectID($objectID)
     {
         $this->container['objectID'] = $objectID;
+
+        return $this;
+    }
+
+    /**
+     * Gets fallbackParameters.
+     *
+     * @return null|FallbackParams
+     */
+    public function getFallbackParameters()
+    {
+        return $this->container['fallbackParameters'] ?? null;
+    }
+
+    /**
+     * Sets fallbackParameters.
+     *
+     * @param null|FallbackParams $fallbackParameters fallbackParameters
+     *
+     * @return self
+     */
+    public function setFallbackParameters($fallbackParameters)
+    {
+        $this->container['fallbackParameters'] = $fallbackParameters;
 
         return $this;
     }

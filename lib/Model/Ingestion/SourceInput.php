@@ -26,6 +26,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'projectKey' => 'string',
         'fallbackIsInStockValue' => 'bool',
         'productQueryPredicate' => 'string',
+        'useImagesObjects' => 'bool',
         'customFields' => 'string[]',
         'storeHash' => 'string',
         'channel' => '\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceChannel',
@@ -59,6 +60,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'projectKey' => null,
         'fallbackIsInStockValue' => null,
         'productQueryPredicate' => null,
+        'useImagesObjects' => null,
         'customFields' => null,
         'storeHash' => null,
         'channel' => null,
@@ -93,6 +95,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'projectKey' => 'projectKey',
         'fallbackIsInStockValue' => 'fallbackIsInStockValue',
         'productQueryPredicate' => 'productQueryPredicate',
+        'useImagesObjects' => 'useImagesObjects',
         'customFields' => 'customFields',
         'storeHash' => 'storeHash',
         'channel' => 'channel',
@@ -126,6 +129,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'projectKey' => 'setProjectKey',
         'fallbackIsInStockValue' => 'setFallbackIsInStockValue',
         'productQueryPredicate' => 'setProductQueryPredicate',
+        'useImagesObjects' => 'setUseImagesObjects',
         'customFields' => 'setCustomFields',
         'storeHash' => 'setStoreHash',
         'channel' => 'setChannel',
@@ -159,6 +163,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'projectKey' => 'getProjectKey',
         'fallbackIsInStockValue' => 'getFallbackIsInStockValue',
         'productQueryPredicate' => 'getProductQueryPredicate',
+        'useImagesObjects' => 'getUseImagesObjects',
         'customFields' => 'getCustomFields',
         'storeHash' => 'getStoreHash',
         'channel' => 'getChannel',
@@ -211,6 +216,9 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         }
         if (isset($data['productQueryPredicate'])) {
             $this->container['productQueryPredicate'] = $data['productQueryPredicate'];
+        }
+        if (isset($data['useImagesObjects'])) {
+            $this->container['useImagesObjects'] = $data['useImagesObjects'];
         }
         if (isset($data['customFields'])) {
             $this->container['customFields'] = $data['customFields'];
@@ -513,6 +521,30 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
     public function setProductQueryPredicate($productQueryPredicate)
     {
         $this->container['productQueryPredicate'] = $productQueryPredicate;
+
+        return $this;
+    }
+
+    /**
+     * Gets useImagesObjects.
+     *
+     * @return null|bool
+     */
+    public function getUseImagesObjects()
+    {
+        return $this->container['useImagesObjects'] ?? null;
+    }
+
+    /**
+     * Sets useImagesObjects.
+     *
+     * @param null|bool $useImagesObjects when set to true, the connector indexes objects with all images attributes instead of only the URLs
+     *
+     * @return self
+     */
+    public function setUseImagesObjects($useImagesObjects)
+    {
+        $this->container['useImagesObjects'] = $useImagesObjects;
 
         return $this;
     }

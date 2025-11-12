@@ -28,6 +28,7 @@ class SourceCommercetools extends AbstractModel implements ModelInterface, \Arra
         'projectKey' => 'string',
         'fallbackIsInStockValue' => 'bool',
         'productQueryPredicate' => 'string',
+        'useImagesObjects' => 'bool',
         'customFields' => '\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields',
     ];
 
@@ -43,6 +44,7 @@ class SourceCommercetools extends AbstractModel implements ModelInterface, \Arra
         'projectKey' => null,
         'fallbackIsInStockValue' => null,
         'productQueryPredicate' => null,
+        'useImagesObjects' => null,
         'customFields' => null,
     ];
 
@@ -59,6 +61,7 @@ class SourceCommercetools extends AbstractModel implements ModelInterface, \Arra
         'projectKey' => 'projectKey',
         'fallbackIsInStockValue' => 'fallbackIsInStockValue',
         'productQueryPredicate' => 'productQueryPredicate',
+        'useImagesObjects' => 'useImagesObjects',
         'customFields' => 'customFields',
     ];
 
@@ -74,6 +77,7 @@ class SourceCommercetools extends AbstractModel implements ModelInterface, \Arra
         'projectKey' => 'setProjectKey',
         'fallbackIsInStockValue' => 'setFallbackIsInStockValue',
         'productQueryPredicate' => 'setProductQueryPredicate',
+        'useImagesObjects' => 'setUseImagesObjects',
         'customFields' => 'setCustomFields',
     ];
 
@@ -89,6 +93,7 @@ class SourceCommercetools extends AbstractModel implements ModelInterface, \Arra
         'projectKey' => 'getProjectKey',
         'fallbackIsInStockValue' => 'getFallbackIsInStockValue',
         'productQueryPredicate' => 'getProductQueryPredicate',
+        'useImagesObjects' => 'getUseImagesObjects',
         'customFields' => 'getCustomFields',
     ];
 
@@ -123,6 +128,9 @@ class SourceCommercetools extends AbstractModel implements ModelInterface, \Arra
         }
         if (isset($data['productQueryPredicate'])) {
             $this->container['productQueryPredicate'] = $data['productQueryPredicate'];
+        }
+        if (isset($data['useImagesObjects'])) {
+            $this->container['useImagesObjects'] = $data['useImagesObjects'];
         }
         if (isset($data['customFields'])) {
             $this->container['customFields'] = $data['customFields'];
@@ -350,6 +358,30 @@ class SourceCommercetools extends AbstractModel implements ModelInterface, \Arra
     public function setProductQueryPredicate($productQueryPredicate)
     {
         $this->container['productQueryPredicate'] = $productQueryPredicate;
+
+        return $this;
+    }
+
+    /**
+     * Gets useImagesObjects.
+     *
+     * @return null|bool
+     */
+    public function getUseImagesObjects()
+    {
+        return $this->container['useImagesObjects'] ?? null;
+    }
+
+    /**
+     * Sets useImagesObjects.
+     *
+     * @param null|bool $useImagesObjects when set to true, the connector indexes objects with all images attributes instead of only the URLs
+     *
+     * @return self
+     */
+    public function setUseImagesObjects($useImagesObjects)
+    {
+        $this->container['useImagesObjects'] = $useImagesObjects;
 
         return $this;
     }

@@ -25,6 +25,7 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         'url' => 'string',
         'fallbackIsInStockValue' => 'bool',
         'productQueryPredicate' => 'string',
+        'useImagesObjects' => 'bool',
         'customFields' => '\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields',
         'uniqueIDColumn' => 'string',
         'method' => '\Algolia\AlgoliaSearch\Model\Ingestion\MethodType',
@@ -51,6 +52,7 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         'url' => null,
         'fallbackIsInStockValue' => null,
         'productQueryPredicate' => null,
+        'useImagesObjects' => null,
         'customFields' => null,
         'uniqueIDColumn' => null,
         'method' => null,
@@ -78,6 +80,7 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         'url' => 'url',
         'fallbackIsInStockValue' => 'fallbackIsInStockValue',
         'productQueryPredicate' => 'productQueryPredicate',
+        'useImagesObjects' => 'useImagesObjects',
         'customFields' => 'customFields',
         'uniqueIDColumn' => 'uniqueIDColumn',
         'method' => 'method',
@@ -104,6 +107,7 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         'url' => 'setUrl',
         'fallbackIsInStockValue' => 'setFallbackIsInStockValue',
         'productQueryPredicate' => 'setProductQueryPredicate',
+        'useImagesObjects' => 'setUseImagesObjects',
         'customFields' => 'setCustomFields',
         'uniqueIDColumn' => 'setUniqueIDColumn',
         'method' => 'setMethod',
@@ -130,6 +134,7 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         'url' => 'getUrl',
         'fallbackIsInStockValue' => 'getFallbackIsInStockValue',
         'productQueryPredicate' => 'getProductQueryPredicate',
+        'useImagesObjects' => 'getUseImagesObjects',
         'customFields' => 'getCustomFields',
         'uniqueIDColumn' => 'getUniqueIDColumn',
         'method' => 'getMethod',
@@ -173,6 +178,9 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         }
         if (isset($data['productQueryPredicate'])) {
             $this->container['productQueryPredicate'] = $data['productQueryPredicate'];
+        }
+        if (isset($data['useImagesObjects'])) {
+            $this->container['useImagesObjects'] = $data['useImagesObjects'];
         }
         if (isset($data['customFields'])) {
             $this->container['customFields'] = $data['customFields'];
@@ -421,6 +429,30 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
     public function setProductQueryPredicate($productQueryPredicate)
     {
         $this->container['productQueryPredicate'] = $productQueryPredicate;
+
+        return $this;
+    }
+
+    /**
+     * Gets useImagesObjects.
+     *
+     * @return null|bool
+     */
+    public function getUseImagesObjects()
+    {
+        return $this->container['useImagesObjects'] ?? null;
+    }
+
+    /**
+     * Sets useImagesObjects.
+     *
+     * @param null|bool $useImagesObjects when set to true, the connector indexes objects with all images attributes instead of only the URLs
+     *
+     * @return self
+     */
+    public function setUseImagesObjects($useImagesObjects)
+    {
+        $this->container['useImagesObjects'] = $useImagesObjects;
 
         return $this;
     }

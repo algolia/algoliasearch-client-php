@@ -20,8 +20,6 @@ class RunStatus
 
     public const STARTED = 'started';
 
-    public const IDLED = 'idled';
-
     public const FINISHED = 'finished';
 
     public const SKIPPED = 'skipped';
@@ -36,7 +34,6 @@ class RunStatus
         return [
             self::CREATED,
             self::STARTED,
-            self::IDLED,
             self::FINISHED,
             self::SKIPPED,
         ];

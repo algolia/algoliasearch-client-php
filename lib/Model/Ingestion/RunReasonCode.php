@@ -18,17 +18,21 @@ class RunReasonCode
      */
     public const INTERNAL = 'internal';
 
+    public const CANCELLED = 'cancelled';
+
     public const CRITICAL = 'critical';
 
     public const NO_EVENTS = 'no_events';
 
     public const TOO_MANY_ERRORS = 'too_many_errors';
 
+    public const LACKING_EVENTS = 'lacking_events';
+
     public const OK = 'ok';
 
-    public const DISCARDED = 'discarded';
-
     public const BLOCKING = 'blocking';
+
+    public const IDLE = 'idle';
 
     /**
      * Gets allowable values of the enum.
@@ -39,12 +43,14 @@ class RunReasonCode
     {
         return [
             self::INTERNAL,
+            self::CANCELLED,
             self::CRITICAL,
             self::NO_EVENTS,
             self::TOO_MANY_ERRORS,
+            self::LACKING_EVENTS,
             self::OK,
-            self::DISCARDED,
             self::BLOCKING,
+            self::IDLE,
         ];
     }
 }

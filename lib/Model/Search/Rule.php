@@ -28,6 +28,8 @@ class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'description' => 'string',
         'enabled' => 'bool',
         'validity' => '\Algolia\AlgoliaSearch\Model\Search\TimeRange[]',
+        'tags' => 'string[]',
+        'scope' => 'string',
     ];
 
     /**
@@ -42,6 +44,8 @@ class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'description' => null,
         'enabled' => null,
         'validity' => null,
+        'tags' => null,
+        'scope' => null,
     ];
 
     /**
@@ -57,6 +61,8 @@ class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'description' => 'description',
         'enabled' => 'enabled',
         'validity' => 'validity',
+        'tags' => 'tags',
+        'scope' => 'scope',
     ];
 
     /**
@@ -71,6 +77,8 @@ class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'description' => 'setDescription',
         'enabled' => 'setEnabled',
         'validity' => 'setValidity',
+        'tags' => 'setTags',
+        'scope' => 'setScope',
     ];
 
     /**
@@ -85,6 +93,8 @@ class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'description' => 'getDescription',
         'enabled' => 'getEnabled',
         'validity' => 'getValidity',
+        'tags' => 'getTags',
+        'scope' => 'getScope',
     ];
 
     /**
@@ -118,6 +128,12 @@ class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         }
         if (isset($data['validity'])) {
             $this->container['validity'] = $data['validity'];
+        }
+        if (isset($data['tags'])) {
+            $this->container['tags'] = $data['tags'];
+        }
+        if (isset($data['scope'])) {
+            $this->container['scope'] = $data['scope'];
         }
     }
 
@@ -342,6 +358,54 @@ class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     public function setValidity($validity)
     {
         $this->container['validity'] = $validity;
+
+        return $this;
+    }
+
+    /**
+     * Gets tags.
+     *
+     * @return null|string[]
+     */
+    public function getTags()
+    {
+        return $this->container['tags'] ?? null;
+    }
+
+    /**
+     * Sets tags.
+     *
+     * @param null|string[] $tags tags
+     *
+     * @return self
+     */
+    public function setTags($tags)
+    {
+        $this->container['tags'] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Gets scope.
+     *
+     * @return null|string
+     */
+    public function getScope()
+    {
+        return $this->container['scope'] ?? null;
+    }
+
+    /**
+     * Sets scope.
+     *
+     * @param null|string $scope scope
+     *
+     * @return self
+     */
+    public function setScope($scope)
+    {
+        $this->container['scope'] = $scope;
 
         return $this;
     }

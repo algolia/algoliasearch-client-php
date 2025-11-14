@@ -2132,6 +2132,8 @@ class SearchClient
      *                              - $rule['description'] => (string) Description of the rule's purpose to help you distinguish between different rules.
      *                              - $rule['enabled'] => (bool) Whether the rule is active.
      *                              - $rule['validity'] => (array) Time periods when the rule is active.
+     *                              - $rule['tags'] => (array)
+     *                              - $rule['scope'] => (string)
      *
      * @see Rule
      *

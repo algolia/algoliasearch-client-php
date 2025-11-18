@@ -20,34 +20,35 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
      * @var string[]
      */
     protected static $modelTypes = [
-        'query' => 'string',
-        'filters' => 'string',
-        'page' => 'int',
-        'getRankingInfo' => 'bool',
-        'relevancyStrictness' => 'int',
-        'facetFilters' => '\Algolia\AlgoliaSearch\Model\Composition\FacetFilters',
-        'facets' => 'string[]',
-        'optionalFilters' => '\Algolia\AlgoliaSearch\Model\Composition\OptionalFilters',
-        'numericFilters' => '\Algolia\AlgoliaSearch\Model\Composition\NumericFilters',
-        'hitsPerPage' => 'int',
+        'analytics' => 'bool',
+        'analyticsTags' => 'string[]',
         'aroundLatLng' => 'string',
         'aroundLatLngViaIP' => 'bool',
         'aroundRadius' => '\Algolia\AlgoliaSearch\Model\Composition\AroundRadius',
         'aroundPrecision' => '\Algolia\AlgoliaSearch\Model\Composition\AroundPrecision',
-        'minimumAroundRadius' => 'int',
+        'clickAnalytics' => 'bool',
+        'enableABTest' => 'bool',
+        'enablePersonalization' => 'bool',
+        'enableReRanking' => 'bool',
+        'enableRules' => 'bool',
+        'facetFilters' => '\Algolia\AlgoliaSearch\Model\Composition\FacetFilters',
+        'facets' => 'string[]',
+        'filters' => 'string',
+        'getRankingInfo' => 'bool',
+        'hitsPerPage' => 'int',
+        'injectedItems' => 'array<string,\Algolia\AlgoliaSearch\Model\Composition\ExternalInjectedItem>',
         'insideBoundingBox' => '\Algolia\AlgoliaSearch\Model\Composition\InsideBoundingBox',
         'insidePolygon' => 'float[][]',
-        'queryLanguages' => '\Algolia\AlgoliaSearch\Model\Composition\SupportedLanguage[]',
+        'minimumAroundRadius' => 'int',
         'naturalLanguages' => '\Algolia\AlgoliaSearch\Model\Composition\SupportedLanguage[]',
-        'enableRules' => 'bool',
+        'numericFilters' => '\Algolia\AlgoliaSearch\Model\Composition\NumericFilters',
+        'optionalFilters' => '\Algolia\AlgoliaSearch\Model\Composition\OptionalFilters',
+        'page' => 'int',
+        'query' => 'string',
+        'relevancyStrictness' => 'int',
+        'queryLanguages' => '\Algolia\AlgoliaSearch\Model\Composition\SupportedLanguage[]',
         'ruleContexts' => 'string[]',
         'userToken' => 'string',
-        'clickAnalytics' => 'bool',
-        'analytics' => 'bool',
-        'analyticsTags' => 'string[]',
-        'enableABTest' => 'bool',
-        'enableReRanking' => 'bool',
-        'injectedItems' => 'array<string,\Algolia\AlgoliaSearch\Model\Composition\ExternalInjectedItem>',
     ];
 
     /**
@@ -56,34 +57,35 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
      * @var string[]
      */
     protected static $modelFormats = [
-        'query' => null,
-        'filters' => null,
-        'page' => null,
-        'getRankingInfo' => null,
-        'relevancyStrictness' => null,
-        'facetFilters' => null,
-        'facets' => null,
-        'optionalFilters' => null,
-        'numericFilters' => null,
-        'hitsPerPage' => null,
+        'analytics' => null,
+        'analyticsTags' => null,
         'aroundLatLng' => null,
         'aroundLatLngViaIP' => null,
         'aroundRadius' => null,
         'aroundPrecision' => null,
-        'minimumAroundRadius' => null,
+        'clickAnalytics' => null,
+        'enableABTest' => null,
+        'enablePersonalization' => null,
+        'enableReRanking' => null,
+        'enableRules' => null,
+        'facetFilters' => null,
+        'facets' => null,
+        'filters' => null,
+        'getRankingInfo' => null,
+        'hitsPerPage' => null,
+        'injectedItems' => null,
         'insideBoundingBox' => null,
         'insidePolygon' => 'double',
-        'queryLanguages' => null,
+        'minimumAroundRadius' => null,
         'naturalLanguages' => null,
-        'enableRules' => null,
+        'numericFilters' => null,
+        'optionalFilters' => null,
+        'page' => null,
+        'query' => null,
+        'relevancyStrictness' => null,
+        'queryLanguages' => null,
         'ruleContexts' => null,
         'userToken' => null,
-        'clickAnalytics' => null,
-        'analytics' => null,
-        'analyticsTags' => null,
-        'enableABTest' => null,
-        'enableReRanking' => null,
-        'injectedItems' => null,
     ];
 
     /**
@@ -93,34 +95,35 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
-        'query' => 'query',
-        'filters' => 'filters',
-        'page' => 'page',
-        'getRankingInfo' => 'getRankingInfo',
-        'relevancyStrictness' => 'relevancyStrictness',
-        'facetFilters' => 'facetFilters',
-        'facets' => 'facets',
-        'optionalFilters' => 'optionalFilters',
-        'numericFilters' => 'numericFilters',
-        'hitsPerPage' => 'hitsPerPage',
+        'analytics' => 'analytics',
+        'analyticsTags' => 'analyticsTags',
         'aroundLatLng' => 'aroundLatLng',
         'aroundLatLngViaIP' => 'aroundLatLngViaIP',
         'aroundRadius' => 'aroundRadius',
         'aroundPrecision' => 'aroundPrecision',
-        'minimumAroundRadius' => 'minimumAroundRadius',
+        'clickAnalytics' => 'clickAnalytics',
+        'enableABTest' => 'enableABTest',
+        'enablePersonalization' => 'enablePersonalization',
+        'enableReRanking' => 'enableReRanking',
+        'enableRules' => 'enableRules',
+        'facetFilters' => 'facetFilters',
+        'facets' => 'facets',
+        'filters' => 'filters',
+        'getRankingInfo' => 'getRankingInfo',
+        'hitsPerPage' => 'hitsPerPage',
+        'injectedItems' => 'injectedItems',
         'insideBoundingBox' => 'insideBoundingBox',
         'insidePolygon' => 'insidePolygon',
-        'queryLanguages' => 'queryLanguages',
+        'minimumAroundRadius' => 'minimumAroundRadius',
         'naturalLanguages' => 'naturalLanguages',
-        'enableRules' => 'enableRules',
+        'numericFilters' => 'numericFilters',
+        'optionalFilters' => 'optionalFilters',
+        'page' => 'page',
+        'query' => 'query',
+        'relevancyStrictness' => 'relevancyStrictness',
+        'queryLanguages' => 'queryLanguages',
         'ruleContexts' => 'ruleContexts',
         'userToken' => 'userToken',
-        'clickAnalytics' => 'clickAnalytics',
-        'analytics' => 'analytics',
-        'analyticsTags' => 'analyticsTags',
-        'enableABTest' => 'enableABTest',
-        'enableReRanking' => 'enableReRanking',
-        'injectedItems' => 'injectedItems',
     ];
 
     /**
@@ -129,34 +132,35 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
-        'query' => 'setQuery',
-        'filters' => 'setFilters',
-        'page' => 'setPage',
-        'getRankingInfo' => 'setGetRankingInfo',
-        'relevancyStrictness' => 'setRelevancyStrictness',
-        'facetFilters' => 'setFacetFilters',
-        'facets' => 'setFacets',
-        'optionalFilters' => 'setOptionalFilters',
-        'numericFilters' => 'setNumericFilters',
-        'hitsPerPage' => 'setHitsPerPage',
+        'analytics' => 'setAnalytics',
+        'analyticsTags' => 'setAnalyticsTags',
         'aroundLatLng' => 'setAroundLatLng',
         'aroundLatLngViaIP' => 'setAroundLatLngViaIP',
         'aroundRadius' => 'setAroundRadius',
         'aroundPrecision' => 'setAroundPrecision',
-        'minimumAroundRadius' => 'setMinimumAroundRadius',
+        'clickAnalytics' => 'setClickAnalytics',
+        'enableABTest' => 'setEnableABTest',
+        'enablePersonalization' => 'setEnablePersonalization',
+        'enableReRanking' => 'setEnableReRanking',
+        'enableRules' => 'setEnableRules',
+        'facetFilters' => 'setFacetFilters',
+        'facets' => 'setFacets',
+        'filters' => 'setFilters',
+        'getRankingInfo' => 'setGetRankingInfo',
+        'hitsPerPage' => 'setHitsPerPage',
+        'injectedItems' => 'setInjectedItems',
         'insideBoundingBox' => 'setInsideBoundingBox',
         'insidePolygon' => 'setInsidePolygon',
-        'queryLanguages' => 'setQueryLanguages',
+        'minimumAroundRadius' => 'setMinimumAroundRadius',
         'naturalLanguages' => 'setNaturalLanguages',
-        'enableRules' => 'setEnableRules',
+        'numericFilters' => 'setNumericFilters',
+        'optionalFilters' => 'setOptionalFilters',
+        'page' => 'setPage',
+        'query' => 'setQuery',
+        'relevancyStrictness' => 'setRelevancyStrictness',
+        'queryLanguages' => 'setQueryLanguages',
         'ruleContexts' => 'setRuleContexts',
         'userToken' => 'setUserToken',
-        'clickAnalytics' => 'setClickAnalytics',
-        'analytics' => 'setAnalytics',
-        'analyticsTags' => 'setAnalyticsTags',
-        'enableABTest' => 'setEnableABTest',
-        'enableReRanking' => 'setEnableReRanking',
-        'injectedItems' => 'setInjectedItems',
     ];
 
     /**
@@ -165,34 +169,35 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
-        'query' => 'getQuery',
-        'filters' => 'getFilters',
-        'page' => 'getPage',
-        'getRankingInfo' => 'getGetRankingInfo',
-        'relevancyStrictness' => 'getRelevancyStrictness',
-        'facetFilters' => 'getFacetFilters',
-        'facets' => 'getFacets',
-        'optionalFilters' => 'getOptionalFilters',
-        'numericFilters' => 'getNumericFilters',
-        'hitsPerPage' => 'getHitsPerPage',
+        'analytics' => 'getAnalytics',
+        'analyticsTags' => 'getAnalyticsTags',
         'aroundLatLng' => 'getAroundLatLng',
         'aroundLatLngViaIP' => 'getAroundLatLngViaIP',
         'aroundRadius' => 'getAroundRadius',
         'aroundPrecision' => 'getAroundPrecision',
-        'minimumAroundRadius' => 'getMinimumAroundRadius',
+        'clickAnalytics' => 'getClickAnalytics',
+        'enableABTest' => 'getEnableABTest',
+        'enablePersonalization' => 'getEnablePersonalization',
+        'enableReRanking' => 'getEnableReRanking',
+        'enableRules' => 'getEnableRules',
+        'facetFilters' => 'getFacetFilters',
+        'facets' => 'getFacets',
+        'filters' => 'getFilters',
+        'getRankingInfo' => 'getGetRankingInfo',
+        'hitsPerPage' => 'getHitsPerPage',
+        'injectedItems' => 'getInjectedItems',
         'insideBoundingBox' => 'getInsideBoundingBox',
         'insidePolygon' => 'getInsidePolygon',
-        'queryLanguages' => 'getQueryLanguages',
+        'minimumAroundRadius' => 'getMinimumAroundRadius',
         'naturalLanguages' => 'getNaturalLanguages',
-        'enableRules' => 'getEnableRules',
+        'numericFilters' => 'getNumericFilters',
+        'optionalFilters' => 'getOptionalFilters',
+        'page' => 'getPage',
+        'query' => 'getQuery',
+        'relevancyStrictness' => 'getRelevancyStrictness',
+        'queryLanguages' => 'getQueryLanguages',
         'ruleContexts' => 'getRuleContexts',
         'userToken' => 'getUserToken',
-        'clickAnalytics' => 'getClickAnalytics',
-        'analytics' => 'getAnalytics',
-        'analyticsTags' => 'getAnalyticsTags',
-        'enableABTest' => 'getEnableABTest',
-        'enableReRanking' => 'getEnableReRanking',
-        'injectedItems' => 'getInjectedItems',
     ];
 
     /**
@@ -209,35 +214,11 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['query'])) {
-            $this->container['query'] = $data['query'];
+        if (isset($data['analytics'])) {
+            $this->container['analytics'] = $data['analytics'];
         }
-        if (isset($data['filters'])) {
-            $this->container['filters'] = $data['filters'];
-        }
-        if (isset($data['page'])) {
-            $this->container['page'] = $data['page'];
-        }
-        if (isset($data['getRankingInfo'])) {
-            $this->container['getRankingInfo'] = $data['getRankingInfo'];
-        }
-        if (isset($data['relevancyStrictness'])) {
-            $this->container['relevancyStrictness'] = $data['relevancyStrictness'];
-        }
-        if (isset($data['facetFilters'])) {
-            $this->container['facetFilters'] = $data['facetFilters'];
-        }
-        if (isset($data['facets'])) {
-            $this->container['facets'] = $data['facets'];
-        }
-        if (isset($data['optionalFilters'])) {
-            $this->container['optionalFilters'] = $data['optionalFilters'];
-        }
-        if (isset($data['numericFilters'])) {
-            $this->container['numericFilters'] = $data['numericFilters'];
-        }
-        if (isset($data['hitsPerPage'])) {
-            $this->container['hitsPerPage'] = $data['hitsPerPage'];
+        if (isset($data['analyticsTags'])) {
+            $this->container['analyticsTags'] = $data['analyticsTags'];
         }
         if (isset($data['aroundLatLng'])) {
             $this->container['aroundLatLng'] = $data['aroundLatLng'];
@@ -251,8 +232,38 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         if (isset($data['aroundPrecision'])) {
             $this->container['aroundPrecision'] = $data['aroundPrecision'];
         }
-        if (isset($data['minimumAroundRadius'])) {
-            $this->container['minimumAroundRadius'] = $data['minimumAroundRadius'];
+        if (isset($data['clickAnalytics'])) {
+            $this->container['clickAnalytics'] = $data['clickAnalytics'];
+        }
+        if (isset($data['enableABTest'])) {
+            $this->container['enableABTest'] = $data['enableABTest'];
+        }
+        if (isset($data['enablePersonalization'])) {
+            $this->container['enablePersonalization'] = $data['enablePersonalization'];
+        }
+        if (isset($data['enableReRanking'])) {
+            $this->container['enableReRanking'] = $data['enableReRanking'];
+        }
+        if (isset($data['enableRules'])) {
+            $this->container['enableRules'] = $data['enableRules'];
+        }
+        if (isset($data['facetFilters'])) {
+            $this->container['facetFilters'] = $data['facetFilters'];
+        }
+        if (isset($data['facets'])) {
+            $this->container['facets'] = $data['facets'];
+        }
+        if (isset($data['filters'])) {
+            $this->container['filters'] = $data['filters'];
+        }
+        if (isset($data['getRankingInfo'])) {
+            $this->container['getRankingInfo'] = $data['getRankingInfo'];
+        }
+        if (isset($data['hitsPerPage'])) {
+            $this->container['hitsPerPage'] = $data['hitsPerPage'];
+        }
+        if (isset($data['injectedItems'])) {
+            $this->container['injectedItems'] = $data['injectedItems'];
         }
         if (isset($data['insideBoundingBox'])) {
             $this->container['insideBoundingBox'] = $data['insideBoundingBox'];
@@ -260,38 +271,35 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         if (isset($data['insidePolygon'])) {
             $this->container['insidePolygon'] = $data['insidePolygon'];
         }
-        if (isset($data['queryLanguages'])) {
-            $this->container['queryLanguages'] = $data['queryLanguages'];
+        if (isset($data['minimumAroundRadius'])) {
+            $this->container['minimumAroundRadius'] = $data['minimumAroundRadius'];
         }
         if (isset($data['naturalLanguages'])) {
             $this->container['naturalLanguages'] = $data['naturalLanguages'];
         }
-        if (isset($data['enableRules'])) {
-            $this->container['enableRules'] = $data['enableRules'];
+        if (isset($data['numericFilters'])) {
+            $this->container['numericFilters'] = $data['numericFilters'];
+        }
+        if (isset($data['optionalFilters'])) {
+            $this->container['optionalFilters'] = $data['optionalFilters'];
+        }
+        if (isset($data['page'])) {
+            $this->container['page'] = $data['page'];
+        }
+        if (isset($data['query'])) {
+            $this->container['query'] = $data['query'];
+        }
+        if (isset($data['relevancyStrictness'])) {
+            $this->container['relevancyStrictness'] = $data['relevancyStrictness'];
+        }
+        if (isset($data['queryLanguages'])) {
+            $this->container['queryLanguages'] = $data['queryLanguages'];
         }
         if (isset($data['ruleContexts'])) {
             $this->container['ruleContexts'] = $data['ruleContexts'];
         }
         if (isset($data['userToken'])) {
             $this->container['userToken'] = $data['userToken'];
-        }
-        if (isset($data['clickAnalytics'])) {
-            $this->container['clickAnalytics'] = $data['clickAnalytics'];
-        }
-        if (isset($data['analytics'])) {
-            $this->container['analytics'] = $data['analytics'];
-        }
-        if (isset($data['analyticsTags'])) {
-            $this->container['analyticsTags'] = $data['analyticsTags'];
-        }
-        if (isset($data['enableABTest'])) {
-            $this->container['enableABTest'] = $data['enableABTest'];
-        }
-        if (isset($data['enableReRanking'])) {
-            $this->container['enableReRanking'] = $data['enableReRanking'];
-        }
-        if (isset($data['injectedItems'])) {
-            $this->container['injectedItems'] = $data['injectedItems'];
         }
     }
 
@@ -368,241 +376,49 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     }
 
     /**
-     * Gets query.
-     *
-     * @return null|string
-     */
-    public function getQuery()
-    {
-        return $this->container['query'] ?? null;
-    }
-
-    /**
-     * Sets query.
-     *
-     * @param null|string $query search query
-     *
-     * @return self
-     */
-    public function setQuery($query)
-    {
-        $this->container['query'] = $query;
-
-        return $this;
-    }
-
-    /**
-     * Gets filters.
-     *
-     * @return null|string
-     */
-    public function getFilters()
-    {
-        return $this->container['filters'] ?? null;
-    }
-
-    /**
-     * Sets filters.
-     *
-     * @param null|string $filters Filter expression to only include items that match the filter criteria in the response.  You can use these filter expressions:  - **Numeric filters.** `<facet> <op> <number>`, where `<op>` is one of `<`, `<=`, `=`, `!=`, `>`, `>=`. - **Ranges.** `<facet>:<lower> TO <upper>` where `<lower>` and `<upper>` are the lower and upper limits of the range (inclusive). - **Facet filters.** `<facet>:<value>` where `<facet>` is a facet attribute (case-sensitive) and `<value>` a facet value. - **Tag filters.** `_tags:<value>` or just `<value>` (case-sensitive). - **Boolean filters.** `<facet>: true | false`.  You can combine filters with `AND`, `OR`, and `NOT` operators with the following restrictions:  - You can only combine filters of the same type with `OR`.   **Not supported:** `facet:value OR num > 3`. - You can't use `NOT` with combinations of filters.   **Not supported:** `NOT(facet:value OR facet:value)` - You can't combine conjunctions (`AND`) with `OR`.   **Not supported:** `facet:value OR (facet:value AND facet:value)`  Use quotes around your filters, if the facet attribute name or facet value has spaces, keywords (`OR`, `AND`, `NOT`), or quotes. If a facet attribute is an array, the filter matches if it matches at least one element of the array.  For more information, see [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering).
-     *
-     * @return self
-     */
-    public function setFilters($filters)
-    {
-        $this->container['filters'] = $filters;
-
-        return $this;
-    }
-
-    /**
-     * Gets page.
-     *
-     * @return null|int
-     */
-    public function getPage()
-    {
-        return $this->container['page'] ?? null;
-    }
-
-    /**
-     * Sets page.
-     *
-     * @param null|int $page page of search results to retrieve
-     *
-     * @return self
-     */
-    public function setPage($page)
-    {
-        $this->container['page'] = $page;
-
-        return $this;
-    }
-
-    /**
-     * Gets getRankingInfo.
+     * Gets analytics.
      *
      * @return null|bool
      */
-    public function getGetRankingInfo()
+    public function getAnalytics()
     {
-        return $this->container['getRankingInfo'] ?? null;
+        return $this->container['analytics'] ?? null;
     }
 
     /**
-     * Sets getRankingInfo.
+     * Sets analytics.
      *
-     * @param null|bool $getRankingInfo whether the run response should include detailed ranking information
+     * @param null|bool $analytics whether this search will be included in Analytics
      *
      * @return self
      */
-    public function setGetRankingInfo($getRankingInfo)
+    public function setAnalytics($analytics)
     {
-        $this->container['getRankingInfo'] = $getRankingInfo;
+        $this->container['analytics'] = $analytics;
 
         return $this;
     }
 
     /**
-     * Gets relevancyStrictness.
-     *
-     * @return null|int
-     */
-    public function getRelevancyStrictness()
-    {
-        return $this->container['relevancyStrictness'] ?? null;
-    }
-
-    /**
-     * Sets relevancyStrictness.
-     *
-     * @param null|int $relevancyStrictness Relevancy threshold below which less relevant results aren't included in the results You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results.
-     *
-     * @return self
-     */
-    public function setRelevancyStrictness($relevancyStrictness)
-    {
-        $this->container['relevancyStrictness'] = $relevancyStrictness;
-
-        return $this;
-    }
-
-    /**
-     * Gets facetFilters.
-     *
-     * @return null|FacetFilters
-     */
-    public function getFacetFilters()
-    {
-        return $this->container['facetFilters'] ?? null;
-    }
-
-    /**
-     * Sets facetFilters.
-     *
-     * @param null|FacetFilters $facetFilters facetFilters
-     *
-     * @return self
-     */
-    public function setFacetFilters($facetFilters)
-    {
-        $this->container['facetFilters'] = $facetFilters;
-
-        return $this;
-    }
-
-    /**
-     * Gets facets.
+     * Gets analyticsTags.
      *
      * @return null|string[]
      */
-    public function getFacets()
+    public function getAnalyticsTags()
     {
-        return $this->container['facets'] ?? null;
+        return $this->container['analyticsTags'] ?? null;
     }
 
     /**
-     * Sets facets.
+     * Sets analyticsTags.
      *
-     * @param null|string[] $facets Facets for which to retrieve facet values that match the search criteria and the number of matching facet values To retrieve all facets, use the wildcard character `*`. To retrieve disjunctive facets lists, annotate any facets with the `disjunctive` modifier. For more information, see [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts) and [disjunctive faceting for Smart Groups](https://www.algolia.com/doc/guides/managing-results/compositions/search-based-groups#facets-including-disjunctive-faceting).
+     * @param null|string[] $analyticsTags Tags to apply to the query for [segmenting analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).
      *
      * @return self
      */
-    public function setFacets($facets)
+    public function setAnalyticsTags($analyticsTags)
     {
-        $this->container['facets'] = $facets;
-
-        return $this;
-    }
-
-    /**
-     * Gets optionalFilters.
-     *
-     * @return null|OptionalFilters
-     */
-    public function getOptionalFilters()
-    {
-        return $this->container['optionalFilters'] ?? null;
-    }
-
-    /**
-     * Sets optionalFilters.
-     *
-     * @param null|OptionalFilters $optionalFilters optionalFilters
-     *
-     * @return self
-     */
-    public function setOptionalFilters($optionalFilters)
-    {
-        $this->container['optionalFilters'] = $optionalFilters;
-
-        return $this;
-    }
-
-    /**
-     * Gets numericFilters.
-     *
-     * @return null|NumericFilters
-     */
-    public function getNumericFilters()
-    {
-        return $this->container['numericFilters'] ?? null;
-    }
-
-    /**
-     * Sets numericFilters.
-     *
-     * @param null|NumericFilters $numericFilters numericFilters
-     *
-     * @return self
-     */
-    public function setNumericFilters($numericFilters)
-    {
-        $this->container['numericFilters'] = $numericFilters;
-
-        return $this;
-    }
-
-    /**
-     * Gets hitsPerPage.
-     *
-     * @return null|int
-     */
-    public function getHitsPerPage()
-    {
-        return $this->container['hitsPerPage'] ?? null;
-    }
-
-    /**
-     * Sets hitsPerPage.
-     *
-     * @param null|int $hitsPerPage number of hits per page
-     *
-     * @return self
-     */
-    public function setHitsPerPage($hitsPerPage)
-    {
-        $this->container['hitsPerPage'] = $hitsPerPage;
+        $this->container['analyticsTags'] = $analyticsTags;
 
         return $this;
     }
@@ -704,25 +520,265 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     }
 
     /**
-     * Gets minimumAroundRadius.
+     * Gets clickAnalytics.
      *
-     * @return null|int
+     * @return null|bool
      */
-    public function getMinimumAroundRadius()
+    public function getClickAnalytics()
     {
-        return $this->container['minimumAroundRadius'] ?? null;
+        return $this->container['clickAnalytics'] ?? null;
     }
 
     /**
-     * Sets minimumAroundRadius.
+     * Sets clickAnalytics.
      *
-     * @param null|int $minimumAroundRadius minimum radius (in meters) for a search around a location when `aroundRadius` isn't set
+     * @param null|bool $clickAnalytics Whether to include a `queryID` attribute in the response The query ID is a unique identifier for a search query and is required for tracking [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started).
      *
      * @return self
      */
-    public function setMinimumAroundRadius($minimumAroundRadius)
+    public function setClickAnalytics($clickAnalytics)
     {
-        $this->container['minimumAroundRadius'] = $minimumAroundRadius;
+        $this->container['clickAnalytics'] = $clickAnalytics;
+
+        return $this;
+    }
+
+    /**
+     * Gets enableABTest.
+     *
+     * @return null|bool
+     */
+    public function getEnableABTest()
+    {
+        return $this->container['enableABTest'] ?? null;
+    }
+
+    /**
+     * Sets enableABTest.
+     *
+     * @param null|bool $enableABTest Whether to enable index level A/B testing for this run request. If the composition mixes multiple indices, the A/B test is ignored.
+     *
+     * @return self
+     */
+    public function setEnableABTest($enableABTest)
+    {
+        $this->container['enableABTest'] = $enableABTest;
+
+        return $this;
+    }
+
+    /**
+     * Gets enablePersonalization.
+     *
+     * @return null|bool
+     */
+    public function getEnablePersonalization()
+    {
+        return $this->container['enablePersonalization'] ?? null;
+    }
+
+    /**
+     * Sets enablePersonalization.
+     *
+     * @param null|bool $enablePersonalization whether to enable Personalization
+     *
+     * @return self
+     */
+    public function setEnablePersonalization($enablePersonalization)
+    {
+        $this->container['enablePersonalization'] = $enablePersonalization;
+
+        return $this;
+    }
+
+    /**
+     * Gets enableReRanking.
+     *
+     * @return null|bool
+     */
+    public function getEnableReRanking()
+    {
+        return $this->container['enableReRanking'] ?? null;
+    }
+
+    /**
+     * Sets enableReRanking.
+     *
+     * @param null|bool $enableReRanking Whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) This setting only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard.
+     *
+     * @return self
+     */
+    public function setEnableReRanking($enableReRanking)
+    {
+        $this->container['enableReRanking'] = $enableReRanking;
+
+        return $this;
+    }
+
+    /**
+     * Gets enableRules.
+     *
+     * @return null|bool
+     */
+    public function getEnableRules()
+    {
+        return $this->container['enableRules'] ?? null;
+    }
+
+    /**
+     * Sets enableRules.
+     *
+     * @param null|bool $enableRules whether to enable composition rules
+     *
+     * @return self
+     */
+    public function setEnableRules($enableRules)
+    {
+        $this->container['enableRules'] = $enableRules;
+
+        return $this;
+    }
+
+    /**
+     * Gets facetFilters.
+     *
+     * @return null|FacetFilters
+     */
+    public function getFacetFilters()
+    {
+        return $this->container['facetFilters'] ?? null;
+    }
+
+    /**
+     * Sets facetFilters.
+     *
+     * @param null|FacetFilters $facetFilters facetFilters
+     *
+     * @return self
+     */
+    public function setFacetFilters($facetFilters)
+    {
+        $this->container['facetFilters'] = $facetFilters;
+
+        return $this;
+    }
+
+    /**
+     * Gets facets.
+     *
+     * @return null|string[]
+     */
+    public function getFacets()
+    {
+        return $this->container['facets'] ?? null;
+    }
+
+    /**
+     * Sets facets.
+     *
+     * @param null|string[] $facets Facets for which to retrieve facet values that match the search criteria and the number of matching facet values To retrieve all facets, use the wildcard character `*`. To retrieve disjunctive facets lists, annotate any facets with the `disjunctive` modifier. For more information, see [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts) and [disjunctive faceting for Smart Groups](https://www.algolia.com/doc/guides/managing-results/compositions/search-based-groups#facets-including-disjunctive-faceting).
+     *
+     * @return self
+     */
+    public function setFacets($facets)
+    {
+        $this->container['facets'] = $facets;
+
+        return $this;
+    }
+
+    /**
+     * Gets filters.
+     *
+     * @return null|string
+     */
+    public function getFilters()
+    {
+        return $this->container['filters'] ?? null;
+    }
+
+    /**
+     * Sets filters.
+     *
+     * @param null|string $filters Filter expression to only include items that match the filter criteria in the response.  You can use these filter expressions:  - **Numeric filters.** `<facet> <op> <number>`, where `<op>` is one of `<`, `<=`, `=`, `!=`, `>`, `>=`. - **Ranges.** `<facet>:<lower> TO <upper>` where `<lower>` and `<upper>` are the lower and upper limits of the range (inclusive). - **Facet filters.** `<facet>:<value>` where `<facet>` is a facet attribute (case-sensitive) and `<value>` a facet value. - **Tag filters.** `_tags:<value>` or just `<value>` (case-sensitive). - **Boolean filters.** `<facet>: true | false`.  You can combine filters with `AND`, `OR`, and `NOT` operators with the following restrictions:  - You can only combine filters of the same type with `OR`.   **Not supported:** `facet:value OR num > 3`. - You can't use `NOT` with combinations of filters.   **Not supported:** `NOT(facet:value OR facet:value)` - You can't combine conjunctions (`AND`) with `OR`.   **Not supported:** `facet:value OR (facet:value AND facet:value)`  Use quotes around your filters, if the facet attribute name or facet value has spaces, keywords (`OR`, `AND`, `NOT`), or quotes. If a facet attribute is an array, the filter matches if it matches at least one element of the array.  For more information, see [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering).
+     *
+     * @return self
+     */
+    public function setFilters($filters)
+    {
+        $this->container['filters'] = $filters;
+
+        return $this;
+    }
+
+    /**
+     * Gets getRankingInfo.
+     *
+     * @return null|bool
+     */
+    public function getGetRankingInfo()
+    {
+        return $this->container['getRankingInfo'] ?? null;
+    }
+
+    /**
+     * Sets getRankingInfo.
+     *
+     * @param null|bool $getRankingInfo whether the run response should include detailed ranking information
+     *
+     * @return self
+     */
+    public function setGetRankingInfo($getRankingInfo)
+    {
+        $this->container['getRankingInfo'] = $getRankingInfo;
+
+        return $this;
+    }
+
+    /**
+     * Gets hitsPerPage.
+     *
+     * @return null|int
+     */
+    public function getHitsPerPage()
+    {
+        return $this->container['hitsPerPage'] ?? null;
+    }
+
+    /**
+     * Sets hitsPerPage.
+     *
+     * @param null|int $hitsPerPage number of hits per page
+     *
+     * @return self
+     */
+    public function setHitsPerPage($hitsPerPage)
+    {
+        $this->container['hitsPerPage'] = $hitsPerPage;
+
+        return $this;
+    }
+
+    /**
+     * Gets injectedItems.
+     *
+     * @return null|array<string,ExternalInjectedItem>
+     */
+    public function getInjectedItems()
+    {
+        return $this->container['injectedItems'] ?? null;
+    }
+
+    /**
+     * Sets injectedItems.
+     *
+     * @param null|array<string,ExternalInjectedItem> $injectedItems a list of extenrally injected objectID groups into from an external source
+     *
+     * @return self
+     */
+    public function setInjectedItems($injectedItems)
+    {
+        $this->container['injectedItems'] = $injectedItems;
 
         return $this;
     }
@@ -776,25 +832,25 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     }
 
     /**
-     * Gets queryLanguages.
+     * Gets minimumAroundRadius.
      *
-     * @return null|SupportedLanguage[]
+     * @return null|int
      */
-    public function getQueryLanguages()
+    public function getMinimumAroundRadius()
     {
-        return $this->container['queryLanguages'] ?? null;
+        return $this->container['minimumAroundRadius'] ?? null;
     }
 
     /**
-     * Sets queryLanguages.
+     * Sets minimumAroundRadius.
      *
-     * @param null|SupportedLanguage[] $queryLanguages Languages for language-specific query processing steps such as plurals, stop-word removal, and word-detection dictionaries  This setting sets a default list of languages used by the `removeStopWords` and `ignorePlurals` settings. This setting also sets a dictionary for word detection in the logogram-based [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) languages. To support this, you must place the CJK language **first**  **You should always specify a query language.** If you don't specify an indexing language, the search engine uses all [supported languages](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages), or the languages you specified with the `ignorePlurals` or `removeStopWords` parameters. This can lead to unexpected search results. For more information, see [Language-specific configuration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations).
+     * @param null|int $minimumAroundRadius minimum radius (in meters) for a search around a location when `aroundRadius` isn't set
      *
      * @return self
      */
-    public function setQueryLanguages($queryLanguages)
+    public function setMinimumAroundRadius($minimumAroundRadius)
     {
-        $this->container['queryLanguages'] = $queryLanguages;
+        $this->container['minimumAroundRadius'] = $minimumAroundRadius;
 
         return $this;
     }
@@ -824,25 +880,145 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     }
 
     /**
-     * Gets enableRules.
+     * Gets numericFilters.
      *
-     * @return null|bool
+     * @return null|NumericFilters
      */
-    public function getEnableRules()
+    public function getNumericFilters()
     {
-        return $this->container['enableRules'] ?? null;
+        return $this->container['numericFilters'] ?? null;
     }
 
     /**
-     * Sets enableRules.
+     * Sets numericFilters.
      *
-     * @param null|bool $enableRules whether to enable composition rules
+     * @param null|NumericFilters $numericFilters numericFilters
      *
      * @return self
      */
-    public function setEnableRules($enableRules)
+    public function setNumericFilters($numericFilters)
     {
-        $this->container['enableRules'] = $enableRules;
+        $this->container['numericFilters'] = $numericFilters;
+
+        return $this;
+    }
+
+    /**
+     * Gets optionalFilters.
+     *
+     * @return null|OptionalFilters
+     */
+    public function getOptionalFilters()
+    {
+        return $this->container['optionalFilters'] ?? null;
+    }
+
+    /**
+     * Sets optionalFilters.
+     *
+     * @param null|OptionalFilters $optionalFilters optionalFilters
+     *
+     * @return self
+     */
+    public function setOptionalFilters($optionalFilters)
+    {
+        $this->container['optionalFilters'] = $optionalFilters;
+
+        return $this;
+    }
+
+    /**
+     * Gets page.
+     *
+     * @return null|int
+     */
+    public function getPage()
+    {
+        return $this->container['page'] ?? null;
+    }
+
+    /**
+     * Sets page.
+     *
+     * @param null|int $page page of search results to retrieve
+     *
+     * @return self
+     */
+    public function setPage($page)
+    {
+        $this->container['page'] = $page;
+
+        return $this;
+    }
+
+    /**
+     * Gets query.
+     *
+     * @return null|string
+     */
+    public function getQuery()
+    {
+        return $this->container['query'] ?? null;
+    }
+
+    /**
+     * Sets query.
+     *
+     * @param null|string $query search query
+     *
+     * @return self
+     */
+    public function setQuery($query)
+    {
+        $this->container['query'] = $query;
+
+        return $this;
+    }
+
+    /**
+     * Gets relevancyStrictness.
+     *
+     * @return null|int
+     */
+    public function getRelevancyStrictness()
+    {
+        return $this->container['relevancyStrictness'] ?? null;
+    }
+
+    /**
+     * Sets relevancyStrictness.
+     *
+     * @param null|int $relevancyStrictness Relevancy threshold below which less relevant results aren't included in the results You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results.
+     *
+     * @return self
+     */
+    public function setRelevancyStrictness($relevancyStrictness)
+    {
+        $this->container['relevancyStrictness'] = $relevancyStrictness;
+
+        return $this;
+    }
+
+    /**
+     * Gets queryLanguages.
+     *
+     * @return null|SupportedLanguage[]
+     */
+    public function getQueryLanguages()
+    {
+        return $this->container['queryLanguages'] ?? null;
+    }
+
+    /**
+     * Sets queryLanguages.
+     *
+     * @param null|SupportedLanguage[] $queryLanguages Languages for language-specific query processing steps such as plurals, stop-word removal, and word-detection dictionaries  This setting sets a default list of languages used by the `removeStopWords` and `ignorePlurals` settings. This setting also sets a dictionary for word detection in the logogram-based [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) languages. To support this, you must place the CJK language **first**  **You should always specify a query language.** If you don't specify an indexing language, the search engine uses all [supported languages](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages), or the languages you specified with the `ignorePlurals` or `removeStopWords` parameters. This can lead to unexpected search results. For more information, see [Language-specific configuration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations).
+     *
+     * @return self
+     */
+    public function setQueryLanguages($queryLanguages)
+    {
+        $this->container['queryLanguages'] = $queryLanguages;
 
         return $this;
     }
@@ -891,150 +1067,6 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     public function setUserToken($userToken)
     {
         $this->container['userToken'] = $userToken;
-
-        return $this;
-    }
-
-    /**
-     * Gets clickAnalytics.
-     *
-     * @return null|bool
-     */
-    public function getClickAnalytics()
-    {
-        return $this->container['clickAnalytics'] ?? null;
-    }
-
-    /**
-     * Sets clickAnalytics.
-     *
-     * @param null|bool $clickAnalytics Whether to include a `queryID` attribute in the response The query ID is a unique identifier for a search query and is required for tracking [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started).
-     *
-     * @return self
-     */
-    public function setClickAnalytics($clickAnalytics)
-    {
-        $this->container['clickAnalytics'] = $clickAnalytics;
-
-        return $this;
-    }
-
-    /**
-     * Gets analytics.
-     *
-     * @return null|bool
-     */
-    public function getAnalytics()
-    {
-        return $this->container['analytics'] ?? null;
-    }
-
-    /**
-     * Sets analytics.
-     *
-     * @param null|bool $analytics whether this search will be included in Analytics
-     *
-     * @return self
-     */
-    public function setAnalytics($analytics)
-    {
-        $this->container['analytics'] = $analytics;
-
-        return $this;
-    }
-
-    /**
-     * Gets analyticsTags.
-     *
-     * @return null|string[]
-     */
-    public function getAnalyticsTags()
-    {
-        return $this->container['analyticsTags'] ?? null;
-    }
-
-    /**
-     * Sets analyticsTags.
-     *
-     * @param null|string[] $analyticsTags Tags to apply to the query for [segmenting analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).
-     *
-     * @return self
-     */
-    public function setAnalyticsTags($analyticsTags)
-    {
-        $this->container['analyticsTags'] = $analyticsTags;
-
-        return $this;
-    }
-
-    /**
-     * Gets enableABTest.
-     *
-     * @return null|bool
-     */
-    public function getEnableABTest()
-    {
-        return $this->container['enableABTest'] ?? null;
-    }
-
-    /**
-     * Sets enableABTest.
-     *
-     * @param null|bool $enableABTest Whether to enable index level A/B testing for this run request. If the composition mixes multiple indices, the A/B test is ignored.
-     *
-     * @return self
-     */
-    public function setEnableABTest($enableABTest)
-    {
-        $this->container['enableABTest'] = $enableABTest;
-
-        return $this;
-    }
-
-    /**
-     * Gets enableReRanking.
-     *
-     * @return null|bool
-     */
-    public function getEnableReRanking()
-    {
-        return $this->container['enableReRanking'] ?? null;
-    }
-
-    /**
-     * Sets enableReRanking.
-     *
-     * @param null|bool $enableReRanking Whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) This setting only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard.
-     *
-     * @return self
-     */
-    public function setEnableReRanking($enableReRanking)
-    {
-        $this->container['enableReRanking'] = $enableReRanking;
-
-        return $this;
-    }
-
-    /**
-     * Gets injectedItems.
-     *
-     * @return null|array<string,ExternalInjectedItem>
-     */
-    public function getInjectedItems()
-    {
-        return $this->container['injectedItems'] ?? null;
-    }
-
-    /**
-     * Sets injectedItems.
-     *
-     * @param null|array<string,ExternalInjectedItem> $injectedItems a list of extenrally injected objectID groups into from an external source
-     *
-     * @return self
-     */
-    public function setInjectedItems($injectedItems)
-    {
-        $this->container['injectedItems'] = $injectedItems;
 
         return $this;
     }

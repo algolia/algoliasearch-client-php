@@ -20,7 +20,6 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $modelTypes = [
-        'params' => 'string',
         'query' => 'string',
         'similarQuery' => 'string',
         'filters' => 'string',
@@ -95,6 +94,7 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
         'enableReRanking' => 'bool',
         'reRankingApplyFilter' => '\Algolia\AlgoliaSearch\Model\Search\ReRankingApplyFilter',
         'cursor' => 'string',
+        'params' => 'string',
     ];
 
     /**
@@ -103,7 +103,6 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $modelFormats = [
-        'params' => null,
         'query' => null,
         'similarQuery' => null,
         'filters' => null,
@@ -178,6 +177,7 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
         'enableReRanking' => null,
         'reRankingApplyFilter' => null,
         'cursor' => null,
+        'params' => null,
     ];
 
     /**
@@ -187,7 +187,6 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'params' => 'params',
         'query' => 'query',
         'similarQuery' => 'similarQuery',
         'filters' => 'filters',
@@ -262,6 +261,7 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
         'enableReRanking' => 'enableReRanking',
         'reRankingApplyFilter' => 'reRankingApplyFilter',
         'cursor' => 'cursor',
+        'params' => 'params',
     ];
 
     /**
@@ -270,7 +270,6 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'params' => 'setParams',
         'query' => 'setQuery',
         'similarQuery' => 'setSimilarQuery',
         'filters' => 'setFilters',
@@ -345,6 +344,7 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
         'enableReRanking' => 'setEnableReRanking',
         'reRankingApplyFilter' => 'setReRankingApplyFilter',
         'cursor' => 'setCursor',
+        'params' => 'setParams',
     ];
 
     /**
@@ -353,7 +353,6 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'params' => 'getParams',
         'query' => 'getQuery',
         'similarQuery' => 'getSimilarQuery',
         'filters' => 'getFilters',
@@ -428,6 +427,7 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
         'enableReRanking' => 'getEnableReRanking',
         'reRankingApplyFilter' => 'getReRankingApplyFilter',
         'cursor' => 'getCursor',
+        'params' => 'getParams',
     ];
 
     /**
@@ -444,9 +444,6 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['params'])) {
-            $this->container['params'] = $data['params'];
-        }
         if (isset($data['query'])) {
             $this->container['query'] = $data['query'];
         }
@@ -669,6 +666,9 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
         if (isset($data['cursor'])) {
             $this->container['cursor'] = $data['cursor'];
         }
+        if (isset($data['params'])) {
+            $this->container['params'] = $data['params'];
+        }
     }
 
     /**
@@ -741,30 +741,6 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
     public function valid()
     {
         return 0 === count($this->listInvalidProperties());
-    }
-
-    /**
-     * Gets params.
-     *
-     * @return null|string
-     */
-    public function getParams()
-    {
-        return $this->container['params'] ?? null;
-    }
-
-    /**
-     * Sets params.
-     *
-     * @param null|string $params search parameters as a URL-encoded query string
-     *
-     * @return self
-     */
-    public function setParams($params)
-    {
-        $this->container['params'] = $params;
-
-        return $this;
     }
 
     /**
@@ -2539,6 +2515,30 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
     public function setCursor($cursor)
     {
         $this->container['cursor'] = $cursor;
+
+        return $this;
+    }
+
+    /**
+     * Gets params.
+     *
+     * @return null|string
+     */
+    public function getParams()
+    {
+        return $this->container['params'] ?? null;
+    }
+
+    /**
+     * Sets params.
+     *
+     * @param null|string $params search parameters as a URL-encoded query string
+     *
+     * @return self
+     */
+    public function setParams($params)
+    {
+        $this->container['params'] = $params;
 
         return $this;
     }

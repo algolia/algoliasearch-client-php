@@ -601,6 +601,7 @@ class CompositionClient
      *                                         - $composition['name'] => (string) Composition name. (required)
      *                                         - $composition['description'] => (string) Composition description.
      *                                         - $composition['behavior'] => (array)  (required)
+     *                                         - $composition['sortingStrategy'] => (array) A mapping of sorting labels to the indices (or replicas) that implement those sorting rules. The sorting indices MUST be related to the associated main targeted index in the composition. Each key is the label your frontend sends at runtime (for example, \"Price (asc)\"), and each value is the name of the index that should be queried when that label is selected.  When a request includes a \"sortBy\" parameter, the platform looks up the corresponding index in this mapping and uses it to execute the query. The main targeted index is replaced with the sorting strategy index it is mapped to.  Up to 20 sorting strategies can be defined.
      *
      * @see Composition
      *
@@ -909,6 +910,50 @@ class CompositionClient
         }
 
         return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, true);
+    }
+
+    /**
+     * Updates the \"sortingStrategy\" field of an existing composition. This endpoint allows you to create a new sorting strategy mapping or replace the currently configured one. The provided sorting indices MUST be associated indices or replicas of the main targeted index.  WARNING: This endpoint cannot validate if the sort index is related to the composition's main index.   Validation will fail at runtime if the index you updated is not related!  The update is applied to the specified composition within the current Algolia application and returns a taskID that can be used to track the operation’s completion.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param string $compositionID  Unique Composition ObjectID. (required)
+     * @param array  $requestBody    requestBody (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TaskIDResponse
+     */
+    public function updateSortingStrategyComposition($compositionID, $requestBody, $requestOptions = [])
+    {
+        // verify the required parameter 'compositionID' is set
+        if (!isset($compositionID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `compositionID` is required when calling `updateSortingStrategyComposition`.'
+            );
+        }
+        // verify the required parameter 'requestBody' is set
+        if (!isset($requestBody)) {
+            throw new \InvalidArgumentException(
+                'Parameter `requestBody` is required when calling `updateSortingStrategyComposition`.'
+            );
+        }
+
+        $resourcePath = '/1/compositions/{compositionID}/sortingStrategy';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $requestBody;
+
+        // path params
+        if (null !== $compositionID) {
+            $resourcePath = str_replace(
+                '{compositionID}',
+                ObjectSerializer::toPathValue($compositionID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)

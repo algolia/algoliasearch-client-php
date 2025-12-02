@@ -45,9 +45,10 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'optionalFilters' => '\Algolia\AlgoliaSearch\Model\Composition\OptionalFilters',
         'page' => 'int',
         'query' => 'string',
-        'relevancyStrictness' => 'int',
         'queryLanguages' => '\Algolia\AlgoliaSearch\Model\Composition\SupportedLanguage[]',
+        'relevancyStrictness' => 'int',
         'ruleContexts' => 'string[]',
+        'sortBy' => 'string',
         'userToken' => 'string',
     ];
 
@@ -82,9 +83,10 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'optionalFilters' => null,
         'page' => null,
         'query' => null,
-        'relevancyStrictness' => null,
         'queryLanguages' => null,
+        'relevancyStrictness' => null,
         'ruleContexts' => null,
+        'sortBy' => null,
         'userToken' => null,
     ];
 
@@ -120,9 +122,10 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'optionalFilters' => 'optionalFilters',
         'page' => 'page',
         'query' => 'query',
-        'relevancyStrictness' => 'relevancyStrictness',
         'queryLanguages' => 'queryLanguages',
+        'relevancyStrictness' => 'relevancyStrictness',
         'ruleContexts' => 'ruleContexts',
+        'sortBy' => 'sortBy',
         'userToken' => 'userToken',
     ];
 
@@ -157,9 +160,10 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'optionalFilters' => 'setOptionalFilters',
         'page' => 'setPage',
         'query' => 'setQuery',
-        'relevancyStrictness' => 'setRelevancyStrictness',
         'queryLanguages' => 'setQueryLanguages',
+        'relevancyStrictness' => 'setRelevancyStrictness',
         'ruleContexts' => 'setRuleContexts',
+        'sortBy' => 'setSortBy',
         'userToken' => 'setUserToken',
     ];
 
@@ -194,9 +198,10 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'optionalFilters' => 'getOptionalFilters',
         'page' => 'getPage',
         'query' => 'getQuery',
-        'relevancyStrictness' => 'getRelevancyStrictness',
         'queryLanguages' => 'getQueryLanguages',
+        'relevancyStrictness' => 'getRelevancyStrictness',
         'ruleContexts' => 'getRuleContexts',
+        'sortBy' => 'getSortBy',
         'userToken' => 'getUserToken',
     ];
 
@@ -289,14 +294,17 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         if (isset($data['query'])) {
             $this->container['query'] = $data['query'];
         }
-        if (isset($data['relevancyStrictness'])) {
-            $this->container['relevancyStrictness'] = $data['relevancyStrictness'];
-        }
         if (isset($data['queryLanguages'])) {
             $this->container['queryLanguages'] = $data['queryLanguages'];
         }
+        if (isset($data['relevancyStrictness'])) {
+            $this->container['relevancyStrictness'] = $data['relevancyStrictness'];
+        }
         if (isset($data['ruleContexts'])) {
             $this->container['ruleContexts'] = $data['ruleContexts'];
+        }
+        if (isset($data['sortBy'])) {
+            $this->container['sortBy'] = $data['sortBy'];
         }
         if (isset($data['userToken'])) {
             $this->container['userToken'] = $data['userToken'];
@@ -976,30 +984,6 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     }
 
     /**
-     * Gets relevancyStrictness.
-     *
-     * @return null|int
-     */
-    public function getRelevancyStrictness()
-    {
-        return $this->container['relevancyStrictness'] ?? null;
-    }
-
-    /**
-     * Sets relevancyStrictness.
-     *
-     * @param null|int $relevancyStrictness Relevancy threshold below which less relevant results aren't included in the results You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results.
-     *
-     * @return self
-     */
-    public function setRelevancyStrictness($relevancyStrictness)
-    {
-        $this->container['relevancyStrictness'] = $relevancyStrictness;
-
-        return $this;
-    }
-
-    /**
      * Gets queryLanguages.
      *
      * @return null|SupportedLanguage[]
@@ -1024,6 +1008,30 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     }
 
     /**
+     * Gets relevancyStrictness.
+     *
+     * @return null|int
+     */
+    public function getRelevancyStrictness()
+    {
+        return $this->container['relevancyStrictness'] ?? null;
+    }
+
+    /**
+     * Sets relevancyStrictness.
+     *
+     * @param null|int $relevancyStrictness Relevancy threshold below which less relevant results aren't included in the results You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results.
+     *
+     * @return self
+     */
+    public function setRelevancyStrictness($relevancyStrictness)
+    {
+        $this->container['relevancyStrictness'] = $relevancyStrictness;
+
+        return $this;
+    }
+
+    /**
      * Gets ruleContexts.
      *
      * @return null|string[]
@@ -1043,6 +1051,30 @@ class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     public function setRuleContexts($ruleContexts)
     {
         $this->container['ruleContexts'] = $ruleContexts;
+
+        return $this;
+    }
+
+    /**
+     * Gets sortBy.
+     *
+     * @return null|string
+     */
+    public function getSortBy()
+    {
+        return $this->container['sortBy'] ?? null;
+    }
+
+    /**
+     * Sets sortBy.
+     *
+     * @param null|string $sortBy Indicates which sorting strategy to apply for the request. The value must match one of the labels defined in the \"sortingStrategy\" mapping. For example, \"Price (asc)\", see Upsert Composition. At runtime, this label is used to look up the corresponding index or replica configured in \"sortingStrategy\", and the query is executed using that index instead of main's.  In addition to \"sortingStrategy\", this parameter is also used to apply a matching Composition Rule that contains a condition defined to trigger on \"sortBy\", see Composition Rules.  If no value is provided or an invalid value, no sorting strategy is applied.
+     *
+     * @return self
+     */
+    public function setSortBy($sortBy)
+    {
+        $this->container['sortBy'] = $sortBy;
 
         return $this;
     }

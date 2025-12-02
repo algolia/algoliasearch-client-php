@@ -24,6 +24,7 @@ class BatchCompositionAction extends AbstractModel implements ModelInterface, \A
         'name' => 'string',
         'description' => 'string',
         'behavior' => '\Algolia\AlgoliaSearch\Model\Composition\CompositionBehavior',
+        'sortingStrategy' => 'array<string,string>',
     ];
 
     /**
@@ -36,6 +37,7 @@ class BatchCompositionAction extends AbstractModel implements ModelInterface, \A
         'name' => null,
         'description' => null,
         'behavior' => null,
+        'sortingStrategy' => null,
     ];
 
     /**
@@ -49,6 +51,7 @@ class BatchCompositionAction extends AbstractModel implements ModelInterface, \A
         'name' => 'name',
         'description' => 'description',
         'behavior' => 'behavior',
+        'sortingStrategy' => 'sortingStrategy',
     ];
 
     /**
@@ -61,6 +64,7 @@ class BatchCompositionAction extends AbstractModel implements ModelInterface, \A
         'name' => 'setName',
         'description' => 'setDescription',
         'behavior' => 'setBehavior',
+        'sortingStrategy' => 'setSortingStrategy',
     ];
 
     /**
@@ -73,6 +77,7 @@ class BatchCompositionAction extends AbstractModel implements ModelInterface, \A
         'name' => 'getName',
         'description' => 'getDescription',
         'behavior' => 'getBehavior',
+        'sortingStrategy' => 'getSortingStrategy',
     ];
 
     /**
@@ -100,6 +105,9 @@ class BatchCompositionAction extends AbstractModel implements ModelInterface, \A
         }
         if (isset($data['behavior'])) {
             $this->container['behavior'] = $data['behavior'];
+        }
+        if (isset($data['sortingStrategy'])) {
+            $this->container['sortingStrategy'] = $data['sortingStrategy'];
         }
     }
 
@@ -279,6 +287,30 @@ class BatchCompositionAction extends AbstractModel implements ModelInterface, \A
     public function setBehavior($behavior)
     {
         $this->container['behavior'] = $behavior;
+
+        return $this;
+    }
+
+    /**
+     * Gets sortingStrategy.
+     *
+     * @return null|array<string,string>
+     */
+    public function getSortingStrategy()
+    {
+        return $this->container['sortingStrategy'] ?? null;
+    }
+
+    /**
+     * Sets sortingStrategy.
+     *
+     * @param null|array<string,string> $sortingStrategy A mapping of sorting labels to the indices (or replicas) that implement those sorting rules. The sorting indices MUST be related to the associated main targeted index in the composition. Each key is the label your frontend sends at runtime (for example, \"Price (asc)\"), and each value is the name of the index that should be queried when that label is selected.  When a request includes a \"sortBy\" parameter, the platform looks up the corresponding index in this mapping and uses it to execute the query. The main targeted index is replaced with the sorting strategy index it is mapped to.  Up to 20 sorting strategies can be defined.
+     *
+     * @return self
+     */
+    public function setSortingStrategy($sortingStrategy)
+    {
+        $this->container['sortingStrategy'] = $sortingStrategy;
 
         return $this;
     }

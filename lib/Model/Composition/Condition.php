@@ -24,6 +24,7 @@ class Condition extends AbstractModel implements ModelInterface, \ArrayAccess, \
         'anchoring' => '\Algolia\AlgoliaSearch\Model\Composition\Anchoring',
         'context' => 'string',
         'filters' => 'string',
+        'sortBy' => 'string',
     ];
 
     /**
@@ -36,6 +37,7 @@ class Condition extends AbstractModel implements ModelInterface, \ArrayAccess, \
         'anchoring' => null,
         'context' => null,
         'filters' => null,
+        'sortBy' => null,
     ];
 
     /**
@@ -49,6 +51,7 @@ class Condition extends AbstractModel implements ModelInterface, \ArrayAccess, \
         'anchoring' => 'anchoring',
         'context' => 'context',
         'filters' => 'filters',
+        'sortBy' => 'sortBy',
     ];
 
     /**
@@ -61,6 +64,7 @@ class Condition extends AbstractModel implements ModelInterface, \ArrayAccess, \
         'anchoring' => 'setAnchoring',
         'context' => 'setContext',
         'filters' => 'setFilters',
+        'sortBy' => 'setSortBy',
     ];
 
     /**
@@ -73,6 +77,7 @@ class Condition extends AbstractModel implements ModelInterface, \ArrayAccess, \
         'anchoring' => 'getAnchoring',
         'context' => 'getContext',
         'filters' => 'getFilters',
+        'sortBy' => 'getSortBy',
     ];
 
     /**
@@ -100,6 +105,9 @@ class Condition extends AbstractModel implements ModelInterface, \ArrayAccess, \
         }
         if (isset($data['filters'])) {
             $this->container['filters'] = $data['filters'];
+        }
+        if (isset($data['sortBy'])) {
+            $this->container['sortBy'] = $data['sortBy'];
         }
     }
 
@@ -267,6 +275,30 @@ class Condition extends AbstractModel implements ModelInterface, \ArrayAccess, \
     public function setFilters($filters)
     {
         $this->container['filters'] = $filters;
+
+        return $this;
+    }
+
+    /**
+     * Gets sortBy.
+     *
+     * @return null|string
+     */
+    public function getSortBy()
+    {
+        return $this->container['sortBy'] ?? null;
+    }
+
+    /**
+     * Sets sortBy.
+     *
+     * @param null|string $sortBy Sort criteria that trigger the rule.  You can trigger composition rules based on the selected sorting strategy set by the parameter `sortBy`. The rule will trigger if the value passed to `sortBy` matches the one defined in the condition.
+     *
+     * @return self
+     */
+    public function setSortBy($sortBy)
+    {
+        $this->container['sortBy'] = $sortBy;
 
         return $this;
     }

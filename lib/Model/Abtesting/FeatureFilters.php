@@ -8,13 +8,13 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * EstimateConfiguration Class Doc Comment.
+ * FeatureFilters Class Doc Comment.
  *
  * @category Class
  *
- * @description A/B test configuration for estimating the sample size and duration using minimum detectable effect.
+ * @description Configuration of feature-based filters applied to the A/B test population.
  */
-class EstimateConfiguration extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class FeatureFilters extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -22,10 +22,9 @@ class EstimateConfiguration extends AbstractModel implements ModelInterface, \Ar
      * @var string[]
      */
     protected static $modelTypes = [
-        'featureFilters' => '\Algolia\AlgoliaSearch\Model\Abtesting\FeatureFilters',
-        'outliers' => '\Algolia\AlgoliaSearch\Model\Abtesting\Outliers',
-        'emptySearch' => '\Algolia\AlgoliaSearch\Model\Abtesting\EmptySearch',
-        'minimumDetectableEffect' => '\Algolia\AlgoliaSearch\Model\Abtesting\MinimumDetectableEffect',
+        'dynamicReRanking' => 'bool',
+        'aiPerso' => 'bool',
+        'multiSignalRanking' => 'bool',
     ];
 
     /**
@@ -34,10 +33,9 @@ class EstimateConfiguration extends AbstractModel implements ModelInterface, \Ar
      * @var string[]
      */
     protected static $modelFormats = [
-        'featureFilters' => null,
-        'outliers' => null,
-        'emptySearch' => null,
-        'minimumDetectableEffect' => null,
+        'dynamicReRanking' => null,
+        'aiPerso' => null,
+        'multiSignalRanking' => null,
     ];
 
     /**
@@ -47,10 +45,9 @@ class EstimateConfiguration extends AbstractModel implements ModelInterface, \Ar
      * @var string[]
      */
     protected static $attributeMap = [
-        'featureFilters' => 'featureFilters',
-        'outliers' => 'outliers',
-        'emptySearch' => 'emptySearch',
-        'minimumDetectableEffect' => 'minimumDetectableEffect',
+        'dynamicReRanking' => 'dynamicReRanking',
+        'aiPerso' => 'aiPerso',
+        'multiSignalRanking' => 'multiSignalRanking',
     ];
 
     /**
@@ -59,10 +56,9 @@ class EstimateConfiguration extends AbstractModel implements ModelInterface, \Ar
      * @var string[]
      */
     protected static $setters = [
-        'featureFilters' => 'setFeatureFilters',
-        'outliers' => 'setOutliers',
-        'emptySearch' => 'setEmptySearch',
-        'minimumDetectableEffect' => 'setMinimumDetectableEffect',
+        'dynamicReRanking' => 'setDynamicReRanking',
+        'aiPerso' => 'setAiPerso',
+        'multiSignalRanking' => 'setMultiSignalRanking',
     ];
 
     /**
@@ -71,10 +67,9 @@ class EstimateConfiguration extends AbstractModel implements ModelInterface, \Ar
      * @var string[]
      */
     protected static $getters = [
-        'featureFilters' => 'getFeatureFilters',
-        'outliers' => 'getOutliers',
-        'emptySearch' => 'getEmptySearch',
-        'minimumDetectableEffect' => 'getMinimumDetectableEffect',
+        'dynamicReRanking' => 'getDynamicReRanking',
+        'aiPerso' => 'getAiPerso',
+        'multiSignalRanking' => 'getMultiSignalRanking',
     ];
 
     /**
@@ -91,17 +86,14 @@ class EstimateConfiguration extends AbstractModel implements ModelInterface, \Ar
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['featureFilters'])) {
-            $this->container['featureFilters'] = $data['featureFilters'];
+        if (isset($data['dynamicReRanking'])) {
+            $this->container['dynamicReRanking'] = $data['dynamicReRanking'];
         }
-        if (isset($data['outliers'])) {
-            $this->container['outliers'] = $data['outliers'];
+        if (isset($data['aiPerso'])) {
+            $this->container['aiPerso'] = $data['aiPerso'];
         }
-        if (isset($data['emptySearch'])) {
-            $this->container['emptySearch'] = $data['emptySearch'];
-        }
-        if (isset($data['minimumDetectableEffect'])) {
-            $this->container['minimumDetectableEffect'] = $data['minimumDetectableEffect'];
+        if (isset($data['multiSignalRanking'])) {
+            $this->container['multiSignalRanking'] = $data['multiSignalRanking'];
         }
     }
 
@@ -163,13 +155,7 @@ class EstimateConfiguration extends AbstractModel implements ModelInterface, \Ar
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (!isset($this->container['minimumDetectableEffect']) || null === $this->container['minimumDetectableEffect']) {
-            $invalidProperties[] = "'minimumDetectableEffect' can't be null";
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -184,97 +170,73 @@ class EstimateConfiguration extends AbstractModel implements ModelInterface, \Ar
     }
 
     /**
-     * Gets featureFilters.
+     * Gets dynamicReRanking.
      *
-     * @return null|FeatureFilters
+     * @return null|bool
      */
-    public function getFeatureFilters()
+    public function getDynamicReRanking()
     {
-        return $this->container['featureFilters'] ?? null;
+        return $this->container['dynamicReRanking'] ?? null;
     }
 
     /**
-     * Sets featureFilters.
+     * Sets dynamicReRanking.
      *
-     * @param null|FeatureFilters $featureFilters featureFilters
+     * @param null|bool $dynamicReRanking whether to apply Dynamic Re-Ranking feature filters
      *
      * @return self
      */
-    public function setFeatureFilters($featureFilters)
+    public function setDynamicReRanking($dynamicReRanking)
     {
-        $this->container['featureFilters'] = $featureFilters;
+        $this->container['dynamicReRanking'] = $dynamicReRanking;
 
         return $this;
     }
 
     /**
-     * Gets outliers.
+     * Gets aiPerso.
      *
-     * @return null|Outliers
+     * @return null|bool
      */
-    public function getOutliers()
+    public function getAiPerso()
     {
-        return $this->container['outliers'] ?? null;
+        return $this->container['aiPerso'] ?? null;
     }
 
     /**
-     * Sets outliers.
+     * Sets aiPerso.
      *
-     * @param null|Outliers $outliers outliers
+     * @param null|bool $aiPerso whether to apply AI Personalization feature filters
      *
      * @return self
      */
-    public function setOutliers($outliers)
+    public function setAiPerso($aiPerso)
     {
-        $this->container['outliers'] = $outliers;
+        $this->container['aiPerso'] = $aiPerso;
 
         return $this;
     }
 
     /**
-     * Gets emptySearch.
+     * Gets multiSignalRanking.
      *
-     * @return null|EmptySearch
+     * @return null|bool
      */
-    public function getEmptySearch()
+    public function getMultiSignalRanking()
     {
-        return $this->container['emptySearch'] ?? null;
+        return $this->container['multiSignalRanking'] ?? null;
     }
 
     /**
-     * Sets emptySearch.
+     * Sets multiSignalRanking.
      *
-     * @param null|EmptySearch $emptySearch emptySearch
+     * @param null|bool $multiSignalRanking whether to apply Multi-Signal Re-Ranking feature filters
      *
      * @return self
      */
-    public function setEmptySearch($emptySearch)
+    public function setMultiSignalRanking($multiSignalRanking)
     {
-        $this->container['emptySearch'] = $emptySearch;
-
-        return $this;
-    }
-
-    /**
-     * Gets minimumDetectableEffect.
-     *
-     * @return MinimumDetectableEffect
-     */
-    public function getMinimumDetectableEffect()
-    {
-        return $this->container['minimumDetectableEffect'] ?? null;
-    }
-
-    /**
-     * Sets minimumDetectableEffect.
-     *
-     * @param MinimumDetectableEffect $minimumDetectableEffect minimumDetectableEffect
-     *
-     * @return self
-     */
-    public function setMinimumDetectableEffect($minimumDetectableEffect)
-    {
-        $this->container['minimumDetectableEffect'] = $minimumDetectableEffect;
+        $this->container['multiSignalRanking'] = $multiSignalRanking;
 
         return $this;
     }

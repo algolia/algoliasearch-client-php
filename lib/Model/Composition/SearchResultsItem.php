@@ -1091,7 +1091,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets page.
      *
-     * @param int $page page of search results to retrieve
+     * @param int $page the current page of the results
      *
      * @return self
      */
@@ -1163,7 +1163,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets hitsPerPage.
      *
-     * @param int $hitsPerPage number of hits per page
+     * @param int $hitsPerPage number of hits returned per page
      *
      * @return self
      */
@@ -1211,7 +1211,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets query.
      *
-     * @param string $query search query
+     * @param string $query the search query string
      *
      * @return self
      */

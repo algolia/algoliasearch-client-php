@@ -23,8 +23,8 @@
         "psr/simple-cache": "^1.0 || ^2.0 || ^3.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.80.0",
-        "phpunit/phpunit": "^11.0",
+        "friendsofphp/php-cs-fixer": "^3.91.3",
+        "phpunit/phpunit": "^10.0",
         "vlucas/phpdotenv": "^5.4",
         "phpstan/phpstan": "^1.12"
     },

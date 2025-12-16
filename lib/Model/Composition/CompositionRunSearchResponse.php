@@ -178,7 +178,7 @@ class CompositionRunSearchResponse extends AbstractModel implements ModelInterfa
     /**
      * Sets objectID.
      *
-     * @param string $objectID unique record identifier
+     * @param string $objectID the objectID of the composition which generated this result set
      *
      * @return self
      */

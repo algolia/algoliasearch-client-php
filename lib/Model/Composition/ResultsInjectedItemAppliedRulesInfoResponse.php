@@ -170,7 +170,7 @@ class ResultsInjectedItemAppliedRulesInfoResponse extends AbstractModel implemen
     /**
      * Sets objectID.
      *
-     * @param string $objectID unique record identifier
+     * @param string $objectID the objectID of the applied index level rule on this injected group
      *
      * @return self
      */

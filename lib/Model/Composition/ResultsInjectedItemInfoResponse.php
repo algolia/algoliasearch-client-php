@@ -178,7 +178,7 @@ class ResultsInjectedItemInfoResponse extends AbstractModel implements ModelInte
     /**
      * Sets key.
      *
-     * @param string $key key
+     * @param string $key the key of the injected group
      *
      * @return self
      */

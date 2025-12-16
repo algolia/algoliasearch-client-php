@@ -170,7 +170,7 @@ class CompositionRunAppliedRules extends AbstractModel implements ModelInterface
     /**
      * Sets objectID.
      *
-     * @param string $objectID unique record identifier
+     * @param string $objectID the objectID of the applied composition rule on this query
      *
      * @return self
      */

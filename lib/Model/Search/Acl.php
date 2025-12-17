@@ -46,6 +46,22 @@ class Acl
 
     public const USAGE = 'usage';
 
+    public const NLU_WRITE_PROJECT = 'nluWriteProject';
+
+    public const NLU_READ_PROJECT = 'nluReadProject';
+
+    public const NLU_WRITE_ENTITY = 'nluWriteEntity';
+
+    public const NLU_READ_ENTITY = 'nluReadEntity';
+
+    public const NLU_WRITE_INTENT = 'nluWriteIntent';
+
+    public const NLU_READ_INTENT = 'nluReadIntent';
+
+    public const NLU_PREDICTION = 'nluPrediction';
+
+    public const NLU_READ_ANSWERS = 'nluReadAnswers';
+
     /**
      * Gets allowable values of the enum.
      *
@@ -69,6 +85,14 @@ class Acl
             self::SEE_UNRETRIEVABLE_ATTRIBUTES,
             self::SETTINGS,
             self::USAGE,
+            self::NLU_WRITE_PROJECT,
+            self::NLU_READ_PROJECT,
+            self::NLU_WRITE_ENTITY,
+            self::NLU_READ_ENTITY,
+            self::NLU_WRITE_INTENT,
+            self::NLU_READ_INTENT,
+            self::NLU_PREDICTION,
+            self::NLU_READ_ANSWERS,
         ];
     }
 }

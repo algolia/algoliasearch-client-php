@@ -71,7 +71,7 @@ jobs:
           name: Check code styles
           command: PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix -v --dry-run
 
-      # Run tests with phpunit 
+      # Run tests with phpunit
       #
       # If the PR is open by an Algolia, we run all the tests
       # with the keys in the env variables
@@ -110,6 +110,10 @@ jobs:
 workflows:
   workflow:
     jobs:
+      - test:
+          name: 'Guzzle 7 - PHP 8.4'
+          version: "8.4"
+          http_client: guzzlehttp/guzzle:"^7.0"
       - test:
           name: 'Guzzle 7 - PHP 8.1'
           version: "8.1"

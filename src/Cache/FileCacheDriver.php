@@ -18,7 +18,7 @@ final class FileCacheDriver implements CacheInterface
     /**
      * {@inheritdoc}
      */
-    public function get($key, $default = null)
+    public function get($key, $default = null): mixed
     {
         if (!$this->has($key)) {
             return $default;
@@ -30,15 +30,15 @@ final class FileCacheDriver implements CacheInterface
     /**
      * {@inheritdoc}
      */
-    public function set($key, $value, $ttl = null)
+    public function set($key, $value, $ttl = null): bool
     {
-        return file_put_contents($this->getFilenameFromKey($key), $value);
+        return file_put_contents($this->getFilenameFromKey($key), $value) !== false;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function delete($key)
+    public function delete($key): bool
     {
         return @unlink($this->getFilenameFromKey($key));
     }
@@ -46,7 +46,7 @@ final class FileCacheDriver implements CacheInterface
     /**
      * {@inheritdoc}
      */
-    public function clear()
+    public function clear(): bool
     {
         $result = true;
         foreach (glob($this->directory.self::PREFIX.'*') as $file) {
@@ -59,7 +59,7 @@ final class FileCacheDriver implements CacheInterface
     /**
      * {@inheritdoc}
      */
-    public function getMultiple($keys, $default = null)
+    public function getMultiple($keys, $default = null): iterable
     {
         $result = [];
         foreach ($keys as $key) {
@@ -72,7 +72,7 @@ final class FileCacheDriver implements CacheInterface
     /**
      * {@inheritdoc}
      */
-    public function setMultiple($values, $ttl = null)
+    public function setMultiple($values, $ttl = null): bool
     {
         $result = true;
         foreach ($values as $key => $value) {
@@ -85,7 +85,7 @@ final class FileCacheDriver implements CacheInterface
     /**
      * {@inheritdoc}
      */
-    public function deleteMultiple($keys)
+    public function deleteMultiple($keys): bool
     {
         $result = true;
         foreach ($keys as $key) {
@@ -98,7 +98,7 @@ final class FileCacheDriver implements CacheInterface
     /**
      * {@inheritdoc}
      */
-    public function has($key)
+    public function has($key): bool
     {
         return file_exists($this->getFilenameFromKey($key));
     }

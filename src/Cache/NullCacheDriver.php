@@ -9,7 +9,7 @@ final class NullCacheDriver implements CacheInterface
     /**
      * {@inheritdoc}
      */
-    public function get($key, $default = null)
+    public function get($key, $default = null): mixed
     {
         return $default;
     }
@@ -17,7 +17,7 @@ final class NullCacheDriver implements CacheInterface
     /**
      * {@inheritdoc}
      */
-    public function set($key, $value, $ttl = null)
+    public function set($key, $value, $ttl = null): bool
     {
         return true;
     }
@@ -25,7 +25,7 @@ final class NullCacheDriver implements CacheInterface
     /**
      * {@inheritdoc}
      */
-    public function delete($key)
+    public function delete($key): bool
     {
         return true;
     }
@@ -33,7 +33,7 @@ final class NullCacheDriver implements CacheInterface
     /**
      * {@inheritdoc}
      */
-    public function clear()
+    public function clear(): bool
     {
         return true;
     }
@@ -41,7 +41,7 @@ final class NullCacheDriver implements CacheInterface
     /**
      * {@inheritdoc}
      */
-    public function getMultiple($keys, $default = null)
+    public function getMultiple($keys, $default = null): iterable
     {
         $return = [];
 
@@ -55,7 +55,7 @@ final class NullCacheDriver implements CacheInterface
     /**
      * {@inheritdoc}
      */
-    public function setMultiple($values, $ttl = null)
+    public function setMultiple($values, $ttl = null): bool
     {
         return true;
     }
@@ -63,7 +63,7 @@ final class NullCacheDriver implements CacheInterface
     /**
      * {@inheritdoc}
      */
-    public function deleteMultiple($keys)
+    public function deleteMultiple($keys): bool
     {
         return true;
     }
@@ -71,7 +71,7 @@ final class NullCacheDriver implements CacheInterface
     /**
      * {@inheritdoc}
      */
-    public function has($key)
+    public function has($key): bool
     {
         return false;
     }

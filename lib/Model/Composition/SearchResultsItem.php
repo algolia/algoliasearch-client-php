@@ -403,27 +403,6 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['hits']) || null === $this->container['hits']) {
-            $invalidProperties[] = "'hits' can't be null";
-        }
-        if (!isset($this->container['hitsPerPage']) || null === $this->container['hitsPerPage']) {
-            $invalidProperties[] = "'hitsPerPage' can't be null";
-        }
-        if (!isset($this->container['nbHits']) || null === $this->container['nbHits']) {
-            $invalidProperties[] = "'nbHits' can't be null";
-        }
-        if (!isset($this->container['nbPages']) || null === $this->container['nbPages']) {
-            $invalidProperties[] = "'nbPages' can't be null";
-        }
-        if (!isset($this->container['page']) || null === $this->container['page']) {
-            $invalidProperties[] = "'page' can't be null";
-        }
-        if (!isset($this->container['params']) || null === $this->container['params']) {
-            $invalidProperties[] = "'params' can't be null";
-        }
-        if (!isset($this->container['query']) || null === $this->container['query']) {
-            $invalidProperties[] = "'query' can't be null";
-        }
         if (!isset($this->container['compositions']) || null === $this->container['compositions']) {
             $invalidProperties[] = "'compositions' can't be null";
         }
@@ -1081,7 +1060,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets hits.
      *
-     * @return Hit[]
+     * @return null|Hit[]
      */
     public function getHits()
     {
@@ -1091,7 +1070,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets hits.
      *
-     * @param Hit[] $hits Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.
+     * @param null|Hit[] $hits Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.
      *
      * @return self
      */
@@ -1105,7 +1084,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets hitsPerPage.
      *
-     * @return int
+     * @return null|int
      */
     public function getHitsPerPage()
     {
@@ -1115,7 +1094,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets hitsPerPage.
      *
-     * @param int $hitsPerPage number of hits returned per page
+     * @param null|int $hitsPerPage number of hits returned per page
      *
      * @return self
      */
@@ -1129,7 +1108,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets nbHits.
      *
-     * @return int
+     * @return null|int
      */
     public function getNbHits()
     {
@@ -1139,7 +1118,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets nbHits.
      *
-     * @param int $nbHits number of results (hits)
+     * @param null|int $nbHits number of results (hits)
      *
      * @return self
      */
@@ -1153,7 +1132,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets nbPages.
      *
-     * @return int
+     * @return null|int
      */
     public function getNbPages()
     {
@@ -1163,7 +1142,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets nbPages.
      *
-     * @param int $nbPages number of pages of results
+     * @param null|int $nbPages number of pages of results
      *
      * @return self
      */
@@ -1177,7 +1156,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets page.
      *
-     * @return int
+     * @return null|int
      */
     public function getPage()
     {
@@ -1187,7 +1166,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets page.
      *
-     * @param int $page the current page of the results
+     * @param null|int $page the current page of the results
      *
      * @return self
      */
@@ -1201,7 +1180,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets params.
      *
-     * @return string
+     * @return null|string
      */
     public function getParams()
     {
@@ -1211,7 +1190,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets params.
      *
-     * @param string $params URL-encoded string of all search parameters
+     * @param null|string $params URL-encoded string of all search parameters
      *
      * @return self
      */
@@ -1225,7 +1204,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets query.
      *
-     * @return string
+     * @return null|string
      */
     public function getQuery()
     {
@@ -1235,7 +1214,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets query.
      *
-     * @param string $query the search query string
+     * @param null|string $query the search query string
      *
      * @return self
      */

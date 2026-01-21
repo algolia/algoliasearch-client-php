@@ -13,6 +13,7 @@ use Algolia\AlgoliaSearch\Model\Monitoring\InventoryResponse;
 use Algolia\AlgoliaSearch\Model\Monitoring\LatencyResponse;
 use Algolia\AlgoliaSearch\Model\Monitoring\StatusResponse;
 use Algolia\AlgoliaSearch\ObjectSerializer;
+use Algolia\AlgoliaSearch\RetryStrategy\AlgoliaResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
@@ -127,6 +128,208 @@ class MonitoringClient
      */
     public function customDelete($path, $parameters = null, $requestOptions = [])
     {
+        $response = $this->customDeleteWithHttpInfo($path, $parameters, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customGet($path, $parameters = null, $requestOptions = [])
+    {
+        $response = $this->customGetWithHttpInfo($path, $parameters, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customPost($path, $parameters = null, $body = null, $requestOptions = [])
+    {
+        $response = $this->customPostWithHttpInfo($path, $parameters, $body, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customPut($path, $parameters = null, $body = null, $requestOptions = [])
+    {
+        $response = $this->customPutWithHttpInfo($path, $parameters, $body, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves known incidents for the selected clusters.
+     *
+     * @param string $clusters       Subset of clusters, separated by commas. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|IncidentsResponse
+     */
+    public function getClusterIncidents($clusters, $requestOptions = [])
+    {
+        $response = $this->getClusterIncidentsWithHttpInfo($clusters, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves the status of selected clusters.
+     *
+     * @param string $clusters       Subset of clusters, separated by commas. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|StatusResponse
+     */
+    public function getClusterStatus($clusters, $requestOptions = [])
+    {
+        $response = $this->getClusterStatusWithHttpInfo($clusters, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves known incidents for all clusters.
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|IncidentsResponse
+     */
+    public function getIncidents($requestOptions = [])
+    {
+        $response = $this->getIncidentsWithHttpInfo($requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves average times for indexing operations for selected clusters.
+     *
+     * @param string $clusters       Subset of clusters, separated by commas. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|IndexingTimeResponse
+     */
+    public function getIndexingTime($clusters, $requestOptions = [])
+    {
+        $response = $this->getIndexingTimeWithHttpInfo($clusters, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves the average latency for search requests for selected clusters.
+     *
+     * @param string $clusters       Subset of clusters, separated by commas. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|LatencyResponse
+     */
+    public function getLatency($clusters, $requestOptions = [])
+    {
+        $response = $this->getLatencyWithHttpInfo($clusters, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves metrics related to your Algolia infrastructure, aggregated over a selected time window.  Access to this API is available as part of the [Premium or Elevate plans](https://www.algolia.com/pricing). You must authenticate requests with the `x-algolia-application-id` and `x-algolia-api-key` headers (using the Monitoring API key).
+     *
+     * @param array $metric         Metric to report.  For more information about the individual metrics, see the description of the API response. To include all metrics, use `*`. (required)
+     * @param array $period         Period over which to aggregate the metrics:  - `minute`. Aggregate the last minute. 1 data point per 10 seconds. - `hour`. Aggregate the last hour. 1 data point per minute. - `day`. Aggregate the last day. 1 data point per 10 minutes. - `week`. Aggregate the last week. 1 data point per hour. - `month`. Aggregate the last month. 1 data point per day. (required)
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|InfrastructureResponse
+     */
+    public function getMetrics($metric, $period, $requestOptions = [])
+    {
+        $response = $this->getMetricsWithHttpInfo($metric, $period, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Test whether clusters are reachable or not.
+     *
+     * @param string $clusters       Subset of clusters, separated by commas. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|array<string,array>
+     */
+    public function getReachability($clusters, $requestOptions = [])
+    {
+        $response = $this->getReachabilityWithHttpInfo($clusters, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves the servers that belong to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application's cluster.  - Without authentication, the response lists the servers for all Algolia clusters.
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|InventoryResponse
+     */
+    public function getServers($requestOptions = [])
+    {
+        $response = $this->getServersWithHttpInfo($requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves the status of all Algolia clusters and instances.
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|StatusResponse
+     */
+    public function getStatus($requestOptions = [])
+    {
+        $response = $this->getStatusWithHttpInfo($requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function customDeleteWithHttpInfo($path, $parameters = null, $requestOptions = [])
+    {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
             throw new \InvalidArgumentException(
@@ -152,19 +355,22 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customGet($path, $parameters = null, $requestOptions = [])
+    public function customGetWithHttpInfo($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -191,20 +397,23 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customPost($path, $parameters = null, $body = null, $requestOptions = [])
+    public function customPostWithHttpInfo($path, $parameters = null, $body = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -231,20 +440,23 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customPut($path, $parameters = null, $body = null, $requestOptions = [])
+    public function customPutWithHttpInfo($path, $parameters = null, $body = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -271,18 +483,21 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Retrieve cluster incidents (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * Retrieves known incidents for the selected clusters.
      *
      * @param string $clusters       Subset of clusters, separated by commas. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|IncidentsResponse
+     * @return AlgoliaResponse
      */
-    public function getClusterIncidents($clusters, $requestOptions = [])
+    public function getClusterIncidentsWithHttpInfo($clusters, $requestOptions = [])
     {
         // verify the required parameter 'clusters' is set
         if (!isset($clusters)) {
@@ -305,18 +520,21 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Retrieve cluster status (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * Retrieves the status of selected clusters.
      *
      * @param string $clusters       Subset of clusters, separated by commas. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|StatusResponse
+     * @return AlgoliaResponse
      */
-    public function getClusterStatus($clusters, $requestOptions = [])
+    public function getClusterStatusWithHttpInfo($clusters, $requestOptions = [])
     {
         // verify the required parameter 'clusters' is set
         if (!isset($clusters)) {
@@ -339,35 +557,41 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Retrieve all incidents (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * Retrieves known incidents for all clusters.
      *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array $requestOptions Request options
      *
-     * @return array<string, mixed>|IncidentsResponse
+     * @return AlgoliaResponse
      */
-    public function getIncidents($requestOptions = [])
+    public function getIncidentsWithHttpInfo($requestOptions = [])
     {
         $resourcePath = '/1/incidents';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Retrieve indexing times (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * Retrieves average times for indexing operations for selected clusters.
      *
      * @param string $clusters       Subset of clusters, separated by commas. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|IndexingTimeResponse
+     * @return AlgoliaResponse
      */
-    public function getIndexingTime($clusters, $requestOptions = [])
+    public function getIndexingTimeWithHttpInfo($clusters, $requestOptions = [])
     {
         // verify the required parameter 'clusters' is set
         if (!isset($clusters)) {
@@ -390,18 +614,21 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Retrieve search latency times (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * Retrieves the average latency for search requests for selected clusters.
      *
      * @param string $clusters       Subset of clusters, separated by commas. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|LatencyResponse
+     * @return AlgoliaResponse
      */
-    public function getLatency($clusters, $requestOptions = [])
+    public function getLatencyWithHttpInfo($clusters, $requestOptions = [])
     {
         // verify the required parameter 'clusters' is set
         if (!isset($clusters)) {
@@ -424,19 +651,22 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Retrieve metrics (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * Retrieves metrics related to your Algolia infrastructure, aggregated over a selected time window.  Access to this API is available as part of the [Premium or Elevate plans](https://www.algolia.com/pricing). You must authenticate requests with the `x-algolia-application-id` and `x-algolia-api-key` headers (using the Monitoring API key).
      *
      * @param array $metric         Metric to report.  For more information about the individual metrics, see the description of the API response. To include all metrics, use `*`. (required)
      * @param array $period         Period over which to aggregate the metrics:  - `minute`. Aggregate the last minute. 1 data point per 10 seconds. - `hour`. Aggregate the last hour. 1 data point per minute. - `day`. Aggregate the last day. 1 data point per 10 minutes. - `week`. Aggregate the last week. 1 data point per hour. - `month`. Aggregate the last month. 1 data point per day. (required)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array $requestOptions Request options
      *
-     * @return array<string, mixed>|InfrastructureResponse
+     * @return AlgoliaResponse
      */
-    public function getMetrics($metric, $period, $requestOptions = [])
+    public function getMetricsWithHttpInfo($metric, $period, $requestOptions = [])
     {
         // verify the required parameter 'metric' is set
         if (!isset($metric)) {
@@ -474,18 +704,21 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Test the reachability of clusters (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * Test whether clusters are reachable or not.
      *
      * @param string $clusters       Subset of clusters, separated by commas. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|array<string,array>
+     * @return AlgoliaResponse
      */
-    public function getReachability($clusters, $requestOptions = [])
+    public function getReachabilityWithHttpInfo($clusters, $requestOptions = [])
     {
         // verify the required parameter 'clusters' is set
         if (!isset($clusters)) {
@@ -508,44 +741,50 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Retrieve servers (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * Retrieves the servers that belong to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application's cluster.  - Without authentication, the response lists the servers for all Algolia clusters.
      *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array $requestOptions Request options
      *
-     * @return array<string, mixed>|InventoryResponse
+     * @return AlgoliaResponse
      */
-    public function getServers($requestOptions = [])
+    public function getServersWithHttpInfo($requestOptions = [])
     {
         $resourcePath = '/1/inventory/servers';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Retrieve status of all clusters (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * Retrieves the status of all Algolia clusters and instances.
      *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array $requestOptions Request options
      *
-     * @return array<string, mixed>|StatusResponse
+     * @return AlgoliaResponse
      */
-    public function getStatus($requestOptions = [])
+    public function getStatusWithHttpInfo($requestOptions = [])
     {
         $resourcePath = '/1/status';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
-    private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
+    private function sendRequestWithHttpInfo($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
     {
         if (!isset($requestOptions['headers'])) {
             $requestOptions['headers'] = [];
@@ -563,7 +802,8 @@ class MonitoringClient
             $resourcePath.($query ? "?{$query}" : ''),
             $httpBody,
             $requestOptions,
-            $useReadTransporter
+            $useReadTransporter,
+            true
         );
     }
 }

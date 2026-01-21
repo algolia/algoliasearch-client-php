@@ -9,6 +9,7 @@ use Algolia\AlgoliaSearch\Configuration\InsightsConfig;
 use Algolia\AlgoliaSearch\Model\Insights\EventsResponse;
 use Algolia\AlgoliaSearch\Model\Insights\InsightsEvents;
 use Algolia\AlgoliaSearch\ObjectSerializer;
+use Algolia\AlgoliaSearch\RetryStrategy\AlgoliaResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
@@ -127,6 +128,113 @@ class InsightsClient
      */
     public function customDelete($path, $parameters = null, $requestOptions = [])
     {
+        $response = $this->customDeleteWithHttpInfo($path, $parameters, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customGet($path, $parameters = null, $requestOptions = [])
+    {
+        $response = $this->customGetWithHttpInfo($path, $parameters, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customPost($path, $parameters = null, $body = null, $requestOptions = [])
+    {
+        $response = $this->customPostWithHttpInfo($path, $parameters, $body, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customPut($path, $parameters = null, $body = null, $requestOptions = [])
+    {
+        $response = $this->customPutWithHttpInfo($path, $parameters, $body, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Deletes all events related to the specified user token from events metrics and analytics. The deletion is asynchronous, and processed within 48 hours. To delete a personalization user profile, see `Delete a user profile` in the Personalization API.
+     *
+     * Required API Key ACLs:
+     *  - deleteObject
+     *
+     * @param string $userToken      User token for which to delete all associated events. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     */
+    public function deleteUserToken($userToken, $requestOptions = [])
+    {
+        $response = $this->deleteUserTokenWithHttpInfo($userToken, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Sends a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB.
+     *
+     * Required API Key ACLs:
+     *  - search
+     *
+     * @param array|InsightsEvents $insightsEvents insightsEvents (required)
+     *                                             - $insightsEvents['events'] => (array) Click and conversion events.  **All** events must be valid, otherwise the API returns an error. (required)
+     *
+     * @see InsightsEvents
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|EventsResponse
+     */
+    public function pushEvents($insightsEvents, $requestOptions = [])
+    {
+        $response = $this->pushEventsWithHttpInfo($insightsEvents, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function customDeleteWithHttpInfo($path, $parameters = null, $requestOptions = [])
+    {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
             throw new \InvalidArgumentException(
@@ -152,19 +260,22 @@ class InsightsClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customGet($path, $parameters = null, $requestOptions = [])
+    public function customGetWithHttpInfo($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -191,20 +302,23 @@ class InsightsClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customPost($path, $parameters = null, $body = null, $requestOptions = [])
+    public function customPostWithHttpInfo($path, $parameters = null, $body = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -231,20 +345,23 @@ class InsightsClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customPut($path, $parameters = null, $body = null, $requestOptions = [])
+    public function customPutWithHttpInfo($path, $parameters = null, $body = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -271,19 +388,23 @@ class InsightsClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Deletes all events related to the specified user token from events metrics and analytics. The deletion is asynchronous, and processed within 48 hours. To delete a personalization user profile, see `Delete a user profile` in the Personalization API.
+     * Delete user token (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Deletes all events related to the specified user token from events metrics and analytics. The deletion is asynchronous, and processed within 48 hours. To delete a personalization user profile, see `Delete a user profile` in the Personalization API.
      * Required API Key ACLs:
      *  - deleteObject
      *
      * @param string $userToken      User token for which to delete all associated events. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
+     *
+     * @return AlgoliaResponse
      */
-    public function deleteUserToken($userToken, $requestOptions = [])
+    public function deleteUserTokenWithHttpInfo($userToken, $requestOptions = [])
     {
         // verify the required parameter 'userToken' is set
         if (!isset($userToken)) {
@@ -306,25 +427,23 @@ class InsightsClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Sends a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB.
+     * Send events (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Sends a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB.
      * Required API Key ACLs:
      *  - search
      *
-     * @param array|InsightsEvents $insightsEvents insightsEvents (required)
-     *                                             - $insightsEvents['events'] => (array) Click and conversion events.  **All** events must be valid, otherwise the API returns an error. (required)
+     * @param array|InsightsEvents $insightsEvents (required)
+     * @param array                $requestOptions Request options
      *
-     * @see InsightsEvents
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|EventsResponse
+     * @return AlgoliaResponse
      */
-    public function pushEvents($insightsEvents, $requestOptions = [])
+    public function pushEventsWithHttpInfo($insightsEvents, $requestOptions = [])
     {
         // verify the required parameter 'insightsEvents' is set
         if (!isset($insightsEvents)) {
@@ -338,10 +457,10 @@ class InsightsClient
         $headers = [];
         $httpBody = $insightsEvents;
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
-    private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
+    private function sendRequestWithHttpInfo($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
     {
         if (!isset($requestOptions['headers'])) {
             $requestOptions['headers'] = [];
@@ -359,7 +478,8 @@ class InsightsClient
             $resourcePath.($query ? "?{$query}" : ''),
             $httpBody,
             $requestOptions,
-            $useReadTransporter
+            $useReadTransporter,
+            true
         );
     }
 }

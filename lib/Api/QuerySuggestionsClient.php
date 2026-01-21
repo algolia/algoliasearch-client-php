@@ -13,6 +13,7 @@ use Algolia\AlgoliaSearch\Model\QuerySuggestions\ConfigurationResponse;
 use Algolia\AlgoliaSearch\Model\QuerySuggestions\ConfigurationWithIndex;
 use Algolia\AlgoliaSearch\Model\QuerySuggestions\LogFile;
 use Algolia\AlgoliaSearch\ObjectSerializer;
+use Algolia\AlgoliaSearch\RetryStrategy\AlgoliaResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
@@ -136,19 +137,9 @@ class QuerySuggestionsClient
      */
     public function createConfig($configurationWithIndex, $requestOptions = [])
     {
-        // verify the required parameter 'configurationWithIndex' is set
-        if (!isset($configurationWithIndex)) {
-            throw new \InvalidArgumentException(
-                'Parameter `configurationWithIndex` is required when calling `createConfig`.'
-            );
-        }
+        $response = $this->createConfigWithHttpInfo($configurationWithIndex, $requestOptions);
 
-        $resourcePath = '/1/configs';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = $configurationWithIndex;
-
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $response->getData();
     }
 
     /**
@@ -161,6 +152,221 @@ class QuerySuggestionsClient
      * @return array<string, mixed>|object
      */
     public function customDelete($path, $parameters = null, $requestOptions = [])
+    {
+        $response = $this->customDeleteWithHttpInfo($path, $parameters, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customGet($path, $parameters = null, $requestOptions = [])
+    {
+        $response = $this->customGetWithHttpInfo($path, $parameters, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customPost($path, $parameters = null, $body = null, $requestOptions = [])
+    {
+        $response = $this->customPostWithHttpInfo($path, $parameters, $body, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customPut($path, $parameters = null, $body = null, $requestOptions = [])
+    {
+        $response = $this->customPutWithHttpInfo($path, $parameters, $body, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the `Delete an index` operation.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param string $indexName      Query Suggestions index name. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|BaseResponse
+     */
+    public function deleteConfig($indexName, $requestOptions = [])
+    {
+        $response = $this->deleteConfigWithHttpInfo($indexName, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves all Query Suggestions configurations of your Algolia application.
+     *
+     * Required API Key ACLs:
+     *  - settings
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|ConfigurationResponse[]
+     */
+    public function getAllConfigs($requestOptions = [])
+    {
+        $response = $this->getAllConfigsWithHttpInfo($requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves a single Query Suggestions configuration by its index name.
+     *
+     * Required API Key ACLs:
+     *  - settings
+     *
+     * @param string $indexName      Query Suggestions index name. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|ConfigurationResponse
+     */
+    public function getConfig($indexName, $requestOptions = [])
+    {
+        $response = $this->getConfigWithHttpInfo($indexName, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Reports the status of a Query Suggestions index.
+     *
+     * Required API Key ACLs:
+     *  - settings
+     *
+     * @param string $indexName      Query Suggestions index name. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|ConfigStatus
+     */
+    public function getConfigStatus($indexName, $requestOptions = [])
+    {
+        $response = $this->getConfigStatusWithHttpInfo($indexName, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves the logs for a single Query Suggestions index.
+     *
+     * Required API Key ACLs:
+     *  - settings
+     *
+     * @param string $indexName      Query Suggestions index name. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|LogFile
+     */
+    public function getLogFile($indexName, $requestOptions = [])
+    {
+        $response = $this->getLogFileWithHttpInfo($indexName, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Updates a QuerySuggestions configuration.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param string              $indexName     Query Suggestions index name. (required)
+     * @param array|Configuration $configuration configuration (required)
+     *                                           - $configuration['sourceIndices'] => (array) Algolia indices from which to get the popular searches for query suggestions. (required)
+     *                                           - $configuration['languages'] => (array)
+     *                                           - $configuration['exclude'] => (array)
+     *                                           - $configuration['enablePersonalization'] => (bool) Whether to turn on personalized query suggestions.
+     *                                           - $configuration['allowSpecialCharacters'] => (bool) Whether to include suggestions with special characters.
+     *
+     * @see Configuration
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|BaseResponse
+     */
+    public function updateConfig($indexName, $configuration, $requestOptions = [])
+    {
+        $response = $this->updateConfigWithHttpInfo($indexName, $configuration, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Create a configuration (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Creates a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application.
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param array|ConfigurationWithIndex $configurationWithIndex (required)
+     * @param array                        $requestOptions         Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function createConfigWithHttpInfo($configurationWithIndex, $requestOptions = [])
+    {
+        // verify the required parameter 'configurationWithIndex' is set
+        if (!isset($configurationWithIndex)) {
+            throw new \InvalidArgumentException(
+                'Parameter `configurationWithIndex` is required when calling `createConfig`.'
+            );
+        }
+
+        $resourcePath = '/1/configs';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $configurationWithIndex;
+
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function customDeleteWithHttpInfo($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -187,19 +393,22 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customGet($path, $parameters = null, $requestOptions = [])
+    public function customGetWithHttpInfo($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -226,20 +435,23 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customPost($path, $parameters = null, $body = null, $requestOptions = [])
+    public function customPostWithHttpInfo($path, $parameters = null, $body = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -266,20 +478,23 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customPut($path, $parameters = null, $body = null, $requestOptions = [])
+    public function customPutWithHttpInfo($path, $parameters = null, $body = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -306,21 +521,23 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the `Delete an index` operation.
+     * Delete a configuration (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the `Delete an index` operation.
      * Required API Key ACLs:
      *  - editSettings
      *
      * @param string $indexName      Query Suggestions index name. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|BaseResponse
+     * @return AlgoliaResponse
      */
-    public function deleteConfig($indexName, $requestOptions = [])
+    public function deleteConfigWithHttpInfo($indexName, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
@@ -343,41 +560,45 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves all Query Suggestions configurations of your Algolia application.
+     * List configurations (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves all Query Suggestions configurations of your Algolia application.
      * Required API Key ACLs:
      *  - settings
      *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array $requestOptions Request options
      *
-     * @return array<string, mixed>|ConfigurationResponse[]
+     * @return AlgoliaResponse
      */
-    public function getAllConfigs($requestOptions = [])
+    public function getAllConfigsWithHttpInfo($requestOptions = [])
     {
         $resourcePath = '/1/configs';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves a single Query Suggestions configuration by its index name.
+     * Retrieve a configuration (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves a single Query Suggestions configuration by its index name.
      * Required API Key ACLs:
      *  - settings
      *
      * @param string $indexName      Query Suggestions index name. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|ConfigurationResponse
+     * @return AlgoliaResponse
      */
-    public function getConfig($indexName, $requestOptions = [])
+    public function getConfigWithHttpInfo($indexName, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
@@ -400,21 +621,23 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Reports the status of a Query Suggestions index.
+     * Retrieve configuration status (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Reports the status of a Query Suggestions index.
      * Required API Key ACLs:
      *  - settings
      *
      * @param string $indexName      Query Suggestions index name. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|ConfigStatus
+     * @return AlgoliaResponse
      */
-    public function getConfigStatus($indexName, $requestOptions = [])
+    public function getConfigStatusWithHttpInfo($indexName, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
@@ -437,21 +660,23 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves the logs for a single Query Suggestions index.
+     * Retrieve logs (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves the logs for a single Query Suggestions index.
      * Required API Key ACLs:
      *  - settings
      *
      * @param string $indexName      Query Suggestions index name. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|LogFile
+     * @return AlgoliaResponse
      */
-    public function getLogFile($indexName, $requestOptions = [])
+    public function getLogFileWithHttpInfo($indexName, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
@@ -474,30 +699,24 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Updates a QuerySuggestions configuration.
+     * Update a configuration (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Updates a QuerySuggestions configuration.
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param string              $indexName     Query Suggestions index name. (required)
-     * @param array|Configuration $configuration configuration (required)
-     *                                           - $configuration['sourceIndices'] => (array) Algolia indices from which to get the popular searches for query suggestions. (required)
-     *                                           - $configuration['languages'] => (array)
-     *                                           - $configuration['exclude'] => (array)
-     *                                           - $configuration['enablePersonalization'] => (bool) Whether to turn on personalized query suggestions.
-     *                                           - $configuration['allowSpecialCharacters'] => (bool) Whether to include suggestions with special characters.
+     * @param string              $indexName      Query Suggestions index name. (required)
+     * @param array|Configuration $configuration  (required)
+     * @param array               $requestOptions Request options
      *
-     * @see Configuration
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|BaseResponse
+     * @return AlgoliaResponse
      */
-    public function updateConfig($indexName, $configuration, $requestOptions = [])
+    public function updateConfigWithHttpInfo($indexName, $configuration, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
@@ -526,10 +745,10 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
-    private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
+    private function sendRequestWithHttpInfo($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
     {
         if (!isset($requestOptions['headers'])) {
             $requestOptions['headers'] = [];
@@ -547,7 +766,8 @@ class QuerySuggestionsClient
             $resourcePath.($query ? "?{$query}" : ''),
             $httpBody,
             $requestOptions,
-            $useReadTransporter
+            $useReadTransporter,
+            true
         );
     }
 }

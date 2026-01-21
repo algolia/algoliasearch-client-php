@@ -11,6 +11,7 @@ use Algolia\AlgoliaSearch\Model\Personalization\GetUserTokenResponse;
 use Algolia\AlgoliaSearch\Model\Personalization\PersonalizationStrategyParams;
 use Algolia\AlgoliaSearch\Model\Personalization\SetPersonalizationStrategyResponse;
 use Algolia\AlgoliaSearch\ObjectSerializer;
+use Algolia\AlgoliaSearch\RetryStrategy\AlgoliaResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
@@ -129,6 +130,152 @@ class PersonalizationClient
      */
     public function customDelete($path, $parameters = null, $requestOptions = [])
     {
+        $response = $this->customDeleteWithHttpInfo($path, $parameters, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customGet($path, $parameters = null, $requestOptions = [])
+    {
+        $response = $this->customGetWithHttpInfo($path, $parameters, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customPost($path, $parameters = null, $body = null, $requestOptions = [])
+    {
+        $response = $this->customPostWithHttpInfo($path, $parameters, $body, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customPut($path, $parameters = null, $body = null, $requestOptions = [])
+    {
+        $response = $this->customPutWithHttpInfo($path, $parameters, $body, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Deletes a user profile.  The response includes a date and time when the user profile can safely be considered deleted.
+     *
+     * Required API Key ACLs:
+     *  - recommendation
+     *
+     * @param string $userToken      Unique identifier representing a user for which to fetch the personalization profile. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|DeleteUserProfileResponse
+     */
+    public function deleteUserProfile($userToken, $requestOptions = [])
+    {
+        $response = $this->deleteUserProfileWithHttpInfo($userToken, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves the current personalization strategy.
+     *
+     * Required API Key ACLs:
+     *  - recommendation
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|PersonalizationStrategyParams
+     */
+    public function getPersonalizationStrategy($requestOptions = [])
+    {
+        $response = $this->getPersonalizationStrategyWithHttpInfo($requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves a user profile and their affinities for different facets.
+     *
+     * Required API Key ACLs:
+     *  - recommendation
+     *
+     * @param string $userToken      Unique identifier representing a user for which to fetch the personalization profile. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|GetUserTokenResponse
+     */
+    public function getUserTokenProfile($userToken, $requestOptions = [])
+    {
+        $response = $this->getUserTokenProfileWithHttpInfo($userToken, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Creates a new personalization strategy.
+     *
+     * Required API Key ACLs:
+     *  - recommendation
+     *
+     * @param array|PersonalizationStrategyParams $personalizationStrategyParams personalizationStrategyParams (required)
+     *                                                                           - $personalizationStrategyParams['eventsScoring'] => (array) Scores associated with each event.  The higher the scores, the higher the impact of those events on the personalization of search results. (required)
+     *                                                                           - $personalizationStrategyParams['facetsScoring'] => (array) Scores associated with each facet.  The higher the scores, the higher the impact of those events on the personalization of search results. (required)
+     *                                                                           - $personalizationStrategyParams['personalizationImpact'] => (int) Impact of personalization on the search results.  If set to 0, personalization has no impact on the search results. (required)
+     *
+     * @see PersonalizationStrategyParams
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|SetPersonalizationStrategyResponse
+     */
+    public function setPersonalizationStrategy($personalizationStrategyParams, $requestOptions = [])
+    {
+        $response = $this->setPersonalizationStrategyWithHttpInfo($personalizationStrategyParams, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function customDeleteWithHttpInfo($path, $parameters = null, $requestOptions = [])
+    {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
             throw new \InvalidArgumentException(
@@ -154,19 +301,22 @@ class PersonalizationClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customGet($path, $parameters = null, $requestOptions = [])
+    public function customGetWithHttpInfo($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -193,20 +343,23 @@ class PersonalizationClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customPost($path, $parameters = null, $body = null, $requestOptions = [])
+    public function customPostWithHttpInfo($path, $parameters = null, $body = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -233,20 +386,23 @@ class PersonalizationClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customPut($path, $parameters = null, $body = null, $requestOptions = [])
+    public function customPutWithHttpInfo($path, $parameters = null, $body = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -273,21 +429,23 @@ class PersonalizationClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Deletes a user profile.  The response includes a date and time when the user profile can safely be considered deleted.
+     * Delete a user profile (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Deletes a user profile.  The response includes a date and time when the user profile can safely be considered deleted.
      * Required API Key ACLs:
      *  - recommendation
      *
      * @param string $userToken      Unique identifier representing a user for which to fetch the personalization profile. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|DeleteUserProfileResponse
+     * @return AlgoliaResponse
      */
-    public function deleteUserProfile($userToken, $requestOptions = [])
+    public function deleteUserProfileWithHttpInfo($userToken, $requestOptions = [])
     {
         // verify the required parameter 'userToken' is set
         if (!isset($userToken)) {
@@ -310,41 +468,45 @@ class PersonalizationClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves the current personalization strategy.
+     * Retrieve the personalization strategy (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves the current personalization strategy.
      * Required API Key ACLs:
      *  - recommendation
      *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array $requestOptions Request options
      *
-     * @return array<string, mixed>|PersonalizationStrategyParams
+     * @return AlgoliaResponse
      */
-    public function getPersonalizationStrategy($requestOptions = [])
+    public function getPersonalizationStrategyWithHttpInfo($requestOptions = [])
     {
         $resourcePath = '/1/strategies/personalization';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves a user profile and their affinities for different facets.
+     * Retrieve a user profile (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves a user profile and their affinities for different facets.
      * Required API Key ACLs:
      *  - recommendation
      *
      * @param string $userToken      Unique identifier representing a user for which to fetch the personalization profile. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|GetUserTokenResponse
+     * @return AlgoliaResponse
      */
-    public function getUserTokenProfile($userToken, $requestOptions = [])
+    public function getUserTokenProfileWithHttpInfo($userToken, $requestOptions = [])
     {
         // verify the required parameter 'userToken' is set
         if (!isset($userToken)) {
@@ -367,27 +529,23 @@ class PersonalizationClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Creates a new personalization strategy.
+     * Define the personalization strategy (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Creates a new personalization strategy.
      * Required API Key ACLs:
      *  - recommendation
      *
-     * @param array|PersonalizationStrategyParams $personalizationStrategyParams personalizationStrategyParams (required)
-     *                                                                           - $personalizationStrategyParams['eventsScoring'] => (array) Scores associated with each event.  The higher the scores, the higher the impact of those events on the personalization of search results. (required)
-     *                                                                           - $personalizationStrategyParams['facetsScoring'] => (array) Scores associated with each facet.  The higher the scores, the higher the impact of those events on the personalization of search results. (required)
-     *                                                                           - $personalizationStrategyParams['personalizationImpact'] => (int) Impact of personalization on the search results.  If set to 0, personalization has no impact on the search results. (required)
+     * @param array|PersonalizationStrategyParams $personalizationStrategyParams (required)
+     * @param array                               $requestOptions                Request options
      *
-     * @see PersonalizationStrategyParams
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|SetPersonalizationStrategyResponse
+     * @return AlgoliaResponse
      */
-    public function setPersonalizationStrategy($personalizationStrategyParams, $requestOptions = [])
+    public function setPersonalizationStrategyWithHttpInfo($personalizationStrategyParams, $requestOptions = [])
     {
         // verify the required parameter 'personalizationStrategyParams' is set
         if (!isset($personalizationStrategyParams)) {
@@ -401,10 +559,10 @@ class PersonalizationClient
         $headers = [];
         $httpBody = $personalizationStrategyParams;
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
-    private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
+    private function sendRequestWithHttpInfo($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
     {
         if (!isset($requestOptions['headers'])) {
             $requestOptions['headers'] = [];
@@ -422,7 +580,8 @@ class PersonalizationClient
             $resourcePath.($query ? "?{$query}" : ''),
             $httpBody,
             $requestOptions,
-            $useReadTransporter
+            $useReadTransporter,
+            true
         );
     }
 }

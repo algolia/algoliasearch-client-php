@@ -77,7 +77,8 @@ final class ApiWrapper implements ApiWrapperInterface
         $path,
         $data = [],
         $requestOptions = [],
-        $useReadTransporter = false
+        $useReadTransporter = false,
+        $returnHttpInfo = false
     ) {
         /**
          * Some POST methods in the Algolia REST API uses the `read` transporter.
@@ -105,7 +106,8 @@ final class ApiWrapper implements ApiWrapperInterface
             $isRead
                 ? $requestOptions->getReadTimeout()
                 : $requestOptions->getWriteTimeout(),
-            $data
+            $data,
+            $returnHttpInfo
         );
     }
 
@@ -134,7 +136,8 @@ final class ApiWrapper implements ApiWrapperInterface
         RequestOptions $requestOptions,
         $hosts,
         $timeout,
-        $data = []
+        $data = [],
+        $returnHttpInfo = false
     ) {
         $uri = $this->createUri($path)
             ->withQuery($requestOptions->getBuiltQueryParameters())
@@ -184,7 +187,7 @@ final class ApiWrapper implements ApiWrapperInterface
                     $requestOptions->getConnectTimeout() * $retry
                 );
 
-                $responseBody = $this->handleResponse($response, $request);
+                $responseBody = $this->handleResponse($response, $request, $returnHttpInfo);
 
                 $logParams['response'] = $responseBody;
                 $this->log(LogLevel::DEBUG, 'Response received.', $logParams);
@@ -222,7 +225,8 @@ final class ApiWrapper implements ApiWrapperInterface
 
     private function handleResponse(
         ResponseInterface $response,
-        RequestInterface $request
+        RequestInterface $request,
+        $returnHttpInfo
     ) {
         $body = (string) $response->getBody();
         $statusCode = $response->getStatusCode();
@@ -262,6 +266,15 @@ final class ApiWrapper implements ApiWrapperInterface
         }
         if (2 !== (int) ($statusCode / 100)) {
             throw new AlgoliaException($statusCode.': '.$body, $statusCode);
+        }
+
+        if ($returnHttpInfo) {
+            return new AlgoliaResponse(
+                $statusCode,
+                $response->getHeaders(),
+                $body,
+                $responseArray
+            );
         }
 
         return $responseArray;

@@ -61,6 +61,7 @@ use Algolia\AlgoliaSearch\Model\Ingestion\TransformationTryResponse;
 use Algolia\AlgoliaSearch\Model\Ingestion\TransformationUpdateResponse;
 use Algolia\AlgoliaSearch\Model\Ingestion\WatchResponse;
 use Algolia\AlgoliaSearch\ObjectSerializer;
+use Algolia\AlgoliaSearch\RetryStrategy\AlgoliaResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
@@ -190,19 +191,9 @@ class IngestionClient
      */
     public function createAuthentication($authenticationCreate, $requestOptions = [])
     {
-        // verify the required parameter 'authenticationCreate' is set
-        if (!isset($authenticationCreate)) {
-            throw new \InvalidArgumentException(
-                'Parameter `authenticationCreate` is required when calling `createAuthentication`.'
-            );
-        }
+        $response = $this->createAuthenticationWithHttpInfo($authenticationCreate, $requestOptions);
 
-        $resourcePath = '/1/authentications';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = $authenticationCreate;
-
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $response->getData();
     }
 
     /**
@@ -228,19 +219,9 @@ class IngestionClient
      */
     public function createDestination($destinationCreate, $requestOptions = [])
     {
-        // verify the required parameter 'destinationCreate' is set
-        if (!isset($destinationCreate)) {
-            throw new \InvalidArgumentException(
-                'Parameter `destinationCreate` is required when calling `createDestination`.'
-            );
-        }
+        $response = $this->createDestinationWithHttpInfo($destinationCreate, $requestOptions);
 
-        $resourcePath = '/1/destinations';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = $destinationCreate;
-
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $response->getData();
     }
 
     /**
@@ -265,19 +246,9 @@ class IngestionClient
      */
     public function createSource($sourceCreate, $requestOptions = [])
     {
-        // verify the required parameter 'sourceCreate' is set
-        if (!isset($sourceCreate)) {
-            throw new \InvalidArgumentException(
-                'Parameter `sourceCreate` is required when calling `createSource`.'
-            );
-        }
+        $response = $this->createSourceWithHttpInfo($sourceCreate, $requestOptions);
 
-        $resourcePath = '/1/sources';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = $sourceCreate;
-
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $response->getData();
     }
 
     /**
@@ -309,19 +280,9 @@ class IngestionClient
      */
     public function createTask($taskCreate, $requestOptions = [])
     {
-        // verify the required parameter 'taskCreate' is set
-        if (!isset($taskCreate)) {
-            throw new \InvalidArgumentException(
-                'Parameter `taskCreate` is required when calling `createTask`.'
-            );
-        }
+        $response = $this->createTaskWithHttpInfo($taskCreate, $requestOptions);
 
-        $resourcePath = '/2/tasks';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = $taskCreate;
-
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $response->getData();
     }
 
     /**
@@ -352,19 +313,9 @@ class IngestionClient
      */
     public function createTaskV1($taskCreate, $requestOptions = [])
     {
-        // verify the required parameter 'taskCreate' is set
-        if (!isset($taskCreate)) {
-            throw new \InvalidArgumentException(
-                'Parameter `taskCreate` is required when calling `createTaskV1`.'
-            );
-        }
+        $response = $this->createTaskV1WithHttpInfo($taskCreate, $requestOptions);
 
-        $resourcePath = '/1/tasks';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = $taskCreate;
-
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $response->getData();
     }
 
     /**
@@ -391,19 +342,9 @@ class IngestionClient
      */
     public function createTransformation($transformationCreate, $requestOptions = [])
     {
-        // verify the required parameter 'transformationCreate' is set
-        if (!isset($transformationCreate)) {
-            throw new \InvalidArgumentException(
-                'Parameter `transformationCreate` is required when calling `createTransformation`.'
-            );
-        }
+        $response = $this->createTransformationWithHttpInfo($transformationCreate, $requestOptions);
 
-        $resourcePath = '/1/transformations';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = $transformationCreate;
-
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $response->getData();
     }
 
     /**
@@ -416,6 +357,1475 @@ class IngestionClient
      * @return array<string, mixed>|object
      */
     public function customDelete($path, $parameters = null, $requestOptions = [])
+    {
+        $response = $this->customDeleteWithHttpInfo($path, $parameters, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customGet($path, $parameters = null, $requestOptions = [])
+    {
+        $response = $this->customGetWithHttpInfo($path, $parameters, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customPost($path, $parameters = null, $body = null, $requestOptions = [])
+    {
+        $response = $this->customPostWithHttpInfo($path, $parameters, $body, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customPut($path, $parameters = null, $body = null, $requestOptions = [])
+    {
+        $response = $this->customPutWithHttpInfo($path, $parameters, $body, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Deletes an authentication resource. You can't delete authentication resources that are used by a source or a destination.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $authenticationID Unique identifier of an authentication resource. (required)
+     * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|DeleteResponse
+     */
+    public function deleteAuthentication($authenticationID, $requestOptions = [])
+    {
+        $response = $this->deleteAuthenticationWithHttpInfo($authenticationID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Deletes a destination by its ID. You can't delete destinations that are referenced in tasks.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $destinationID  Unique identifier of a destination. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|DeleteResponse
+     */
+    public function deleteDestination($destinationID, $requestOptions = [])
+    {
+        $response = $this->deleteDestinationWithHttpInfo($destinationID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Deletes a source by its ID. You can't delete sources that are referenced in tasks.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $sourceID       Unique identifier of a source. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|DeleteResponse
+     */
+    public function deleteSource($sourceID, $requestOptions = [])
+    {
+        $response = $this->deleteSourceWithHttpInfo($sourceID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Deletes a task by its ID.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $taskID         Unique identifier of a task. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|DeleteResponse
+     */
+    public function deleteTask($taskID, $requestOptions = [])
+    {
+        $response = $this->deleteTaskWithHttpInfo($taskID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Deletes a task by its ID using the v1 endpoint, please use `deleteTask` instead.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $taskID         Unique identifier of a task. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|DeleteResponse
+     *
+     * @deprecated
+     */
+    public function deleteTaskV1($taskID, $requestOptions = [])
+    {
+        $response = $this->deleteTaskV1WithHttpInfo($taskID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Deletes a transformation by its ID.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $transformationID Unique identifier of a transformation. (required)
+     * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|DeleteResponse
+     */
+    public function deleteTransformation($transformationID, $requestOptions = [])
+    {
+        $response = $this->deleteTransformationWithHttpInfo($transformationID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Disables a task.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $taskID         Unique identifier of a task. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TaskUpdateResponse
+     */
+    public function disableTask($taskID, $requestOptions = [])
+    {
+        $response = $this->disableTaskWithHttpInfo($taskID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Disables a task using the v1 endpoint, please use `disableTask` instead.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $taskID         Unique identifier of a task. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TaskUpdateResponse
+     *
+     * @deprecated
+     */
+    public function disableTaskV1($taskID, $requestOptions = [])
+    {
+        $response = $this->disableTaskV1WithHttpInfo($taskID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Enables a task.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $taskID         Unique identifier of a task. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TaskUpdateResponse
+     */
+    public function enableTask($taskID, $requestOptions = [])
+    {
+        $response = $this->enableTaskWithHttpInfo($taskID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Enables a task using the v1 endpoint, please use `enableTask` instead.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $taskID         Unique identifier of a task. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TaskUpdateResponse
+     *
+     * @deprecated
+     */
+    public function enableTaskV1($taskID, $requestOptions = [])
+    {
+        $response = $this->enableTaskV1WithHttpInfo($taskID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves an authentication resource by its ID.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $authenticationID Unique identifier of an authentication resource. (required)
+     * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|Authentication
+     */
+    public function getAuthentication($authenticationID, $requestOptions = [])
+    {
+        $response = $this->getAuthenticationWithHttpInfo($authenticationID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves a destination by its ID.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $destinationID  Unique identifier of a destination. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|Destination
+     */
+    public function getDestination($destinationID, $requestOptions = [])
+    {
+        $response = $this->getDestinationWithHttpInfo($destinationID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves a single task run event by its ID.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $runID          Unique identifier of a task run. (required)
+     * @param string $eventID        Unique identifier of an event. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|Event
+     */
+    public function getEvent($runID, $eventID, $requestOptions = [])
+    {
+        $response = $this->getEventWithHttpInfo($runID, $eventID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieve a single task run by its ID.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $runID          Unique identifier of a task run. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|Run
+     */
+    public function getRun($runID, $requestOptions = [])
+    {
+        $response = $this->getRunWithHttpInfo($runID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieve a source by its ID.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $sourceID       Unique identifier of a source. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|Source
+     */
+    public function getSource($sourceID, $requestOptions = [])
+    {
+        $response = $this->getSourceWithHttpInfo($sourceID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves a task by its ID.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $taskID         Unique identifier of a task. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|Task
+     */
+    public function getTask($taskID, $requestOptions = [])
+    {
+        $response = $this->getTaskWithHttpInfo($taskID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves a task by its ID using the v1 endpoint, please use `getTask` instead.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $taskID         Unique identifier of a task. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TaskV1
+     *
+     * @deprecated
+     */
+    public function getTaskV1($taskID, $requestOptions = [])
+    {
+        $response = $this->getTaskV1WithHttpInfo($taskID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves a transformation by its ID.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $transformationID Unique identifier of a transformation. (required)
+     * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|Transformation
+     */
+    public function getTransformation($transformationID, $requestOptions = [])
+    {
+        $response = $this->getTransformationWithHttpInfo($transformationID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves a list of all authentication resources.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param int   $itemsPerPage   Number of items per page. (optional, default to 10)
+     * @param int   $page           Page number of the paginated API response. (optional)
+     * @param array $type           Type of authentication resource to retrieve. (optional)
+     * @param array $platform       Ecommerce platform for which to retrieve authentications. (optional)
+     * @param array $sort           Property by which to sort the list of authentications. (optional)
+     * @param array $order          Sort order of the response, ascending or descending. (optional)
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|ListAuthenticationsResponse
+     */
+    public function listAuthentications($itemsPerPage = null, $page = null, $type = null, $platform = null, $sort = null, $order = null, $requestOptions = [])
+    {
+        $response = $this->listAuthenticationsWithHttpInfo($itemsPerPage, $page, $type, $platform, $sort, $order, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves a list of destinations.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param int    $itemsPerPage     Number of items per page. (optional, default to 10)
+     * @param int    $page             Page number of the paginated API response. (optional)
+     * @param array  $type             Destination type. (optional)
+     * @param array  $authenticationID Authentication ID used by destinations. (optional)
+     * @param string $transformationID Get the list of destinations used by a transformation. (optional)
+     * @param array  $sort             Property by which to sort the destinations. (optional)
+     * @param array  $order            Sort order of the response, ascending or descending. (optional)
+     * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|ListDestinationsResponse
+     */
+    public function listDestinations($itemsPerPage = null, $page = null, $type = null, $authenticationID = null, $transformationID = null, $sort = null, $order = null, $requestOptions = [])
+    {
+        $response = $this->listDestinationsWithHttpInfo($itemsPerPage, $page, $type, $authenticationID, $transformationID, $sort, $order, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves a list of events for a task run, identified by its ID.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $runID          Unique identifier of a task run. (required)
+     * @param int    $itemsPerPage   Number of items per page. (optional, default to 10)
+     * @param int    $page           Page number of the paginated API response. (optional)
+     * @param array  $status         Event status for filtering the list of task runs. (optional)
+     * @param array  $type           Event type for filtering the list of task runs. (optional)
+     * @param array  $sort           Property by which to sort the list of task run events. (optional)
+     * @param array  $order          Sort order of the response, ascending or descending. (optional)
+     * @param string $startDate      Date and time in RFC 3339 format for the earliest events to retrieve. By default, the current time minus three hours is used. (optional)
+     * @param string $endDate        Date and time in RFC 3339 format for the latest events to retrieve. By default, the current time is used. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|ListEventsResponse
+     */
+    public function listEvents($runID, $itemsPerPage = null, $page = null, $status = null, $type = null, $sort = null, $order = null, $startDate = null, $endDate = null, $requestOptions = [])
+    {
+        $response = $this->listEventsWithHttpInfo($runID, $itemsPerPage, $page, $status, $type, $sort, $order, $startDate, $endDate, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieve a list of task runs.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param int    $itemsPerPage   Number of items per page. (optional, default to 10)
+     * @param int    $page           Page number of the paginated API response. (optional)
+     * @param array  $status         Run status for filtering the list of task runs. (optional)
+     * @param array  $type           Run type for filtering the list of task runs. (optional)
+     * @param string $taskID         Task ID for filtering the list of task runs. (optional)
+     * @param array  $sort           Property by which to sort the list of task runs. (optional)
+     * @param array  $order          Sort order of the response, ascending or descending. (optional)
+     * @param string $startDate      Date in RFC 3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)
+     * @param string $endDate        Date in RFC 3339 format for the latest run to retrieve. By default, the current day is used. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|RunListResponse
+     */
+    public function listRuns($itemsPerPage = null, $page = null, $status = null, $type = null, $taskID = null, $sort = null, $order = null, $startDate = null, $endDate = null, $requestOptions = [])
+    {
+        $response = $this->listRunsWithHttpInfo($itemsPerPage, $page, $status, $type, $taskID, $sort, $order, $startDate, $endDate, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves a list of sources.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param int   $itemsPerPage     Number of items per page. (optional, default to 10)
+     * @param int   $page             Page number of the paginated API response. (optional)
+     * @param array $type             Source type. Some sources require authentication. (optional)
+     * @param array $authenticationID Authentication IDs of the sources to retrieve. 'none' returns sources that doesn't have an authentication. (optional)
+     * @param array $sort             Property by which to sort the list of sources. (optional)
+     * @param array $order            Sort order of the response, ascending or descending. (optional)
+     * @param array $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|ListSourcesResponse
+     */
+    public function listSources($itemsPerPage = null, $page = null, $type = null, $authenticationID = null, $sort = null, $order = null, $requestOptions = [])
+    {
+        $response = $this->listSourcesWithHttpInfo($itemsPerPage, $page, $type, $authenticationID, $sort, $order, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves a list of tasks.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param int   $itemsPerPage           Number of items per page. (optional, default to 10)
+     * @param int   $page                   Page number of the paginated API response. (optional)
+     * @param array $action                 Actions for filtering the list of tasks. (optional)
+     * @param bool  $enabled                Whether to filter the list of tasks by the `enabled` status. (optional)
+     * @param array $sourceID               Source IDs for filtering the list of tasks. (optional)
+     * @param array $sourceType             Filters the tasks with the specified source type. (optional)
+     * @param array $destinationID          Destination IDs for filtering the list of tasks. (optional)
+     * @param array $triggerType            Type of task trigger for filtering the list of tasks. (optional)
+     * @param bool  $withEmailNotifications If specified, the response only includes tasks with notifications.email.enabled set to this value. (optional)
+     * @param array $sort                   Property by which to sort the list of tasks. (optional)
+     * @param array $order                  Sort order of the response, ascending or descending. (optional)
+     * @param array $requestOptions         the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|ListTasksResponse
+     */
+    public function listTasks($itemsPerPage = null, $page = null, $action = null, $enabled = null, $sourceID = null, $sourceType = null, $destinationID = null, $triggerType = null, $withEmailNotifications = null, $sort = null, $order = null, $requestOptions = [])
+    {
+        $response = $this->listTasksWithHttpInfo($itemsPerPage, $page, $action, $enabled, $sourceID, $sourceType, $destinationID, $triggerType, $withEmailNotifications, $sort, $order, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves a list of tasks using the v1 endpoint, please use `getTasks` instead.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param int   $itemsPerPage   Number of items per page. (optional, default to 10)
+     * @param int   $page           Page number of the paginated API response. (optional)
+     * @param array $action         Actions for filtering the list of tasks. (optional)
+     * @param bool  $enabled        Whether to filter the list of tasks by the `enabled` status. (optional)
+     * @param array $sourceID       Source IDs for filtering the list of tasks. (optional)
+     * @param array $destinationID  Destination IDs for filtering the list of tasks. (optional)
+     * @param array $triggerType    Type of task trigger for filtering the list of tasks. (optional)
+     * @param array $sort           Property by which to sort the list of tasks. (optional)
+     * @param array $order          Sort order of the response, ascending or descending. (optional)
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|ListTasksResponseV1
+     *
+     * @deprecated
+     */
+    public function listTasksV1($itemsPerPage = null, $page = null, $action = null, $enabled = null, $sourceID = null, $destinationID = null, $triggerType = null, $sort = null, $order = null, $requestOptions = [])
+    {
+        $response = $this->listTasksV1WithHttpInfo($itemsPerPage, $page, $action, $enabled, $sourceID, $destinationID, $triggerType, $sort, $order, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves a list of transformations.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param int   $itemsPerPage   Number of items per page. (optional, default to 10)
+     * @param int   $page           Page number of the paginated API response. (optional)
+     * @param array $sort           Property by which to sort the list of transformations. (optional)
+     * @param array $order          Sort order of the response, ascending or descending. (optional)
+     * @param array $type           Whether to filter the list of transformations by the type of transformation. (optional)
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|ListTransformationsResponse
+     */
+    public function listTransformations($itemsPerPage = null, $page = null, $sort = null, $order = null, $type = null, $requestOptions = [])
+    {
+        $response = $this->listTransformationsWithHttpInfo($itemsPerPage, $page, $sort, $order, $type, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Pushes records through the Pipeline, directly to an index. You can make the call synchronous by providing the `watch` parameter, for asynchronous calls, you can use the observability endpoints and/or debugger dashboard to see the status of your task. If you want to leverage the [pre-indexing data transformation](https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/how-to/transform-your-data), this is the recommended way of ingesting your records. This method is similar to `pushTask`, but requires an `indexName` instead of a `taskID`. If zero or many tasks are found, an error will be returned.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string                $indexName       Name of the index on which to perform the operation. (required)
+     * @param array|PushTaskPayload $pushTaskPayload pushTaskPayload (required)
+     *                                               - $pushTaskPayload['action'] => (array)  (required)
+     *                                               - $pushTaskPayload['records'] => (array)  (required)
+     *
+     * @see PushTaskPayload
+     *
+     * @param bool   $watch              When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding. (optional)
+     * @param string $referenceIndexName This is required when targeting an index that does not have a push connector setup (e.g. a tmp index), but you wish to attach another index's transformation to it (e.g. the source index name). (optional)
+     * @param array  $requestOptions     the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|WatchResponse
+     */
+    public function push($indexName, $pushTaskPayload, $watch = null, $referenceIndexName = null, $requestOptions = [])
+    {
+        $response = $this->pushWithHttpInfo($indexName, $pushTaskPayload, $watch, $referenceIndexName, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Pushes records through the pipeline, directly to an index. You can make the call synchronous by providing the `watch` parameter, for asynchronous calls, you can use the observability endpoints or the debugger dashboard to see the status of your task. If you want to transform your data before indexing, this is the recommended way of ingesting your records. This method is similar to `push`, but requires a `taskID` instead of a `indexName`, which is useful when many `destinations` target the same `indexName`.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string                $taskID          Unique identifier of a task. (required)
+     * @param array|PushTaskPayload $pushTaskPayload pushTaskPayload (required)
+     *                                               - $pushTaskPayload['action'] => (array)  (required)
+     *                                               - $pushTaskPayload['records'] => (array)  (required)
+     *
+     * @see PushTaskPayload
+     *
+     * @param bool  $watch          When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding. (optional)
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|WatchResponse
+     */
+    public function pushTask($taskID, $pushTaskPayload, $watch = null, $requestOptions = [])
+    {
+        $response = $this->pushTaskWithHttpInfo($taskID, $pushTaskPayload, $watch, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Fully updates a task by its ID, use partialUpdateTask if you only want to update a subset of fields.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string            $taskID      Unique identifier of a task. (required)
+     * @param array|TaskReplace $taskReplace taskReplace (required)
+     *                                       - $taskReplace['destinationID'] => (string) Universally unique identifier (UUID) of a destination resource. (required)
+     *                                       - $taskReplace['action'] => (array)  (required)
+     *                                       - $taskReplace['subscriptionAction'] => (array)
+     *                                       - $taskReplace['cron'] => (string) Cron expression for the task's schedule.
+     *                                       - $taskReplace['enabled'] => (bool) Whether the task is enabled.
+     *                                       - $taskReplace['failureThreshold'] => (int) Maximum accepted percentage of failures for a task run to finish successfully.
+     *                                       - $taskReplace['input'] => (array)
+     *                                       - $taskReplace['cursor'] => (string) Date of the last cursor in RFC 3339 format.
+     *                                       - $taskReplace['notifications'] => (array)
+     *                                       - $taskReplace['policies'] => (array)
+     *
+     * @see TaskReplace
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TaskUpdateResponse
+     */
+    public function replaceTask($taskID, $taskReplace, $requestOptions = [])
+    {
+        $response = $this->replaceTaskWithHttpInfo($taskID, $taskReplace, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Runs all tasks linked to a source, only available for Shopify, BigCommerce and commercetools sources. Creates one run per task.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string                 $sourceID         Unique identifier of a source. (required)
+     * @param array|RunSourcePayload $runSourcePayload (optional)
+     *                                                 - $runSourcePayload['indexToInclude'] => (array) List of index names to include in reindex/update.
+     *                                                 - $runSourcePayload['indexToExclude'] => (array) List of index names to exclude in reindex/update.
+     *                                                 - $runSourcePayload['entityIDs'] => (array) List of entityIDs to update.
+     *                                                 - $runSourcePayload['entityType'] => (array)
+     *                                                 - $runSourcePayload['runMetadata'] => (array) Additional information that will be passed to the created runs.
+     *
+     * @see RunSourcePayload
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|RunSourceResponse
+     */
+    public function runSource($sourceID, $runSourcePayload = null, $requestOptions = [])
+    {
+        $response = $this->runSourceWithHttpInfo($sourceID, $runSourcePayload, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Runs a task. You can check the status of task runs with the observability endpoints.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string               $taskID         Unique identifier of a task. (required)
+     * @param array|RunTaskPayload $runTaskPayload (optional)
+     *                                             - $runTaskPayload['runMetadata'] => (array) Additional information that will be passed to the created run
+     *
+     * @see RunTaskPayload
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|RunResponse
+     */
+    public function runTask($taskID, $runTaskPayload = null, $requestOptions = [])
+    {
+        $response = $this->runTaskWithHttpInfo($taskID, $runTaskPayload, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Runs a task using the v1 endpoint, please use `runTask` instead. You can check the status of task runs with the observability endpoints.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string               $taskID         Unique identifier of a task. (required)
+     * @param array|RunTaskPayload $runTaskPayload (optional)
+     *                                             - $runTaskPayload['runMetadata'] => (array) Additional information that will be passed to the created run
+     *
+     * @see RunTaskPayload
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|RunResponse
+     *
+     * @deprecated
+     */
+    public function runTaskV1($taskID, $runTaskPayload = null, $requestOptions = [])
+    {
+        $response = $this->runTaskV1WithHttpInfo($taskID, $runTaskPayload, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Searches for authentication resources.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param array|AuthenticationSearch $authenticationSearch authenticationSearch (required)
+     *                                                         - $authenticationSearch['authenticationIDs'] => (array)  (required)
+     *
+     * @see AuthenticationSearch
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|Authentication[]
+     */
+    public function searchAuthentications($authenticationSearch, $requestOptions = [])
+    {
+        $response = $this->searchAuthenticationsWithHttpInfo($authenticationSearch, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Searches for destinations.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param array|DestinationSearch $destinationSearch destinationSearch (required)
+     *                                                   - $destinationSearch['destinationIDs'] => (array)  (required)
+     *
+     * @see DestinationSearch
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|Destination[]
+     */
+    public function searchDestinations($destinationSearch, $requestOptions = [])
+    {
+        $response = $this->searchDestinationsWithHttpInfo($destinationSearch, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Searches for sources.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param array|SourceSearch $sourceSearch sourceSearch (required)
+     *                                         - $sourceSearch['sourceIDs'] => (array)  (required)
+     *
+     * @see SourceSearch
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|Source[]
+     */
+    public function searchSources($sourceSearch, $requestOptions = [])
+    {
+        $response = $this->searchSourcesWithHttpInfo($sourceSearch, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Searches for tasks.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param array|TaskSearch $taskSearch taskSearch (required)
+     *                                     - $taskSearch['taskIDs'] => (array)  (required)
+     *
+     * @see TaskSearch
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|Task[]
+     */
+    public function searchTasks($taskSearch, $requestOptions = [])
+    {
+        $response = $this->searchTasksWithHttpInfo($taskSearch, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Searches for tasks using the v1 endpoint, please use `searchTasks` instead.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param array|TaskSearch $taskSearch taskSearch (required)
+     *                                     - $taskSearch['taskIDs'] => (array)  (required)
+     *
+     * @see TaskSearch
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TaskV1[]
+     *
+     * @deprecated
+     */
+    public function searchTasksV1($taskSearch, $requestOptions = [])
+    {
+        $response = $this->searchTasksV1WithHttpInfo($taskSearch, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Searches for transformations.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param array|TransformationSearch $transformationSearch transformationSearch (required)
+     *                                                         - $transformationSearch['transformationIDs'] => (array)  (required)
+     *
+     * @see TransformationSearch
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|Transformation[]
+     */
+    public function searchTransformations($transformationSearch, $requestOptions = [])
+    {
+        $response = $this->searchTransformationsWithHttpInfo($transformationSearch, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Triggers a stream-listing request for a source. Triggering stream-listing requests only works with sources with `type: docker` and `imageType: airbyte`.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $sourceID       Unique identifier of a source. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|WatchResponse
+     */
+    public function triggerDockerSourceDiscover($sourceID, $requestOptions = [])
+    {
+        $response = $this->triggerDockerSourceDiscoverWithHttpInfo($sourceID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Try a transformation before creating it.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param array|TransformationTry $transformationTry transformationTry (required)
+     *                                                   - $transformationTry['code'] => (string) It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.
+     *                                                   - $transformationTry['type'] => (array)
+     *                                                   - $transformationTry['input'] => (array)
+     *                                                   - $transformationTry['sampleRecord'] => (array) The record to apply the given code to. (required)
+     *                                                   - $transformationTry['authentications'] => (array)
+     *
+     * @see TransformationTry
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TransformationTryResponse
+     */
+    public function tryTransformation($transformationTry, $requestOptions = [])
+    {
+        $response = $this->tryTransformationWithHttpInfo($transformationTry, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Try a transformation before updating it.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string                  $transformationID  Unique identifier of a transformation. (required)
+     * @param array|TransformationTry $transformationTry transformationTry (required)
+     *                                                   - $transformationTry['code'] => (string) It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.
+     *                                                   - $transformationTry['type'] => (array)
+     *                                                   - $transformationTry['input'] => (array)
+     *                                                   - $transformationTry['sampleRecord'] => (array) The record to apply the given code to. (required)
+     *                                                   - $transformationTry['authentications'] => (array)
+     *
+     * @see TransformationTry
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TransformationTryResponse
+     */
+    public function tryTransformationBeforeUpdate($transformationID, $transformationTry, $requestOptions = [])
+    {
+        $response = $this->tryTransformationBeforeUpdateWithHttpInfo($transformationID, $transformationTry, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Updates an authentication resource.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string                     $authenticationID     Unique identifier of an authentication resource. (required)
+     * @param array|AuthenticationUpdate $authenticationUpdate authenticationUpdate (required)
+     *                                                         - $authenticationUpdate['type'] => (array)
+     *                                                         - $authenticationUpdate['name'] => (string) Descriptive name for the resource.
+     *                                                         - $authenticationUpdate['input'] => (array)
+     *
+     * @see AuthenticationUpdate
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|AuthenticationUpdateResponse
+     */
+    public function updateAuthentication($authenticationID, $authenticationUpdate, $requestOptions = [])
+    {
+        $response = $this->updateAuthenticationWithHttpInfo($authenticationID, $authenticationUpdate, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Updates the destination by its ID.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string                  $destinationID     Unique identifier of a destination. (required)
+     * @param array|DestinationUpdate $destinationUpdate destinationUpdate (required)
+     *                                                   - $destinationUpdate['type'] => (array)
+     *                                                   - $destinationUpdate['name'] => (string) Descriptive name for the resource.
+     *                                                   - $destinationUpdate['input'] => (array)
+     *                                                   - $destinationUpdate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
+     *                                                   - $destinationUpdate['transformationIDs'] => (array)
+     *
+     * @see DestinationUpdate
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|DestinationUpdateResponse
+     */
+    public function updateDestination($destinationID, $destinationUpdate, $requestOptions = [])
+    {
+        $response = $this->updateDestinationWithHttpInfo($destinationID, $destinationUpdate, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Updates a source by its ID.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string             $sourceID     Unique identifier of a source. (required)
+     * @param array|SourceUpdate $sourceUpdate sourceUpdate (required)
+     *                                         - $sourceUpdate['name'] => (string) Descriptive name of the source.
+     *                                         - $sourceUpdate['input'] => (array)
+     *                                         - $sourceUpdate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
+     *
+     * @see SourceUpdate
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|SourceUpdateResponse
+     */
+    public function updateSource($sourceID, $sourceUpdate, $requestOptions = [])
+    {
+        $response = $this->updateSourceWithHttpInfo($sourceID, $sourceUpdate, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Partially updates a task by its ID.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string           $taskID     Unique identifier of a task. (required)
+     * @param array|TaskUpdate $taskUpdate taskUpdate (required)
+     *                                     - $taskUpdate['destinationID'] => (string) Universally unique identifier (UUID) of a destination resource.
+     *                                     - $taskUpdate['cron'] => (string) Cron expression for the task's schedule.
+     *                                     - $taskUpdate['input'] => (array)
+     *                                     - $taskUpdate['enabled'] => (bool) Whether the task is enabled.
+     *                                     - $taskUpdate['subscriptionAction'] => (array)
+     *                                     - $taskUpdate['failureThreshold'] => (int) Maximum accepted percentage of failures for a task run to finish successfully.
+     *                                     - $taskUpdate['notifications'] => (array)
+     *                                     - $taskUpdate['policies'] => (array)
+     *
+     * @see TaskUpdate
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TaskUpdateResponse
+     */
+    public function updateTask($taskID, $taskUpdate, $requestOptions = [])
+    {
+        $response = $this->updateTaskWithHttpInfo($taskID, $taskUpdate, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Updates a task by its ID using the v1 endpoint, please use `updateTask` instead.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string             $taskID     Unique identifier of a task. (required)
+     * @param array|TaskUpdateV1 $taskUpdate taskUpdate (required)
+     *                                       - $taskUpdate['destinationID'] => (string) Universally unique identifier (UUID) of a destination resource.
+     *                                       - $taskUpdate['trigger'] => (array)
+     *                                       - $taskUpdate['input'] => (array)
+     *                                       - $taskUpdate['enabled'] => (bool) Whether the task is enabled.
+     *                                       - $taskUpdate['failureThreshold'] => (int) Maximum accepted percentage of failures for a task run to finish successfully.
+     *
+     * @see TaskUpdateV1
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TaskUpdateResponse
+     *
+     * @deprecated
+     */
+    public function updateTaskV1($taskID, $taskUpdate, $requestOptions = [])
+    {
+        $response = $this->updateTaskV1WithHttpInfo($taskID, $taskUpdate, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Updates a transformation by its ID.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string                     $transformationID     Unique identifier of a transformation. (required)
+     * @param array|TransformationCreate $transformationCreate transformationCreate (required)
+     *                                                         - $transformationCreate['code'] => (string) It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.
+     *                                                         - $transformationCreate['name'] => (string) The uniquely identified name of your transformation. (required)
+     *                                                         - $transformationCreate['type'] => (array)
+     *                                                         - $transformationCreate['input'] => (array)
+     *                                                         - $transformationCreate['description'] => (string) A descriptive name for your transformation of what it does.
+     *                                                         - $transformationCreate['authenticationIDs'] => (array) The authentications associated with the current transformation.
+     *
+     * @see TransformationCreate
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TransformationUpdateResponse
+     */
+    public function updateTransformation($transformationID, $transformationCreate, $requestOptions = [])
+    {
+        $response = $this->updateTransformationWithHttpInfo($transformationID, $transformationCreate, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Validates a source payload to ensure it can be created and that the data source can be reached by Algolia.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param array|SourceCreate $sourceCreate (optional)
+     *                                         - $sourceCreate['type'] => (array)  (required)
+     *                                         - $sourceCreate['name'] => (string) Descriptive name of the source. (required)
+     *                                         - $sourceCreate['input'] => (array)
+     *                                         - $sourceCreate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
+     *
+     * @see SourceCreate
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|WatchResponse
+     */
+    public function validateSource($sourceCreate = null, $requestOptions = [])
+    {
+        $response = $this->validateSourceWithHttpInfo($sourceCreate, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Validates an update of a source payload to ensure it can be created and that the data source can be reached by Algolia.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string             $sourceID     Unique identifier of a source. (required)
+     * @param array|SourceUpdate $sourceUpdate sourceUpdate (required)
+     *                                         - $sourceUpdate['name'] => (string) Descriptive name of the source.
+     *                                         - $sourceUpdate['input'] => (array)
+     *                                         - $sourceUpdate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
+     *
+     * @see SourceUpdate
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|WatchResponse
+     */
+    public function validateSourceBeforeUpdate($sourceID, $sourceUpdate, $requestOptions = [])
+    {
+        $response = $this->validateSourceBeforeUpdateWithHttpInfo($sourceID, $sourceUpdate, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Create an authentication resource (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Creates a new authentication resource.
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param array|AuthenticationCreate $authenticationCreate (required)
+     * @param array                      $requestOptions       Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function createAuthenticationWithHttpInfo($authenticationCreate, $requestOptions = [])
+    {
+        // verify the required parameter 'authenticationCreate' is set
+        if (!isset($authenticationCreate)) {
+            throw new \InvalidArgumentException(
+                'Parameter `authenticationCreate` is required when calling `createAuthentication`.'
+            );
+        }
+
+        $resourcePath = '/1/authentications';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $authenticationCreate;
+
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Create a destination (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Creates a new destination.
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param array|DestinationCreate $destinationCreate (required)
+     * @param array                   $requestOptions    Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function createDestinationWithHttpInfo($destinationCreate, $requestOptions = [])
+    {
+        // verify the required parameter 'destinationCreate' is set
+        if (!isset($destinationCreate)) {
+            throw new \InvalidArgumentException(
+                'Parameter `destinationCreate` is required when calling `createDestination`.'
+            );
+        }
+
+        $resourcePath = '/1/destinations';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $destinationCreate;
+
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Create a source (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Creates a new source.
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param array|SourceCreate $sourceCreate   (required)
+     * @param array              $requestOptions Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function createSourceWithHttpInfo($sourceCreate, $requestOptions = [])
+    {
+        // verify the required parameter 'sourceCreate' is set
+        if (!isset($sourceCreate)) {
+            throw new \InvalidArgumentException(
+                'Parameter `sourceCreate` is required when calling `createSource`.'
+            );
+        }
+
+        $resourcePath = '/1/sources';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $sourceCreate;
+
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Create a task (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Creates a new task.
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param array|TaskCreate $taskCreate     Request body for creating a task. (required)
+     * @param array            $requestOptions Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function createTaskWithHttpInfo($taskCreate, $requestOptions = [])
+    {
+        // verify the required parameter 'taskCreate' is set
+        if (!isset($taskCreate)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskCreate` is required when calling `createTask`.'
+            );
+        }
+
+        $resourcePath = '/2/tasks';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $taskCreate;
+
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Create a task V1 (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Creates a new task using the v1 endpoint, please use `createTask` instead.
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param array|TaskCreateV1 $taskCreate     Request body for creating a task. (required)
+     * @param array              $requestOptions Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function createTaskV1WithHttpInfo($taskCreate, $requestOptions = [])
+    {
+        // verify the required parameter 'taskCreate' is set
+        if (!isset($taskCreate)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskCreate` is required when calling `createTaskV1`.'
+            );
+        }
+
+        $resourcePath = '/1/tasks';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $taskCreate;
+
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Create a transformation (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Creates a new transformation.
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param array|TransformationCreate $transformationCreate Request body for creating a transformation. (required)
+     * @param array                      $requestOptions       Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function createTransformationWithHttpInfo($transformationCreate, $requestOptions = [])
+    {
+        // verify the required parameter 'transformationCreate' is set
+        if (!isset($transformationCreate)) {
+            throw new \InvalidArgumentException(
+                'Parameter `transformationCreate` is required when calling `createTransformation`.'
+            );
+        }
+
+        $resourcePath = '/1/transformations';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $transformationCreate;
+
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function customDeleteWithHttpInfo($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -442,19 +1852,22 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customGet($path, $parameters = null, $requestOptions = [])
+    public function customGetWithHttpInfo($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -481,20 +1894,23 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customPost($path, $parameters = null, $body = null, $requestOptions = [])
+    public function customPostWithHttpInfo($path, $parameters = null, $body = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -521,20 +1937,23 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customPut($path, $parameters = null, $body = null, $requestOptions = [])
+    public function customPutWithHttpInfo($path, $parameters = null, $body = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -561,23 +1980,25 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Deletes an authentication resource. You can't delete authentication resources that are used by a source or a destination.
+     * Delete an authentication resource (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Deletes an authentication resource. You can't delete authentication resources that are used by a source or a destination.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string $authenticationID Unique identifier of an authentication resource. (required)
-     * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions   Request options
      *
-     * @return array<string, mixed>|DeleteResponse
+     * @return AlgoliaResponse
      */
-    public function deleteAuthentication($authenticationID, $requestOptions = [])
+    public function deleteAuthenticationWithHttpInfo($authenticationID, $requestOptions = [])
     {
         // verify the required parameter 'authenticationID' is set
         if (!isset($authenticationID)) {
@@ -600,23 +2021,25 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Deletes a destination by its ID. You can't delete destinations that are referenced in tasks.
+     * Delete a destination (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Deletes a destination by its ID. You can't delete destinations that are referenced in tasks.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string $destinationID  Unique identifier of a destination. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|DeleteResponse
+     * @return AlgoliaResponse
      */
-    public function deleteDestination($destinationID, $requestOptions = [])
+    public function deleteDestinationWithHttpInfo($destinationID, $requestOptions = [])
     {
         // verify the required parameter 'destinationID' is set
         if (!isset($destinationID)) {
@@ -639,23 +2062,25 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Deletes a source by its ID. You can't delete sources that are referenced in tasks.
+     * Delete a source (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Deletes a source by its ID. You can't delete sources that are referenced in tasks.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string $sourceID       Unique identifier of a source. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|DeleteResponse
+     * @return AlgoliaResponse
      */
-    public function deleteSource($sourceID, $requestOptions = [])
+    public function deleteSourceWithHttpInfo($sourceID, $requestOptions = [])
     {
         // verify the required parameter 'sourceID' is set
         if (!isset($sourceID)) {
@@ -678,23 +2103,25 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Deletes a task by its ID.
+     * Delete a task (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Deletes a task by its ID.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string $taskID         Unique identifier of a task. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|DeleteResponse
+     * @return AlgoliaResponse
      */
-    public function deleteTask($taskID, $requestOptions = [])
+    public function deleteTaskWithHttpInfo($taskID, $requestOptions = [])
     {
         // verify the required parameter 'taskID' is set
         if (!isset($taskID)) {
@@ -717,25 +2144,25 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Deletes a task by its ID using the v1 endpoint, please use `deleteTask` instead.
+     * Delete a task (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Deletes a task by its ID using the v1 endpoint, please use `deleteTask` instead.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string $taskID         Unique identifier of a task. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|DeleteResponse
-     *
-     * @deprecated
+     * @return AlgoliaResponse
      */
-    public function deleteTaskV1($taskID, $requestOptions = [])
+    public function deleteTaskV1WithHttpInfo($taskID, $requestOptions = [])
     {
         // verify the required parameter 'taskID' is set
         if (!isset($taskID)) {
@@ -758,23 +2185,25 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Deletes a transformation by its ID.
+     * Delete a transformation (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Deletes a transformation by its ID.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string $transformationID Unique identifier of a transformation. (required)
-     * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions   Request options
      *
-     * @return array<string, mixed>|DeleteResponse
+     * @return AlgoliaResponse
      */
-    public function deleteTransformation($transformationID, $requestOptions = [])
+    public function deleteTransformationWithHttpInfo($transformationID, $requestOptions = [])
     {
         // verify the required parameter 'transformationID' is set
         if (!isset($transformationID)) {
@@ -797,23 +2226,25 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Disables a task.
+     * Disable a task (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Disables a task.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string $taskID         Unique identifier of a task. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|TaskUpdateResponse
+     * @return AlgoliaResponse
      */
-    public function disableTask($taskID, $requestOptions = [])
+    public function disableTaskWithHttpInfo($taskID, $requestOptions = [])
     {
         // verify the required parameter 'taskID' is set
         if (!isset($taskID)) {
@@ -836,25 +2267,25 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Disables a task using the v1 endpoint, please use `disableTask` instead.
+     * Disable a task V1 (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Disables a task using the v1 endpoint, please use `disableTask` instead.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string $taskID         Unique identifier of a task. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|TaskUpdateResponse
-     *
-     * @deprecated
+     * @return AlgoliaResponse
      */
-    public function disableTaskV1($taskID, $requestOptions = [])
+    public function disableTaskV1WithHttpInfo($taskID, $requestOptions = [])
     {
         // verify the required parameter 'taskID' is set
         if (!isset($taskID)) {
@@ -877,23 +2308,25 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Enables a task.
+     * Enable a task (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Enables a task.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string $taskID         Unique identifier of a task. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|TaskUpdateResponse
+     * @return AlgoliaResponse
      */
-    public function enableTask($taskID, $requestOptions = [])
+    public function enableTaskWithHttpInfo($taskID, $requestOptions = [])
     {
         // verify the required parameter 'taskID' is set
         if (!isset($taskID)) {
@@ -916,25 +2349,25 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Enables a task using the v1 endpoint, please use `enableTask` instead.
+     * Enable a task V1 (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Enables a task using the v1 endpoint, please use `enableTask` instead.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string $taskID         Unique identifier of a task. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|TaskUpdateResponse
-     *
-     * @deprecated
+     * @return AlgoliaResponse
      */
-    public function enableTaskV1($taskID, $requestOptions = [])
+    public function enableTaskV1WithHttpInfo($taskID, $requestOptions = [])
     {
         // verify the required parameter 'taskID' is set
         if (!isset($taskID)) {
@@ -957,23 +2390,25 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves an authentication resource by its ID.
+     * Retrieve an authentication resource (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves an authentication resource by its ID.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string $authenticationID Unique identifier of an authentication resource. (required)
-     * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions   Request options
      *
-     * @return array<string, mixed>|Authentication
+     * @return AlgoliaResponse
      */
-    public function getAuthentication($authenticationID, $requestOptions = [])
+    public function getAuthenticationWithHttpInfo($authenticationID, $requestOptions = [])
     {
         // verify the required parameter 'authenticationID' is set
         if (!isset($authenticationID)) {
@@ -996,23 +2431,25 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves a destination by its ID.
+     * Retrieve a destination (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves a destination by its ID.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string $destinationID  Unique identifier of a destination. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|Destination
+     * @return AlgoliaResponse
      */
-    public function getDestination($destinationID, $requestOptions = [])
+    public function getDestinationWithHttpInfo($destinationID, $requestOptions = [])
     {
         // verify the required parameter 'destinationID' is set
         if (!isset($destinationID)) {
@@ -1035,12 +2472,14 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves a single task run event by its ID.
+     * Retrieve a task run event (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves a single task run event by its ID.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
@@ -1048,11 +2487,11 @@ class IngestionClient
      *
      * @param string $runID          Unique identifier of a task run. (required)
      * @param string $eventID        Unique identifier of an event. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|Event
+     * @return AlgoliaResponse
      */
-    public function getEvent($runID, $eventID, $requestOptions = [])
+    public function getEventWithHttpInfo($runID, $eventID, $requestOptions = [])
     {
         // verify the required parameter 'runID' is set
         if (!isset($runID)) {
@@ -1090,23 +2529,25 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieve a single task run by its ID.
+     * Retrieve a task run (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieve a single task run by its ID.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string $runID          Unique identifier of a task run. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|Run
+     * @return AlgoliaResponse
      */
-    public function getRun($runID, $requestOptions = [])
+    public function getRunWithHttpInfo($runID, $requestOptions = [])
     {
         // verify the required parameter 'runID' is set
         if (!isset($runID)) {
@@ -1129,23 +2570,25 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieve a source by its ID.
+     * Retrieve a source (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieve a source by its ID.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string $sourceID       Unique identifier of a source. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|Source
+     * @return AlgoliaResponse
      */
-    public function getSource($sourceID, $requestOptions = [])
+    public function getSourceWithHttpInfo($sourceID, $requestOptions = [])
     {
         // verify the required parameter 'sourceID' is set
         if (!isset($sourceID)) {
@@ -1168,23 +2611,25 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves a task by its ID.
+     * Retrieve a task (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves a task by its ID.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string $taskID         Unique identifier of a task. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|Task
+     * @return AlgoliaResponse
      */
-    public function getTask($taskID, $requestOptions = [])
+    public function getTaskWithHttpInfo($taskID, $requestOptions = [])
     {
         // verify the required parameter 'taskID' is set
         if (!isset($taskID)) {
@@ -1207,25 +2652,25 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves a task by its ID using the v1 endpoint, please use `getTask` instead.
+     * Retrieve a task V1 (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves a task by its ID using the v1 endpoint, please use `getTask` instead.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string $taskID         Unique identifier of a task. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|TaskV1
-     *
-     * @deprecated
+     * @return AlgoliaResponse
      */
-    public function getTaskV1($taskID, $requestOptions = [])
+    public function getTaskV1WithHttpInfo($taskID, $requestOptions = [])
     {
         // verify the required parameter 'taskID' is set
         if (!isset($taskID)) {
@@ -1248,23 +2693,25 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves a transformation by its ID.
+     * Retrieve a transformation (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves a transformation by its ID.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string $transformationID Unique identifier of a transformation. (required)
-     * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions   Request options
      *
-     * @return array<string, mixed>|Transformation
+     * @return AlgoliaResponse
      */
-    public function getTransformation($transformationID, $requestOptions = [])
+    public function getTransformationWithHttpInfo($transformationID, $requestOptions = [])
     {
         // verify the required parameter 'transformationID' is set
         if (!isset($transformationID)) {
@@ -1287,28 +2734,30 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves a list of all authentication resources.
+     * List authentication resources (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves a list of all authentication resources.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param int   $itemsPerPage   Number of items per page. (optional, default to 10)
+     * @param int   $itemsPerPage   Number of items per page. (optional)
      * @param int   $page           Page number of the paginated API response. (optional)
      * @param array $type           Type of authentication resource to retrieve. (optional)
      * @param array $platform       Ecommerce platform for which to retrieve authentications. (optional)
      * @param array $sort           Property by which to sort the list of authentications. (optional)
      * @param array $order          Sort order of the response, ascending or descending. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array $requestOptions Request options
      *
-     * @return array<string, mixed>|ListAuthenticationsResponse
+     * @return AlgoliaResponse
      */
-    public function listAuthentications($itemsPerPage = null, $page = null, $type = null, $platform = null, $sort = null, $order = null, $requestOptions = [])
+    public function listAuthenticationsWithHttpInfo($itemsPerPage = null, $page = null, $type = null, $platform = null, $sort = null, $order = null, $requestOptions = [])
     {
         $resourcePath = '/1/authentications';
         $queryParameters = [];
@@ -1345,29 +2794,31 @@ class IngestionClient
             $queryParameters['order'] = $order;
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves a list of destinations.
+     * List destinations (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves a list of destinations.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param int    $itemsPerPage     Number of items per page. (optional, default to 10)
+     * @param int    $itemsPerPage     Number of items per page. (optional)
      * @param int    $page             Page number of the paginated API response. (optional)
      * @param array  $type             Destination type. (optional)
      * @param array  $authenticationID Authentication ID used by destinations. (optional)
      * @param string $transformationID Get the list of destinations used by a transformation. (optional)
      * @param array  $sort             Property by which to sort the destinations. (optional)
      * @param array  $order            Sort order of the response, ascending or descending. (optional)
-     * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions   Request options
      *
-     * @return array<string, mixed>|ListDestinationsResponse
+     * @return AlgoliaResponse
      */
-    public function listDestinations($itemsPerPage = null, $page = null, $type = null, $authenticationID = null, $transformationID = null, $sort = null, $order = null, $requestOptions = [])
+    public function listDestinationsWithHttpInfo($itemsPerPage = null, $page = null, $type = null, $authenticationID = null, $transformationID = null, $sort = null, $order = null, $requestOptions = [])
     {
         $resourcePath = '/1/destinations';
         $queryParameters = [];
@@ -1411,19 +2862,21 @@ class IngestionClient
             $queryParameters['order'] = $order;
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves a list of events for a task run, identified by its ID.
+     * List task run events (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves a list of events for a task run, identified by its ID.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string $runID          Unique identifier of a task run. (required)
-     * @param int    $itemsPerPage   Number of items per page. (optional, default to 10)
+     * @param int    $itemsPerPage   Number of items per page. (optional)
      * @param int    $page           Page number of the paginated API response. (optional)
      * @param array  $status         Event status for filtering the list of task runs. (optional)
      * @param array  $type           Event type for filtering the list of task runs. (optional)
@@ -1431,11 +2884,11 @@ class IngestionClient
      * @param array  $order          Sort order of the response, ascending or descending. (optional)
      * @param string $startDate      Date and time in RFC 3339 format for the earliest events to retrieve. By default, the current time minus three hours is used. (optional)
      * @param string $endDate        Date and time in RFC 3339 format for the latest events to retrieve. By default, the current time is used. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|ListEventsResponse
+     * @return AlgoliaResponse
      */
-    public function listEvents($runID, $itemsPerPage = null, $page = null, $status = null, $type = null, $sort = null, $order = null, $startDate = null, $endDate = null, $requestOptions = [])
+    public function listEventsWithHttpInfo($runID, $itemsPerPage = null, $page = null, $status = null, $type = null, $sort = null, $order = null, $startDate = null, $endDate = null, $requestOptions = [])
     {
         // verify the required parameter 'runID' is set
         if (!isset($runID)) {
@@ -1490,18 +2943,20 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieve a list of task runs.
+     * List task runs (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieve a list of task runs.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param int    $itemsPerPage   Number of items per page. (optional, default to 10)
+     * @param int    $itemsPerPage   Number of items per page. (optional)
      * @param int    $page           Page number of the paginated API response. (optional)
      * @param array  $status         Run status for filtering the list of task runs. (optional)
      * @param array  $type           Run type for filtering the list of task runs. (optional)
@@ -1510,11 +2965,11 @@ class IngestionClient
      * @param array  $order          Sort order of the response, ascending or descending. (optional)
      * @param string $startDate      Date in RFC 3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)
      * @param string $endDate        Date in RFC 3339 format for the latest run to retrieve. By default, the current day is used. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|RunListResponse
+     * @return AlgoliaResponse
      */
-    public function listRuns($itemsPerPage = null, $page = null, $status = null, $type = null, $taskID = null, $sort = null, $order = null, $startDate = null, $endDate = null, $requestOptions = [])
+    public function listRunsWithHttpInfo($itemsPerPage = null, $page = null, $status = null, $type = null, $taskID = null, $sort = null, $order = null, $startDate = null, $endDate = null, $requestOptions = [])
     {
         $resourcePath = '/1/runs';
         $queryParameters = [];
@@ -1557,28 +3012,30 @@ class IngestionClient
             $queryParameters['endDate'] = $endDate;
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves a list of sources.
+     * List sources (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves a list of sources.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param int   $itemsPerPage     Number of items per page. (optional, default to 10)
+     * @param int   $itemsPerPage     Number of items per page. (optional)
      * @param int   $page             Page number of the paginated API response. (optional)
      * @param array $type             Source type. Some sources require authentication. (optional)
      * @param array $authenticationID Authentication IDs of the sources to retrieve. 'none' returns sources that doesn't have an authentication. (optional)
      * @param array $sort             Property by which to sort the list of sources. (optional)
      * @param array $order            Sort order of the response, ascending or descending. (optional)
-     * @param array $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array $requestOptions   Request options
      *
-     * @return array<string, mixed>|ListSourcesResponse
+     * @return AlgoliaResponse
      */
-    public function listSources($itemsPerPage = null, $page = null, $type = null, $authenticationID = null, $sort = null, $order = null, $requestOptions = [])
+    public function listSourcesWithHttpInfo($itemsPerPage = null, $page = null, $type = null, $authenticationID = null, $sort = null, $order = null, $requestOptions = [])
     {
         $resourcePath = '/1/sources';
         $queryParameters = [];
@@ -1615,18 +3072,20 @@ class IngestionClient
             $queryParameters['order'] = $order;
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves a list of tasks.
+     * List tasks (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves a list of tasks.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param int   $itemsPerPage           Number of items per page. (optional, default to 10)
+     * @param int   $itemsPerPage           Number of items per page. (optional)
      * @param int   $page                   Page number of the paginated API response. (optional)
      * @param array $action                 Actions for filtering the list of tasks. (optional)
      * @param bool  $enabled                Whether to filter the list of tasks by the `enabled` status. (optional)
@@ -1637,11 +3096,11 @@ class IngestionClient
      * @param bool  $withEmailNotifications If specified, the response only includes tasks with notifications.email.enabled set to this value. (optional)
      * @param array $sort                   Property by which to sort the list of tasks. (optional)
      * @param array $order                  Sort order of the response, ascending or descending. (optional)
-     * @param array $requestOptions         the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array $requestOptions         Request options
      *
-     * @return array<string, mixed>|ListTasksResponse
+     * @return AlgoliaResponse
      */
-    public function listTasks($itemsPerPage = null, $page = null, $action = null, $enabled = null, $sourceID = null, $sourceType = null, $destinationID = null, $triggerType = null, $withEmailNotifications = null, $sort = null, $order = null, $requestOptions = [])
+    public function listTasksWithHttpInfo($itemsPerPage = null, $page = null, $action = null, $enabled = null, $sourceID = null, $sourceType = null, $destinationID = null, $triggerType = null, $withEmailNotifications = null, $sort = null, $order = null, $requestOptions = [])
     {
         $resourcePath = '/2/tasks';
         $queryParameters = [];
@@ -1707,18 +3166,20 @@ class IngestionClient
             $queryParameters['order'] = $order;
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves a list of tasks using the v1 endpoint, please use `getTasks` instead.
+     * List tasks V1 (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves a list of tasks using the v1 endpoint, please use `getTasks` instead.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param int   $itemsPerPage   Number of items per page. (optional, default to 10)
+     * @param int   $itemsPerPage   Number of items per page. (optional)
      * @param int   $page           Page number of the paginated API response. (optional)
      * @param array $action         Actions for filtering the list of tasks. (optional)
      * @param bool  $enabled        Whether to filter the list of tasks by the `enabled` status. (optional)
@@ -1727,13 +3188,11 @@ class IngestionClient
      * @param array $triggerType    Type of task trigger for filtering the list of tasks. (optional)
      * @param array $sort           Property by which to sort the list of tasks. (optional)
      * @param array $order          Sort order of the response, ascending or descending. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array $requestOptions Request options
      *
-     * @return array<string, mixed>|ListTasksResponseV1
-     *
-     * @deprecated
+     * @return AlgoliaResponse
      */
-    public function listTasksV1($itemsPerPage = null, $page = null, $action = null, $enabled = null, $sourceID = null, $destinationID = null, $triggerType = null, $sort = null, $order = null, $requestOptions = [])
+    public function listTasksV1WithHttpInfo($itemsPerPage = null, $page = null, $action = null, $enabled = null, $sourceID = null, $destinationID = null, $triggerType = null, $sort = null, $order = null, $requestOptions = [])
     {
         $resourcePath = '/1/tasks';
         $queryParameters = [];
@@ -1788,27 +3247,29 @@ class IngestionClient
             $queryParameters['order'] = $order;
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves a list of transformations.
+     * List transformations (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves a list of transformations.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param int   $itemsPerPage   Number of items per page. (optional, default to 10)
+     * @param int   $itemsPerPage   Number of items per page. (optional)
      * @param int   $page           Page number of the paginated API response. (optional)
      * @param array $sort           Property by which to sort the list of transformations. (optional)
      * @param array $order          Sort order of the response, ascending or descending. (optional)
      * @param array $type           Whether to filter the list of transformations by the type of transformation. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array $requestOptions Request options
      *
-     * @return array<string, mixed>|ListTransformationsResponse
+     * @return AlgoliaResponse
      */
-    public function listTransformations($itemsPerPage = null, $page = null, $sort = null, $order = null, $type = null, $requestOptions = [])
+    public function listTransformationsWithHttpInfo($itemsPerPage = null, $page = null, $sort = null, $order = null, $type = null, $requestOptions = [])
     {
         $resourcePath = '/1/transformations';
         $queryParameters = [];
@@ -1835,31 +3296,28 @@ class IngestionClient
             $queryParameters['type'] = $type;
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Pushes records through the Pipeline, directly to an index. You can make the call synchronous by providing the `watch` parameter, for asynchronous calls, you can use the observability endpoints and/or debugger dashboard to see the status of your task. If you want to leverage the [pre-indexing data transformation](https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/how-to/transform-your-data), this is the recommended way of ingesting your records. This method is similar to `pushTask`, but requires an `indexName` instead of a `taskID`. If zero or many tasks are found, an error will be returned.
+     * Push records by indexName (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Pushes records through the Pipeline, directly to an index. You can make the call synchronous by providing the `watch` parameter, for asynchronous calls, you can use the observability endpoints and/or debugger dashboard to see the status of your task. If you want to leverage the [pre-indexing data transformation](https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/how-to/transform-your-data), this is the recommended way of ingesting your records. This method is similar to `pushTask`, but requires an `indexName` instead of a `taskID`. If zero or many tasks are found, an error will be returned.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string                $indexName       Name of the index on which to perform the operation. (required)
-     * @param array|PushTaskPayload $pushTaskPayload pushTaskPayload (required)
-     *                                               - $pushTaskPayload['action'] => (array)  (required)
-     *                                               - $pushTaskPayload['records'] => (array)  (required)
+     * @param string                $indexName          Name of the index on which to perform the operation. (required)
+     * @param array|PushTaskPayload $pushTaskPayload    (required)
+     * @param bool                  $watch              When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding. (optional)
+     * @param string                $referenceIndexName This is required when targeting an index that does not have a push connector setup (e.g. a tmp index), but you wish to attach another index's transformation to it (e.g. the source index name). (optional)
+     * @param array                 $requestOptions     Request options
      *
-     * @see PushTaskPayload
-     *
-     * @param bool   $watch              When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding. (optional)
-     * @param string $referenceIndexName This is required when targeting an index that does not have a push connector setup (e.g. a tmp index), but you wish to attach another index's transformation to it (e.g. the source index name). (optional)
-     * @param array  $requestOptions     the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|WatchResponse
+     * @return AlgoliaResponse
      */
-    public function push($indexName, $pushTaskPayload, $watch = null, $referenceIndexName = null, $requestOptions = [])
+    public function pushWithHttpInfo($indexName, $pushTaskPayload, $watch = null, $referenceIndexName = null, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
@@ -1906,30 +3364,27 @@ class IngestionClient
             $requestOptions['connectTimeout'] = 180;
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Pushes records through the pipeline, directly to an index. You can make the call synchronous by providing the `watch` parameter, for asynchronous calls, you can use the observability endpoints or the debugger dashboard to see the status of your task. If you want to transform your data before indexing, this is the recommended way of ingesting your records. This method is similar to `push`, but requires a `taskID` instead of a `indexName`, which is useful when many `destinations` target the same `indexName`.
+     * Push records by task ID (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Pushes records through the pipeline, directly to an index. You can make the call synchronous by providing the `watch` parameter, for asynchronous calls, you can use the observability endpoints or the debugger dashboard to see the status of your task. If you want to transform your data before indexing, this is the recommended way of ingesting your records. This method is similar to `push`, but requires a `taskID` instead of a `indexName`, which is useful when many `destinations` target the same `indexName`.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string                $taskID          Unique identifier of a task. (required)
-     * @param array|PushTaskPayload $pushTaskPayload pushTaskPayload (required)
-     *                                               - $pushTaskPayload['action'] => (array)  (required)
-     *                                               - $pushTaskPayload['records'] => (array)  (required)
+     * @param array|PushTaskPayload $pushTaskPayload (required)
+     * @param bool                  $watch           When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding. (optional)
+     * @param array                 $requestOptions  Request options
      *
-     * @see PushTaskPayload
-     *
-     * @param bool  $watch          When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|WatchResponse
+     * @return AlgoliaResponse
      */
-    public function pushTask($taskID, $pushTaskPayload, $watch = null, $requestOptions = [])
+    public function pushTaskWithHttpInfo($taskID, $pushTaskPayload, $watch = null, $requestOptions = [])
     {
         // verify the required parameter 'taskID' is set
         if (!isset($taskID)) {
@@ -1972,37 +3427,26 @@ class IngestionClient
             $requestOptions['connectTimeout'] = 180;
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Fully updates a task by its ID, use partialUpdateTask if you only want to update a subset of fields.
+     * Fully update a task (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Fully updates a task by its ID, use partialUpdateTask if you only want to update a subset of fields.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string            $taskID      Unique identifier of a task. (required)
-     * @param array|TaskReplace $taskReplace taskReplace (required)
-     *                                       - $taskReplace['destinationID'] => (string) Universally unique identifier (UUID) of a destination resource. (required)
-     *                                       - $taskReplace['action'] => (array)  (required)
-     *                                       - $taskReplace['subscriptionAction'] => (array)
-     *                                       - $taskReplace['cron'] => (string) Cron expression for the task's schedule.
-     *                                       - $taskReplace['enabled'] => (bool) Whether the task is enabled.
-     *                                       - $taskReplace['failureThreshold'] => (int) Maximum accepted percentage of failures for a task run to finish successfully.
-     *                                       - $taskReplace['input'] => (array)
-     *                                       - $taskReplace['cursor'] => (string) Date of the last cursor in RFC 3339 format.
-     *                                       - $taskReplace['notifications'] => (array)
-     *                                       - $taskReplace['policies'] => (array)
+     * @param string            $taskID         Unique identifier of a task. (required)
+     * @param array|TaskReplace $taskReplace    (required)
+     * @param array             $requestOptions Request options
      *
-     * @see TaskReplace
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|TaskUpdateResponse
+     * @return AlgoliaResponse
      */
-    public function replaceTask($taskID, $taskReplace, $requestOptions = [])
+    public function replaceTaskWithHttpInfo($taskID, $taskReplace, $requestOptions = [])
     {
         // verify the required parameter 'taskID' is set
         if (!isset($taskID)) {
@@ -2031,12 +3475,14 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Runs all tasks linked to a source, only available for Shopify, BigCommerce and commercetools sources. Creates one run per task.
+     * Run all tasks linked to a source (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Runs all tasks linked to a source, only available for Shopify, BigCommerce and commercetools sources. Creates one run per task.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
@@ -2044,19 +3490,11 @@ class IngestionClient
      *
      * @param string                 $sourceID         Unique identifier of a source. (required)
      * @param array|RunSourcePayload $runSourcePayload (optional)
-     *                                                 - $runSourcePayload['indexToInclude'] => (array) List of index names to include in reindex/update.
-     *                                                 - $runSourcePayload['indexToExclude'] => (array) List of index names to exclude in reindex/update.
-     *                                                 - $runSourcePayload['entityIDs'] => (array) List of entityIDs to update.
-     *                                                 - $runSourcePayload['entityType'] => (array)
-     *                                                 - $runSourcePayload['runMetadata'] => (array) Additional information that will be passed to the created runs.
+     * @param array                  $requestOptions   Request options
      *
-     * @see RunSourcePayload
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|RunSourceResponse
+     * @return AlgoliaResponse
      */
-    public function runSource($sourceID, $runSourcePayload = null, $requestOptions = [])
+    public function runSourceWithHttpInfo($sourceID, $runSourcePayload = null, $requestOptions = [])
     {
         // verify the required parameter 'sourceID' is set
         if (!isset($sourceID)) {
@@ -2079,12 +3517,14 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Runs a task. You can check the status of task runs with the observability endpoints.
+     * Run a task (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Runs a task. You can check the status of task runs with the observability endpoints.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
@@ -2092,15 +3532,11 @@ class IngestionClient
      *
      * @param string               $taskID         Unique identifier of a task. (required)
      * @param array|RunTaskPayload $runTaskPayload (optional)
-     *                                             - $runTaskPayload['runMetadata'] => (array) Additional information that will be passed to the created run
+     * @param array                $requestOptions Request options
      *
-     * @see RunTaskPayload
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|RunResponse
+     * @return AlgoliaResponse
      */
-    public function runTask($taskID, $runTaskPayload = null, $requestOptions = [])
+    public function runTaskWithHttpInfo($taskID, $runTaskPayload = null, $requestOptions = [])
     {
         // verify the required parameter 'taskID' is set
         if (!isset($taskID)) {
@@ -2123,12 +3559,14 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Runs a task using the v1 endpoint, please use `runTask` instead. You can check the status of task runs with the observability endpoints.
+     * Run a task V1 (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Runs a task using the v1 endpoint, please use `runTask` instead. You can check the status of task runs with the observability endpoints.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
@@ -2136,17 +3574,11 @@ class IngestionClient
      *
      * @param string               $taskID         Unique identifier of a task. (required)
      * @param array|RunTaskPayload $runTaskPayload (optional)
-     *                                             - $runTaskPayload['runMetadata'] => (array) Additional information that will be passed to the created run
+     * @param array                $requestOptions Request options
      *
-     * @see RunTaskPayload
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|RunResponse
-     *
-     * @deprecated
+     * @return AlgoliaResponse
      */
-    public function runTaskV1($taskID, $runTaskPayload = null, $requestOptions = [])
+    public function runTaskV1WithHttpInfo($taskID, $runTaskPayload = null, $requestOptions = [])
     {
         // verify the required parameter 'taskID' is set
         if (!isset($taskID)) {
@@ -2169,27 +3601,25 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Searches for authentication resources.
+     * Search for authentication resources (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Searches for authentication resources.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param array|AuthenticationSearch $authenticationSearch authenticationSearch (required)
-     *                                                         - $authenticationSearch['authenticationIDs'] => (array)  (required)
+     * @param array|AuthenticationSearch $authenticationSearch (required)
+     * @param array                      $requestOptions       Request options
      *
-     * @see AuthenticationSearch
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|Authentication[]
+     * @return AlgoliaResponse
      */
-    public function searchAuthentications($authenticationSearch, $requestOptions = [])
+    public function searchAuthenticationsWithHttpInfo($authenticationSearch, $requestOptions = [])
     {
         // verify the required parameter 'authenticationSearch' is set
         if (!isset($authenticationSearch)) {
@@ -2203,27 +3633,25 @@ class IngestionClient
         $headers = [];
         $httpBody = $authenticationSearch;
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Searches for destinations.
+     * Search for destinations (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Searches for destinations.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param array|DestinationSearch $destinationSearch destinationSearch (required)
-     *                                                   - $destinationSearch['destinationIDs'] => (array)  (required)
+     * @param array|DestinationSearch $destinationSearch (required)
+     * @param array                   $requestOptions    Request options
      *
-     * @see DestinationSearch
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|Destination[]
+     * @return AlgoliaResponse
      */
-    public function searchDestinations($destinationSearch, $requestOptions = [])
+    public function searchDestinationsWithHttpInfo($destinationSearch, $requestOptions = [])
     {
         // verify the required parameter 'destinationSearch' is set
         if (!isset($destinationSearch)) {
@@ -2237,27 +3665,25 @@ class IngestionClient
         $headers = [];
         $httpBody = $destinationSearch;
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Searches for sources.
+     * Search for sources (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Searches for sources.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param array|SourceSearch $sourceSearch sourceSearch (required)
-     *                                         - $sourceSearch['sourceIDs'] => (array)  (required)
+     * @param array|SourceSearch $sourceSearch   (required)
+     * @param array              $requestOptions Request options
      *
-     * @see SourceSearch
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|Source[]
+     * @return AlgoliaResponse
      */
-    public function searchSources($sourceSearch, $requestOptions = [])
+    public function searchSourcesWithHttpInfo($sourceSearch, $requestOptions = [])
     {
         // verify the required parameter 'sourceSearch' is set
         if (!isset($sourceSearch)) {
@@ -2271,27 +3697,25 @@ class IngestionClient
         $headers = [];
         $httpBody = $sourceSearch;
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Searches for tasks.
+     * Search for tasks (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Searches for tasks.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param array|TaskSearch $taskSearch taskSearch (required)
-     *                                     - $taskSearch['taskIDs'] => (array)  (required)
+     * @param array|TaskSearch $taskSearch     (required)
+     * @param array            $requestOptions Request options
      *
-     * @see TaskSearch
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|Task[]
+     * @return AlgoliaResponse
      */
-    public function searchTasks($taskSearch, $requestOptions = [])
+    public function searchTasksWithHttpInfo($taskSearch, $requestOptions = [])
     {
         // verify the required parameter 'taskSearch' is set
         if (!isset($taskSearch)) {
@@ -2305,29 +3729,25 @@ class IngestionClient
         $headers = [];
         $httpBody = $taskSearch;
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Searches for tasks using the v1 endpoint, please use `searchTasks` instead.
+     * Search for tasks V1 (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Searches for tasks using the v1 endpoint, please use `searchTasks` instead.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param array|TaskSearch $taskSearch taskSearch (required)
-     *                                     - $taskSearch['taskIDs'] => (array)  (required)
+     * @param array|TaskSearch $taskSearch     (required)
+     * @param array            $requestOptions Request options
      *
-     * @see TaskSearch
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|TaskV1[]
-     *
-     * @deprecated
+     * @return AlgoliaResponse
      */
-    public function searchTasksV1($taskSearch, $requestOptions = [])
+    public function searchTasksV1WithHttpInfo($taskSearch, $requestOptions = [])
     {
         // verify the required parameter 'taskSearch' is set
         if (!isset($taskSearch)) {
@@ -2341,27 +3761,25 @@ class IngestionClient
         $headers = [];
         $httpBody = $taskSearch;
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Searches for transformations.
+     * Search for transformations (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Searches for transformations.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param array|TransformationSearch $transformationSearch transformationSearch (required)
-     *                                                         - $transformationSearch['transformationIDs'] => (array)  (required)
+     * @param array|TransformationSearch $transformationSearch (required)
+     * @param array                      $requestOptions       Request options
      *
-     * @see TransformationSearch
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|Transformation[]
+     * @return AlgoliaResponse
      */
-    public function searchTransformations($transformationSearch, $requestOptions = [])
+    public function searchTransformationsWithHttpInfo($transformationSearch, $requestOptions = [])
     {
         // verify the required parameter 'transformationSearch' is set
         if (!isset($transformationSearch)) {
@@ -2375,23 +3793,25 @@ class IngestionClient
         $headers = [];
         $httpBody = $transformationSearch;
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Triggers a stream-listing request for a source. Triggering stream-listing requests only works with sources with `type: docker` and `imageType: airbyte`.
+     * Trigger a stream-listing request (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Triggers a stream-listing request for a source. Triggering stream-listing requests only works with sources with `type: docker` and `imageType: airbyte`.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string $sourceID       Unique identifier of a source. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|WatchResponse
+     * @return AlgoliaResponse
      */
-    public function triggerDockerSourceDiscover($sourceID, $requestOptions = [])
+    public function triggerDockerSourceDiscoverWithHttpInfo($sourceID, $requestOptions = [])
     {
         // verify the required parameter 'sourceID' is set
         if (!isset($sourceID)) {
@@ -2424,31 +3844,25 @@ class IngestionClient
             $requestOptions['connectTimeout'] = 180;
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Try a transformation before creating it.
+     * Try a transformation before creating it (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Try a transformation before creating it.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param array|TransformationTry $transformationTry transformationTry (required)
-     *                                                   - $transformationTry['code'] => (string) It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.
-     *                                                   - $transformationTry['type'] => (array)
-     *                                                   - $transformationTry['input'] => (array)
-     *                                                   - $transformationTry['sampleRecord'] => (array) The record to apply the given code to. (required)
-     *                                                   - $transformationTry['authentications'] => (array)
+     * @param array|TransformationTry $transformationTry (required)
+     * @param array                   $requestOptions    Request options
      *
-     * @see TransformationTry
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|TransformationTryResponse
+     * @return AlgoliaResponse
      */
-    public function tryTransformation($transformationTry, $requestOptions = [])
+    public function tryTransformationWithHttpInfo($transformationTry, $requestOptions = [])
     {
         // verify the required parameter 'transformationTry' is set
         if (!isset($transformationTry)) {
@@ -2462,32 +3876,26 @@ class IngestionClient
         $headers = [];
         $httpBody = $transformationTry;
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Try a transformation before updating it.
+     * Try a transformation before updating it (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Try a transformation before updating it.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string                  $transformationID  Unique identifier of a transformation. (required)
-     * @param array|TransformationTry $transformationTry transformationTry (required)
-     *                                                   - $transformationTry['code'] => (string) It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.
-     *                                                   - $transformationTry['type'] => (array)
-     *                                                   - $transformationTry['input'] => (array)
-     *                                                   - $transformationTry['sampleRecord'] => (array) The record to apply the given code to. (required)
-     *                                                   - $transformationTry['authentications'] => (array)
+     * @param array|TransformationTry $transformationTry (required)
+     * @param array                   $requestOptions    Request options
      *
-     * @see TransformationTry
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|TransformationTryResponse
+     * @return AlgoliaResponse
      */
-    public function tryTransformationBeforeUpdate($transformationID, $transformationTry, $requestOptions = [])
+    public function tryTransformationBeforeUpdateWithHttpInfo($transformationID, $transformationTry, $requestOptions = [])
     {
         // verify the required parameter 'transformationID' is set
         if (!isset($transformationID)) {
@@ -2516,30 +3924,26 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Updates an authentication resource.
+     * Update an authentication resource (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Updates an authentication resource.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string                     $authenticationID     Unique identifier of an authentication resource. (required)
-     * @param array|AuthenticationUpdate $authenticationUpdate authenticationUpdate (required)
-     *                                                         - $authenticationUpdate['type'] => (array)
-     *                                                         - $authenticationUpdate['name'] => (string) Descriptive name for the resource.
-     *                                                         - $authenticationUpdate['input'] => (array)
+     * @param array|AuthenticationUpdate $authenticationUpdate (required)
+     * @param array                      $requestOptions       Request options
      *
-     * @see AuthenticationUpdate
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|AuthenticationUpdateResponse
+     * @return AlgoliaResponse
      */
-    public function updateAuthentication($authenticationID, $authenticationUpdate, $requestOptions = [])
+    public function updateAuthenticationWithHttpInfo($authenticationID, $authenticationUpdate, $requestOptions = [])
     {
         // verify the required parameter 'authenticationID' is set
         if (!isset($authenticationID)) {
@@ -2568,32 +3972,26 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('PATCH', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PATCH', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Updates the destination by its ID.
+     * Update a destination (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Updates the destination by its ID.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string                  $destinationID     Unique identifier of a destination. (required)
-     * @param array|DestinationUpdate $destinationUpdate destinationUpdate (required)
-     *                                                   - $destinationUpdate['type'] => (array)
-     *                                                   - $destinationUpdate['name'] => (string) Descriptive name for the resource.
-     *                                                   - $destinationUpdate['input'] => (array)
-     *                                                   - $destinationUpdate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
-     *                                                   - $destinationUpdate['transformationIDs'] => (array)
+     * @param array|DestinationUpdate $destinationUpdate (required)
+     * @param array                   $requestOptions    Request options
      *
-     * @see DestinationUpdate
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|DestinationUpdateResponse
+     * @return AlgoliaResponse
      */
-    public function updateDestination($destinationID, $destinationUpdate, $requestOptions = [])
+    public function updateDestinationWithHttpInfo($destinationID, $destinationUpdate, $requestOptions = [])
     {
         // verify the required parameter 'destinationID' is set
         if (!isset($destinationID)) {
@@ -2622,30 +4020,26 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('PATCH', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PATCH', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Updates a source by its ID.
+     * Update a source (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Updates a source by its ID.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string             $sourceID     Unique identifier of a source. (required)
-     * @param array|SourceUpdate $sourceUpdate sourceUpdate (required)
-     *                                         - $sourceUpdate['name'] => (string) Descriptive name of the source.
-     *                                         - $sourceUpdate['input'] => (array)
-     *                                         - $sourceUpdate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
+     * @param string             $sourceID       Unique identifier of a source. (required)
+     * @param array|SourceUpdate $sourceUpdate   (required)
+     * @param array              $requestOptions Request options
      *
-     * @see SourceUpdate
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|SourceUpdateResponse
+     * @return AlgoliaResponse
      */
-    public function updateSource($sourceID, $sourceUpdate, $requestOptions = [])
+    public function updateSourceWithHttpInfo($sourceID, $sourceUpdate, $requestOptions = [])
     {
         // verify the required parameter 'sourceID' is set
         if (!isset($sourceID)) {
@@ -2674,35 +4068,26 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('PATCH', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PATCH', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Partially updates a task by its ID.
+     * Partially update a task (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Partially updates a task by its ID.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string           $taskID     Unique identifier of a task. (required)
-     * @param array|TaskUpdate $taskUpdate taskUpdate (required)
-     *                                     - $taskUpdate['destinationID'] => (string) Universally unique identifier (UUID) of a destination resource.
-     *                                     - $taskUpdate['cron'] => (string) Cron expression for the task's schedule.
-     *                                     - $taskUpdate['input'] => (array)
-     *                                     - $taskUpdate['enabled'] => (bool) Whether the task is enabled.
-     *                                     - $taskUpdate['subscriptionAction'] => (array)
-     *                                     - $taskUpdate['failureThreshold'] => (int) Maximum accepted percentage of failures for a task run to finish successfully.
-     *                                     - $taskUpdate['notifications'] => (array)
-     *                                     - $taskUpdate['policies'] => (array)
+     * @param string           $taskID         Unique identifier of a task. (required)
+     * @param array|TaskUpdate $taskUpdate     (required)
+     * @param array            $requestOptions Request options
      *
-     * @see TaskUpdate
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|TaskUpdateResponse
+     * @return AlgoliaResponse
      */
-    public function updateTask($taskID, $taskUpdate, $requestOptions = [])
+    public function updateTaskWithHttpInfo($taskID, $taskUpdate, $requestOptions = [])
     {
         // verify the required parameter 'taskID' is set
         if (!isset($taskID)) {
@@ -2731,34 +4116,26 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('PATCH', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PATCH', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Updates a task by its ID using the v1 endpoint, please use `updateTask` instead.
+     * Update a task V1 (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Updates a task by its ID using the v1 endpoint, please use `updateTask` instead.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string             $taskID     Unique identifier of a task. (required)
-     * @param array|TaskUpdateV1 $taskUpdate taskUpdate (required)
-     *                                       - $taskUpdate['destinationID'] => (string) Universally unique identifier (UUID) of a destination resource.
-     *                                       - $taskUpdate['trigger'] => (array)
-     *                                       - $taskUpdate['input'] => (array)
-     *                                       - $taskUpdate['enabled'] => (bool) Whether the task is enabled.
-     *                                       - $taskUpdate['failureThreshold'] => (int) Maximum accepted percentage of failures for a task run to finish successfully.
+     * @param string             $taskID         Unique identifier of a task. (required)
+     * @param array|TaskUpdateV1 $taskUpdate     (required)
+     * @param array              $requestOptions Request options
      *
-     * @see TaskUpdateV1
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|TaskUpdateResponse
-     *
-     * @deprecated
+     * @return AlgoliaResponse
      */
-    public function updateTaskV1($taskID, $taskUpdate, $requestOptions = [])
+    public function updateTaskV1WithHttpInfo($taskID, $taskUpdate, $requestOptions = [])
     {
         // verify the required parameter 'taskID' is set
         if (!isset($taskID)) {
@@ -2787,33 +4164,26 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('PATCH', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PATCH', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Updates a transformation by its ID.
+     * Update a transformation (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Updates a transformation by its ID.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
      * @param string                     $transformationID     Unique identifier of a transformation. (required)
-     * @param array|TransformationCreate $transformationCreate transformationCreate (required)
-     *                                                         - $transformationCreate['code'] => (string) It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.
-     *                                                         - $transformationCreate['name'] => (string) The uniquely identified name of your transformation. (required)
-     *                                                         - $transformationCreate['type'] => (array)
-     *                                                         - $transformationCreate['input'] => (array)
-     *                                                         - $transformationCreate['description'] => (string) A descriptive name for your transformation of what it does.
-     *                                                         - $transformationCreate['authenticationIDs'] => (array) The authentications associated with the current transformation.
+     * @param array|TransformationCreate $transformationCreate (required)
+     * @param array                      $requestOptions       Request options
      *
-     * @see TransformationCreate
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|TransformationUpdateResponse
+     * @return AlgoliaResponse
      */
-    public function updateTransformation($transformationID, $transformationCreate, $requestOptions = [])
+    public function updateTransformationWithHttpInfo($transformationID, $transformationCreate, $requestOptions = [])
     {
         // verify the required parameter 'transformationID' is set
         if (!isset($transformationID)) {
@@ -2842,30 +4212,25 @@ class IngestionClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Validates a source payload to ensure it can be created and that the data source can be reached by Algolia.
+     * Validate a source payload (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Validates a source payload to ensure it can be created and that the data source can be reached by Algolia.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param array|SourceCreate $sourceCreate (optional)
-     *                                         - $sourceCreate['type'] => (array)  (required)
-     *                                         - $sourceCreate['name'] => (string) Descriptive name of the source. (required)
-     *                                         - $sourceCreate['input'] => (array)
-     *                                         - $sourceCreate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
+     * @param array|SourceCreate $sourceCreate   (optional)
+     * @param array              $requestOptions Request options
      *
-     * @see SourceCreate
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|WatchResponse
+     * @return AlgoliaResponse
      */
-    public function validateSource($sourceCreate = null, $requestOptions = [])
+    public function validateSourceWithHttpInfo($sourceCreate = null, $requestOptions = [])
     {
         $resourcePath = '/1/sources/validate';
         $queryParameters = [];
@@ -2882,30 +4247,26 @@ class IngestionClient
             $requestOptions['connectTimeout'] = 180;
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Validates an update of a source payload to ensure it can be created and that the data source can be reached by Algolia.
+     * Validate an update of a source payload (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Validates an update of a source payload to ensure it can be created and that the data source can be reached by Algolia.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string             $sourceID     Unique identifier of a source. (required)
-     * @param array|SourceUpdate $sourceUpdate sourceUpdate (required)
-     *                                         - $sourceUpdate['name'] => (string) Descriptive name of the source.
-     *                                         - $sourceUpdate['input'] => (array)
-     *                                         - $sourceUpdate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
+     * @param string             $sourceID       Unique identifier of a source. (required)
+     * @param array|SourceUpdate $sourceUpdate   (required)
+     * @param array              $requestOptions Request options
      *
-     * @see SourceUpdate
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|WatchResponse
+     * @return AlgoliaResponse
      */
-    public function validateSourceBeforeUpdate($sourceID, $sourceUpdate, $requestOptions = [])
+    public function validateSourceBeforeUpdateWithHttpInfo($sourceID, $sourceUpdate, $requestOptions = [])
     {
         // verify the required parameter 'sourceID' is set
         if (!isset($sourceID)) {
@@ -2944,7 +4305,7 @@ class IngestionClient
             $requestOptions['connectTimeout'] = 180;
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
@@ -3020,7 +4381,7 @@ class IngestionClient
         return $responses;
     }
 
-    private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
+    private function sendRequestWithHttpInfo($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
     {
         if (!isset($requestOptions['headers'])) {
             $requestOptions['headers'] = [];
@@ -3038,7 +4399,8 @@ class IngestionClient
             $resourcePath.($query ? "?{$query}" : ''),
             $httpBody,
             $requestOptions,
-            $useReadTransporter
+            $useReadTransporter,
+            true
         );
     }
 }

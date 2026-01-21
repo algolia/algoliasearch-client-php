@@ -15,6 +15,7 @@ use Algolia\AlgoliaSearch\Model\Recommend\RecommendUpdatedAtResponse;
 use Algolia\AlgoliaSearch\Model\Recommend\SearchRecommendRulesParams;
 use Algolia\AlgoliaSearch\Model\Recommend\SearchRecommendRulesResponse;
 use Algolia\AlgoliaSearch\ObjectSerializer;
+use Algolia\AlgoliaSearch\RetryStrategy\AlgoliaResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
@@ -137,6 +138,207 @@ class RecommendClient
      */
     public function batchRecommendRules($indexName, $model, $recommendRule = null, $requestOptions = [])
     {
+        $response = $this->batchRecommendRulesWithHttpInfo($indexName, $model, $recommendRule, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customDelete($path, $parameters = null, $requestOptions = [])
+    {
+        $response = $this->customDeleteWithHttpInfo($path, $parameters, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customGet($path, $parameters = null, $requestOptions = [])
+    {
+        $response = $this->customGetWithHttpInfo($path, $parameters, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customPost($path, $parameters = null, $body = null, $requestOptions = [])
+    {
+        $response = $this->customPostWithHttpInfo($path, $parameters, $body, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customPut($path, $parameters = null, $body = null, $requestOptions = [])
+    {
+        $response = $this->customPutWithHttpInfo($path, $parameters, $body, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Deletes a Recommend rule from a recommendation scenario.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param string $indexName      Name of the index on which to perform the operation. (required)
+     * @param array  $model          [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
+     * @param string $objectID       Unique record identifier. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|DeletedAtResponse
+     */
+    public function deleteRecommendRule($indexName, $model, $objectID, $requestOptions = [])
+    {
+        $response = $this->deleteRecommendRuleWithHttpInfo($indexName, $model, $objectID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves a Recommend rule that you previously created in the Algolia dashboard.
+     *
+     * Required API Key ACLs:
+     *  - settings
+     *
+     * @param string $indexName      Name of the index on which to perform the operation. (required)
+     * @param array  $model          [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
+     * @param string $objectID       Unique record identifier. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|RecommendRule
+     */
+    public function getRecommendRule($indexName, $model, $objectID, $requestOptions = [])
+    {
+        $response = $this->getRecommendRuleWithHttpInfo($indexName, $model, $objectID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Checks the status of a given task.  Deleting a Recommend rule is asynchronous. When you delete a rule, a task is created on a queue and completed depending on the load on the server. The API response includes a task ID that you can use to check the status.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param string $indexName      Name of the index on which to perform the operation. (required)
+     * @param array  $model          [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
+     * @param int    $taskID         Unique task identifier. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|GetRecommendTaskResponse
+     */
+    public function getRecommendStatus($indexName, $model, $taskID, $requestOptions = [])
+    {
+        $response = $this->getRecommendStatusWithHttpInfo($indexName, $model, $taskID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves recommendations from selected AI models.
+     *
+     * Required API Key ACLs:
+     *  - search
+     *
+     * @param array|GetRecommendationsParams $getRecommendationsParams getRecommendationsParams (required)
+     *                                                                 - $getRecommendationsParams['requests'] => (array) Recommendation request with parameters depending on the requested model. (required)
+     *
+     * @see GetRecommendationsParams
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|GetRecommendationsResponse
+     */
+    public function getRecommendations($getRecommendationsParams, $requestOptions = [])
+    {
+        $response = $this->getRecommendationsWithHttpInfo($getRecommendationsParams, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Searches for Recommend rules.  Use an empty query to list all rules for this recommendation scenario.
+     *
+     * Required API Key ACLs:
+     *  - settings
+     *
+     * @param string                           $indexName                  Name of the index on which to perform the operation. (required)
+     * @param array                            $model                      [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
+     * @param array|SearchRecommendRulesParams $searchRecommendRulesParams searchRecommendRulesParams (optional)
+     *                                                                     - $searchRecommendRulesParams['query'] => (string) Search query.
+     *                                                                     - $searchRecommendRulesParams['context'] => (string) Only search for rules with matching context.
+     *                                                                     - $searchRecommendRulesParams['page'] => (int) Requested page of the API response.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
+     *                                                                     - $searchRecommendRulesParams['hitsPerPage'] => (int) Maximum number of hits per page.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
+     *                                                                     - $searchRecommendRulesParams['enabled'] => (bool) Whether to only show rules where the value of their `enabled` property matches this parameter. If absent, show all rules, regardless of their `enabled` property.
+     *                                                                     - $searchRecommendRulesParams['filters'] => (string) Filter expression. This only searches for rules matching the filter expression.
+     *                                                                     - $searchRecommendRulesParams['facets'] => (array) Include facets and facet values in the response. Use `['*']` to include all facets.
+     *                                                                     - $searchRecommendRulesParams['maxValuesPerFacet'] => (int) Maximum number of values to return for each facet.
+     *
+     * @see SearchRecommendRulesParams
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|SearchRecommendRulesResponse
+     */
+    public function searchRecommendRules($indexName, $model, $searchRecommendRulesParams = null, $requestOptions = [])
+    {
+        $response = $this->searchRecommendRulesWithHttpInfo($indexName, $model, $searchRecommendRulesParams, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Create or update a batch of Recommend Rules (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Create or update a batch of Recommend Rules  Each Recommend Rule is created or updated, depending on whether a Recommend Rule with the same `objectID` already exists. You may also specify `true` for `clearExistingRules`, in which case the batch will atomically replace all the existing Recommend Rules.  Recommend Rules are similar to Search Rules, except that the conditions and consequences apply to a [source item](/doc/guides/algolia-recommend/overview/#recommend-models) instead of a query. The main differences are the following: - Conditions `pattern` and `anchoring` are unavailable. - Condition `filters` triggers if the source item matches the specified filters. - Condition `filters` accepts numeric filters. - Consequence `params` only covers filtering parameters. - Consequence `automaticFacetFilters` doesn't require a facet value placeholder (it tries to match the data source item's attributes instead).
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param string $indexName      Name of the index on which to perform the operation. (required)
+     * @param array  $model          [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
+     * @param array  $recommendRule  (optional)
+     * @param array  $requestOptions Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function batchRecommendRulesWithHttpInfo($indexName, $model, $recommendRule = null, $requestOptions = [])
+    {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
             throw new \InvalidArgumentException(
@@ -173,19 +375,22 @@ class RecommendClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customDelete($path, $parameters = null, $requestOptions = [])
+    public function customDeleteWithHttpInfo($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -212,19 +417,22 @@ class RecommendClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customGet($path, $parameters = null, $requestOptions = [])
+    public function customGetWithHttpInfo($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -251,20 +459,23 @@ class RecommendClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customPost($path, $parameters = null, $body = null, $requestOptions = [])
+    public function customPostWithHttpInfo($path, $parameters = null, $body = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -291,20 +502,23 @@ class RecommendClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customPut($path, $parameters = null, $body = null, $requestOptions = [])
+    public function customPutWithHttpInfo($path, $parameters = null, $body = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -331,23 +545,25 @@ class RecommendClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Deletes a Recommend rule from a recommendation scenario.
+     * Delete a rule (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Deletes a Recommend rule from a recommendation scenario.
      * Required API Key ACLs:
      *  - editSettings
      *
      * @param string $indexName      Name of the index on which to perform the operation. (required)
      * @param array  $model          [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
      * @param string $objectID       Unique record identifier. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|DeletedAtResponse
+     * @return AlgoliaResponse
      */
-    public function deleteRecommendRule($indexName, $model, $objectID, $requestOptions = [])
+    public function deleteRecommendRuleWithHttpInfo($indexName, $model, $objectID, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
@@ -400,23 +616,25 @@ class RecommendClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves a Recommend rule that you previously created in the Algolia dashboard.
+     * Retrieve a rule (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves a Recommend rule that you previously created in the Algolia dashboard.
      * Required API Key ACLs:
      *  - settings
      *
      * @param string $indexName      Name of the index on which to perform the operation. (required)
      * @param array  $model          [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
      * @param string $objectID       Unique record identifier. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|RecommendRule
+     * @return AlgoliaResponse
      */
-    public function getRecommendRule($indexName, $model, $objectID, $requestOptions = [])
+    public function getRecommendRuleWithHttpInfo($indexName, $model, $objectID, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
@@ -469,23 +687,25 @@ class RecommendClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Checks the status of a given task.  Deleting a Recommend rule is asynchronous. When you delete a rule, a task is created on a queue and completed depending on the load on the server. The API response includes a task ID that you can use to check the status.
+     * Check task status (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Checks the status of a given task.  Deleting a Recommend rule is asynchronous. When you delete a rule, a task is created on a queue and completed depending on the load on the server. The API response includes a task ID that you can use to check the status.
      * Required API Key ACLs:
      *  - editSettings
      *
      * @param string $indexName      Name of the index on which to perform the operation. (required)
      * @param array  $model          [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
      * @param int    $taskID         Unique task identifier. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|GetRecommendTaskResponse
+     * @return AlgoliaResponse
      */
-    public function getRecommendStatus($indexName, $model, $taskID, $requestOptions = [])
+    public function getRecommendStatusWithHttpInfo($indexName, $model, $taskID, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
@@ -538,25 +758,23 @@ class RecommendClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves recommendations from selected AI models.
+     * Retrieve recommendations (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves recommendations from selected AI models.
      * Required API Key ACLs:
      *  - search
      *
-     * @param array|GetRecommendationsParams $getRecommendationsParams getRecommendationsParams (required)
-     *                                                                 - $getRecommendationsParams['requests'] => (array) Recommendation request with parameters depending on the requested model. (required)
+     * @param array|GetRecommendationsParams $getRecommendationsParams (required)
+     * @param array                          $requestOptions           Request options
      *
-     * @see GetRecommendationsParams
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|GetRecommendationsResponse
+     * @return AlgoliaResponse
      */
-    public function getRecommendations($getRecommendationsParams, $requestOptions = [])
+    public function getRecommendationsWithHttpInfo($getRecommendationsParams, $requestOptions = [])
     {
         // verify the required parameter 'getRecommendationsParams' is set
         if (!isset($getRecommendationsParams)) {
@@ -570,34 +788,25 @@ class RecommendClient
         $headers = [];
         $httpBody = $getRecommendationsParams;
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, true);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, true);
     }
 
     /**
-     * Searches for Recommend rules.  Use an empty query to list all rules for this recommendation scenario.
+     * Search for rules (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Searches for Recommend rules.  Use an empty query to list all rules for this recommendation scenario.
      * Required API Key ACLs:
      *  - settings
      *
      * @param string                           $indexName                  Name of the index on which to perform the operation. (required)
      * @param array                            $model                      [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
-     * @param array|SearchRecommendRulesParams $searchRecommendRulesParams searchRecommendRulesParams (optional)
-     *                                                                     - $searchRecommendRulesParams['query'] => (string) Search query.
-     *                                                                     - $searchRecommendRulesParams['context'] => (string) Only search for rules with matching context.
-     *                                                                     - $searchRecommendRulesParams['page'] => (int) Requested page of the API response.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
-     *                                                                     - $searchRecommendRulesParams['hitsPerPage'] => (int) Maximum number of hits per page.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
-     *                                                                     - $searchRecommendRulesParams['enabled'] => (bool) Whether to only show rules where the value of their `enabled` property matches this parameter. If absent, show all rules, regardless of their `enabled` property.
-     *                                                                     - $searchRecommendRulesParams['filters'] => (string) Filter expression. This only searches for rules matching the filter expression.
-     *                                                                     - $searchRecommendRulesParams['facets'] => (array) Include facets and facet values in the response. Use `['*']` to include all facets.
-     *                                                                     - $searchRecommendRulesParams['maxValuesPerFacet'] => (int) Maximum number of values to return for each facet.
+     * @param array|SearchRecommendRulesParams $searchRecommendRulesParams (optional)
+     * @param array                            $requestOptions             Request options
      *
-     * @see SearchRecommendRulesParams
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|SearchRecommendRulesResponse
+     * @return AlgoliaResponse
      */
-    public function searchRecommendRules($indexName, $model, $searchRecommendRulesParams = null, $requestOptions = [])
+    public function searchRecommendRulesWithHttpInfo($indexName, $model, $searchRecommendRulesParams = null, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
@@ -635,10 +844,10 @@ class RecommendClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, true);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, true);
     }
 
-    private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
+    private function sendRequestWithHttpInfo($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
     {
         if (!isset($requestOptions['headers'])) {
             $requestOptions['headers'] = [];
@@ -656,7 +865,8 @@ class RecommendClient
             $resourcePath.($query ? "?{$query}" : ''),
             $httpBody,
             $requestOptions,
-            $useReadTransporter
+            $useReadTransporter,
+            true
         );
     }
 }

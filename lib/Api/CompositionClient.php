@@ -22,6 +22,7 @@ use Algolia\AlgoliaSearch\Model\Composition\SearchForFacetValuesResponse;
 use Algolia\AlgoliaSearch\Model\Composition\SearchResponse;
 use Algolia\AlgoliaSearch\Model\Composition\TaskIDResponse;
 use Algolia\AlgoliaSearch\ObjectSerializer;
+use Algolia\AlgoliaSearch\RetryStrategy\AlgoliaResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
@@ -140,6 +141,390 @@ class CompositionClient
      */
     public function customDelete($path, $parameters = null, $requestOptions = [])
     {
+        $response = $this->customDeleteWithHttpInfo($path, $parameters, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customGet($path, $parameters = null, $requestOptions = [])
+    {
+        $response = $this->customGetWithHttpInfo($path, $parameters, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customPost($path, $parameters = null, $body = null, $requestOptions = [])
+    {
+        $response = $this->customPostWithHttpInfo($path, $parameters, $body, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customPut($path, $parameters = null, $body = null, $requestOptions = [])
+    {
+        $response = $this->customPutWithHttpInfo($path, $parameters, $body, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Delete a composition from the current Algolia application.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param string $compositionID  Unique Composition ObjectID. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TaskIDResponse
+     */
+    public function deleteComposition($compositionID, $requestOptions = [])
+    {
+        $response = $this->deleteCompositionWithHttpInfo($compositionID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Delete a Composition Rule from the specified Composition ID.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param string $compositionID  Unique Composition ObjectID. (required)
+     * @param string $objectID       Unique identifier of a rule object. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TaskIDResponse
+     */
+    public function deleteCompositionRule($compositionID, $objectID, $requestOptions = [])
+    {
+        $response = $this->deleteCompositionRuleWithHttpInfo($compositionID, $objectID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieve a single composition in the current Algolia application.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *  - settings
+     *
+     * @param string $compositionID  Unique Composition ObjectID. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|Composition
+     */
+    public function getComposition($compositionID, $requestOptions = [])
+    {
+        $response = $this->getCompositionWithHttpInfo($compositionID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves a rule by its ID.  To find the object ID of a rule, use the [`search` operation](https://www.algolia.com/doc/rest-api/composition/search-composition-rules).
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *  - settings
+     *
+     * @param string $compositionID  Unique Composition ObjectID. (required)
+     * @param string $objectID       Unique identifier of a rule object. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|CompositionRule
+     */
+    public function getRule($compositionID, $objectID, $requestOptions = [])
+    {
+        $response = $this->getRuleWithHttpInfo($compositionID, $objectID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Checks the status of a given task.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *  - settings
+     *  - addObject
+     *  - deleteObject
+     *  - deleteIndex
+     *
+     * @param string $compositionID  Unique Composition ObjectID. (required)
+     * @param int    $taskID         Unique task identifier. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|GetTaskResponse
+     */
+    public function getTask($compositionID, $taskID, $requestOptions = [])
+    {
+        $response = $this->getTaskWithHttpInfo($compositionID, $taskID, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Lists all compositions in the current Algolia application.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *  - settings
+     *
+     * @param int   $page           Requested page of the API response. If `null`, the API response is not paginated. (optional)
+     * @param int   $hitsPerPage    Number of hits per page. (optional, default to 100)
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|ListCompositionsResponse
+     */
+    public function listCompositions($page = null, $hitsPerPage = null, $requestOptions = [])
+    {
+        $response = $this->listCompositionsWithHttpInfo($page, $hitsPerPage, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Adds, updates, or deletes compositions with a single API request.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param array|BatchParams $batchParams batchParams (required)
+     *                                       - $batchParams['requests'] => (array)  (required)
+     *
+     * @see BatchParams
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|MultipleBatchResponse
+     */
+    public function multipleBatch($batchParams, $requestOptions = [])
+    {
+        $response = $this->multipleBatchWithHttpInfo($batchParams, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Update and insert a composition in the current Algolia application.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param string            $compositionID Unique Composition ObjectID. (required)
+     * @param array|Composition $composition   composition (required)
+     *                                         - $composition['objectID'] => (string) Composition unique identifier. (required)
+     *                                         - $composition['name'] => (string) Composition name. (required)
+     *                                         - $composition['description'] => (string) Composition description.
+     *                                         - $composition['behavior'] => (array)  (required)
+     *                                         - $composition['sortingStrategy'] => (array) A mapping of sorting labels to the indices (or replicas) that implement those sorting rules. The sorting indices MUST be related to the associated main targeted index in the composition. Each key is the label your frontend sends at runtime (for example, \"Price (asc)\"), and each value is the name of the index that should be queried when that label is selected.  When a request includes a \"sortBy\" parameter, the platform looks up the corresponding index in this mapping and uses it to execute the query. The main targeted index is replaced with the sorting strategy index it is mapped to.  Up to 20 sorting strategies can be defined.
+     *
+     * @see Composition
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TaskIDResponse
+     */
+    public function putComposition($compositionID, $composition, $requestOptions = [])
+    {
+        $response = $this->putCompositionWithHttpInfo($compositionID, $composition, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * If a composition rule with the provided ID already exists, it's replaced. Otherwise, a new one is added.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param string                $compositionID   Unique Composition ObjectID. (required)
+     * @param string                $objectID        Unique identifier of a rule object. (required)
+     * @param array|CompositionRule $compositionRule compositionRule (required)
+     *                                               - $compositionRule['objectID'] => (string) Composition rule unique identifier. (required)
+     *                                               - $compositionRule['conditions'] => (array) Conditions that trigger a composition rule.
+     *                                               - $compositionRule['consequence'] => (array)  (required)
+     *                                               - $compositionRule['description'] => (string) Description of the rule's purpose to help you distinguish between different rules.
+     *                                               - $compositionRule['enabled'] => (bool) Whether the rule is active.
+     *                                               - $compositionRule['validity'] => (array) Time periods when the rule is active.
+     *                                               - $compositionRule['tags'] => (array) A list of tags.
+     *
+     * @see CompositionRule
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TaskIDResponse
+     */
+    public function putCompositionRule($compositionID, $objectID, $compositionRule, $requestOptions = [])
+    {
+        $response = $this->putCompositionRuleWithHttpInfo($compositionID, $objectID, $compositionRule, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Create or update or delete multiple composition rules.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param string                            $compositionID Unique Composition ObjectID. (required)
+     * @param array|CompositionRulesBatchParams $rules         rules (required)
+     *                                                         - $rules['requests'] => (array)
+     *
+     * @see CompositionRulesBatchParams
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|RulesMultipleBatchResponse
+     */
+    public function saveRules($compositionID, $rules, $requestOptions = [])
+    {
+        $response = $this->saveRulesWithHttpInfo($compositionID, $rules, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Runs a query on a single composition and returns matching results.
+     *
+     * Required API Key ACLs:
+     *  - search
+     *
+     * @param string            $compositionID Unique Composition ObjectID. (required)
+     * @param array|RequestBody $requestBody   requestBody (required)
+     *                                         - $requestBody['params'] => (array)
+     *
+     * @see RequestBody
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|SearchResponse
+     */
+    public function search($compositionID, $requestBody, $requestOptions = [])
+    {
+        $response = $this->searchWithHttpInfo($compositionID, $requestBody, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Searches for composition rules in your index.
+     *
+     * Required API Key ACLs:
+     *  - settings
+     *
+     * @param string                             $compositionID                Unique Composition ObjectID. (required)
+     * @param array|SearchCompositionRulesParams $searchCompositionRulesParams searchCompositionRulesParams (optional)
+     *                                                                         - $searchCompositionRulesParams['query'] => (string) Search query for rules.
+     *                                                                         - $searchCompositionRulesParams['anchoring'] => (array)
+     *                                                                         - $searchCompositionRulesParams['context'] => (string) Only return composition rules that match the context (exact match).
+     *                                                                         - $searchCompositionRulesParams['page'] => (int) Requested page of the API response.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
+     *                                                                         - $searchCompositionRulesParams['hitsPerPage'] => (int) Maximum number of hits per page.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
+     *                                                                         - $searchCompositionRulesParams['enabled'] => (bool) If `true`, return only enabled composition rules. If `false`, return only inactive composition rules. By default, _all_ composition rules are returned.
+     *
+     * @see SearchCompositionRulesParams
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|SearchCompositionRulesResponse
+     */
+    public function searchCompositionRules($compositionID, $searchCompositionRulesParams = null, $requestOptions = [])
+    {
+        $response = $this->searchCompositionRulesWithHttpInfo($compositionID, $searchCompositionRulesParams, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Searches for values of a specified facet attribute on the composition's main source's index.  - By default, facet values are sorted by decreasing count.   You can adjust this with the `sortFacetValueBy` parameter. - Searching for facet values doesn't work if you have **more than 65 searchable facets and searchable attributes combined**.
+     *
+     * Required API Key ACLs:
+     *  - search
+     *
+     * @param string                            $compositionID               Unique Composition ObjectID. (required)
+     * @param string                            $facetName                   Facet attribute in which to search for values.  This attribute must be included in the `attributesForFaceting` index setting with the `searchable()` modifier. (required)
+     * @param array|SearchForFacetValuesRequest $searchForFacetValuesRequest searchForFacetValuesRequest (optional)
+     *                                                                       - $searchForFacetValuesRequest['params'] => (array)
+     *
+     * @see SearchForFacetValuesRequest
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|SearchForFacetValuesResponse
+     */
+    public function searchForFacetValues($compositionID, $facetName, $searchForFacetValuesRequest = null, $requestOptions = [])
+    {
+        $response = $this->searchForFacetValuesWithHttpInfo($compositionID, $facetName, $searchForFacetValuesRequest, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Updates the \"sortingStrategy\" field of an existing composition. This endpoint allows you to create a new sorting strategy mapping or replace the currently configured one. The provided sorting indices MUST be associated indices or replicas of the main targeted index.  WARNING: This endpoint cannot validate if the sort index is related to the composition's main index.   Validation will fail at runtime if the index you updated is not related!  The update is applied to the specified composition within the current Algolia application and returns a taskID that can be used to track the operation’s completion.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param string $compositionID  Unique Composition ObjectID. (required)
+     * @param array  $requestBody    requestBody (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TaskIDResponse
+     */
+    public function updateSortingStrategyComposition($compositionID, $requestBody, $requestOptions = [])
+    {
+        $response = $this->updateSortingStrategyCompositionWithHttpInfo($compositionID, $requestBody, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function customDeleteWithHttpInfo($path, $parameters = null, $requestOptions = [])
+    {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
             throw new \InvalidArgumentException(
@@ -165,19 +550,22 @@ class CompositionClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customGet($path, $parameters = null, $requestOptions = [])
+    public function customGetWithHttpInfo($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -204,20 +592,23 @@ class CompositionClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customPost($path, $parameters = null, $body = null, $requestOptions = [])
+    public function customPostWithHttpInfo($path, $parameters = null, $body = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -244,20 +635,23 @@ class CompositionClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customPut($path, $parameters = null, $body = null, $requestOptions = [])
+    public function customPutWithHttpInfo($path, $parameters = null, $body = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -284,21 +678,23 @@ class CompositionClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Delete a composition from the current Algolia application.
+     * Delete a composition (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Delete a composition from the current Algolia application.
      * Required API Key ACLs:
      *  - editSettings
      *
      * @param string $compositionID  Unique Composition ObjectID. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|TaskIDResponse
+     * @return AlgoliaResponse
      */
-    public function deleteComposition($compositionID, $requestOptions = [])
+    public function deleteCompositionWithHttpInfo($compositionID, $requestOptions = [])
     {
         // verify the required parameter 'compositionID' is set
         if (!isset($compositionID)) {
@@ -321,22 +717,24 @@ class CompositionClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Delete a Composition Rule from the specified Composition ID.
+     * Delete a Composition Rule (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Delete a Composition Rule from the specified Composition ID.
      * Required API Key ACLs:
      *  - editSettings
      *
      * @param string $compositionID  Unique Composition ObjectID. (required)
      * @param string $objectID       Unique identifier of a rule object. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|TaskIDResponse
+     * @return AlgoliaResponse
      */
-    public function deleteCompositionRule($compositionID, $objectID, $requestOptions = [])
+    public function deleteCompositionRuleWithHttpInfo($compositionID, $objectID, $requestOptions = [])
     {
         // verify the required parameter 'compositionID' is set
         if (!isset($compositionID)) {
@@ -374,22 +772,24 @@ class CompositionClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieve a single composition in the current Algolia application.
+     * Retrieve a composition (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieve a single composition in the current Algolia application.
      * Required API Key ACLs:
      *  - editSettings
      *  - settings
      *
      * @param string $compositionID  Unique Composition ObjectID. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|Composition
+     * @return AlgoliaResponse
      */
-    public function getComposition($compositionID, $requestOptions = [])
+    public function getCompositionWithHttpInfo($compositionID, $requestOptions = [])
     {
         // verify the required parameter 'compositionID' is set
         if (!isset($compositionID)) {
@@ -412,23 +812,25 @@ class CompositionClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves a rule by its ID.  To find the object ID of a rule, use the [`search` operation](https://www.algolia.com/doc/rest-api/composition/search-composition-rules).
+     * Retrieve a rule (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves a rule by its ID.  To find the object ID of a rule, use the [`search` operation](https://www.algolia.com/doc/rest-api/composition/search-composition-rules).
      * Required API Key ACLs:
      *  - editSettings
      *  - settings
      *
      * @param string $compositionID  Unique Composition ObjectID. (required)
      * @param string $objectID       Unique identifier of a rule object. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|CompositionRule
+     * @return AlgoliaResponse
      */
-    public function getRule($compositionID, $objectID, $requestOptions = [])
+    public function getRuleWithHttpInfo($compositionID, $objectID, $requestOptions = [])
     {
         // verify the required parameter 'compositionID' is set
         if (!isset($compositionID)) {
@@ -466,12 +868,14 @@ class CompositionClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Checks the status of a given task.
+     * Check task status (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Checks the status of a given task.
      * Required API Key ACLs:
      *  - editSettings
      *  - settings
@@ -481,11 +885,11 @@ class CompositionClient
      *
      * @param string $compositionID  Unique Composition ObjectID. (required)
      * @param int    $taskID         Unique task identifier. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|GetTaskResponse
+     * @return AlgoliaResponse
      */
-    public function getTask($compositionID, $taskID, $requestOptions = [])
+    public function getTaskWithHttpInfo($compositionID, $taskID, $requestOptions = [])
     {
         // verify the required parameter 'compositionID' is set
         if (!isset($compositionID)) {
@@ -523,23 +927,25 @@ class CompositionClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Lists all compositions in the current Algolia application.
+     * List compositions (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Lists all compositions in the current Algolia application.
      * Required API Key ACLs:
      *  - editSettings
      *  - settings
      *
      * @param int   $page           Requested page of the API response. If `null`, the API response is not paginated. (optional)
-     * @param int   $hitsPerPage    Number of hits per page. (optional, default to 100)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param int   $hitsPerPage    Number of hits per page. (optional)
+     * @param array $requestOptions Request options
      *
-     * @return array<string, mixed>|ListCompositionsResponse
+     * @return AlgoliaResponse
      */
-    public function listCompositions($page = null, $hitsPerPage = null, $requestOptions = [])
+    public function listCompositionsWithHttpInfo($page = null, $hitsPerPage = null, $requestOptions = [])
     {
         $resourcePath = '/1/compositions';
         $queryParameters = [];
@@ -554,25 +960,23 @@ class CompositionClient
             $queryParameters['hitsPerPage'] = $hitsPerPage;
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Adds, updates, or deletes compositions with a single API request.
+     * Batch action to multiple compositions (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Adds, updates, or deletes compositions with a single API request.
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param array|BatchParams $batchParams batchParams (required)
-     *                                       - $batchParams['requests'] => (array)  (required)
+     * @param array|BatchParams $batchParams    (required)
+     * @param array             $requestOptions Request options
      *
-     * @see BatchParams
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|MultipleBatchResponse
+     * @return AlgoliaResponse
      */
-    public function multipleBatch($batchParams, $requestOptions = [])
+    public function multipleBatchWithHttpInfo($batchParams, $requestOptions = [])
     {
         // verify the required parameter 'batchParams' is set
         if (!isset($batchParams)) {
@@ -586,30 +990,24 @@ class CompositionClient
         $headers = [];
         $httpBody = $batchParams;
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Update and insert a composition in the current Algolia application.
+     * Update and insert (upsert) a composition (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Update and insert a composition in the current Algolia application.
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param string            $compositionID Unique Composition ObjectID. (required)
-     * @param array|Composition $composition   composition (required)
-     *                                         - $composition['objectID'] => (string) Composition unique identifier. (required)
-     *                                         - $composition['name'] => (string) Composition name. (required)
-     *                                         - $composition['description'] => (string) Composition description.
-     *                                         - $composition['behavior'] => (array)  (required)
-     *                                         - $composition['sortingStrategy'] => (array) A mapping of sorting labels to the indices (or replicas) that implement those sorting rules. The sorting indices MUST be related to the associated main targeted index in the composition. Each key is the label your frontend sends at runtime (for example, \"Price (asc)\"), and each value is the name of the index that should be queried when that label is selected.  When a request includes a \"sortBy\" parameter, the platform looks up the corresponding index in this mapping and uses it to execute the query. The main targeted index is replaced with the sorting strategy index it is mapped to.  Up to 20 sorting strategies can be defined.
+     * @param string            $compositionID  Unique Composition ObjectID. (required)
+     * @param array|Composition $composition    (required)
+     * @param array             $requestOptions Request options
      *
-     * @see Composition
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|TaskIDResponse
+     * @return AlgoliaResponse
      */
-    public function putComposition($compositionID, $composition, $requestOptions = [])
+    public function putCompositionWithHttpInfo($compositionID, $composition, $requestOptions = [])
     {
         // verify the required parameter 'compositionID' is set
         if (!isset($compositionID)) {
@@ -638,33 +1036,25 @@ class CompositionClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * If a composition rule with the provided ID already exists, it's replaced. Otherwise, a new one is added.
+     * Add or update a composition rule (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * If a composition rule with the provided ID already exists, it's replaced. Otherwise, a new one is added.
      * Required API Key ACLs:
      *  - editSettings
      *
      * @param string                $compositionID   Unique Composition ObjectID. (required)
      * @param string                $objectID        Unique identifier of a rule object. (required)
-     * @param array|CompositionRule $compositionRule compositionRule (required)
-     *                                               - $compositionRule['objectID'] => (string) Composition rule unique identifier. (required)
-     *                                               - $compositionRule['conditions'] => (array) Conditions that trigger a composition rule.
-     *                                               - $compositionRule['consequence'] => (array)  (required)
-     *                                               - $compositionRule['description'] => (string) Description of the rule's purpose to help you distinguish between different rules.
-     *                                               - $compositionRule['enabled'] => (bool) Whether the rule is active.
-     *                                               - $compositionRule['validity'] => (array) Time periods when the rule is active.
-     *                                               - $compositionRule['tags'] => (array) A list of tags.
+     * @param array|CompositionRule $compositionRule (required)
+     * @param array                 $requestOptions  Request options
      *
-     * @see CompositionRule
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|TaskIDResponse
+     * @return AlgoliaResponse
      */
-    public function putCompositionRule($compositionID, $objectID, $compositionRule, $requestOptions = [])
+    public function putCompositionRuleWithHttpInfo($compositionID, $objectID, $compositionRule, $requestOptions = [])
     {
         // verify the required parameter 'compositionID' is set
         if (!isset($compositionID)) {
@@ -708,26 +1098,24 @@ class CompositionClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Create or update or delete multiple composition rules.
+     * Create or update or delete composition rules (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Create or update or delete multiple composition rules.
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param string                            $compositionID Unique Composition ObjectID. (required)
-     * @param array|CompositionRulesBatchParams $rules         rules (required)
-     *                                                         - $rules['requests'] => (array)
+     * @param string                            $compositionID  Unique Composition ObjectID. (required)
+     * @param array|CompositionRulesBatchParams $rules          (required)
+     * @param array                             $requestOptions Request options
      *
-     * @see CompositionRulesBatchParams
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|RulesMultipleBatchResponse
+     * @return AlgoliaResponse
      */
-    public function saveRules($compositionID, $rules, $requestOptions = [])
+    public function saveRulesWithHttpInfo($compositionID, $rules, $requestOptions = [])
     {
         // verify the required parameter 'compositionID' is set
         if (!isset($compositionID)) {
@@ -756,26 +1144,24 @@ class CompositionClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Runs a query on a single composition and returns matching results.
+     * Run a Composition (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Runs a query on a single composition and returns matching results.
      * Required API Key ACLs:
      *  - search
      *
-     * @param string            $compositionID Unique Composition ObjectID. (required)
-     * @param array|RequestBody $requestBody   requestBody (required)
-     *                                         - $requestBody['params'] => (array)
+     * @param string            $compositionID  Unique Composition ObjectID. (required)
+     * @param array|RequestBody $requestBody    (required)
+     * @param array             $requestOptions Request options
      *
-     * @see RequestBody
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|SearchResponse
+     * @return AlgoliaResponse
      */
-    public function search($compositionID, $requestBody, $requestOptions = [])
+    public function searchWithHttpInfo($compositionID, $requestBody, $requestOptions = [])
     {
         // verify the required parameter 'compositionID' is set
         if (!isset($compositionID)) {
@@ -804,31 +1190,24 @@ class CompositionClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, true);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, true);
     }
 
     /**
-     * Searches for composition rules in your index.
+     * Search for composition rules (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Searches for composition rules in your index.
      * Required API Key ACLs:
      *  - settings
      *
      * @param string                             $compositionID                Unique Composition ObjectID. (required)
-     * @param array|SearchCompositionRulesParams $searchCompositionRulesParams searchCompositionRulesParams (optional)
-     *                                                                         - $searchCompositionRulesParams['query'] => (string) Search query for rules.
-     *                                                                         - $searchCompositionRulesParams['anchoring'] => (array)
-     *                                                                         - $searchCompositionRulesParams['context'] => (string) Only return composition rules that match the context (exact match).
-     *                                                                         - $searchCompositionRulesParams['page'] => (int) Requested page of the API response.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
-     *                                                                         - $searchCompositionRulesParams['hitsPerPage'] => (int) Maximum number of hits per page.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
-     *                                                                         - $searchCompositionRulesParams['enabled'] => (bool) If `true`, return only enabled composition rules. If `false`, return only inactive composition rules. By default, _all_ composition rules are returned.
+     * @param array|SearchCompositionRulesParams $searchCompositionRulesParams (optional)
+     * @param array                              $requestOptions               Request options
      *
-     * @see SearchCompositionRulesParams
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|SearchCompositionRulesResponse
+     * @return AlgoliaResponse
      */
-    public function searchCompositionRules($compositionID, $searchCompositionRulesParams = null, $requestOptions = [])
+    public function searchCompositionRulesWithHttpInfo($compositionID, $searchCompositionRulesParams = null, $requestOptions = [])
     {
         // verify the required parameter 'compositionID' is set
         if (!isset($compositionID)) {
@@ -851,27 +1230,25 @@ class CompositionClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Searches for values of a specified facet attribute on the composition's main source's index.  - By default, facet values are sorted by decreasing count.   You can adjust this with the `sortFacetValueBy` parameter. - Searching for facet values doesn't work if you have **more than 65 searchable facets and searchable attributes combined**.
+     * Search for facet values (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Searches for values of a specified facet attribute on the composition's main source's index.  - By default, facet values are sorted by decreasing count.   You can adjust this with the `sortFacetValueBy` parameter. - Searching for facet values doesn't work if you have **more than 65 searchable facets and searchable attributes combined**.
      * Required API Key ACLs:
      *  - search
      *
      * @param string                            $compositionID               Unique Composition ObjectID. (required)
      * @param string                            $facetName                   Facet attribute in which to search for values.  This attribute must be included in the `attributesForFaceting` index setting with the `searchable()` modifier. (required)
-     * @param array|SearchForFacetValuesRequest $searchForFacetValuesRequest searchForFacetValuesRequest (optional)
-     *                                                                       - $searchForFacetValuesRequest['params'] => (array)
+     * @param array|SearchForFacetValuesRequest $searchForFacetValuesRequest (optional)
+     * @param array                             $requestOptions              Request options
      *
-     * @see SearchForFacetValuesRequest
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|SearchForFacetValuesResponse
+     * @return AlgoliaResponse
      */
-    public function searchForFacetValues($compositionID, $facetName, $searchForFacetValuesRequest = null, $requestOptions = [])
+    public function searchForFacetValuesWithHttpInfo($compositionID, $facetName, $searchForFacetValuesRequest = null, $requestOptions = [])
     {
         // verify the required parameter 'compositionID' is set
         if (!isset($compositionID)) {
@@ -909,22 +1286,24 @@ class CompositionClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, true);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, true);
     }
 
     /**
-     * Updates the \"sortingStrategy\" field of an existing composition. This endpoint allows you to create a new sorting strategy mapping or replace the currently configured one. The provided sorting indices MUST be associated indices or replicas of the main targeted index.  WARNING: This endpoint cannot validate if the sort index is related to the composition's main index.   Validation will fail at runtime if the index you updated is not related!  The update is applied to the specified composition within the current Algolia application and returns a taskID that can be used to track the operation’s completion.
+     * Set or update the \&quot;sortingStrategy\&quot; configuration for an existing composition (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Updates the \"sortingStrategy\" field of an existing composition. This endpoint allows you to create a new sorting strategy mapping or replace the currently configured one. The provided sorting indices MUST be associated indices or replicas of the main targeted index.  WARNING: This endpoint cannot validate if the sort index is related to the composition's main index.   Validation will fail at runtime if the index you updated is not related!  The update is applied to the specified composition within the current Algolia application and returns a taskID that can be used to track the operation’s completion.
      * Required API Key ACLs:
      *  - editSettings
      *
      * @param string $compositionID  Unique Composition ObjectID. (required)
-     * @param array  $requestBody    requestBody (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestBody    (required)
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|TaskIDResponse
+     * @return AlgoliaResponse
      */
-    public function updateSortingStrategyComposition($compositionID, $requestBody, $requestOptions = [])
+    public function updateSortingStrategyCompositionWithHttpInfo($compositionID, $requestBody, $requestOptions = [])
     {
         // verify the required parameter 'compositionID' is set
         if (!isset($compositionID)) {
@@ -953,10 +1332,10 @@ class CompositionClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
-    private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
+    private function sendRequestWithHttpInfo($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
     {
         if (!isset($requestOptions['headers'])) {
             $requestOptions['headers'] = [];
@@ -974,7 +1353,8 @@ class CompositionClient
             $resourcePath.($query ? "?{$query}" : ''),
             $httpBody,
             $requestOptions,
-            $useReadTransporter
+            $useReadTransporter,
+            true
         );
     }
 }

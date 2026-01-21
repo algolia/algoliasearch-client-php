@@ -13,6 +13,7 @@ use Algolia\AlgoliaSearch\Model\Abtesting\EstimateABTestRequest;
 use Algolia\AlgoliaSearch\Model\Abtesting\EstimateABTestResponse;
 use Algolia\AlgoliaSearch\Model\Abtesting\ListABTestsResponse;
 use Algolia\AlgoliaSearch\ObjectSerializer;
+use Algolia\AlgoliaSearch\RetryStrategy\AlgoliaResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
@@ -139,19 +140,9 @@ class AbtestingClient
      */
     public function addABTests($addABTestsRequest, $requestOptions = [])
     {
-        // verify the required parameter 'addABTestsRequest' is set
-        if (!isset($addABTestsRequest)) {
-            throw new \InvalidArgumentException(
-                'Parameter `addABTestsRequest` is required when calling `addABTests`.'
-            );
-        }
+        $response = $this->addABTestsWithHttpInfo($addABTestsRequest, $requestOptions);
 
-        $resourcePath = '/2/abtests';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = $addABTestsRequest;
-
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $response->getData();
     }
 
     /**
@@ -164,6 +155,203 @@ class AbtestingClient
      * @return array<string, mixed>|object
      */
     public function customDelete($path, $parameters = null, $requestOptions = [])
+    {
+        $response = $this->customDeleteWithHttpInfo($path, $parameters, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customGet($path, $parameters = null, $requestOptions = [])
+    {
+        $response = $this->customGetWithHttpInfo($path, $parameters, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customPost($path, $parameters = null, $body = null, $requestOptions = [])
+    {
+        $response = $this->customPostWithHttpInfo($path, $parameters, $body, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customPut($path, $parameters = null, $body = null, $requestOptions = [])
+    {
+        $response = $this->customPutWithHttpInfo($path, $parameters, $body, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Deletes an A/B test by its ID.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param int   $id             Unique A/B test identifier. (required)
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return ABTestResponse|array<string, mixed>
+     */
+    public function deleteABTest($id, $requestOptions = [])
+    {
+        $response = $this->deleteABTestWithHttpInfo($id, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Given the traffic percentage and the expected effect size, this endpoint estimates the sample size and duration of an A/B test based on historical traffic.
+     *
+     * Required API Key ACLs:
+     *  - analytics
+     *
+     * @param array|EstimateABTestRequest $estimateABTestRequest estimateABTestRequest (required)
+     *                                                           - $estimateABTestRequest['configuration'] => (array)  (required)
+     *                                                           - $estimateABTestRequest['variants'] => (array) A/B test variants. (required)
+     *
+     * @see EstimateABTestRequest
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|EstimateABTestResponse
+     */
+    public function estimateABTest($estimateABTestRequest, $requestOptions = [])
+    {
+        $response = $this->estimateABTestWithHttpInfo($estimateABTestRequest, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Retrieves the details for an A/B test by its ID.
+     *
+     * Required API Key ACLs:
+     *  - analytics
+     *
+     * @param int   $id             Unique A/B test identifier. (required)
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return ABTest|array<string, mixed>
+     */
+    public function getABTest($id, $requestOptions = [])
+    {
+        $response = $this->getABTestWithHttpInfo($id, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Lists all A/B tests you configured for this application.
+     *
+     * Required API Key ACLs:
+     *  - analytics
+     *
+     * @param int    $offset         Position of the first item to return. (optional, default to 0)
+     * @param int    $limit          Number of items to return. (optional, default to 10)
+     * @param string $indexPrefix    Index name prefix. Only A/B tests for indices starting with this string are included in the response. (optional)
+     * @param string $indexSuffix    Index name suffix. Only A/B tests for indices ending with this string are included in the response. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|ListABTestsResponse
+     */
+    public function listABTests($offset = null, $limit = null, $indexPrefix = null, $indexSuffix = null, $requestOptions = [])
+    {
+        $response = $this->listABTestsWithHttpInfo($offset, $limit, $indexPrefix, $indexSuffix, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Stops an A/B test by its ID.  You can't restart stopped A/B tests.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param int   $id             Unique A/B test identifier. (required)
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return ABTestResponse|array<string, mixed>
+     */
+    public function stopABTest($id, $requestOptions = [])
+    {
+        $response = $this->stopABTestWithHttpInfo($id, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Create an A/B test (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Creates a new A/B test.
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param AddABTestsRequest|array $addABTestsRequest (required)
+     * @param array                   $requestOptions    Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function addABTestsWithHttpInfo($addABTestsRequest, $requestOptions = [])
+    {
+        // verify the required parameter 'addABTestsRequest' is set
+        if (!isset($addABTestsRequest)) {
+            throw new \InvalidArgumentException(
+                'Parameter `addABTestsRequest` is required when calling `addABTests`.'
+            );
+        }
+
+        $resourcePath = '/2/abtests';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $addABTestsRequest;
+
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * This method lets you send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function customDeleteWithHttpInfo($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -190,19 +378,22 @@ class AbtestingClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customGet($path, $parameters = null, $requestOptions = [])
+    public function customGetWithHttpInfo($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -229,20 +420,23 @@ class AbtestingClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customPost($path, $parameters = null, $body = null, $requestOptions = [])
+    public function customPostWithHttpInfo($path, $parameters = null, $body = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -269,20 +463,23 @@ class AbtestingClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
+     * Send requests to the Algolia REST API (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|object
+     * @return AlgoliaResponse
      */
-    public function customPut($path, $parameters = null, $body = null, $requestOptions = [])
+    public function customPutWithHttpInfo($path, $parameters = null, $body = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
@@ -309,21 +506,23 @@ class AbtestingClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Deletes an A/B test by its ID.
+     * Delete an A/B test (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Deletes an A/B test by its ID.
      * Required API Key ACLs:
      *  - editSettings
      *
      * @param int   $id             Unique A/B test identifier. (required)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array $requestOptions Request options
      *
-     * @return ABTestResponse|array<string, mixed>
+     * @return AlgoliaResponse
      */
-    public function deleteABTest($id, $requestOptions = [])
+    public function deleteABTestWithHttpInfo($id, $requestOptions = [])
     {
         // verify the required parameter 'id' is set
         if (!isset($id)) {
@@ -346,26 +545,23 @@ class AbtestingClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Given the traffic percentage and the expected effect size, this endpoint estimates the sample size and duration of an A/B test based on historical traffic.
+     * Estimate the sample size and duration of an A/B test (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Given the traffic percentage and the expected effect size, this endpoint estimates the sample size and duration of an A/B test based on historical traffic.
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param array|EstimateABTestRequest $estimateABTestRequest estimateABTestRequest (required)
-     *                                                           - $estimateABTestRequest['configuration'] => (array)  (required)
-     *                                                           - $estimateABTestRequest['variants'] => (array) A/B test variants. (required)
+     * @param array|EstimateABTestRequest $estimateABTestRequest (required)
+     * @param array                       $requestOptions        Request options
      *
-     * @see EstimateABTestRequest
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|EstimateABTestResponse
+     * @return AlgoliaResponse
      */
-    public function estimateABTest($estimateABTestRequest, $requestOptions = [])
+    public function estimateABTestWithHttpInfo($estimateABTestRequest, $requestOptions = [])
     {
         // verify the required parameter 'estimateABTestRequest' is set
         if (!isset($estimateABTestRequest)) {
@@ -379,21 +575,23 @@ class AbtestingClient
         $headers = [];
         $httpBody = $estimateABTestRequest;
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Retrieves the details for an A/B test by its ID.
+     * Retrieve A/B test details (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves the details for an A/B test by its ID.
      * Required API Key ACLs:
      *  - analytics
      *
      * @param int   $id             Unique A/B test identifier. (required)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array $requestOptions Request options
      *
-     * @return ABTest|array<string, mixed>
+     * @return AlgoliaResponse
      */
-    public function getABTest($id, $requestOptions = [])
+    public function getABTestWithHttpInfo($id, $requestOptions = [])
     {
         // verify the required parameter 'id' is set
         if (!isset($id)) {
@@ -416,24 +614,26 @@ class AbtestingClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Lists all A/B tests you configured for this application.
+     * List all A/B tests (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Lists all A/B tests you configured for this application.
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param int    $offset         Position of the first item to return. (optional, default to 0)
-     * @param int    $limit          Number of items to return. (optional, default to 10)
+     * @param int    $offset         Position of the first item to return. (optional)
+     * @param int    $limit          Number of items to return. (optional)
      * @param string $indexPrefix    Index name prefix. Only A/B tests for indices starting with this string are included in the response. (optional)
      * @param string $indexSuffix    Index name suffix. Only A/B tests for indices ending with this string are included in the response. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array  $requestOptions Request options
      *
-     * @return array<string, mixed>|ListABTestsResponse
+     * @return AlgoliaResponse
      */
-    public function listABTests($offset = null, $limit = null, $indexPrefix = null, $indexSuffix = null, $requestOptions = [])
+    public function listABTestsWithHttpInfo($offset = null, $limit = null, $indexPrefix = null, $indexSuffix = null, $requestOptions = [])
     {
         $resourcePath = '/2/abtests';
         $queryParameters = [];
@@ -456,21 +656,23 @@ class AbtestingClient
             $queryParameters['indexSuffix'] = $indexSuffix;
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
-     * Stops an A/B test by its ID.  You can't restart stopped A/B tests.
+     * Stop an A/B test (with HTTP info).
      *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Stops an A/B test by its ID.  You can't restart stopped A/B tests.
      * Required API Key ACLs:
      *  - editSettings
      *
      * @param int   $id             Unique A/B test identifier. (required)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param array $requestOptions Request options
      *
-     * @return ABTestResponse|array<string, mixed>
+     * @return AlgoliaResponse
      */
-    public function stopABTest($id, $requestOptions = [])
+    public function stopABTestWithHttpInfo($id, $requestOptions = [])
     {
         // verify the required parameter 'id' is set
         if (!isset($id)) {
@@ -493,10 +695,10 @@ class AbtestingClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
-    private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
+    private function sendRequestWithHttpInfo($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
     {
         if (!isset($requestOptions['headers'])) {
             $requestOptions['headers'] = [];
@@ -514,7 +716,8 @@ class AbtestingClient
             $resourcePath.($query ? "?{$query}" : ''),
             $httpBody,
             $requestOptions,
-            $useReadTransporter
+            $useReadTransporter,
+            true
         );
     }
 }

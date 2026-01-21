@@ -651,7 +651,7 @@ class CompositionClient
      * @param string                $objectID        Unique identifier of a rule object. (required)
      * @param array|CompositionRule $compositionRule compositionRule (required)
      *                                               - $compositionRule['objectID'] => (string) Composition rule unique identifier. (required)
-     *                                               - $compositionRule['conditions'] => (array) Conditions that trigger a composition rule. (required)
+     *                                               - $compositionRule['conditions'] => (array) Conditions that trigger a composition rule.
      *                                               - $compositionRule['consequence'] => (array)  (required)
      *                                               - $compositionRule['description'] => (string) Description of the rule's purpose to help you distinguish between different rules.
      *                                               - $compositionRule['enabled'] => (bool) Whether the rule is active.

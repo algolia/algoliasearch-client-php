@@ -190,9 +190,6 @@ class CompositionRule extends AbstractModel implements ModelInterface, \ArrayAcc
         if (!isset($this->container['objectID']) || null === $this->container['objectID']) {
             $invalidProperties[] = "'objectID' can't be null";
         }
-        if (!isset($this->container['conditions']) || null === $this->container['conditions']) {
-            $invalidProperties[] = "'conditions' can't be null";
-        }
         if (!isset($this->container['consequence']) || null === $this->container['consequence']) {
             $invalidProperties[] = "'consequence' can't be null";
         }
@@ -238,7 +235,7 @@ class CompositionRule extends AbstractModel implements ModelInterface, \ArrayAcc
     /**
      * Gets conditions.
      *
-     * @return Condition[]
+     * @return null|Condition[]
      */
     public function getConditions()
     {
@@ -248,7 +245,7 @@ class CompositionRule extends AbstractModel implements ModelInterface, \ArrayAcc
     /**
      * Sets conditions.
      *
-     * @param Condition[] $conditions conditions that trigger a composition rule
+     * @param null|Condition[] $conditions conditions that trigger a composition rule
      *
      * @return self
      */

@@ -23,10 +23,8 @@ class TrendingFacetsQuery extends AbstractModel implements ModelInterface, \Arra
         'indexName' => 'string',
         'threshold' => 'float',
         'maxRecommendations' => 'int',
-        'queryParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendSearchParams',
         'facetName' => 'string',
         'model' => '\Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel',
-        'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams',
     ];
 
     /**
@@ -38,10 +36,8 @@ class TrendingFacetsQuery extends AbstractModel implements ModelInterface, \Arra
         'indexName' => null,
         'threshold' => 'double',
         'maxRecommendations' => null,
-        'queryParameters' => null,
         'facetName' => null,
         'model' => null,
-        'fallbackParameters' => null,
     ];
 
     /**
@@ -54,10 +50,8 @@ class TrendingFacetsQuery extends AbstractModel implements ModelInterface, \Arra
         'indexName' => 'indexName',
         'threshold' => 'threshold',
         'maxRecommendations' => 'maxRecommendations',
-        'queryParameters' => 'queryParameters',
         'facetName' => 'facetName',
         'model' => 'model',
-        'fallbackParameters' => 'fallbackParameters',
     ];
 
     /**
@@ -69,10 +63,8 @@ class TrendingFacetsQuery extends AbstractModel implements ModelInterface, \Arra
         'indexName' => 'setIndexName',
         'threshold' => 'setThreshold',
         'maxRecommendations' => 'setMaxRecommendations',
-        'queryParameters' => 'setQueryParameters',
         'facetName' => 'setFacetName',
         'model' => 'setModel',
-        'fallbackParameters' => 'setFallbackParameters',
     ];
 
     /**
@@ -84,10 +76,8 @@ class TrendingFacetsQuery extends AbstractModel implements ModelInterface, \Arra
         'indexName' => 'getIndexName',
         'threshold' => 'getThreshold',
         'maxRecommendations' => 'getMaxRecommendations',
-        'queryParameters' => 'getQueryParameters',
         'facetName' => 'getFacetName',
         'model' => 'getModel',
-        'fallbackParameters' => 'getFallbackParameters',
     ];
 
     /**
@@ -113,17 +103,11 @@ class TrendingFacetsQuery extends AbstractModel implements ModelInterface, \Arra
         if (isset($data['maxRecommendations'])) {
             $this->container['maxRecommendations'] = $data['maxRecommendations'];
         }
-        if (isset($data['queryParameters'])) {
-            $this->container['queryParameters'] = $data['queryParameters'];
-        }
         if (isset($data['facetName'])) {
             $this->container['facetName'] = $data['facetName'];
         }
         if (isset($data['model'])) {
             $this->container['model'] = $data['model'];
-        }
-        if (isset($data['fallbackParameters'])) {
-            $this->container['fallbackParameters'] = $data['fallbackParameters'];
         }
     }
 
@@ -287,30 +271,6 @@ class TrendingFacetsQuery extends AbstractModel implements ModelInterface, \Arra
     }
 
     /**
-     * Gets queryParameters.
-     *
-     * @return null|RecommendSearchParams
-     */
-    public function getQueryParameters()
-    {
-        return $this->container['queryParameters'] ?? null;
-    }
-
-    /**
-     * Sets queryParameters.
-     *
-     * @param null|RecommendSearchParams $queryParameters queryParameters
-     *
-     * @return self
-     */
-    public function setQueryParameters($queryParameters)
-    {
-        $this->container['queryParameters'] = $queryParameters;
-
-        return $this;
-    }
-
-    /**
      * Gets facetName.
      *
      * @return string
@@ -354,30 +314,6 @@ class TrendingFacetsQuery extends AbstractModel implements ModelInterface, \Arra
     public function setModel($model)
     {
         $this->container['model'] = $model;
-
-        return $this;
-    }
-
-    /**
-     * Gets fallbackParameters.
-     *
-     * @return null|FallbackParams
-     */
-    public function getFallbackParameters()
-    {
-        return $this->container['fallbackParameters'] ?? null;
-    }
-
-    /**
-     * Sets fallbackParameters.
-     *
-     * @param null|FallbackParams $fallbackParameters fallbackParameters
-     *
-     * @return self
-     */
-    public function setFallbackParameters($fallbackParameters)
-    {
-        $this->container['fallbackParameters'] = $fallbackParameters;
 
         return $this;
     }

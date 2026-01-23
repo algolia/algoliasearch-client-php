@@ -22,7 +22,6 @@ class AuthenticationUpdate extends AbstractModel implements ModelInterface, \Arr
      * @var string[]
      */
     protected static $modelTypes = [
-        'type' => '\Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationType',
         'name' => 'string',
         'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\AuthInputPartial',
     ];
@@ -33,7 +32,6 @@ class AuthenticationUpdate extends AbstractModel implements ModelInterface, \Arr
      * @var string[]
      */
     protected static $modelFormats = [
-        'type' => null,
         'name' => null,
         'input' => null,
     ];
@@ -45,7 +43,6 @@ class AuthenticationUpdate extends AbstractModel implements ModelInterface, \Arr
      * @var string[]
      */
     protected static $attributeMap = [
-        'type' => 'type',
         'name' => 'name',
         'input' => 'input',
     ];
@@ -56,7 +53,6 @@ class AuthenticationUpdate extends AbstractModel implements ModelInterface, \Arr
      * @var string[]
      */
     protected static $setters = [
-        'type' => 'setType',
         'name' => 'setName',
         'input' => 'setInput',
     ];
@@ -67,7 +63,6 @@ class AuthenticationUpdate extends AbstractModel implements ModelInterface, \Arr
      * @var string[]
      */
     protected static $getters = [
-        'type' => 'getType',
         'name' => 'getName',
         'input' => 'getInput',
     ];
@@ -86,9 +81,6 @@ class AuthenticationUpdate extends AbstractModel implements ModelInterface, \Arr
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['type'])) {
-            $this->container['type'] = $data['type'];
-        }
         if (isset($data['name'])) {
             $this->container['name'] = $data['name'];
         }
@@ -167,30 +159,6 @@ class AuthenticationUpdate extends AbstractModel implements ModelInterface, \Arr
     public function valid()
     {
         return 0 === count($this->listInvalidProperties());
-    }
-
-    /**
-     * Gets type.
-     *
-     * @return null|AuthenticationType
-     */
-    public function getType()
-    {
-        return $this->container['type'] ?? null;
-    }
-
-    /**
-     * Sets type.
-     *
-     * @param null|AuthenticationType $type type
-     *
-     * @return self
-     */
-    public function setType($type)
-    {
-        $this->container['type'] = $type;
-
-        return $this;
     }
 
     /**

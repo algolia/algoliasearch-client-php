@@ -119,7 +119,6 @@ final class CurlHttpClient implements HttpClientInterface
         $contentType = curl_getinfo($curlHandle, CURLINFO_CONTENT_TYPE);
 
         $this->releaseMHandle($curlHandle);
-        curl_close($curlHandle);
 
         return new Response($statusCode, ['Content-Type' => $contentType], $responseBody, '1.1', $error);
     }

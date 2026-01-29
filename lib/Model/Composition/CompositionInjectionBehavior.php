@@ -8,13 +8,13 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * CompositionBehavior Class Doc Comment.
+ * CompositionInjectionBehavior Class Doc Comment.
  *
  * @category Class
  *
- * @description An object containing either an `injection` or `multifeed` behavior schema, but not both.
+ * @description An object containing an `injection` behavior.
  */
-class CompositionBehavior extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class CompositionInjectionBehavior extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -23,7 +23,6 @@ class CompositionBehavior extends AbstractModel implements ModelInterface, \Arra
      */
     protected static $modelTypes = [
         'injection' => '\Algolia\AlgoliaSearch\Model\Composition\Injection',
-        'multifeed' => '\Algolia\AlgoliaSearch\Model\Composition\Multifeed',
     ];
 
     /**
@@ -33,7 +32,6 @@ class CompositionBehavior extends AbstractModel implements ModelInterface, \Arra
      */
     protected static $modelFormats = [
         'injection' => null,
-        'multifeed' => null,
     ];
 
     /**
@@ -44,7 +42,6 @@ class CompositionBehavior extends AbstractModel implements ModelInterface, \Arra
      */
     protected static $attributeMap = [
         'injection' => 'injection',
-        'multifeed' => 'multifeed',
     ];
 
     /**
@@ -54,7 +51,6 @@ class CompositionBehavior extends AbstractModel implements ModelInterface, \Arra
      */
     protected static $setters = [
         'injection' => 'setInjection',
-        'multifeed' => 'setMultifeed',
     ];
 
     /**
@@ -64,7 +60,6 @@ class CompositionBehavior extends AbstractModel implements ModelInterface, \Arra
      */
     protected static $getters = [
         'injection' => 'getInjection',
-        'multifeed' => 'getMultifeed',
     ];
 
     /**
@@ -83,9 +78,6 @@ class CompositionBehavior extends AbstractModel implements ModelInterface, \Arra
     {
         if (isset($data['injection'])) {
             $this->container['injection'] = $data['injection'];
-        }
-        if (isset($data['multifeed'])) {
-            $this->container['multifeed'] = $data['multifeed'];
         }
     }
 
@@ -152,9 +144,6 @@ class CompositionBehavior extends AbstractModel implements ModelInterface, \Arra
         if (!isset($this->container['injection']) || null === $this->container['injection']) {
             $invalidProperties[] = "'injection' can't be null";
         }
-        if (!isset($this->container['multifeed']) || null === $this->container['multifeed']) {
-            $invalidProperties[] = "'multifeed' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -190,30 +179,6 @@ class CompositionBehavior extends AbstractModel implements ModelInterface, \Arra
     public function setInjection($injection)
     {
         $this->container['injection'] = $injection;
-
-        return $this;
-    }
-
-    /**
-     * Gets multifeed.
-     *
-     * @return Multifeed
-     */
-    public function getMultifeed()
-    {
-        return $this->container['multifeed'] ?? null;
-    }
-
-    /**
-     * Sets multifeed.
-     *
-     * @param Multifeed $multifeed multifeed
-     *
-     * @return self
-     */
-    public function setMultifeed($multifeed)
-    {
-        $this->container['multifeed'] = $multifeed;
 
         return $this;
     }

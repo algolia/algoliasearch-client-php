@@ -2,6 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Http;
 
+use Algolia\AlgoliaSearch\Exceptions\TimeoutException;
 use Algolia\AlgoliaSearch\Http\Psr7\Response;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ConnectException;
@@ -36,7 +37,8 @@ final class GuzzleHttpClient implements HttpClientInterface
 
             return new Response(0, [], null, '1.1', $e->getMessage());
         } catch (ConnectException $e) {
-            return new Response(0, [], null, '1.1', $e->getMessage());
+            // ConnectException is thrown for connection timeouts
+            throw new TimeoutException($e->getMessage(), 0, $e);
         }
 
         return $response;

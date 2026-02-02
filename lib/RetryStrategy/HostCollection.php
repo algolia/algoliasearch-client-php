@@ -43,6 +43,17 @@ final class HostCollection
         }, $this->get());
     }
 
+    public function getRetryCountForUrl($hostKey)
+    {
+        foreach ($this->hosts as $host) {
+            if ($host->getUrl() === $hostKey) {
+                return $host->getRetryCount();
+            }
+        }
+
+        return 0;
+    }
+
     public function markAsDown($hostKey)
     {
         array_map(function (Host $host) use ($hostKey) {
@@ -68,6 +79,33 @@ final class HostCollection
         }
 
         return $this;
+    }
+
+    public function timedOut($hostKey)
+    {
+        array_map(function (Host $host) use ($hostKey) {
+            if ($host->getUrl() === $hostKey) {
+                $host->incrementRetryCount();
+            }
+        }, $this->hosts);
+    }
+
+    public function resetHost($hostKey)
+    {
+        array_map(function (Host $host) use ($hostKey) {
+            if ($host->getUrl() === $hostKey) {
+                $host->reset();
+            }
+        }, $this->hosts);
+    }
+
+    public function setRetryCount($hostKey, int $count)
+    {
+        foreach ($this->hosts as $host) {
+            if ($host->getUrl() === $hostKey) {
+                $host->setRetryCount($count);
+            }
+        }
     }
 
     private function sort()

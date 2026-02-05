@@ -25,6 +25,7 @@ class AuthOAuthPartial extends AbstractModel implements ModelInterface, \ArrayAc
         'url' => 'string',
         'clientId' => 'string',
         'clientSecret' => 'string',
+        'code' => 'string',
         'scope' => 'string',
     ];
 
@@ -37,6 +38,7 @@ class AuthOAuthPartial extends AbstractModel implements ModelInterface, \ArrayAc
         'url' => null,
         'clientId' => null,
         'clientSecret' => null,
+        'code' => null,
         'scope' => null,
     ];
 
@@ -50,6 +52,7 @@ class AuthOAuthPartial extends AbstractModel implements ModelInterface, \ArrayAc
         'url' => 'url',
         'clientId' => 'client_id',
         'clientSecret' => 'client_secret',
+        'code' => 'code',
         'scope' => 'scope',
     ];
 
@@ -62,6 +65,7 @@ class AuthOAuthPartial extends AbstractModel implements ModelInterface, \ArrayAc
         'url' => 'setUrl',
         'clientId' => 'setClientId',
         'clientSecret' => 'setClientSecret',
+        'code' => 'setCode',
         'scope' => 'setScope',
     ];
 
@@ -74,6 +78,7 @@ class AuthOAuthPartial extends AbstractModel implements ModelInterface, \ArrayAc
         'url' => 'getUrl',
         'clientId' => 'getClientId',
         'clientSecret' => 'getClientSecret',
+        'code' => 'getCode',
         'scope' => 'getScope',
     ];
 
@@ -99,6 +104,9 @@ class AuthOAuthPartial extends AbstractModel implements ModelInterface, \ArrayAc
         }
         if (isset($data['clientSecret'])) {
             $this->container['clientSecret'] = $data['clientSecret'];
+        }
+        if (isset($data['code'])) {
+            $this->container['code'] = $data['code'];
         }
         if (isset($data['scope'])) {
             $this->container['scope'] = $data['scope'];
@@ -245,6 +253,30 @@ class AuthOAuthPartial extends AbstractModel implements ModelInterface, \ArrayAc
     public function setClientSecret($clientSecret)
     {
         $this->container['clientSecret'] = $clientSecret;
+
+        return $this;
+    }
+
+    /**
+     * Gets code.
+     *
+     * @return null|string
+     */
+    public function getCode()
+    {
+        return $this->container['code'] ?? null;
+    }
+
+    /**
+     * Sets code.
+     *
+     * @param null|string $code Authorization code. Used during an `authorization_code` grant type flow, to request an access_token when creating/updating the authentication. This field is not returned in the API response.
+     *
+     * @return self
+     */
+    public function setCode($code)
+    {
+        $this->container['code'] = $code;
 
         return $this;
     }

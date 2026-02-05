@@ -28,6 +28,7 @@ class AuthInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
         'url' => 'string',
         'clientId' => 'string',
         'clientSecret' => 'string',
+        'code' => 'string',
         'scope' => 'string',
         'appID' => 'string',
         'apiKey' => 'string',
@@ -47,6 +48,7 @@ class AuthInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
         'url' => null,
         'clientId' => null,
         'clientSecret' => null,
+        'code' => null,
         'scope' => null,
         'appID' => null,
         'apiKey' => null,
@@ -67,6 +69,7 @@ class AuthInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
         'url' => 'url',
         'clientId' => 'client_id',
         'clientSecret' => 'client_secret',
+        'code' => 'code',
         'scope' => 'scope',
         'appID' => 'appID',
         'apiKey' => 'apiKey',
@@ -86,6 +89,7 @@ class AuthInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
         'url' => 'setUrl',
         'clientId' => 'setClientId',
         'clientSecret' => 'setClientSecret',
+        'code' => 'setCode',
         'scope' => 'setScope',
         'appID' => 'setAppID',
         'apiKey' => 'setApiKey',
@@ -105,6 +109,7 @@ class AuthInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
         'url' => 'getUrl',
         'clientId' => 'getClientId',
         'clientSecret' => 'getClientSecret',
+        'code' => 'getCode',
         'scope' => 'getScope',
         'appID' => 'getAppID',
         'apiKey' => 'getApiKey',
@@ -147,6 +152,9 @@ class AuthInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
         }
         if (isset($data['clientSecret'])) {
             $this->container['clientSecret'] = $data['clientSecret'];
+        }
+        if (isset($data['code'])) {
+            $this->container['code'] = $data['code'];
         }
         if (isset($data['scope'])) {
             $this->container['scope'] = $data['scope'];
@@ -236,12 +244,6 @@ class AuthInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
         }
         if (!isset($this->container['url']) || null === $this->container['url']) {
             $invalidProperties[] = "'url' can't be null";
-        }
-        if (!isset($this->container['clientId']) || null === $this->container['clientId']) {
-            $invalidProperties[] = "'clientId' can't be null";
-        }
-        if (!isset($this->container['clientSecret']) || null === $this->container['clientSecret']) {
-            $invalidProperties[] = "'clientSecret' can't be null";
         }
         if (!isset($this->container['appID']) || null === $this->container['appID']) {
             $invalidProperties[] = "'appID' can't be null";
@@ -411,7 +413,7 @@ class AuthInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Gets clientId.
      *
-     * @return string
+     * @return null|string
      */
     public function getClientId()
     {
@@ -421,7 +423,7 @@ class AuthInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Sets clientId.
      *
-     * @param string $clientId client ID
+     * @param null|string $clientId client ID
      *
      * @return self
      */
@@ -435,7 +437,7 @@ class AuthInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Gets clientSecret.
      *
-     * @return string
+     * @return null|string
      */
     public function getClientSecret()
     {
@@ -445,13 +447,37 @@ class AuthInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Sets clientSecret.
      *
-     * @param string $clientSecret Client secret. This field is `null` in the API response.
+     * @param null|string $clientSecret Client secret. This field is `null` in the API response.
      *
      * @return self
      */
     public function setClientSecret($clientSecret)
     {
         $this->container['clientSecret'] = $clientSecret;
+
+        return $this;
+    }
+
+    /**
+     * Gets code.
+     *
+     * @return null|string
+     */
+    public function getCode()
+    {
+        return $this->container['code'] ?? null;
+    }
+
+    /**
+     * Sets code.
+     *
+     * @param null|string $code Authorization code. Used during an `authorization_code` grant type flow, to request an access_token when creating/updating the authentication. This field is not returned in the API response.
+     *
+     * @return self
+     */
+    public function setCode($code)
+    {
+        $this->container['code'] = $code;
 
         return $this;
     }

@@ -379,7 +379,7 @@ class Event extends AbstractModel implements ModelInterface, \ArrayAccess, \Json
     /**
      * Sets publishedAt.
      *
-     * @param string $publishedAt date of publish RFC 3339 format
+     * @param string $publishedAt date and time when the resource was published, in RFC 3339 format
      *
      * @return self
      */

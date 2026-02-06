@@ -242,7 +242,7 @@ class DestinationCreateResponse extends AbstractModel implements ModelInterface,
     /**
      * Sets createdAt.
      *
-     * @param string $createdAt date of creation in RFC 3339 format
+     * @param string $createdAt date and time when the resource was created, in RFC 3339 format
      *
      * @return self
      */

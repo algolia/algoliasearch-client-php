@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Treat singular, plurals, and other forms of declensions as equivalent. You should only use this feature for the languages used in your index.
+ * @description Treat singular, plurals, and other forms of declensions as equivalent. Only use this feature for the languages used in your index.
  */
 class IgnorePlurals extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

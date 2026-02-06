@@ -170,7 +170,7 @@ class DeleteResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets deletedAt.
      *
-     * @param string $deletedAt date of deletion in RFC 3339 format
+     * @param string $deletedAt date and time when the resource was deleted, in RFC 3339 format
      *
      * @return self
      */

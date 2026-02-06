@@ -521,7 +521,7 @@ class Run extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
     /**
      * Sets createdAt.
      *
-     * @param string $createdAt date of creation in RFC 3339 format
+     * @param string $createdAt date and time when the resource was created, in RFC 3339 format
      *
      * @return self
      */
@@ -545,7 +545,7 @@ class Run extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
     /**
      * Sets startedAt.
      *
-     * @param null|string $startedAt date of start in RFC 3339 format
+     * @param null|string $startedAt date and time when the task started, in RFC 3339 format
      *
      * @return self
      */
@@ -569,7 +569,7 @@ class Run extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
     /**
      * Sets finishedAt.
      *
-     * @param null|string $finishedAt date of finish in RFC 3339 format
+     * @param null|string $finishedAt date and time when the task finished, in RFC 3339 format
      *
      * @return self
      */

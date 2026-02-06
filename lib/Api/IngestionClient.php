@@ -268,7 +268,7 @@ class IngestionClient
      *                                     - $taskCreate['enabled'] => (bool) Whether the task is enabled.
      *                                     - $taskCreate['failureThreshold'] => (int) Maximum accepted percentage of failures for a task run to finish successfully.
      *                                     - $taskCreate['input'] => (array)
-     *                                     - $taskCreate['cursor'] => (string) Date of the last cursor in RFC 3339 format.
+     *                                     - $taskCreate['cursor'] => (string) Date and time when the last cursor was created, in RFC 3339 format.
      *                                     - $taskCreate['notifications'] => (array)
      *                                     - $taskCreate['policies'] => (array)
      *
@@ -286,7 +286,7 @@ class IngestionClient
     }
 
     /**
-     * Creates a new task using the v1 endpoint, please use `createTask` instead.
+     * Creates a new task using the v1 endpoint. Use `createTask` instead.
      *
      * Required API Key ACLs:
      *  - addObject
@@ -301,7 +301,7 @@ class IngestionClient
      *                                       - $taskCreate['enabled'] => (bool) Whether the task is enabled.
      *                                       - $taskCreate['failureThreshold'] => (int) Maximum accepted percentage of failures for a task run to finish successfully.
      *                                       - $taskCreate['input'] => (array)
-     *                                       - $taskCreate['cursor'] => (string) Date of the last cursor in RFC 3339 format.
+     *                                       - $taskCreate['cursor'] => (string) Date and time when the last cursor was created, in RFC 3339 format.
      *
      * @see TaskCreateV1
      *
@@ -494,7 +494,7 @@ class IngestionClient
     }
 
     /**
-     * Deletes a task by its ID using the v1 endpoint, please use `deleteTask` instead.
+     * Deletes a task by its ID using the v1 endpoint. Use `deleteTask` instead.
      *
      * Required API Key ACLs:
      *  - addObject
@@ -556,7 +556,7 @@ class IngestionClient
     }
 
     /**
-     * Disables a task using the v1 endpoint, please use `disableTask` instead.
+     * Disables a task using the v1 endpoint. Use `disableTask` instead.
      *
      * Required API Key ACLs:
      *  - addObject
@@ -598,7 +598,7 @@ class IngestionClient
     }
 
     /**
-     * Enables a task using the v1 endpoint, please use `enableTask` instead.
+     * Enables a task using the v1 endpoint. Use `enableTask` instead.
      *
      * Required API Key ACLs:
      *  - addObject
@@ -741,7 +741,7 @@ class IngestionClient
     }
 
     /**
-     * Retrieves a task by its ID using the v1 endpoint, please use `getTask` instead.
+     * Retrieves a task by its ID using the v1 endpoint. Use `getTask` instead.
      *
      * Required API Key ACLs:
      *  - addObject
@@ -876,8 +876,8 @@ class IngestionClient
      * @param string $taskID         Task ID for filtering the list of task runs. (optional)
      * @param array  $sort           Property by which to sort the list of task runs. (optional)
      * @param array  $order          Sort order of the response, ascending or descending. (optional)
-     * @param string $startDate      Date in RFC 3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)
-     * @param string $endDate        Date in RFC 3339 format for the latest run to retrieve. By default, the current day is used. (optional)
+     * @param string $startDate      Date and time for the earliest run to retrieve, in RFC 3339 format. By default, the current day minus seven days is used. (optional)
+     * @param string $endDate        Date and time for the latest run to retrieve, in RFC 3339 format. By default, the current day is used. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|RunListResponse
@@ -945,7 +945,7 @@ class IngestionClient
     }
 
     /**
-     * Retrieves a list of tasks using the v1 endpoint, please use `getTasks` instead.
+     * Retrieves a list of tasks using the v1 endpoint. Use `getTasks` instead.
      *
      * Required API Key ACLs:
      *  - addObject
@@ -1070,7 +1070,7 @@ class IngestionClient
      *                                       - $taskReplace['enabled'] => (bool) Whether the task is enabled.
      *                                       - $taskReplace['failureThreshold'] => (int) Maximum accepted percentage of failures for a task run to finish successfully.
      *                                       - $taskReplace['input'] => (array)
-     *                                       - $taskReplace['cursor'] => (string) Date of the last cursor in RFC 3339 format.
+     *                                       - $taskReplace['cursor'] => (string) Date and time when the last cursor was created, in RFC 3339 format.
      *                                       - $taskReplace['notifications'] => (array)
      *                                       - $taskReplace['policies'] => (array)
      *
@@ -1142,7 +1142,7 @@ class IngestionClient
     }
 
     /**
-     * Runs a task using the v1 endpoint, please use `runTask` instead. You can check the status of task runs with the observability endpoints.
+     * Runs a task using the v1 endpoint. Use `runTask` instead. You can check the status of task runs with the observability endpoints.
      *
      * Required API Key ACLs:
      *  - addObject
@@ -1265,7 +1265,7 @@ class IngestionClient
     }
 
     /**
-     * Searches for tasks using the v1 endpoint, please use `searchTasks` instead.
+     * Searches for tasks using the v1 endpoint. Use `searchTasks` instead.
      *
      * Required API Key ACLs:
      *  - addObject
@@ -1506,7 +1506,7 @@ class IngestionClient
     }
 
     /**
-     * Updates a task by its ID using the v1 endpoint, please use `updateTask` instead.
+     * Updates a task by its ID using the v1 endpoint. Use `updateTask` instead.
      *
      * Required API Key ACLs:
      *  - addObject
@@ -1752,7 +1752,7 @@ class IngestionClient
      * Create a task V1 (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
-     * Creates a new task using the v1 endpoint, please use `createTask` instead.
+     * Creates a new task using the v1 endpoint. Use `createTask` instead.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
@@ -2150,7 +2150,7 @@ class IngestionClient
      * Delete a task (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
-     * Deletes a task by its ID using the v1 endpoint, please use `deleteTask` instead.
+     * Deletes a task by its ID using the v1 endpoint. Use `deleteTask` instead.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
@@ -2273,7 +2273,7 @@ class IngestionClient
      * Disable a task V1 (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
-     * Disables a task using the v1 endpoint, please use `disableTask` instead.
+     * Disables a task using the v1 endpoint. Use `disableTask` instead.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
@@ -2355,7 +2355,7 @@ class IngestionClient
      * Enable a task V1 (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
-     * Enables a task using the v1 endpoint, please use `enableTask` instead.
+     * Enables a task using the v1 endpoint. Use `enableTask` instead.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
@@ -2658,7 +2658,7 @@ class IngestionClient
      * Retrieve a task V1 (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
-     * Retrieves a task by its ID using the v1 endpoint, please use `getTask` instead.
+     * Retrieves a task by its ID using the v1 endpoint. Use `getTask` instead.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
@@ -2962,8 +2962,8 @@ class IngestionClient
      * @param string $taskID         Task ID for filtering the list of task runs. (optional)
      * @param array  $sort           Property by which to sort the list of task runs. (optional)
      * @param array  $order          Sort order of the response, ascending or descending. (optional)
-     * @param string $startDate      Date in RFC 3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)
-     * @param string $endDate        Date in RFC 3339 format for the latest run to retrieve. By default, the current day is used. (optional)
+     * @param string $startDate      Date and time for the earliest run to retrieve, in RFC 3339 format. By default, the current day minus seven days is used. (optional)
+     * @param string $endDate        Date and time for the latest run to retrieve, in RFC 3339 format. By default, the current day is used. (optional)
      * @param array  $requestOptions Request options
      *
      * @return AlgoliaResponse
@@ -3172,7 +3172,7 @@ class IngestionClient
      * List tasks V1 (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
-     * Retrieves a list of tasks using the v1 endpoint, please use `getTasks` instead.
+     * Retrieves a list of tasks using the v1 endpoint. Use `getTasks` instead.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
@@ -3565,7 +3565,7 @@ class IngestionClient
      * Run a task V1 (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
-     * Runs a task using the v1 endpoint, please use `runTask` instead. You can check the status of task runs with the observability endpoints.
+     * Runs a task using the v1 endpoint. Use `runTask` instead. You can check the status of task runs with the observability endpoints.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
@@ -3735,7 +3735,7 @@ class IngestionClient
      * Search for tasks V1 (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
-     * Searches for tasks using the v1 endpoint, please use `searchTasks` instead.
+     * Searches for tasks using the v1 endpoint. Use `searchTasks` instead.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
@@ -4122,7 +4122,7 @@ class IngestionClient
      * Update a task V1 (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
-     * Updates a task by its ID using the v1 endpoint, please use `updateTask` instead.
+     * Updates a task by its ID using the v1 endpoint. Use `updateTask` instead.
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex

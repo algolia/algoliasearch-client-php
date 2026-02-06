@@ -242,7 +242,7 @@ class AuthenticationUpdateResponse extends AbstractModel implements ModelInterfa
     /**
      * Sets updatedAt.
      *
-     * @param string $updatedAt date of last update in RFC 3339 format
+     * @param string $updatedAt date and time when the resource was last updated, in RFC 3339 format
      *
      * @return self
      */

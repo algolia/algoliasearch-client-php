@@ -450,7 +450,7 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets createdAt.
      *
-     * @param string $createdAt date of creation in RFC 3339 format
+     * @param string $createdAt date and time when the resource was created, in RFC 3339 format
      *
      * @return self
      */
@@ -474,7 +474,7 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets updatedAt.
      *
-     * @param string $updatedAt date of last update in RFC 3339 format
+     * @param string $updatedAt date and time when the resource was last updated, in RFC 3339 format
      *
      * @return self
      */

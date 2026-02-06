@@ -172,7 +172,7 @@ class TimeRange extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Sets from.
      *
-     * @param null|int $from when the rule should start to be active, in Unix epoch time
+     * @param null|int $from timestamp when the rule should start to be active, measured in seconds since the Unix epoch
      *
      * @return self
      */
@@ -196,7 +196,7 @@ class TimeRange extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Sets until.
      *
-     * @param null|int $until when the rule should stop to be active, in Unix epoch time
+     * @param null|int $until timestamp when the rule should stop to be active, measured in seconds since the Unix epoch
      *
      * @return self
      */

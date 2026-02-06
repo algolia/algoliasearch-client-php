@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description API request body for creating a task using the V1 shape, please use methods and types that don't contain the V1 suffix.
+ * @description API request body for creating a task using the V1 shape. Use methods and types that don't contain the V1 suffix.
  */
 class TaskCreateV1 extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -405,7 +405,7 @@ class TaskCreateV1 extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets cursor.
      *
-     * @param null|string $cursor date of the last cursor in RFC 3339 format
+     * @param null|string $cursor date and time when the last cursor was created, in RFC 3339 format
      *
      * @return self
      */

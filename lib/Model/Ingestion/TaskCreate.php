@@ -450,7 +450,7 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
     /**
      * Sets cursor.
      *
-     * @param null|string $cursor date of the last cursor in RFC 3339 format
+     * @param null|string $cursor date and time when the last cursor was created, in RFC 3339 format
      *
      * @return self
      */

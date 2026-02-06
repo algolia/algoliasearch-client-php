@@ -183,7 +183,7 @@ class Window extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Sets startDate.
      *
-     * @param string $startDate date in RFC 3339 format representing the oldest data in the time window
+     * @param string $startDate date and time representing the oldest data in the time window, in RFC 3339 format
      *
      * @return self
      */
@@ -207,7 +207,7 @@ class Window extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Sets endDate.
      *
-     * @param string $endDate date in RFC 3339 format representing the newest data in the time window
+     * @param string $endDate date and time representing the newest data in the time window, in RFC 3339 format
      *
      * @return self
      */

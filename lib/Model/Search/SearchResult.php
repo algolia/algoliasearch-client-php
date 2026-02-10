@@ -409,12 +409,6 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
         if (!isset($this->container['hits']) || null === $this->container['hits']) {
             $invalidProperties[] = "'hits' can't be null";
         }
-        if (!isset($this->container['query']) || null === $this->container['query']) {
-            $invalidProperties[] = "'query' can't be null";
-        }
-        if (!isset($this->container['params']) || null === $this->container['params']) {
-            $invalidProperties[] = "'params' can't be null";
-        }
         if (!isset($this->container['facetHits']) || null === $this->container['facetHits']) {
             $invalidProperties[] = "'facetHits' can't be null";
         }
@@ -1188,7 +1182,7 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets query.
      *
-     * @return string
+     * @return null|string
      */
     public function getQuery()
     {
@@ -1198,7 +1192,7 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets query.
      *
-     * @param string $query search query
+     * @param null|string $query search query
      *
      * @return self
      */
@@ -1212,7 +1206,7 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets params.
      *
-     * @return string
+     * @return null|string
      */
     public function getParams()
     {
@@ -1222,7 +1216,7 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets params.
      *
-     * @param string $params URL-encoded string of all search parameters
+     * @param null|string $params URL-encoded string of all search parameters
      *
      * @return self
      */

@@ -26,6 +26,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
         'promote' => '\Algolia\AlgoliaSearch\Model\Search\Promote[]',
         'filterPromotes' => 'bool',
         'hide' => '\Algolia\AlgoliaSearch\Model\Search\ConsequenceHide[]',
+        'redirect' => '\Algolia\AlgoliaSearch\Model\Search\ConsequenceRedirect',
         'userData' => 'object',
     ];
 
@@ -39,6 +40,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
         'promote' => null,
         'filterPromotes' => null,
         'hide' => null,
+        'redirect' => null,
         'userData' => null,
     ];
 
@@ -53,6 +55,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
         'promote' => 'promote',
         'filterPromotes' => 'filterPromotes',
         'hide' => 'hide',
+        'redirect' => 'redirect',
         'userData' => 'userData',
     ];
 
@@ -66,6 +69,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
         'promote' => 'setPromote',
         'filterPromotes' => 'setFilterPromotes',
         'hide' => 'setHide',
+        'redirect' => 'setRedirect',
         'userData' => 'setUserData',
     ];
 
@@ -79,6 +83,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
         'promote' => 'getPromote',
         'filterPromotes' => 'getFilterPromotes',
         'hide' => 'getHide',
+        'redirect' => 'getRedirect',
         'userData' => 'getUserData',
     ];
 
@@ -107,6 +112,9 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
         }
         if (isset($data['hide'])) {
             $this->container['hide'] = $data['hide'];
+        }
+        if (isset($data['redirect'])) {
+            $this->container['redirect'] = $data['redirect'];
         }
         if (isset($data['userData'])) {
             $this->container['userData'] = $data['userData'];
@@ -277,6 +285,30 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
     public function setHide($hide)
     {
         $this->container['hide'] = $hide;
+
+        return $this;
+    }
+
+    /**
+     * Gets redirect.
+     *
+     * @return null|ConsequenceRedirect
+     */
+    public function getRedirect()
+    {
+        return $this->container['redirect'] ?? null;
+    }
+
+    /**
+     * Sets redirect.
+     *
+     * @param null|ConsequenceRedirect $redirect redirect
+     *
+     * @return self
+     */
+    public function setRedirect($redirect)
+    {
+        $this->container['redirect'] = $redirect;
 
         return $this;
     }

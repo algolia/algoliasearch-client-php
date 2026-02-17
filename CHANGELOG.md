@@ -1,3 +1,7 @@
+## [4.38.2](https://github.com/algolia/algoliasearch-client-php/compare/4.38.1...4.38.2)
+
+- [9545a4f51](https://github.com/algolia/api-clients-automation/commit/9545a4f51) fix(php): with transformation missing param ([#5986](https://github.com/algolia/api-clients-automation/pull/5986)) by [@eric-zaharia](https://github.com/eric-zaharia/)
+
 ## [4.38.1](https://github.com/algolia/algoliasearch-client-php/compare/4.38.0...4.38.1)
 
 - [46be49a3f](https://github.com/algolia/api-clients-automation/commit/46be49a3f) docs(specs): align with style guides ([#5930](https://github.com/algolia/api-clients-automation/pull/5930)) by [@kai687](https://github.com/kai687/)

@@ -4422,7 +4422,7 @@ class SearchClient
             throw new \InvalidArgumentException('`setTransformationRegion` must have been called before calling this method.');
         }
 
-        return $this->ingestionTransporter->chunkedPush($indexName, $objects, 'addObject', $waitForTasks, $batchSize, $requestOptions);
+        return $this->ingestionTransporter->chunkedPush($indexName, $objects, 'addObject', $waitForTasks, $batchSize, null, $requestOptions);
     }
 
     /**
@@ -4479,7 +4479,7 @@ class SearchClient
             throw new \InvalidArgumentException('`setTransformationRegion` must have been called before calling this method.');
         }
 
-        return $this->ingestionTransporter->chunkedPush($indexName, $objects, (true == $createIfNotExists) ? 'partialUpdateObject' : 'partialUpdateObjectNoCreate', $waitForTasks, $batchSize, $requestOptions);
+        return $this->ingestionTransporter->chunkedPush($indexName, $objects, (true == $createIfNotExists) ? 'partialUpdateObject' : 'partialUpdateObjectNoCreate', $waitForTasks, $batchSize, null, $requestOptions);
     }
 
     /**

@@ -53,6 +53,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
         'page' => 'int',
         'params' => 'string',
         'query' => 'string',
+        'feedID' => 'string',
         'compositions' => 'array<string,\Algolia\AlgoliaSearch\Model\Composition\ResultsCompositionInfoResponse>',
     ];
 
@@ -95,6 +96,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
         'page' => null,
         'params' => null,
         'query' => null,
+        'feedID' => null,
         'compositions' => null,
     ];
 
@@ -138,6 +140,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
         'page' => 'page',
         'params' => 'params',
         'query' => 'query',
+        'feedID' => 'feedID',
         'compositions' => 'compositions',
     ];
 
@@ -180,6 +183,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
         'page' => 'setPage',
         'params' => 'setParams',
         'query' => 'setQuery',
+        'feedID' => 'setFeedID',
         'compositions' => 'setCompositions',
     ];
 
@@ -222,6 +226,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
         'page' => 'getPage',
         'params' => 'getParams',
         'query' => 'getQuery',
+        'feedID' => 'getFeedID',
         'compositions' => 'getCompositions',
     ];
 
@@ -337,6 +342,9 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
         }
         if (isset($data['query'])) {
             $this->container['query'] = $data['query'];
+        }
+        if (isset($data['feedID'])) {
+            $this->container['feedID'] = $data['feedID'];
         }
         if (isset($data['compositions'])) {
             $this->container['compositions'] = $data['compositions'];
@@ -1221,6 +1229,30 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     public function setQuery($query)
     {
         $this->container['query'] = $query;
+
+        return $this;
+    }
+
+    /**
+     * Gets feedID.
+     *
+     * @return null|string
+     */
+    public function getFeedID()
+    {
+        return $this->container['feedID'] ?? null;
+    }
+
+    /**
+     * Sets feedID.
+     *
+     * @param null|string $feedID the ID of the feed
+     *
+     * @return self
+     */
+    public function setFeedID($feedID)
+    {
+        $this->container['feedID'] = $feedID;
 
         return $this;
     }

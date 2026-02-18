@@ -8,11 +8,13 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * Multifeed Class Doc Comment.
+ * FeedInjection Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Feed formatted as an injection.
  */
-class Multifeed extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class FeedInjection extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -20,8 +22,7 @@ class Multifeed extends AbstractModel implements ModelInterface, \ArrayAccess, \
      * @var string[]
      */
     protected static $modelTypes = [
-        'feeds' => 'array<string,\Algolia\AlgoliaSearch\Model\Composition\FeedInjection>',
-        'feedsOrder' => 'string[]',
+        'injection' => '\Algolia\AlgoliaSearch\Model\Composition\Injection',
     ];
 
     /**
@@ -30,8 +31,7 @@ class Multifeed extends AbstractModel implements ModelInterface, \ArrayAccess, \
      * @var string[]
      */
     protected static $modelFormats = [
-        'feeds' => null,
-        'feedsOrder' => null,
+        'injection' => null,
     ];
 
     /**
@@ -41,8 +41,7 @@ class Multifeed extends AbstractModel implements ModelInterface, \ArrayAccess, \
      * @var string[]
      */
     protected static $attributeMap = [
-        'feeds' => 'feeds',
-        'feedsOrder' => 'feedsOrder',
+        'injection' => 'injection',
     ];
 
     /**
@@ -51,8 +50,7 @@ class Multifeed extends AbstractModel implements ModelInterface, \ArrayAccess, \
      * @var string[]
      */
     protected static $setters = [
-        'feeds' => 'setFeeds',
-        'feedsOrder' => 'setFeedsOrder',
+        'injection' => 'setInjection',
     ];
 
     /**
@@ -61,8 +59,7 @@ class Multifeed extends AbstractModel implements ModelInterface, \ArrayAccess, \
      * @var string[]
      */
     protected static $getters = [
-        'feeds' => 'getFeeds',
-        'feedsOrder' => 'getFeedsOrder',
+        'injection' => 'getInjection',
     ];
 
     /**
@@ -79,11 +76,8 @@ class Multifeed extends AbstractModel implements ModelInterface, \ArrayAccess, \
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['feeds'])) {
-            $this->container['feeds'] = $data['feeds'];
-        }
-        if (isset($data['feedsOrder'])) {
-            $this->container['feedsOrder'] = $data['feedsOrder'];
+        if (isset($data['injection'])) {
+            $this->container['injection'] = $data['injection'];
         }
     }
 
@@ -147,8 +141,8 @@ class Multifeed extends AbstractModel implements ModelInterface, \ArrayAccess, \
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['feeds']) || null === $this->container['feeds']) {
-            $invalidProperties[] = "'feeds' can't be null";
+        if (!isset($this->container['injection']) || null === $this->container['injection']) {
+            $invalidProperties[] = "'injection' can't be null";
         }
 
         return $invalidProperties;
@@ -166,49 +160,25 @@ class Multifeed extends AbstractModel implements ModelInterface, \ArrayAccess, \
     }
 
     /**
-     * Gets feeds.
+     * Gets injection.
      *
-     * @return array<string,FeedInjection>
+     * @return Injection
      */
-    public function getFeeds()
+    public function getInjection()
     {
-        return $this->container['feeds'] ?? null;
+        return $this->container['injection'] ?? null;
     }
 
     /**
-     * Sets feeds.
+     * Sets injection.
      *
-     * @param array<string,FeedInjection> $feeds A key-value store of Feed ID to Feed. Currently, the only supported Feed type is an Injection.
+     * @param Injection $injection injection
      *
      * @return self
      */
-    public function setFeeds($feeds)
+    public function setInjection($injection)
     {
-        $this->container['feeds'] = $feeds;
-
-        return $this;
-    }
-
-    /**
-     * Gets feedsOrder.
-     *
-     * @return null|string[]
-     */
-    public function getFeedsOrder()
-    {
-        return $this->container['feedsOrder'] ?? null;
-    }
-
-    /**
-     * Sets feedsOrder.
-     *
-     * @param null|string[] $feedsOrder A list of Feed IDs that specifies the order in which to order the results in the response. The IDs should be a subset of those in the Feeds object, and only those specified will be processed. When this field is not set, all Feeds are processed and returned with a default ordering.
-     *
-     * @return self
-     */
-    public function setFeedsOrder($feedsOrder)
-    {
-        $this->container['feedsOrder'] = $feedsOrder;
+        $this->container['injection'] = $injection;
 
         return $this;
     }

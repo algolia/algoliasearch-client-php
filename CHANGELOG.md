@@ -1,3 +1,8 @@
+## [4.39.0](https://github.com/algolia/algoliasearch-client-php/compare/4.38.2...4.39.0)
+
+- [93c834fee](https://github.com/algolia/api-clients-automation/commit/93c834fee) feat(specs): add optional feedID to composition result set ([#5991](https://github.com/algolia/api-clients-automation/pull/5991)) by [@gavinwade12](https://github.com/gavinwade12/)
+- [9aafd690b](https://github.com/algolia/api-clients-automation/commit/9aafd690b) fix(specs): invalid API format for multi feed in Comp API ([#5993](https://github.com/algolia/api-clients-automation/pull/5993)) by [@ClaraMuller](https://github.com/ClaraMuller/)
+
 ## [4.38.2](https://github.com/algolia/algoliasearch-client-php/compare/4.38.1...4.38.2)
 
 - [9545a4f51](https://github.com/algolia/api-clients-automation/commit/9545a4f51) fix(php): with transformation missing param ([#5986](https://github.com/algolia/api-clients-automation/pull/5986)) by [@eric-zaharia](https://github.com/eric-zaharia/)

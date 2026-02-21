@@ -2,7 +2,13 @@
     "name": "algolia/algoliasearch-client-php",
     "version": "4.39.0",
     "description": "API powering the features of Algolia.",
-    "keywords": ["algolia", "search", "api", "client", "php"],
+    "keywords": [
+        "algolia",
+        "search",
+        "api",
+        "client",
+        "php"
+    ],
     "type": "library",
     "homepage": "https://github.com/algolia/algoliasearch-client-php",
     "license": "MIT",
@@ -13,7 +19,7 @@
         }
     ],
     "require": {
-        "php": ">=8.1 !=8.3.0",
+        "php": ">=8.1 !=8.3.0 || ^8.3",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
@@ -29,7 +35,9 @@
         "phpstan/phpstan": "^1.12"
     },
     "autoload": {
-        "psr-4": { "Algolia\\AlgoliaSearch\\" : "lib/" },
+        "psr-4": {
+            "Algolia\\AlgoliaSearch\\": "lib/"
+        },
         "files": [
             "lib/Http/Psr7/functions.php"
         ]

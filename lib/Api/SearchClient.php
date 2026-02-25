@@ -1173,6 +1173,7 @@ class SearchClient
      *                              - $rule['validity'] => (array) Time periods when the rule is active.
      *                              - $rule['tags'] => (array)
      *                              - $rule['scope'] => (string)
+     *                              - $rule['condition'] => (array)
      *
      * @see Rule
      *

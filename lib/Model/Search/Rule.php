@@ -30,6 +30,7 @@ class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'validity' => '\Algolia\AlgoliaSearch\Model\Search\TimeRange[]',
         'tags' => 'string[]',
         'scope' => 'string',
+        'condition' => '\Algolia\AlgoliaSearch\Model\Search\Condition',
     ];
 
     /**
@@ -46,6 +47,7 @@ class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'validity' => null,
         'tags' => null,
         'scope' => null,
+        'condition' => null,
     ];
 
     /**
@@ -63,6 +65,7 @@ class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'validity' => 'validity',
         'tags' => 'tags',
         'scope' => 'scope',
+        'condition' => 'condition',
     ];
 
     /**
@@ -79,6 +82,7 @@ class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'validity' => 'setValidity',
         'tags' => 'setTags',
         'scope' => 'setScope',
+        'condition' => 'setCondition',
     ];
 
     /**
@@ -95,6 +99,7 @@ class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'validity' => 'getValidity',
         'tags' => 'getTags',
         'scope' => 'getScope',
+        'condition' => 'getCondition',
     ];
 
     /**
@@ -134,6 +139,9 @@ class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         }
         if (isset($data['scope'])) {
             $this->container['scope'] = $data['scope'];
+        }
+        if (isset($data['condition'])) {
+            $this->container['condition'] = $data['condition'];
         }
     }
 
@@ -406,6 +414,30 @@ class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     public function setScope($scope)
     {
         $this->container['scope'] = $scope;
+
+        return $this;
+    }
+
+    /**
+     * Gets condition.
+     *
+     * @return null|Condition
+     */
+    public function getCondition()
+    {
+        return $this->container['condition'] ?? null;
+    }
+
+    /**
+     * Sets condition.
+     *
+     * @param null|Condition $condition condition
+     *
+     * @return self
+     */
+    public function setCondition($condition)
+    {
+        $this->container['condition'] = $condition;
 
         return $this;
     }

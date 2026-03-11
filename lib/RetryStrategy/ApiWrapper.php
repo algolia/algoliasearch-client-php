@@ -24,6 +24,8 @@ use Psr\Log\LogLevel;
 
 final class ApiWrapper implements ApiWrapperInterface
 {
+    private const COMPRESSION_THRESHOLD = 750;
+
     /**
      * @var HttpClientInterface
      */
@@ -320,6 +322,11 @@ final class ApiWrapper implements ApiWrapperInterface
                     throw new \InvalidArgumentException('json_encode error: '.json_last_error_msg());
                 }
             }
+        }
+
+        if ('gzip' === $this->config->getCompressionType() && is_string($body) && strlen($body) >= self::COMPRESSION_THRESHOLD) {
+            $body = \gzencode($body);
+            $headers['content-encoding'] = 'gzip';
         }
 
         return new Request($method, $uri, $headers, $body, $protocolVersion);

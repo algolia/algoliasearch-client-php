@@ -173,6 +173,7 @@ abstract class Configuration
             'writeTimeout' => $this->defaultWriteTimeout,
             'connectTimeout' => $this->defaultConnectTimeout,
             'defaultHeaders' => [],
+            'compressionType' => 'none',
         ];
     }
 
@@ -325,5 +326,17 @@ abstract class Configuration
     public function getClientName()
     {
         return $this->clientName;
+    }
+
+    public function getCompressionType()
+    {
+        return $this->config['compressionType'] ?? 'none';
+    }
+
+    public function setCompressionType($compressionType)
+    {
+        $this->config['compressionType'] = $compressionType;
+
+        return $this;
     }
 }

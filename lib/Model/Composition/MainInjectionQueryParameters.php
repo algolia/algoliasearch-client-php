@@ -24,13 +24,11 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
         'advancedSyntaxFeatures' => '\Algolia\AlgoliaSearch\Model\Composition\AdvancedSyntaxFeatures[]',
         'allowTyposOnNumericTokens' => 'bool',
         'alternativesAsExact' => '\Algolia\AlgoliaSearch\Model\Composition\AlternativesAsExact[]',
-        'analytics' => 'bool',
         'attributeCriteriaComputedByMinProximity' => 'bool',
         'attributesToHighlight' => 'string[]',
         'attributesToRetrieve' => 'string[]',
         'attributesToSnippet' => 'string[]',
         'clickAnalytics' => 'bool',
-        'decompoundQuery' => 'bool',
         'disableExactOnAttributes' => 'string[]',
         'disableTypoToleranceOnAttributes' => 'string[]',
         'distinct' => '\Algolia\AlgoliaSearch\Model\Composition\Distinct',
@@ -45,7 +43,6 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
         'highlightPostTag' => 'string',
         'highlightPreTag' => 'string',
         'ignorePlurals' => '\Algolia\AlgoliaSearch\Model\Composition\IgnorePlurals',
-        'maxFacetHits' => 'int',
         'minProximity' => 'int',
         'minWordSizefor1Typo' => 'int',
         'minWordSizefor2Typos' => 'int',
@@ -86,13 +83,11 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
         'advancedSyntaxFeatures' => null,
         'allowTyposOnNumericTokens' => null,
         'alternativesAsExact' => null,
-        'analytics' => null,
         'attributeCriteriaComputedByMinProximity' => null,
         'attributesToHighlight' => null,
         'attributesToRetrieve' => null,
         'attributesToSnippet' => null,
         'clickAnalytics' => null,
-        'decompoundQuery' => null,
         'disableExactOnAttributes' => null,
         'disableTypoToleranceOnAttributes' => null,
         'distinct' => null,
@@ -107,7 +102,6 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
         'highlightPostTag' => null,
         'highlightPreTag' => null,
         'ignorePlurals' => null,
-        'maxFacetHits' => null,
         'minProximity' => null,
         'minWordSizefor1Typo' => null,
         'minWordSizefor2Typos' => null,
@@ -149,13 +143,11 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
         'advancedSyntaxFeatures' => 'advancedSyntaxFeatures',
         'allowTyposOnNumericTokens' => 'allowTyposOnNumericTokens',
         'alternativesAsExact' => 'alternativesAsExact',
-        'analytics' => 'analytics',
         'attributeCriteriaComputedByMinProximity' => 'attributeCriteriaComputedByMinProximity',
         'attributesToHighlight' => 'attributesToHighlight',
         'attributesToRetrieve' => 'attributesToRetrieve',
         'attributesToSnippet' => 'attributesToSnippet',
         'clickAnalytics' => 'clickAnalytics',
-        'decompoundQuery' => 'decompoundQuery',
         'disableExactOnAttributes' => 'disableExactOnAttributes',
         'disableTypoToleranceOnAttributes' => 'disableTypoToleranceOnAttributes',
         'distinct' => 'distinct',
@@ -170,7 +162,6 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
         'highlightPostTag' => 'highlightPostTag',
         'highlightPreTag' => 'highlightPreTag',
         'ignorePlurals' => 'ignorePlurals',
-        'maxFacetHits' => 'maxFacetHits',
         'minProximity' => 'minProximity',
         'minWordSizefor1Typo' => 'minWordSizefor1Typo',
         'minWordSizefor2Typos' => 'minWordSizefor2Typos',
@@ -211,13 +202,11 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
         'advancedSyntaxFeatures' => 'setAdvancedSyntaxFeatures',
         'allowTyposOnNumericTokens' => 'setAllowTyposOnNumericTokens',
         'alternativesAsExact' => 'setAlternativesAsExact',
-        'analytics' => 'setAnalytics',
         'attributeCriteriaComputedByMinProximity' => 'setAttributeCriteriaComputedByMinProximity',
         'attributesToHighlight' => 'setAttributesToHighlight',
         'attributesToRetrieve' => 'setAttributesToRetrieve',
         'attributesToSnippet' => 'setAttributesToSnippet',
         'clickAnalytics' => 'setClickAnalytics',
-        'decompoundQuery' => 'setDecompoundQuery',
         'disableExactOnAttributes' => 'setDisableExactOnAttributes',
         'disableTypoToleranceOnAttributes' => 'setDisableTypoToleranceOnAttributes',
         'distinct' => 'setDistinct',
@@ -232,7 +221,6 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
         'highlightPostTag' => 'setHighlightPostTag',
         'highlightPreTag' => 'setHighlightPreTag',
         'ignorePlurals' => 'setIgnorePlurals',
-        'maxFacetHits' => 'setMaxFacetHits',
         'minProximity' => 'setMinProximity',
         'minWordSizefor1Typo' => 'setMinWordSizefor1Typo',
         'minWordSizefor2Typos' => 'setMinWordSizefor2Typos',
@@ -273,13 +261,11 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
         'advancedSyntaxFeatures' => 'getAdvancedSyntaxFeatures',
         'allowTyposOnNumericTokens' => 'getAllowTyposOnNumericTokens',
         'alternativesAsExact' => 'getAlternativesAsExact',
-        'analytics' => 'getAnalytics',
         'attributeCriteriaComputedByMinProximity' => 'getAttributeCriteriaComputedByMinProximity',
         'attributesToHighlight' => 'getAttributesToHighlight',
         'attributesToRetrieve' => 'getAttributesToRetrieve',
         'attributesToSnippet' => 'getAttributesToSnippet',
         'clickAnalytics' => 'getClickAnalytics',
-        'decompoundQuery' => 'getDecompoundQuery',
         'disableExactOnAttributes' => 'getDisableExactOnAttributes',
         'disableTypoToleranceOnAttributes' => 'getDisableTypoToleranceOnAttributes',
         'distinct' => 'getDistinct',
@@ -294,7 +280,6 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
         'highlightPostTag' => 'getHighlightPostTag',
         'highlightPreTag' => 'getHighlightPreTag',
         'ignorePlurals' => 'getIgnorePlurals',
-        'maxFacetHits' => 'getMaxFacetHits',
         'minProximity' => 'getMinProximity',
         'minWordSizefor1Typo' => 'getMinWordSizefor1Typo',
         'minWordSizefor2Typos' => 'getMinWordSizefor2Typos',
@@ -351,9 +336,6 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
         if (isset($data['alternativesAsExact'])) {
             $this->container['alternativesAsExact'] = $data['alternativesAsExact'];
         }
-        if (isset($data['analytics'])) {
-            $this->container['analytics'] = $data['analytics'];
-        }
         if (isset($data['attributeCriteriaComputedByMinProximity'])) {
             $this->container['attributeCriteriaComputedByMinProximity'] = $data['attributeCriteriaComputedByMinProximity'];
         }
@@ -368,9 +350,6 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
         }
         if (isset($data['clickAnalytics'])) {
             $this->container['clickAnalytics'] = $data['clickAnalytics'];
-        }
-        if (isset($data['decompoundQuery'])) {
-            $this->container['decompoundQuery'] = $data['decompoundQuery'];
         }
         if (isset($data['disableExactOnAttributes'])) {
             $this->container['disableExactOnAttributes'] = $data['disableExactOnAttributes'];
@@ -413,9 +392,6 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
         }
         if (isset($data['ignorePlurals'])) {
             $this->container['ignorePlurals'] = $data['ignorePlurals'];
-        }
-        if (isset($data['maxFacetHits'])) {
-            $this->container['maxFacetHits'] = $data['maxFacetHits'];
         }
         if (isset($data['minProximity'])) {
             $this->container['minProximity'] = $data['minProximity'];
@@ -672,30 +648,6 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
     }
 
     /**
-     * Gets analytics.
-     *
-     * @return null|bool
-     */
-    public function getAnalytics()
-    {
-        return $this->container['analytics'] ?? null;
-    }
-
-    /**
-     * Sets analytics.
-     *
-     * @param null|bool $analytics whether this search will be included in Analytics
-     *
-     * @return self
-     */
-    public function setAnalytics($analytics)
-    {
-        $this->container['analytics'] = $analytics;
-
-        return $this;
-    }
-
-    /**
      * Gets attributeCriteriaComputedByMinProximity.
      *
      * @return null|bool
@@ -811,30 +763,6 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
     public function setClickAnalytics($clickAnalytics)
     {
         $this->container['clickAnalytics'] = $clickAnalytics;
-
-        return $this;
-    }
-
-    /**
-     * Gets decompoundQuery.
-     *
-     * @return null|bool
-     */
-    public function getDecompoundQuery()
-    {
-        return $this->container['decompoundQuery'] ?? null;
-    }
-
-    /**
-     * Sets decompoundQuery.
-     *
-     * @param null|bool $decompoundQuery Whether to split compound words in the query into their building blocks For more information, see [Word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words). Word segmentation is supported for these languages: German, Dutch, Finnish, Swedish, and Norwegian. Decompounding doesn't work for words with [non-spacing mark Unicode characters](https://www.charactercodes.net/category/non-spacing_mark). For example, `Gartenstühle` won't be decompounded if the `ü` consists of `u` (U+0075) and `◌̈` (U+0308).
-     *
-     * @return self
-     */
-    public function setDecompoundQuery($decompoundQuery)
-    {
-        $this->container['decompoundQuery'] = $decompoundQuery;
 
         return $this;
     }
@@ -1171,30 +1099,6 @@ class MainInjectionQueryParameters extends AbstractModel implements ModelInterfa
     public function setIgnorePlurals($ignorePlurals)
     {
         $this->container['ignorePlurals'] = $ignorePlurals;
-
-        return $this;
-    }
-
-    /**
-     * Gets maxFacetHits.
-     *
-     * @return null|int
-     */
-    public function getMaxFacetHits()
-    {
-        return $this->container['maxFacetHits'] ?? null;
-    }
-
-    /**
-     * Sets maxFacetHits.
-     *
-     * @param null|int $maxFacetHits Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
-     *
-     * @return self
-     */
-    public function setMaxFacetHits($maxFacetHits)
-    {
-        $this->container['maxFacetHits'] = $maxFacetHits;
 
         return $this;
     }

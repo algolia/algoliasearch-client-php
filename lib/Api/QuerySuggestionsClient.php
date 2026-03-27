@@ -80,6 +80,10 @@ class QuerySuggestionsClient
 
         $client = new static($apiWrapper, $config);
 
+        $logger = Algolia::getLogger();
+        $logger->info('Algolia API client: Algolia QuerySuggestionsClient initialized (appId: '.$config->getAppId().')');
+        Algolia::logDebugWarningOnce();
+
         return $client;
     }
 

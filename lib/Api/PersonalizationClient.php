@@ -78,6 +78,10 @@ class PersonalizationClient
 
         $client = new static($apiWrapper, $config);
 
+        $logger = Algolia::getLogger();
+        $logger->info('Algolia API client: Algolia PersonalizationClient initialized (appId: '.$config->getAppId().')');
+        Algolia::logDebugWarningOnce();
+
         return $client;
     }
 

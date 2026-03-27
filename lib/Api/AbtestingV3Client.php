@@ -81,6 +81,10 @@ class AbtestingV3Client
 
         $client = new static($apiWrapper, $config);
 
+        $logger = Algolia::getLogger();
+        $logger->info('Algolia API client: Algolia AbtestingV3Client initialized (appId: '.$config->getAppId().')');
+        Algolia::logDebugWarningOnce();
+
         return $client;
     }
 

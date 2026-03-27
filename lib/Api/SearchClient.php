@@ -151,6 +151,10 @@ class SearchClient
             $client->ingestionTransporter = IngestionClient::createWithConfig($ingestionConfig);
         }
 
+        $logger = Algolia::getLogger();
+        $logger->info('Algolia API client: Algolia SearchClient initialized (appId: '.$config->getAppId().')');
+        Algolia::logDebugWarningOnce();
+
         return $client;
     }
 
@@ -4505,22 +4509,30 @@ class SearchClient
         $requests = [];
         $count = 0;
 
+        $logger = Algolia::getLogger();
+        $totalObjects = count($objects);
+        $startTime = microtime(true);
+        $logger->info('Algolia API client: Batch operation started: '.$action.' on '.$indexName);
+
         foreach ($objects as $object) {
             $requests[] = [
                 'action' => $action,
                 'body' => $object,
             ];
 
-            if (sizeof($requests) === $batchSize || $count === sizeof($objects) - 1) {
+            ++$count;
+
+            if (sizeof($requests) === $batchSize || $count === sizeof($objects)) {
                 $responses[] = $this->batch($indexName, ['requests' => $requests], $requestOptions);
                 $requests = [];
-            }
 
-            ++$count;
+                $logger->info('Algolia API client: Batch progress: '.min($count, $totalObjects).'/'.$totalObjects.' objects processed');
+            }
         }
 
         if (!empty($requests)) {
             $responses[] = $this->batch($indexName, ['requests' => $requests], $requestOptions);
+            $logger->info('Algolia API client: Batch progress: '.$totalObjects.'/'.$totalObjects.' objects processed');
         }
 
         if ($waitForTasks && !empty($responses)) {
@@ -4528,6 +4540,9 @@ class SearchClient
                 $this->waitForTask($indexName, $response['taskID']);
             }
         }
+
+        $durationMs = round((microtime(true) - $startTime) * 1000);
+        $logger->info('Algolia API client: Batch operation completed: '.$totalObjects.' objects in '.$durationMs.'ms');
 
         return $responses;
     }

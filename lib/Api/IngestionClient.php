@@ -128,6 +128,10 @@ class IngestionClient
 
         $client = new static($apiWrapper, $config);
 
+        $logger = Algolia::getLogger();
+        $logger->info('Algolia API client: Algolia IngestionClient initialized (appId: '.$config->getAppId().')');
+        Algolia::logDebugWarningOnce();
+
         return $client;
     }
 
@@ -4336,6 +4340,11 @@ class IngestionClient
             $waitBatchSize = $batchSize;
         }
 
+        $logger = Algolia::getLogger();
+        $totalObjects = count($objects);
+        $startTime = microtime(true);
+        $logger->info('Algolia API client: Batch operation started: '.$action.' on '.$indexName);
+
         foreach ($objects as $object) {
             $records[] = $object;
             $ok = false;
@@ -4344,6 +4353,7 @@ class IngestionClient
             if (sizeof($records) === $batchSize || $count === sizeof($objects)) {
                 $responses[] = $this->push($indexName, ['action' => $action, 'records' => $records], false, $referenceIndexName, $requestOptions);
                 $records = [];
+                $logger->info('Algolia API client: Batch progress: '.$count.'/'.$totalObjects.' objects processed');
             }
 
             if ($waitForTasks && !empty($responses) && (0 === sizeof($responses) % $waitBatchSize || $count === sizeof($objects))) {
@@ -4376,6 +4386,9 @@ class IngestionClient
                 $offset = $offset + $waitBatchSize;
             }
         }
+
+        $durationMs = round((microtime(true) - $startTime) * 1000);
+        $logger->info('Algolia API client: Batch operation completed: '.$totalObjects.' objects in '.$durationMs.'ms');
 
         return $responses;
     }

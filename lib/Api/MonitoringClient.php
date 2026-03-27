@@ -77,6 +77,10 @@ class MonitoringClient
 
         $client = new static($apiWrapper, $config);
 
+        $logger = Algolia::getLogger();
+        $logger->info('Algolia API client: Algolia MonitoringClient initialized (appId: '.$config->getAppId().')');
+        Algolia::logDebugWarningOnce();
+
         return $client;
     }
 

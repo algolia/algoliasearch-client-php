@@ -153,10 +153,14 @@ final class ApiWrapper implements ApiWrapperInterface
 
         $logParams = [
             'body' => $body,
-            'headers' => $requestOptions->getHeaders(),
+            'headers' => $this->filterHeaders($requestOptions->getHeaders()),
             'method' => $method,
             'query' => $requestOptions->getQueryParameters(),
         ];
+
+        $hostCount = count($hosts);
+        $attemptNumber = 0;
+        $totalStartTime = microtime(true);
 
         foreach ($hosts as $hostUrl) {
             if ($this->config->getHasFullHosts()) {
@@ -169,8 +173,12 @@ final class ApiWrapper implements ApiWrapperInterface
                 $uri = $uri->withHost($hostUrl);
             }
 
+            $sanitizedUrl = $this->sanitizeUrl((string) $uri);
+            ++$attemptNumber;
+
             $request = null;
             $logParams['host'] = (string) $uri;
+            $isRead = ($hosts === $this->clusterHosts->read());
 
             try {
                 $request = $this->createRequest(
@@ -180,58 +188,61 @@ final class ApiWrapper implements ApiWrapperInterface
                     $body
                 );
 
-                $this->log(LogLevel::DEBUG, 'Sending request.', $logParams);
-
-                $isRead = ($hosts === $this->clusterHosts->read());
+                $this->log(LogLevel::DEBUG, 'Request headers: '.json_encode($logParams['headers']), $logParams);
+                if (!empty($logParams['body'])) {
+                    $this->log(LogLevel::DEBUG, 'Request body: '.json_encode($logParams['body']), $logParams);
+                }
                 $retryCount = $this->clusterHosts->getRetryCount($hostUrl, $isRead);
+                $connectTimeout = $requestOptions->getConnectTimeout() * ($retryCount + 1);
+
+                $startTime = microtime(true);
 
                 $response = $this->http->sendRequest(
                     $request,
                     $timeout,
-                    $requestOptions->getConnectTimeout() * ($retryCount + 1)
+                    $connectTimeout
                 );
+
+                $statusCode = $response->getStatusCode();
+                $durationMs = round((microtime(true) - $startTime) * 1000);
 
                 $responseBody = $this->handleResponse($response, $request, $returnHttpInfo);
                 $this->clusterHosts->resetHost($hostUrl);
 
-                $logParams['response'] = $responseBody;
-                $this->log(LogLevel::DEBUG, 'Response received.', $logParams);
+                $this->log(LogLevel::INFO, $method.' '.$sanitizedUrl.' - '.$statusCode.' ('.$durationMs.'ms)', $logParams);
+
+                if ($attemptNumber > 1) {
+                    $totalDurationMs = round((microtime(true) - $totalStartTime) * 1000);
+                    $this->log(LogLevel::INFO, 'Request completed on attempt '.$attemptNumber.'/'.$hostCount.' (total: '.$totalDurationMs.'ms)', $logParams);
+                }
+
+                // DEBUG: response details
+                $this->log(LogLevel::DEBUG, 'Response headers: '.json_encode($response->getHeaders()), $logParams);
+                $this->log(LogLevel::DEBUG, 'Response body: '.json_encode($responseBody), $logParams);
 
                 return $responseBody;
             } catch (TimeoutException $e) {
-                $this->log(
-                    LogLevel::DEBUG,
-                    'Request timed out.',
-                    array_merge($logParams, [
-                        'description' => $e->getMessage(),
-                    ])
-                );
-
                 $this->clusterHosts->timedOut($hostUrl);
-            } catch (RetriableException $e) {
-                $this->log(
-                    LogLevel::DEBUG,
-                    'Host failed.',
-                    array_merge($logParams, [
-                        'description' => $e->getMessage(),
-                    ])
-                );
 
+                $this->log(LogLevel::INFO, 'Attempt '.$attemptNumber.'/'.$hostCount.' failed for '.$method.' '.$path, $logParams);
+                $this->log(LogLevel::DEBUG, 'Attempt '.$attemptNumber.'/'.$hostCount.': Timeout on '.$hostUrl.' after '.($timeout * 1000).'ms ('.$e->getMessage().')', $logParams);
+            } catch (RetriableException $e) {
                 $this->clusterHosts->failed($hostUrl);
+
+                $this->log(LogLevel::INFO, 'Attempt '.$attemptNumber.'/'.$hostCount.' failed for '.$method.' '.$path, $logParams);
+                $this->log(LogLevel::DEBUG, 'Attempt '.$attemptNumber.'/'.$hostCount.': '.$e->getMessage().' on '.$hostUrl, $logParams);
             } catch (BadRequestException $e) {
-                unset($logParams['body'], $logParams['headers']);
-                $logParams['description'] = $e->getMessage();
-                $this->log(LogLevel::WARNING, 'Bad request.', $logParams);
+                $this->log(LogLevel::WARNING, 'Bad request: '.$e->getMessage(), $logParams);
 
                 throw $e;
             } catch (\Exception $e) {
-                unset($logParams['body'], $logParams['headers']);
-                $logParams['description'] = $e->getMessage();
-                $this->log(LogLevel::ERROR, 'Generic error.', $logParams);
+                $this->log(LogLevel::ERROR, 'Generic error: '.$e->getMessage(), $logParams);
 
                 throw $e;
             }
         }
+
+        $this->log(LogLevel::ERROR, 'Request failed after '.$hostCount.' retries: All hosts exhausted', $logParams);
 
         throw new UnreachableException();
     }
@@ -269,7 +280,16 @@ final class ApiWrapper implements ApiWrapperInterface
             throw new AlgoliaException($statusCode.': '.$response->getReasonPhrase(), $statusCode);
         }
 
-        $responseArray = Helpers::json_decode($body, true);
+        try {
+            $deserializeStart = microtime(true);
+            $responseArray = Helpers::json_decode($body, true);
+            $deserializeDurationMs = round((microtime(true) - $deserializeStart) * 1000);
+            $this->log(LogLevel::DEBUG, 'Response body deserialized in '.$deserializeDurationMs.'ms');
+        } catch (\InvalidArgumentException $e) {
+            $this->log(LogLevel::ERROR, 'Failed to deserialize response: '.$e->getMessage());
+
+            throw $e;
+        }
 
         if (404 === $statusCode) {
             throw new NotFoundException($responseArray['message'], $statusCode);
@@ -317,10 +337,15 @@ final class ApiWrapper implements ApiWrapperInterface
             if (empty($body)) {
                 $body = '{}';
             } else {
+                $serializeStart = microtime(true);
                 $body = \json_encode($body, $this->jsonOptions);
                 if (JSON_ERROR_NONE !== json_last_error()) {
+                    $this->log(LogLevel::ERROR, 'Serialization error: '.json_last_error_msg());
+
                     throw new \InvalidArgumentException('json_encode error: '.json_last_error_msg());
                 }
+                $serializeDurationMs = round((microtime(true) - $serializeStart) * 1000);
+                $this->log(LogLevel::DEBUG, 'Request body serialized in '.$serializeDurationMs.'ms');
             }
         }
 
@@ -339,5 +364,25 @@ final class ApiWrapper implements ApiWrapperInterface
     private function log($level, $message, array $context = [])
     {
         $this->logger->log($level, 'Algolia API client: '.$message, $context);
+    }
+
+    private function filterHeaders(array $headers): array
+    {
+        $sensitiveHeaders = ['x-algolia-api-key', 'authorization'];
+        $filtered = [];
+        foreach ($headers as $name => $value) {
+            if (in_array(strtolower($name), $sensitiveHeaders, true)) {
+                $filtered[$name] = '[FILTERED]';
+            } else {
+                $filtered[$name] = $value;
+            }
+        }
+
+        return $filtered;
+    }
+
+    private function sanitizeUrl(string $url): string
+    {
+        return preg_replace('/([?&])(apiKey|x-algolia-api-key)=[^&]+/', '$1$2=[FILTERED]', $url);
     }
 }

@@ -1,3 +1,8 @@
+## [4.41.0](https://github.com/algolia/algoliasearch-client-php/compare/4.40.0...4.41.0)
+
+- [90048ee1a2](https://github.com/algolia/api-clients-automation/commit/90048ee1a2) feat(php): add logs ([#6054](https://github.com/algolia/api-clients-automation/pull/6054)) by [@eric-zaharia](https://github.com/eric-zaharia/)
+- [b8dcc5d391](https://github.com/algolia/api-clients-automation/commit/b8dcc5d391) fix(php): make RequestOptions implement ArrayAccess and IteratorAggregate ([#6195](https://github.com/algolia/api-clients-automation/pull/6195)) by [@eric-zaharia](https://github.com/eric-zaharia/)
+
 ## [4.40.0](https://github.com/algolia/algoliasearch-client-php/compare/4.39.1...4.40.0)
 
 - [28cced1ecc](https://github.com/algolia/api-clients-automation/commit/28cced1ecc) feat(php): add gzip compression ([#6051](https://github.com/algolia/api-clients-automation/pull/6051)) by [@eric-zaharia](https://github.com/eric-zaharia/)

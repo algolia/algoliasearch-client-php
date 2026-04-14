@@ -1,3 +1,7 @@
+## [4.41.1](https://github.com/algolia/algoliasearch-client-php/compare/4.41.0...4.41.1)
+
+- [d86a5438e2](https://github.com/algolia/api-clients-automation/commit/d86a5438e2) chore(deps): dependencies 2026-04-06 ([#6200](https://github.com/algolia/api-clients-automation/pull/6200)) by [@algolia-bot](https://github.com/algolia-bot/)
+
 ## [4.41.0](https://github.com/algolia/algoliasearch-client-php/compare/4.40.0...4.41.0)
 
 - [90048ee1a2](https://github.com/algolia/api-clients-automation/commit/90048ee1a2) feat(php): add logs ([#6054](https://github.com/algolia/api-clients-automation/pull/6054)) by [@eric-zaharia](https://github.com/eric-zaharia/)

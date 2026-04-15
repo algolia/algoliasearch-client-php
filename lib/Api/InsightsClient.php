@@ -396,7 +396,7 @@ class InsightsClient
     }
 
     /**
-     * Delete user token (with HTTP info).
+     * Delete user token events (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
      * Deletes all events related to the specified user token from events metrics and analytics. The deletion is asynchronous, and processed within 48 hours. To delete a personalization user profile, see `Delete a user profile` in the Personalization API.

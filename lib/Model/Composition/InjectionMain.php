@@ -8,11 +8,13 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * InjectedItem Class Doc Comment.
+ * InjectionMain Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Main defines the organic result set of the injection.
  */
-class InjectedItem extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class InjectionMain extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -20,11 +22,7 @@ class InjectedItem extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $modelTypes = [
-        'key' => 'string',
-        'source' => '\Algolia\AlgoliaSearch\Model\Composition\InjectedItemSource',
-        'position' => 'int',
-        'length' => 'int',
-        'metadata' => '\Algolia\AlgoliaSearch\Model\Composition\InjectedItemMetadata',
+        'source' => '\Algolia\AlgoliaSearch\Model\Composition\InjectionMainSource',
     ];
 
     /**
@@ -33,11 +31,7 @@ class InjectedItem extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $modelFormats = [
-        'key' => null,
         'source' => null,
-        'position' => null,
-        'length' => null,
-        'metadata' => null,
     ];
 
     /**
@@ -47,11 +41,7 @@ class InjectedItem extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'key' => 'key',
         'source' => 'source',
-        'position' => 'position',
-        'length' => 'length',
-        'metadata' => 'metadata',
     ];
 
     /**
@@ -60,11 +50,7 @@ class InjectedItem extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'key' => 'setKey',
         'source' => 'setSource',
-        'position' => 'setPosition',
-        'length' => 'setLength',
-        'metadata' => 'setMetadata',
     ];
 
     /**
@@ -73,11 +59,7 @@ class InjectedItem extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'key' => 'getKey',
         'source' => 'getSource',
-        'position' => 'getPosition',
-        'length' => 'getLength',
-        'metadata' => 'getMetadata',
     ];
 
     /**
@@ -94,20 +76,8 @@ class InjectedItem extends AbstractModel implements ModelInterface, \ArrayAccess
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['key'])) {
-            $this->container['key'] = $data['key'];
-        }
         if (isset($data['source'])) {
             $this->container['source'] = $data['source'];
-        }
-        if (isset($data['position'])) {
-            $this->container['position'] = $data['position'];
-        }
-        if (isset($data['length'])) {
-            $this->container['length'] = $data['length'];
-        }
-        if (isset($data['metadata'])) {
-            $this->container['metadata'] = $data['metadata'];
         }
     }
 
@@ -169,22 +139,7 @@ class InjectedItem extends AbstractModel implements ModelInterface, \ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (!isset($this->container['key']) || null === $this->container['key']) {
-            $invalidProperties[] = "'key' can't be null";
-        }
-        if (!isset($this->container['source']) || null === $this->container['source']) {
-            $invalidProperties[] = "'source' can't be null";
-        }
-        if (!isset($this->container['position']) || null === $this->container['position']) {
-            $invalidProperties[] = "'position' can't be null";
-        }
-        if (!isset($this->container['length']) || null === $this->container['length']) {
-            $invalidProperties[] = "'length' can't be null";
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -199,33 +154,9 @@ class InjectedItem extends AbstractModel implements ModelInterface, \ArrayAccess
     }
 
     /**
-     * Gets key.
-     *
-     * @return string
-     */
-    public function getKey()
-    {
-        return $this->container['key'] ?? null;
-    }
-
-    /**
-     * Sets key.
-     *
-     * @param string $key injected Item unique identifier
-     *
-     * @return self
-     */
-    public function setKey($key)
-    {
-        $this->container['key'] = $key;
-
-        return $this;
-    }
-
-    /**
      * Gets source.
      *
-     * @return InjectedItemSource
+     * @return null|InjectionMainSource
      */
     public function getSource()
     {
@@ -235,85 +166,13 @@ class InjectedItem extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets source.
      *
-     * @param InjectedItemSource $source source
+     * @param null|InjectionMainSource $source source
      *
      * @return self
      */
     public function setSource($source)
     {
         $this->container['source'] = $source;
-
-        return $this;
-    }
-
-    /**
-     * Gets position.
-     *
-     * @return int
-     */
-    public function getPosition()
-    {
-        return $this->container['position'] ?? null;
-    }
-
-    /**
-     * Sets position.
-     *
-     * @param int $position position
-     *
-     * @return self
-     */
-    public function setPosition($position)
-    {
-        $this->container['position'] = $position;
-
-        return $this;
-    }
-
-    /**
-     * Gets length.
-     *
-     * @return int
-     */
-    public function getLength()
-    {
-        return $this->container['length'] ?? null;
-    }
-
-    /**
-     * Sets length.
-     *
-     * @param int $length length
-     *
-     * @return self
-     */
-    public function setLength($length)
-    {
-        $this->container['length'] = $length;
-
-        return $this;
-    }
-
-    /**
-     * Gets metadata.
-     *
-     * @return null|InjectedItemMetadata
-     */
-    public function getMetadata()
-    {
-        return $this->container['metadata'] ?? null;
-    }
-
-    /**
-     * Sets metadata.
-     *
-     * @param null|InjectedItemMetadata $metadata metadata
-     *
-     * @return self
-     */
-    public function setMetadata($metadata)
-    {
-        $this->container['metadata'] = $metadata;
 
         return $this;
     }

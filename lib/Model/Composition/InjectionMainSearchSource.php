@@ -8,11 +8,13 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * CompositionSource Class Doc Comment.
+ * InjectionMainSearchSource Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Organic result set will originate from a search request performed on the specified index.
  */
-class CompositionSource extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class InjectionMainSearchSource extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -20,7 +22,7 @@ class CompositionSource extends AbstractModel implements ModelInterface, \ArrayA
      * @var string[]
      */
     protected static $modelTypes = [
-        'search' => '\Algolia\AlgoliaSearch\Model\Composition\CompositionSourceSearch',
+        'search' => '\Algolia\AlgoliaSearch\Model\Composition\MainSearch',
     ];
 
     /**
@@ -160,7 +162,7 @@ class CompositionSource extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets search.
      *
-     * @return CompositionSourceSearch
+     * @return MainSearch
      */
     public function getSearch()
     {
@@ -170,7 +172,7 @@ class CompositionSource extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets search.
      *
-     * @param CompositionSourceSearch $search search
+     * @param MainSearch $search search
      *
      * @return self
      */

@@ -20,8 +20,8 @@ class Injection extends AbstractModel implements ModelInterface, \ArrayAccess, \
      * @var string[]
      */
     protected static $modelTypes = [
-        'main' => '\Algolia\AlgoliaSearch\Model\Composition\Main',
-        'injectedItems' => '\Algolia\AlgoliaSearch\Model\Composition\InjectedItem[]',
+        'main' => '\Algolia\AlgoliaSearch\Model\Composition\InjectionMain',
+        'injectedItems' => '\Algolia\AlgoliaSearch\Model\Composition\InjectionInjectedItem[]',
         'deduplication' => '\Algolia\AlgoliaSearch\Model\Composition\Deduplication',
     ];
 
@@ -176,7 +176,7 @@ class Injection extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Gets main.
      *
-     * @return Main
+     * @return InjectionMain
      */
     public function getMain()
     {
@@ -186,7 +186,7 @@ class Injection extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Sets main.
      *
-     * @param Main $main main
+     * @param InjectionMain $main main
      *
      * @return self
      */
@@ -200,7 +200,7 @@ class Injection extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Gets injectedItems.
      *
-     * @return null|InjectedItem[]
+     * @return null|InjectionInjectedItem[]
      */
     public function getInjectedItems()
     {
@@ -210,7 +210,7 @@ class Injection extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Sets injectedItems.
      *
-     * @param null|InjectedItem[] $injectedItems list of injected items of the current Composition
+     * @param null|InjectionInjectedItem[] $injectedItems list of injected items of the current Composition
      *
      * @return self
      */

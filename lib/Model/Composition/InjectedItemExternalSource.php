@@ -8,11 +8,13 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * InjectedItemSource Class Doc Comment.
+ * InjectedItemExternalSource Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Injected items will originate from externally provided objectIDs (that must exist in the index) given at runtime in the run request payload.
  */
-class InjectedItemSource extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class InjectedItemExternalSource extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -20,7 +22,6 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $modelTypes = [
-        'search' => '\Algolia\AlgoliaSearch\Model\Composition\InjectedItemSearch',
         'external' => '\Algolia\AlgoliaSearch\Model\Composition\InjectedItemExternal',
     ];
 
@@ -30,7 +31,6 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $modelFormats = [
-        'search' => null,
         'external' => null,
     ];
 
@@ -41,7 +41,6 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $attributeMap = [
-        'search' => 'search',
         'external' => 'external',
     ];
 
@@ -51,7 +50,6 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $setters = [
-        'search' => 'setSearch',
         'external' => 'setExternal',
     ];
 
@@ -61,7 +59,6 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $getters = [
-        'search' => 'getSearch',
         'external' => 'getExternal',
     ];
 
@@ -79,9 +76,6 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['search'])) {
-            $this->container['search'] = $data['search'];
-        }
         if (isset($data['external'])) {
             $this->container['external'] = $data['external'];
         }
@@ -147,9 +141,6 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['search']) || null === $this->container['search']) {
-            $invalidProperties[] = "'search' can't be null";
-        }
         if (!isset($this->container['external']) || null === $this->container['external']) {
             $invalidProperties[] = "'external' can't be null";
         }
@@ -166,30 +157,6 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
     public function valid()
     {
         return 0 === count($this->listInvalidProperties());
-    }
-
-    /**
-     * Gets search.
-     *
-     * @return InjectedItemSearch
-     */
-    public function getSearch()
-    {
-        return $this->container['search'] ?? null;
-    }
-
-    /**
-     * Sets search.
-     *
-     * @param InjectedItemSearch $search search
-     *
-     * @return self
-     */
-    public function setSearch($search)
-    {
-        $this->container['search'] = $search;
-
-        return $this;
     }
 
     /**

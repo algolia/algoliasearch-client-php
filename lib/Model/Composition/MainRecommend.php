@@ -8,11 +8,11 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * InjectedItemSource Class Doc Comment.
+ * MainRecommend Class Doc Comment.
  *
  * @category Class
  */
-class InjectedItemSource extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class MainRecommend extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -20,8 +20,7 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $modelTypes = [
-        'search' => '\Algolia\AlgoliaSearch\Model\Composition\InjectedItemSearch',
-        'external' => '\Algolia\AlgoliaSearch\Model\Composition\InjectedItemExternal',
+        'index' => 'string',
     ];
 
     /**
@@ -30,8 +29,7 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $modelFormats = [
-        'search' => null,
-        'external' => null,
+        'index' => null,
     ];
 
     /**
@@ -41,8 +39,7 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $attributeMap = [
-        'search' => 'search',
-        'external' => 'external',
+        'index' => 'index',
     ];
 
     /**
@@ -51,8 +48,7 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $setters = [
-        'search' => 'setSearch',
-        'external' => 'setExternal',
+        'index' => 'setIndex',
     ];
 
     /**
@@ -61,8 +57,7 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $getters = [
-        'search' => 'getSearch',
-        'external' => 'getExternal',
+        'index' => 'getIndex',
     ];
 
     /**
@@ -79,11 +74,8 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['search'])) {
-            $this->container['search'] = $data['search'];
-        }
-        if (isset($data['external'])) {
-            $this->container['external'] = $data['external'];
+        if (isset($data['index'])) {
+            $this->container['index'] = $data['index'];
         }
     }
 
@@ -147,11 +139,8 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['search']) || null === $this->container['search']) {
-            $invalidProperties[] = "'search' can't be null";
-        }
-        if (!isset($this->container['external']) || null === $this->container['external']) {
-            $invalidProperties[] = "'external' can't be null";
+        if (!isset($this->container['index']) || null === $this->container['index']) {
+            $invalidProperties[] = "'index' can't be null";
         }
 
         return $invalidProperties;
@@ -169,49 +158,25 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
     }
 
     /**
-     * Gets search.
+     * Gets index.
      *
-     * @return InjectedItemSearch
+     * @return string
      */
-    public function getSearch()
+    public function getIndex()
     {
-        return $this->container['search'] ?? null;
+        return $this->container['index'] ?? null;
     }
 
     /**
-     * Sets search.
+     * Sets index.
      *
-     * @param InjectedItemSearch $search search
+     * @param string $index targeted index name
      *
      * @return self
      */
-    public function setSearch($search)
+    public function setIndex($index)
     {
-        $this->container['search'] = $search;
-
-        return $this;
-    }
-
-    /**
-     * Gets external.
-     *
-     * @return InjectedItemExternal
-     */
-    public function getExternal()
-    {
-        return $this->container['external'] ?? null;
-    }
-
-    /**
-     * Sets external.
-     *
-     * @param InjectedItemExternal $external external
-     *
-     * @return self
-     */
-    public function setExternal($external)
-    {
-        $this->container['external'] = $external;
+        $this->container['index'] = $index;
 
         return $this;
     }

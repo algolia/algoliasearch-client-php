@@ -8,11 +8,11 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * External Class Doc Comment.
+ * InjectedItemSearch Class Doc Comment.
  *
  * @category Class
  */
-class External extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class InjectedItemSearch extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -22,7 +22,6 @@ class External extends AbstractModel implements ModelInterface, \ArrayAccess, \J
     protected static $modelTypes = [
         'index' => 'string',
         'params' => '\Algolia\AlgoliaSearch\Model\Composition\BaseInjectionQueryParameters',
-        'ordering' => '\Algolia\AlgoliaSearch\Model\Composition\ExternalOrdering',
     ];
 
     /**
@@ -33,7 +32,6 @@ class External extends AbstractModel implements ModelInterface, \ArrayAccess, \J
     protected static $modelFormats = [
         'index' => null,
         'params' => null,
-        'ordering' => null,
     ];
 
     /**
@@ -45,7 +43,6 @@ class External extends AbstractModel implements ModelInterface, \ArrayAccess, \J
     protected static $attributeMap = [
         'index' => 'index',
         'params' => 'params',
-        'ordering' => 'ordering',
     ];
 
     /**
@@ -56,7 +53,6 @@ class External extends AbstractModel implements ModelInterface, \ArrayAccess, \J
     protected static $setters = [
         'index' => 'setIndex',
         'params' => 'setParams',
-        'ordering' => 'setOrdering',
     ];
 
     /**
@@ -67,7 +63,6 @@ class External extends AbstractModel implements ModelInterface, \ArrayAccess, \J
     protected static $getters = [
         'index' => 'getIndex',
         'params' => 'getParams',
-        'ordering' => 'getOrdering',
     ];
 
     /**
@@ -89,9 +84,6 @@ class External extends AbstractModel implements ModelInterface, \ArrayAccess, \J
         }
         if (isset($data['params'])) {
             $this->container['params'] = $data['params'];
-        }
-        if (isset($data['ordering'])) {
-            $this->container['ordering'] = $data['ordering'];
         }
     }
 
@@ -217,30 +209,6 @@ class External extends AbstractModel implements ModelInterface, \ArrayAccess, \J
     public function setParams($params)
     {
         $this->container['params'] = $params;
-
-        return $this;
-    }
-
-    /**
-     * Gets ordering.
-     *
-     * @return null|ExternalOrdering
-     */
-    public function getOrdering()
-    {
-        return $this->container['ordering'] ?? null;
-    }
-
-    /**
-     * Sets ordering.
-     *
-     * @param null|ExternalOrdering $ordering ordering
-     *
-     * @return self
-     */
-    public function setOrdering($ordering)
-    {
-        $this->container['ordering'] = $ordering;
 
         return $this;
     }

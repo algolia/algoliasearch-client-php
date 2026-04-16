@@ -8,11 +8,11 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * CompositionSourceSearch Class Doc Comment.
+ * InjectedItemExternal Class Doc Comment.
  *
  * @category Class
  */
-class CompositionSourceSearch extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class InjectedItemExternal extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -21,7 +21,8 @@ class CompositionSourceSearch extends AbstractModel implements ModelInterface, \
      */
     protected static $modelTypes = [
         'index' => 'string',
-        'params' => '\Algolia\AlgoliaSearch\Model\Composition\MainInjectionQueryParameters',
+        'params' => '\Algolia\AlgoliaSearch\Model\Composition\BaseInjectionQueryParameters',
+        'ordering' => '\Algolia\AlgoliaSearch\Model\Composition\ExternalOrdering',
     ];
 
     /**
@@ -32,6 +33,7 @@ class CompositionSourceSearch extends AbstractModel implements ModelInterface, \
     protected static $modelFormats = [
         'index' => null,
         'params' => null,
+        'ordering' => null,
     ];
 
     /**
@@ -43,6 +45,7 @@ class CompositionSourceSearch extends AbstractModel implements ModelInterface, \
     protected static $attributeMap = [
         'index' => 'index',
         'params' => 'params',
+        'ordering' => 'ordering',
     ];
 
     /**
@@ -53,6 +56,7 @@ class CompositionSourceSearch extends AbstractModel implements ModelInterface, \
     protected static $setters = [
         'index' => 'setIndex',
         'params' => 'setParams',
+        'ordering' => 'setOrdering',
     ];
 
     /**
@@ -63,6 +67,7 @@ class CompositionSourceSearch extends AbstractModel implements ModelInterface, \
     protected static $getters = [
         'index' => 'getIndex',
         'params' => 'getParams',
+        'ordering' => 'getOrdering',
     ];
 
     /**
@@ -84,6 +89,9 @@ class CompositionSourceSearch extends AbstractModel implements ModelInterface, \
         }
         if (isset($data['params'])) {
             $this->container['params'] = $data['params'];
+        }
+        if (isset($data['ordering'])) {
+            $this->container['ordering'] = $data['ordering'];
         }
     }
 
@@ -178,7 +186,7 @@ class CompositionSourceSearch extends AbstractModel implements ModelInterface, \
     /**
      * Sets index.
      *
-     * @param string $index composition Main Index name
+     * @param string $index composition Index name
      *
      * @return self
      */
@@ -192,7 +200,7 @@ class CompositionSourceSearch extends AbstractModel implements ModelInterface, \
     /**
      * Gets params.
      *
-     * @return null|MainInjectionQueryParameters
+     * @return null|BaseInjectionQueryParameters
      */
     public function getParams()
     {
@@ -202,13 +210,37 @@ class CompositionSourceSearch extends AbstractModel implements ModelInterface, \
     /**
      * Sets params.
      *
-     * @param null|MainInjectionQueryParameters $params params
+     * @param null|BaseInjectionQueryParameters $params params
      *
      * @return self
      */
     public function setParams($params)
     {
         $this->container['params'] = $params;
+
+        return $this;
+    }
+
+    /**
+     * Gets ordering.
+     *
+     * @return null|ExternalOrdering
+     */
+    public function getOrdering()
+    {
+        return $this->container['ordering'] ?? null;
+    }
+
+    /**
+     * Sets ordering.
+     *
+     * @param null|ExternalOrdering $ordering ordering
+     *
+     * @return self
+     */
+    public function setOrdering($ordering)
+    {
+        $this->container['ordering'] = $ordering;
 
         return $this;
     }

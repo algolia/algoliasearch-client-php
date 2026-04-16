@@ -8,11 +8,13 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * Main Class Doc Comment.
+ * InjectedItemSearchSource Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Injected items will originate from a search request performed on the specified index.
  */
-class Main extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class InjectedItemSearchSource extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -20,7 +22,7 @@ class Main extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $modelTypes = [
-        'source' => '\Algolia\AlgoliaSearch\Model\Composition\CompositionSource',
+        'search' => '\Algolia\AlgoliaSearch\Model\Composition\InjectedItemSearch',
     ];
 
     /**
@@ -29,7 +31,7 @@ class Main extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $modelFormats = [
-        'source' => null,
+        'search' => null,
     ];
 
     /**
@@ -39,7 +41,7 @@ class Main extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'source' => 'source',
+        'search' => 'search',
     ];
 
     /**
@@ -48,7 +50,7 @@ class Main extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'source' => 'setSource',
+        'search' => 'setSearch',
     ];
 
     /**
@@ -57,7 +59,7 @@ class Main extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'source' => 'getSource',
+        'search' => 'getSearch',
     ];
 
     /**
@@ -74,8 +76,8 @@ class Main extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['source'])) {
-            $this->container['source'] = $data['source'];
+        if (isset($data['search'])) {
+            $this->container['search'] = $data['search'];
         }
     }
 
@@ -139,8 +141,8 @@ class Main extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['source']) || null === $this->container['source']) {
-            $invalidProperties[] = "'source' can't be null";
+        if (!isset($this->container['search']) || null === $this->container['search']) {
+            $invalidProperties[] = "'search' can't be null";
         }
 
         return $invalidProperties;
@@ -158,25 +160,25 @@ class Main extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     }
 
     /**
-     * Gets source.
+     * Gets search.
      *
-     * @return CompositionSource
+     * @return InjectedItemSearch
      */
-    public function getSource()
+    public function getSearch()
     {
-        return $this->container['source'] ?? null;
+        return $this->container['search'] ?? null;
     }
 
     /**
-     * Sets source.
+     * Sets search.
      *
-     * @param CompositionSource $source source
+     * @param InjectedItemSearch $search search
      *
      * @return self
      */
-    public function setSource($source)
+    public function setSearch($search)
     {
-        $this->container['source'] = $source;
+        $this->container['search'] = $search;
 
         return $this;
     }

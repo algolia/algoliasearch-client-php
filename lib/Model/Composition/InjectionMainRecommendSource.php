@@ -8,11 +8,13 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * InjectedItemSource Class Doc Comment.
+ * InjectionMainRecommendSource Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Organic result set will originate from a recommend request.
  */
-class InjectedItemSource extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class InjectionMainRecommendSource extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -20,8 +22,7 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $modelTypes = [
-        'search' => '\Algolia\AlgoliaSearch\Model\Composition\InjectedItemSearch',
-        'external' => '\Algolia\AlgoliaSearch\Model\Composition\InjectedItemExternal',
+        'recommend' => '\Algolia\AlgoliaSearch\Model\Composition\MainRecommend',
     ];
 
     /**
@@ -30,8 +31,7 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $modelFormats = [
-        'search' => null,
-        'external' => null,
+        'recommend' => null,
     ];
 
     /**
@@ -41,8 +41,7 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $attributeMap = [
-        'search' => 'search',
-        'external' => 'external',
+        'recommend' => 'recommend',
     ];
 
     /**
@@ -51,8 +50,7 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $setters = [
-        'search' => 'setSearch',
-        'external' => 'setExternal',
+        'recommend' => 'setRecommend',
     ];
 
     /**
@@ -61,8 +59,7 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $getters = [
-        'search' => 'getSearch',
-        'external' => 'getExternal',
+        'recommend' => 'getRecommend',
     ];
 
     /**
@@ -79,11 +76,8 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['search'])) {
-            $this->container['search'] = $data['search'];
-        }
-        if (isset($data['external'])) {
-            $this->container['external'] = $data['external'];
+        if (isset($data['recommend'])) {
+            $this->container['recommend'] = $data['recommend'];
         }
     }
 
@@ -147,11 +141,8 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['search']) || null === $this->container['search']) {
-            $invalidProperties[] = "'search' can't be null";
-        }
-        if (!isset($this->container['external']) || null === $this->container['external']) {
-            $invalidProperties[] = "'external' can't be null";
+        if (!isset($this->container['recommend']) || null === $this->container['recommend']) {
+            $invalidProperties[] = "'recommend' can't be null";
         }
 
         return $invalidProperties;
@@ -169,49 +160,25 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
     }
 
     /**
-     * Gets search.
+     * Gets recommend.
      *
-     * @return InjectedItemSearch
+     * @return MainRecommend
      */
-    public function getSearch()
+    public function getRecommend()
     {
-        return $this->container['search'] ?? null;
+        return $this->container['recommend'] ?? null;
     }
 
     /**
-     * Sets search.
+     * Sets recommend.
      *
-     * @param InjectedItemSearch $search search
+     * @param MainRecommend $recommend recommend
      *
      * @return self
      */
-    public function setSearch($search)
+    public function setRecommend($recommend)
     {
-        $this->container['search'] = $search;
-
-        return $this;
-    }
-
-    /**
-     * Gets external.
-     *
-     * @return InjectedItemExternal
-     */
-    public function getExternal()
-    {
-        return $this->container['external'] ?? null;
-    }
-
-    /**
-     * Sets external.
-     *
-     * @param InjectedItemExternal $external external
-     *
-     * @return self
-     */
-    public function setExternal($external)
-    {
-        $this->container['external'] = $external;
+        $this->container['recommend'] = $recommend;
 
         return $this;
     }

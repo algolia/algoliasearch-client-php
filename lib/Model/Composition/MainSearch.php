@@ -8,13 +8,11 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * SearchSource Class Doc Comment.
+ * MainSearch Class Doc Comment.
  *
  * @category Class
- *
- * @description Injected items will originate from a search request performed on the specified index.
  */
-class SearchSource extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class MainSearch extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -22,7 +20,8 @@ class SearchSource extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $modelTypes = [
-        'search' => '\Algolia\AlgoliaSearch\Model\Composition\Search',
+        'index' => 'string',
+        'params' => '\Algolia\AlgoliaSearch\Model\Composition\MainInjectionQueryParameters',
     ];
 
     /**
@@ -31,7 +30,8 @@ class SearchSource extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $modelFormats = [
-        'search' => null,
+        'index' => null,
+        'params' => null,
     ];
 
     /**
@@ -41,7 +41,8 @@ class SearchSource extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'search' => 'search',
+        'index' => 'index',
+        'params' => 'params',
     ];
 
     /**
@@ -50,7 +51,8 @@ class SearchSource extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'search' => 'setSearch',
+        'index' => 'setIndex',
+        'params' => 'setParams',
     ];
 
     /**
@@ -59,7 +61,8 @@ class SearchSource extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'search' => 'getSearch',
+        'index' => 'getIndex',
+        'params' => 'getParams',
     ];
 
     /**
@@ -76,8 +79,11 @@ class SearchSource extends AbstractModel implements ModelInterface, \ArrayAccess
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['search'])) {
-            $this->container['search'] = $data['search'];
+        if (isset($data['index'])) {
+            $this->container['index'] = $data['index'];
+        }
+        if (isset($data['params'])) {
+            $this->container['params'] = $data['params'];
         }
     }
 
@@ -141,8 +147,8 @@ class SearchSource extends AbstractModel implements ModelInterface, \ArrayAccess
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['search']) || null === $this->container['search']) {
-            $invalidProperties[] = "'search' can't be null";
+        if (!isset($this->container['index']) || null === $this->container['index']) {
+            $invalidProperties[] = "'index' can't be null";
         }
 
         return $invalidProperties;
@@ -160,25 +166,49 @@ class SearchSource extends AbstractModel implements ModelInterface, \ArrayAccess
     }
 
     /**
-     * Gets search.
+     * Gets index.
      *
-     * @return Search
+     * @return string
      */
-    public function getSearch()
+    public function getIndex()
     {
-        return $this->container['search'] ?? null;
+        return $this->container['index'] ?? null;
     }
 
     /**
-     * Sets search.
+     * Sets index.
      *
-     * @param Search $search search
+     * @param string $index targeted index name
      *
      * @return self
      */
-    public function setSearch($search)
+    public function setIndex($index)
     {
-        $this->container['search'] = $search;
+        $this->container['index'] = $index;
+
+        return $this;
+    }
+
+    /**
+     * Gets params.
+     *
+     * @return null|MainInjectionQueryParameters
+     */
+    public function getParams()
+    {
+        return $this->container['params'] ?? null;
+    }
+
+    /**
+     * Sets params.
+     *
+     * @param null|MainInjectionQueryParameters $params params
+     *
+     * @return self
+     */
+    public function setParams($params)
+    {
+        $this->container['params'] = $params;
 
         return $this;
     }

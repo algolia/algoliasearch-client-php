@@ -8,11 +8,11 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * Search Class Doc Comment.
+ * InjectionInjectedItem Class Doc Comment.
  *
  * @category Class
  */
-class Search extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class InjectionInjectedItem extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -20,8 +20,11 @@ class Search extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
      * @var string[]
      */
     protected static $modelTypes = [
-        'index' => 'string',
-        'params' => '\Algolia\AlgoliaSearch\Model\Composition\BaseInjectionQueryParameters',
+        'key' => 'string',
+        'source' => '\Algolia\AlgoliaSearch\Model\Composition\InjectedItemSource',
+        'position' => 'int',
+        'length' => 'int',
+        'metadata' => '\Algolia\AlgoliaSearch\Model\Composition\InjectedItemMetadata',
     ];
 
     /**
@@ -30,8 +33,11 @@ class Search extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
      * @var string[]
      */
     protected static $modelFormats = [
-        'index' => null,
-        'params' => null,
+        'key' => null,
+        'source' => null,
+        'position' => null,
+        'length' => null,
+        'metadata' => null,
     ];
 
     /**
@@ -41,8 +47,11 @@ class Search extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
-        'index' => 'index',
-        'params' => 'params',
+        'key' => 'key',
+        'source' => 'source',
+        'position' => 'position',
+        'length' => 'length',
+        'metadata' => 'metadata',
     ];
 
     /**
@@ -51,8 +60,11 @@ class Search extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
-        'index' => 'setIndex',
-        'params' => 'setParams',
+        'key' => 'setKey',
+        'source' => 'setSource',
+        'position' => 'setPosition',
+        'length' => 'setLength',
+        'metadata' => 'setMetadata',
     ];
 
     /**
@@ -61,8 +73,11 @@ class Search extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
-        'index' => 'getIndex',
-        'params' => 'getParams',
+        'key' => 'getKey',
+        'source' => 'getSource',
+        'position' => 'getPosition',
+        'length' => 'getLength',
+        'metadata' => 'getMetadata',
     ];
 
     /**
@@ -79,11 +94,20 @@ class Search extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['index'])) {
-            $this->container['index'] = $data['index'];
+        if (isset($data['key'])) {
+            $this->container['key'] = $data['key'];
         }
-        if (isset($data['params'])) {
-            $this->container['params'] = $data['params'];
+        if (isset($data['source'])) {
+            $this->container['source'] = $data['source'];
+        }
+        if (isset($data['position'])) {
+            $this->container['position'] = $data['position'];
+        }
+        if (isset($data['length'])) {
+            $this->container['length'] = $data['length'];
+        }
+        if (isset($data['metadata'])) {
+            $this->container['metadata'] = $data['metadata'];
         }
     }
 
@@ -147,8 +171,17 @@ class Search extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['index']) || null === $this->container['index']) {
-            $invalidProperties[] = "'index' can't be null";
+        if (!isset($this->container['key']) || null === $this->container['key']) {
+            $invalidProperties[] = "'key' can't be null";
+        }
+        if (!isset($this->container['source']) || null === $this->container['source']) {
+            $invalidProperties[] = "'source' can't be null";
+        }
+        if (!isset($this->container['position']) || null === $this->container['position']) {
+            $invalidProperties[] = "'position' can't be null";
+        }
+        if (!isset($this->container['length']) || null === $this->container['length']) {
+            $invalidProperties[] = "'length' can't be null";
         }
 
         return $invalidProperties;
@@ -166,49 +199,121 @@ class Search extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     }
 
     /**
-     * Gets index.
+     * Gets key.
      *
      * @return string
      */
-    public function getIndex()
+    public function getKey()
     {
-        return $this->container['index'] ?? null;
+        return $this->container['key'] ?? null;
     }
 
     /**
-     * Sets index.
+     * Sets key.
      *
-     * @param string $index composition Index name
+     * @param string $key injected Item unique identifier
      *
      * @return self
      */
-    public function setIndex($index)
+    public function setKey($key)
     {
-        $this->container['index'] = $index;
+        $this->container['key'] = $key;
 
         return $this;
     }
 
     /**
-     * Gets params.
+     * Gets source.
      *
-     * @return null|BaseInjectionQueryParameters
+     * @return InjectedItemSource
      */
-    public function getParams()
+    public function getSource()
     {
-        return $this->container['params'] ?? null;
+        return $this->container['source'] ?? null;
     }
 
     /**
-     * Sets params.
+     * Sets source.
      *
-     * @param null|BaseInjectionQueryParameters $params params
+     * @param InjectedItemSource $source source
      *
      * @return self
      */
-    public function setParams($params)
+    public function setSource($source)
     {
-        $this->container['params'] = $params;
+        $this->container['source'] = $source;
+
+        return $this;
+    }
+
+    /**
+     * Gets position.
+     *
+     * @return int
+     */
+    public function getPosition()
+    {
+        return $this->container['position'] ?? null;
+    }
+
+    /**
+     * Sets position.
+     *
+     * @param int $position position
+     *
+     * @return self
+     */
+    public function setPosition($position)
+    {
+        $this->container['position'] = $position;
+
+        return $this;
+    }
+
+    /**
+     * Gets length.
+     *
+     * @return int
+     */
+    public function getLength()
+    {
+        return $this->container['length'] ?? null;
+    }
+
+    /**
+     * Sets length.
+     *
+     * @param int $length length
+     *
+     * @return self
+     */
+    public function setLength($length)
+    {
+        $this->container['length'] = $length;
+
+        return $this;
+    }
+
+    /**
+     * Gets metadata.
+     *
+     * @return null|InjectedItemMetadata
+     */
+    public function getMetadata()
+    {
+        return $this->container['metadata'] ?? null;
+    }
+
+    /**
+     * Sets metadata.
+     *
+     * @param null|InjectedItemMetadata $metadata metadata
+     *
+     * @return self
+     */
+    public function setMetadata($metadata)
+    {
+        $this->container['metadata'] = $metadata;
 
         return $this;
     }

@@ -8,11 +8,13 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * MainSearch Class Doc Comment.
+ * InjectedItemRecommendSource Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Injected items will originate from a recommendation request performed on the specified index.
  */
-class MainSearch extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class InjectedItemRecommendSource extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -20,8 +22,7 @@ class MainSearch extends AbstractModel implements ModelInterface, \ArrayAccess, 
      * @var string[]
      */
     protected static $modelTypes = [
-        'index' => 'string',
-        'params' => '\Algolia\AlgoliaSearch\Model\Composition\MainInjectionQueryParameters',
+        'recommend' => '\Algolia\AlgoliaSearch\Model\Composition\Recommend',
     ];
 
     /**
@@ -30,8 +31,7 @@ class MainSearch extends AbstractModel implements ModelInterface, \ArrayAccess, 
      * @var string[]
      */
     protected static $modelFormats = [
-        'index' => null,
-        'params' => null,
+        'recommend' => null,
     ];
 
     /**
@@ -41,8 +41,7 @@ class MainSearch extends AbstractModel implements ModelInterface, \ArrayAccess, 
      * @var string[]
      */
     protected static $attributeMap = [
-        'index' => 'index',
-        'params' => 'params',
+        'recommend' => 'recommend',
     ];
 
     /**
@@ -51,8 +50,7 @@ class MainSearch extends AbstractModel implements ModelInterface, \ArrayAccess, 
      * @var string[]
      */
     protected static $setters = [
-        'index' => 'setIndex',
-        'params' => 'setParams',
+        'recommend' => 'setRecommend',
     ];
 
     /**
@@ -61,8 +59,7 @@ class MainSearch extends AbstractModel implements ModelInterface, \ArrayAccess, 
      * @var string[]
      */
     protected static $getters = [
-        'index' => 'getIndex',
-        'params' => 'getParams',
+        'recommend' => 'getRecommend',
     ];
 
     /**
@@ -79,11 +76,8 @@ class MainSearch extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['index'])) {
-            $this->container['index'] = $data['index'];
-        }
-        if (isset($data['params'])) {
-            $this->container['params'] = $data['params'];
+        if (isset($data['recommend'])) {
+            $this->container['recommend'] = $data['recommend'];
         }
     }
 
@@ -147,8 +141,8 @@ class MainSearch extends AbstractModel implements ModelInterface, \ArrayAccess, 
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['index']) || null === $this->container['index']) {
-            $invalidProperties[] = "'index' can't be null";
+        if (!isset($this->container['recommend']) || null === $this->container['recommend']) {
+            $invalidProperties[] = "'recommend' can't be null";
         }
 
         return $invalidProperties;
@@ -166,49 +160,25 @@ class MainSearch extends AbstractModel implements ModelInterface, \ArrayAccess, 
     }
 
     /**
-     * Gets index.
+     * Gets recommend.
      *
-     * @return string
+     * @return Recommend
      */
-    public function getIndex()
+    public function getRecommend()
     {
-        return $this->container['index'] ?? null;
+        return $this->container['recommend'] ?? null;
     }
 
     /**
-     * Sets index.
+     * Sets recommend.
      *
-     * @param string $index index to retrieve search results from
+     * @param Recommend $recommend recommend
      *
      * @return self
      */
-    public function setIndex($index)
+    public function setRecommend($recommend)
     {
-        $this->container['index'] = $index;
-
-        return $this;
-    }
-
-    /**
-     * Gets params.
-     *
-     * @return null|MainInjectionQueryParameters
-     */
-    public function getParams()
-    {
-        return $this->container['params'] ?? null;
-    }
-
-    /**
-     * Sets params.
-     *
-     * @param null|MainInjectionQueryParameters $params params
-     *
-     * @return self
-     */
-    public function setParams($params)
-    {
-        $this->container['params'] = $params;
+        $this->container['recommend'] = $recommend;
 
         return $this;
     }

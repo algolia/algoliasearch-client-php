@@ -1431,7 +1431,6 @@ class IngestionClient
      *
      * @param string                  $destinationID     Unique identifier of a destination. (required)
      * @param array|DestinationUpdate $destinationUpdate destinationUpdate (required)
-     *                                                   - $destinationUpdate['type'] => (array)
      *                                                   - $destinationUpdate['name'] => (string) Descriptive name for the resource.
      *                                                   - $destinationUpdate['input'] => (array)
      *                                                   - $destinationUpdate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.

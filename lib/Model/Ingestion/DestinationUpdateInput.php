@@ -8,13 +8,11 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * DestinationUpdate Class Doc Comment.
+ * DestinationUpdateInput Class Doc Comment.
  *
  * @category Class
- *
- * @description API request body for updating a destination.
  */
-class DestinationUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DestinationUpdateInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -22,10 +20,9 @@ class DestinationUpdate extends AbstractModel implements ModelInterface, \ArrayA
      * @var string[]
      */
     protected static $modelTypes = [
-        'name' => 'string',
-        'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\DestinationUpdateInput',
-        'authenticationID' => 'string',
-        'transformationIDs' => 'string[]',
+        'indexName' => 'string',
+        'recordType' => '\Algolia\AlgoliaSearch\Model\Ingestion\RecordType',
+        'attributesToExclude' => 'string[]',
     ];
 
     /**
@@ -34,10 +31,9 @@ class DestinationUpdate extends AbstractModel implements ModelInterface, \ArrayA
      * @var string[]
      */
     protected static $modelFormats = [
-        'name' => null,
-        'input' => null,
-        'authenticationID' => null,
-        'transformationIDs' => null,
+        'indexName' => null,
+        'recordType' => null,
+        'attributesToExclude' => null,
     ];
 
     /**
@@ -47,10 +43,9 @@ class DestinationUpdate extends AbstractModel implements ModelInterface, \ArrayA
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'input' => 'input',
-        'authenticationID' => 'authenticationID',
-        'transformationIDs' => 'transformationIDs',
+        'indexName' => 'indexName',
+        'recordType' => 'recordType',
+        'attributesToExclude' => 'attributesToExclude',
     ];
 
     /**
@@ -59,10 +54,9 @@ class DestinationUpdate extends AbstractModel implements ModelInterface, \ArrayA
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'input' => 'setInput',
-        'authenticationID' => 'setAuthenticationID',
-        'transformationIDs' => 'setTransformationIDs',
+        'indexName' => 'setIndexName',
+        'recordType' => 'setRecordType',
+        'attributesToExclude' => 'setAttributesToExclude',
     ];
 
     /**
@@ -71,10 +65,9 @@ class DestinationUpdate extends AbstractModel implements ModelInterface, \ArrayA
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'input' => 'getInput',
-        'authenticationID' => 'getAuthenticationID',
-        'transformationIDs' => 'getTransformationIDs',
+        'indexName' => 'getIndexName',
+        'recordType' => 'getRecordType',
+        'attributesToExclude' => 'getAttributesToExclude',
     ];
 
     /**
@@ -91,17 +84,14 @@ class DestinationUpdate extends AbstractModel implements ModelInterface, \ArrayA
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['name'])) {
-            $this->container['name'] = $data['name'];
+        if (isset($data['indexName'])) {
+            $this->container['indexName'] = $data['indexName'];
         }
-        if (isset($data['input'])) {
-            $this->container['input'] = $data['input'];
+        if (isset($data['recordType'])) {
+            $this->container['recordType'] = $data['recordType'];
         }
-        if (isset($data['authenticationID'])) {
-            $this->container['authenticationID'] = $data['authenticationID'];
-        }
-        if (isset($data['transformationIDs'])) {
-            $this->container['transformationIDs'] = $data['transformationIDs'];
+        if (isset($data['attributesToExclude'])) {
+            $this->container['attributesToExclude'] = $data['attributesToExclude'];
         }
     }
 
@@ -178,97 +168,73 @@ class DestinationUpdate extends AbstractModel implements ModelInterface, \ArrayA
     }
 
     /**
-     * Gets name.
+     * Gets indexName.
      *
      * @return null|string
      */
-    public function getName()
+    public function getIndexName()
     {
-        return $this->container['name'] ?? null;
+        return $this->container['indexName'] ?? null;
     }
 
     /**
-     * Sets name.
+     * Sets indexName.
      *
-     * @param null|string $name descriptive name for the resource
+     * @param null|string $indexName algolia index name (case-sensitive)
      *
      * @return self
      */
-    public function setName($name)
+    public function setIndexName($indexName)
     {
-        $this->container['name'] = $name;
+        $this->container['indexName'] = $indexName;
 
         return $this;
     }
 
     /**
-     * Gets input.
+     * Gets recordType.
      *
-     * @return null|DestinationUpdateInput
+     * @return null|RecordType
      */
-    public function getInput()
+    public function getRecordType()
     {
-        return $this->container['input'] ?? null;
+        return $this->container['recordType'] ?? null;
     }
 
     /**
-     * Sets input.
+     * Sets recordType.
      *
-     * @param null|DestinationUpdateInput $input input
+     * @param null|RecordType $recordType recordType
      *
      * @return self
      */
-    public function setInput($input)
+    public function setRecordType($recordType)
     {
-        $this->container['input'] = $input;
+        $this->container['recordType'] = $recordType;
 
         return $this;
     }
 
     /**
-     * Gets authenticationID.
-     *
-     * @return null|string
-     */
-    public function getAuthenticationID()
-    {
-        return $this->container['authenticationID'] ?? null;
-    }
-
-    /**
-     * Sets authenticationID.
-     *
-     * @param null|string $authenticationID universally unique identifier (UUID) of an authentication resource
-     *
-     * @return self
-     */
-    public function setAuthenticationID($authenticationID)
-    {
-        $this->container['authenticationID'] = $authenticationID;
-
-        return $this;
-    }
-
-    /**
-     * Gets transformationIDs.
+     * Gets attributesToExclude.
      *
      * @return null|string[]
      */
-    public function getTransformationIDs()
+    public function getAttributesToExclude()
     {
-        return $this->container['transformationIDs'] ?? null;
+        return $this->container['attributesToExclude'] ?? null;
     }
 
     /**
-     * Sets transformationIDs.
+     * Sets attributesToExclude.
      *
-     * @param null|string[] $transformationIDs transformationIDs
+     * @param null|string[] $attributesToExclude Attributes from your source to exclude from Algolia records.  Not all your data attributes will be useful for searching. Keeping your Algolia records small increases indexing and search performance.  - Exclude nested attributes with `.` notation. For example, `foo.bar` indexes the `foo` attribute and all its children **except** the `bar` attribute. - Exclude attributes from arrays with `[i]`, where `i` is the index of the array element.   For example, `foo.[0].bar` only excludes the `bar` attribute from the first element of the `foo` array, but indexes the complete `foo` attribute for all other elements.   Use `*` as wildcard: `foo.[*].bar` excludes `bar` from all elements of the `foo` array.
      *
      * @return self
      */
-    public function setTransformationIDs($transformationIDs)
+    public function setAttributesToExclude($attributesToExclude)
     {
-        $this->container['transformationIDs'] = $transformationIDs;
+        $this->container['attributesToExclude'] = $attributesToExclude;
 
         return $this;
     }

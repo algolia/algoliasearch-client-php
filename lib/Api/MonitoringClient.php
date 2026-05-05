@@ -340,6 +340,12 @@ class MonitoringClient
                 'Parameter `path` is required when calling `customDelete`.'
             );
         }
+        // verify the required parameter 'path' is not empty
+        if (isset($path) && '' === $path) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customDelete`.'
+            );
+        }
 
         $resourcePath = '/{path}';
         $queryParameters = [];
@@ -378,6 +384,12 @@ class MonitoringClient
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customGet`.'
+            );
+        }
+        // verify the required parameter 'path' is not empty
+        if (isset($path) && '' === $path) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `customGet`.'
             );
@@ -425,6 +437,12 @@ class MonitoringClient
                 'Parameter `path` is required when calling `customPost`.'
             );
         }
+        // verify the required parameter 'path' is not empty
+        if (isset($path) && '' === $path) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customPost`.'
+            );
+        }
 
         $resourcePath = '/{path}';
         $queryParameters = [];
@@ -464,6 +482,12 @@ class MonitoringClient
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customPut`.'
+            );
+        }
+        // verify the required parameter 'path' is not empty
+        if (isset($path) && '' === $path) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `customPut`.'
             );
@@ -509,6 +533,12 @@ class MonitoringClient
                 'Parameter `clusters` is required when calling `getClusterIncidents`.'
             );
         }
+        // verify the required parameter 'clusters' is not empty
+        if (isset($clusters) && '' === $clusters) {
+            throw new \InvalidArgumentException(
+                'Parameter `clusters` is required when calling `getClusterIncidents`.'
+            );
+        }
 
         $resourcePath = '/1/incidents/{clusters}';
         $queryParameters = [];
@@ -542,6 +572,12 @@ class MonitoringClient
     {
         // verify the required parameter 'clusters' is set
         if (!isset($clusters)) {
+            throw new \InvalidArgumentException(
+                'Parameter `clusters` is required when calling `getClusterStatus`.'
+            );
+        }
+        // verify the required parameter 'clusters' is not empty
+        if (isset($clusters) && '' === $clusters) {
             throw new \InvalidArgumentException(
                 'Parameter `clusters` is required when calling `getClusterStatus`.'
             );
@@ -603,6 +639,12 @@ class MonitoringClient
                 'Parameter `clusters` is required when calling `getIndexingTime`.'
             );
         }
+        // verify the required parameter 'clusters' is not empty
+        if (isset($clusters) && '' === $clusters) {
+            throw new \InvalidArgumentException(
+                'Parameter `clusters` is required when calling `getIndexingTime`.'
+            );
+        }
 
         $resourcePath = '/1/indexing/{clusters}';
         $queryParameters = [];
@@ -636,6 +678,12 @@ class MonitoringClient
     {
         // verify the required parameter 'clusters' is set
         if (!isset($clusters)) {
+            throw new \InvalidArgumentException(
+                'Parameter `clusters` is required when calling `getLatency`.'
+            );
+        }
+        // verify the required parameter 'clusters' is not empty
+        if (isset($clusters) && '' === $clusters) {
             throw new \InvalidArgumentException(
                 'Parameter `clusters` is required when calling `getLatency`.'
             );
@@ -726,6 +774,12 @@ class MonitoringClient
     {
         // verify the required parameter 'clusters' is set
         if (!isset($clusters)) {
+            throw new \InvalidArgumentException(
+                'Parameter `clusters` is required when calling `getReachability`.'
+            );
+        }
+        // verify the required parameter 'clusters' is not empty
+        if (isset($clusters) && '' === $clusters) {
             throw new \InvalidArgumentException(
                 'Parameter `clusters` is required when calling `getReachability`.'
             );

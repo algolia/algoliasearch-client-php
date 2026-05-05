@@ -1573,8 +1573,20 @@ class SearchClient
                 'Parameter `indexName` is required when calling `addOrUpdateObject`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `addOrUpdateObject`.'
+            );
+        }
         // verify the required parameter 'objectID' is set
         if (!isset($objectID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `objectID` is required when calling `addOrUpdateObject`.'
+            );
+        }
+        // verify the required parameter 'objectID' is not empty
+        if (isset($objectID) && '' === $objectID) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `addOrUpdateObject`.'
             );
@@ -1664,6 +1676,12 @@ class SearchClient
                 'Parameter `xAlgoliaUserID` is required when calling `assignUserId`.'
             );
         }
+        // verify the required parameter 'xAlgoliaUserID' is not empty
+        if (isset($xAlgoliaUserID) && '' === $xAlgoliaUserID) {
+            throw new \InvalidArgumentException(
+                'Parameter `xAlgoliaUserID` is required when calling `assignUserId`.'
+            );
+        }
         // verify the required parameter 'assignUserIdParams' is set
         if (!isset($assignUserIdParams)) {
             throw new \InvalidArgumentException(
@@ -1699,6 +1717,12 @@ class SearchClient
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `batch`.'
+            );
+        }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `batch`.'
             );
@@ -1745,6 +1769,12 @@ class SearchClient
     {
         // verify the required parameter 'xAlgoliaUserID' is set
         if (!isset($xAlgoliaUserID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `xAlgoliaUserID` is required when calling `batchAssignUserIds`.'
+            );
+        }
+        // verify the required parameter 'xAlgoliaUserID' is not empty
+        if (isset($xAlgoliaUserID) && '' === $xAlgoliaUserID) {
             throw new \InvalidArgumentException(
                 'Parameter `xAlgoliaUserID` is required when calling `batchAssignUserIds`.'
             );
@@ -1834,6 +1864,12 @@ class SearchClient
                 'Parameter `indexName` is required when calling `browse`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `browse`.'
+            );
+        }
 
         $resourcePath = '/1/indexes/{indexName}/browse';
         $queryParameters = [];
@@ -1869,6 +1905,12 @@ class SearchClient
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `clearObjects`.'
+            );
+        }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `clearObjects`.'
             );
@@ -1909,6 +1951,12 @@ class SearchClient
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `clearRules`.'
+            );
+        }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `clearRules`.'
             );
@@ -1957,6 +2005,12 @@ class SearchClient
                 'Parameter `indexName` is required when calling `clearSynonyms`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `clearSynonyms`.'
+            );
+        }
 
         $resourcePath = '/1/indexes/{indexName}/synonyms/clear';
         $queryParameters = [];
@@ -1999,6 +2053,12 @@ class SearchClient
                 'Parameter `path` is required when calling `customDelete`.'
             );
         }
+        // verify the required parameter 'path' is not empty
+        if (isset($path) && '' === $path) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customDelete`.'
+            );
+        }
 
         $resourcePath = '/{path}';
         $queryParameters = [];
@@ -2037,6 +2097,12 @@ class SearchClient
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customGet`.'
+            );
+        }
+        // verify the required parameter 'path' is not empty
+        if (isset($path) && '' === $path) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `customGet`.'
             );
@@ -2084,6 +2150,12 @@ class SearchClient
                 'Parameter `path` is required when calling `customPost`.'
             );
         }
+        // verify the required parameter 'path' is not empty
+        if (isset($path) && '' === $path) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customPost`.'
+            );
+        }
 
         $resourcePath = '/{path}';
         $queryParameters = [];
@@ -2123,6 +2195,12 @@ class SearchClient
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customPut`.'
+            );
+        }
+        // verify the required parameter 'path' is not empty
+        if (isset($path) && '' === $path) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `customPut`.'
             );
@@ -2170,6 +2248,12 @@ class SearchClient
                 'Parameter `key` is required when calling `deleteApiKey`.'
             );
         }
+        // verify the required parameter 'key' is not empty
+        if (isset($key) && '' === $key) {
+            throw new \InvalidArgumentException(
+                'Parameter `key` is required when calling `deleteApiKey`.'
+            );
+        }
 
         $resourcePath = '/1/keys/{key}';
         $queryParameters = [];
@@ -2206,6 +2290,12 @@ class SearchClient
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `deleteBy`.'
+            );
+        }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `deleteBy`.'
             );
@@ -2255,6 +2345,12 @@ class SearchClient
                 'Parameter `indexName` is required when calling `deleteIndex`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `deleteIndex`.'
+            );
+        }
 
         $resourcePath = '/1/indexes/{indexName}';
         $queryParameters = [];
@@ -2295,8 +2391,20 @@ class SearchClient
                 'Parameter `indexName` is required when calling `deleteObject`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `deleteObject`.'
+            );
+        }
         // verify the required parameter 'objectID' is set
         if (!isset($objectID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `objectID` is required when calling `deleteObject`.'
+            );
+        }
+        // verify the required parameter 'objectID' is not empty
+        if (isset($objectID) && '' === $objectID) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `deleteObject`.'
             );
@@ -2351,8 +2459,20 @@ class SearchClient
                 'Parameter `indexName` is required when calling `deleteRule`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `deleteRule`.'
+            );
+        }
         // verify the required parameter 'objectID' is set
         if (!isset($objectID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `objectID` is required when calling `deleteRule`.'
+            );
+        }
+        // verify the required parameter 'objectID' is not empty
+        if (isset($objectID) && '' === $objectID) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `deleteRule`.'
             );
@@ -2409,6 +2529,12 @@ class SearchClient
                 'Parameter `source` is required when calling `deleteSource`.'
             );
         }
+        // verify the required parameter 'source' is not empty
+        if (isset($source) && '' === $source) {
+            throw new \InvalidArgumentException(
+                'Parameter `source` is required when calling `deleteSource`.'
+            );
+        }
 
         $resourcePath = '/1/security/sources/{source}';
         $queryParameters = [];
@@ -2450,8 +2576,20 @@ class SearchClient
                 'Parameter `indexName` is required when calling `deleteSynonym`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `deleteSynonym`.'
+            );
+        }
         // verify the required parameter 'objectID' is set
         if (!isset($objectID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `objectID` is required when calling `deleteSynonym`.'
+            );
+        }
+        // verify the required parameter 'objectID' is not empty
+        if (isset($objectID) && '' === $objectID) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `deleteSynonym`.'
             );
@@ -2504,6 +2642,12 @@ class SearchClient
     {
         // verify the required parameter 'key' is set
         if (!isset($key)) {
+            throw new \InvalidArgumentException(
+                'Parameter `key` is required when calling `getApiKey`.'
+            );
+        }
+        // verify the required parameter 'key' is not empty
+        if (isset($key) && '' === $key) {
             throw new \InvalidArgumentException(
                 'Parameter `key` is required when calling `getApiKey`.'
             );
@@ -2674,8 +2818,20 @@ class SearchClient
                 'Parameter `indexName` is required when calling `getObject`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `getObject`.'
+            );
+        }
         // verify the required parameter 'objectID' is set
         if (!isset($objectID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `objectID` is required when calling `getObject`.'
+            );
+        }
+        // verify the required parameter 'objectID' is not empty
+        if (isset($objectID) && '' === $objectID) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `getObject`.'
             );
@@ -2763,8 +2919,20 @@ class SearchClient
                 'Parameter `indexName` is required when calling `getRule`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `getRule`.'
+            );
+        }
         // verify the required parameter 'objectID' is set
         if (!isset($objectID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `objectID` is required when calling `getRule`.'
+            );
+        }
+        // verify the required parameter 'objectID' is not empty
+        if (isset($objectID) && '' === $objectID) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `getRule`.'
             );
@@ -2814,6 +2982,12 @@ class SearchClient
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `getSettings`.'
+            );
+        }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `getSettings`.'
             );
@@ -2884,8 +3058,20 @@ class SearchClient
                 'Parameter `indexName` is required when calling `getSynonym`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `getSynonym`.'
+            );
+        }
         // verify the required parameter 'objectID' is set
         if (!isset($objectID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `objectID` is required when calling `getSynonym`.'
+            );
+        }
+        // verify the required parameter 'objectID' is not empty
+        if (isset($objectID) && '' === $objectID) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `getSynonym`.'
             );
@@ -2935,6 +3121,12 @@ class SearchClient
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `getTask`.'
+            );
+        }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `getTask`.'
             );
@@ -3011,6 +3203,12 @@ class SearchClient
     {
         // verify the required parameter 'userID' is set
         if (!isset($userID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `userID` is required when calling `getUserId`.'
+            );
+        }
+        // verify the required parameter 'userID' is not empty
+        if (isset($userID) && '' === $userID) {
             throw new \InvalidArgumentException(
                 'Parameter `userID` is required when calling `getUserId`.'
             );
@@ -3220,6 +3418,12 @@ class SearchClient
                 'Parameter `indexName` is required when calling `operationIndex`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `operationIndex`.'
+            );
+        }
         // verify the required parameter 'operationIndexParams' is set
         if (!isset($operationIndexParams)) {
             throw new \InvalidArgumentException(
@@ -3268,8 +3472,20 @@ class SearchClient
                 'Parameter `indexName` is required when calling `partialUpdateObject`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `partialUpdateObject`.'
+            );
+        }
         // verify the required parameter 'objectID' is set
         if (!isset($objectID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `objectID` is required when calling `partialUpdateObject`.'
+            );
+        }
+        // verify the required parameter 'objectID' is not empty
+        if (isset($objectID) && '' === $objectID) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `partialUpdateObject`.'
             );
@@ -3328,6 +3544,12 @@ class SearchClient
     {
         // verify the required parameter 'userID' is set
         if (!isset($userID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `userID` is required when calling `removeUserId`.'
+            );
+        }
+        // verify the required parameter 'userID' is not empty
+        if (isset($userID) && '' === $userID) {
             throw new \InvalidArgumentException(
                 'Parameter `userID` is required when calling `removeUserId`.'
             );
@@ -3401,6 +3623,12 @@ class SearchClient
                 'Parameter `key` is required when calling `restoreApiKey`.'
             );
         }
+        // verify the required parameter 'key' is not empty
+        if (isset($key) && '' === $key) {
+            throw new \InvalidArgumentException(
+                'Parameter `key` is required when calling `restoreApiKey`.'
+            );
+        }
 
         $resourcePath = '/1/keys/{key}/restore';
         $queryParameters = [];
@@ -3437,6 +3665,12 @@ class SearchClient
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `saveObject`.'
+            );
+        }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `saveObject`.'
             );
@@ -3489,8 +3723,20 @@ class SearchClient
                 'Parameter `indexName` is required when calling `saveRule`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `saveRule`.'
+            );
+        }
         // verify the required parameter 'objectID' is set
         if (!isset($objectID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `objectID` is required when calling `saveRule`.'
+            );
+        }
+        // verify the required parameter 'objectID' is not empty
+        if (isset($objectID) && '' === $objectID) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `saveRule`.'
             );
@@ -3556,6 +3802,12 @@ class SearchClient
                 'Parameter `indexName` is required when calling `saveRules`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `saveRules`.'
+            );
+        }
         // verify the required parameter 'rules' is set
         if (!isset($rules)) {
             throw new \InvalidArgumentException(
@@ -3612,8 +3864,20 @@ class SearchClient
                 'Parameter `indexName` is required when calling `saveSynonym`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `saveSynonym`.'
+            );
+        }
         // verify the required parameter 'objectID' is set
         if (!isset($objectID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `objectID` is required when calling `saveSynonym`.'
+            );
+        }
+        // verify the required parameter 'objectID' is not empty
+        if (isset($objectID) && '' === $objectID) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `saveSynonym`.'
             );
@@ -3675,6 +3939,12 @@ class SearchClient
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `saveSynonyms`.'
+            );
+        }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `saveSynonyms`.'
             );
@@ -3810,8 +4080,20 @@ class SearchClient
                 'Parameter `indexName` is required when calling `searchForFacetValues`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `searchForFacetValues`.'
+            );
+        }
         // verify the required parameter 'facetName' is set
         if (!isset($facetName)) {
+            throw new \InvalidArgumentException(
+                'Parameter `facetName` is required when calling `searchForFacetValues`.'
+            );
+        }
+        // verify the required parameter 'facetName' is not empty
+        if (isset($facetName) && '' === $facetName) {
             throw new \InvalidArgumentException(
                 'Parameter `facetName` is required when calling `searchForFacetValues`.'
             );
@@ -3865,6 +4147,12 @@ class SearchClient
                 'Parameter `indexName` is required when calling `searchRules`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `searchRules`.'
+            );
+        }
 
         $resourcePath = '/1/indexes/{indexName}/rules/search';
         $queryParameters = [];
@@ -3905,6 +4193,12 @@ class SearchClient
                 'Parameter `indexName` is required when calling `searchSingleIndex`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `searchSingleIndex`.'
+            );
+        }
 
         $resourcePath = '/1/indexes/{indexName}/query';
         $queryParameters = [];
@@ -3941,6 +4235,12 @@ class SearchClient
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `searchSynonyms`.'
+            );
+        }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `searchSynonyms`.'
             );
@@ -4046,6 +4346,12 @@ class SearchClient
                 'Parameter `indexName` is required when calling `setSettings`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `setSettings`.'
+            );
+        }
         // verify the required parameter 'indexSettings' is set
         if (!isset($indexSettings)) {
             throw new \InvalidArgumentException(
@@ -4092,6 +4398,12 @@ class SearchClient
     {
         // verify the required parameter 'key' is set
         if (!isset($key)) {
+            throw new \InvalidArgumentException(
+                'Parameter `key` is required when calling `updateApiKey`.'
+            );
+        }
+        // verify the required parameter 'key' is not empty
+        if (isset($key) && '' === $key) {
             throw new \InvalidArgumentException(
                 'Parameter `key` is required when calling `updateApiKey`.'
             );

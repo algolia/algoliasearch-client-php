@@ -349,6 +349,12 @@ class RecommendClient
                 'Parameter `indexName` is required when calling `batchRecommendRules`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `batchRecommendRules`.'
+            );
+        }
         // verify the required parameter 'model' is set
         if (!isset($model)) {
             throw new \InvalidArgumentException(
@@ -402,6 +408,12 @@ class RecommendClient
                 'Parameter `path` is required when calling `customDelete`.'
             );
         }
+        // verify the required parameter 'path' is not empty
+        if (isset($path) && '' === $path) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customDelete`.'
+            );
+        }
 
         $resourcePath = '/{path}';
         $queryParameters = [];
@@ -440,6 +452,12 @@ class RecommendClient
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customGet`.'
+            );
+        }
+        // verify the required parameter 'path' is not empty
+        if (isset($path) && '' === $path) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `customGet`.'
             );
@@ -487,6 +505,12 @@ class RecommendClient
                 'Parameter `path` is required when calling `customPost`.'
             );
         }
+        // verify the required parameter 'path' is not empty
+        if (isset($path) && '' === $path) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customPost`.'
+            );
+        }
 
         $resourcePath = '/{path}';
         $queryParameters = [];
@@ -526,6 +550,12 @@ class RecommendClient
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customPut`.'
+            );
+        }
+        // verify the required parameter 'path' is not empty
+        if (isset($path) && '' === $path) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `customPut`.'
             );
@@ -575,6 +605,12 @@ class RecommendClient
                 'Parameter `indexName` is required when calling `deleteRecommendRule`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `deleteRecommendRule`.'
+            );
+        }
         // verify the required parameter 'model' is set
         if (!isset($model)) {
             throw new \InvalidArgumentException(
@@ -583,6 +619,12 @@ class RecommendClient
         }
         // verify the required parameter 'objectID' is set
         if (!isset($objectID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `objectID` is required when calling `deleteRecommendRule`.'
+            );
+        }
+        // verify the required parameter 'objectID' is not empty
+        if (isset($objectID) && '' === $objectID) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `deleteRecommendRule`.'
             );
@@ -646,6 +688,12 @@ class RecommendClient
                 'Parameter `indexName` is required when calling `getRecommendRule`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `getRecommendRule`.'
+            );
+        }
         // verify the required parameter 'model' is set
         if (!isset($model)) {
             throw new \InvalidArgumentException(
@@ -654,6 +702,12 @@ class RecommendClient
         }
         // verify the required parameter 'objectID' is set
         if (!isset($objectID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `objectID` is required when calling `getRecommendRule`.'
+            );
+        }
+        // verify the required parameter 'objectID' is not empty
+        if (isset($objectID) && '' === $objectID) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `getRecommendRule`.'
             );
@@ -713,6 +767,12 @@ class RecommendClient
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `getRecommendStatus`.'
+            );
+        }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `getRecommendStatus`.'
             );
@@ -814,6 +874,12 @@ class RecommendClient
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `searchRecommendRules`.'
+            );
+        }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `searchRecommendRules`.'
             );

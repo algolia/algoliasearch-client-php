@@ -1835,6 +1835,12 @@ class IngestionClient
                 'Parameter `path` is required when calling `customDelete`.'
             );
         }
+        // verify the required parameter 'path' is not empty
+        if (isset($path) && '' === $path) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customDelete`.'
+            );
+        }
 
         $resourcePath = '/{path}';
         $queryParameters = [];
@@ -1873,6 +1879,12 @@ class IngestionClient
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customGet`.'
+            );
+        }
+        // verify the required parameter 'path' is not empty
+        if (isset($path) && '' === $path) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `customGet`.'
             );
@@ -1920,6 +1932,12 @@ class IngestionClient
                 'Parameter `path` is required when calling `customPost`.'
             );
         }
+        // verify the required parameter 'path' is not empty
+        if (isset($path) && '' === $path) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customPost`.'
+            );
+        }
 
         $resourcePath = '/{path}';
         $queryParameters = [];
@@ -1959,6 +1977,12 @@ class IngestionClient
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customPut`.'
+            );
+        }
+        // verify the required parameter 'path' is not empty
+        if (isset($path) && '' === $path) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `customPut`.'
             );
@@ -2008,6 +2032,12 @@ class IngestionClient
                 'Parameter `authenticationID` is required when calling `deleteAuthentication`.'
             );
         }
+        // verify the required parameter 'authenticationID' is not empty
+        if (isset($authenticationID) && '' === $authenticationID) {
+            throw new \InvalidArgumentException(
+                'Parameter `authenticationID` is required when calling `deleteAuthentication`.'
+            );
+        }
 
         $resourcePath = '/1/authentications/{authenticationID}';
         $queryParameters = [];
@@ -2045,6 +2075,12 @@ class IngestionClient
     {
         // verify the required parameter 'destinationID' is set
         if (!isset($destinationID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `destinationID` is required when calling `deleteDestination`.'
+            );
+        }
+        // verify the required parameter 'destinationID' is not empty
+        if (isset($destinationID) && '' === $destinationID) {
             throw new \InvalidArgumentException(
                 'Parameter `destinationID` is required when calling `deleteDestination`.'
             );
@@ -2090,6 +2126,12 @@ class IngestionClient
                 'Parameter `sourceID` is required when calling `deleteSource`.'
             );
         }
+        // verify the required parameter 'sourceID' is not empty
+        if (isset($sourceID) && '' === $sourceID) {
+            throw new \InvalidArgumentException(
+                'Parameter `sourceID` is required when calling `deleteSource`.'
+            );
+        }
 
         $resourcePath = '/1/sources/{sourceID}';
         $queryParameters = [];
@@ -2127,6 +2169,12 @@ class IngestionClient
     {
         // verify the required parameter 'taskID' is set
         if (!isset($taskID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `deleteTask`.'
+            );
+        }
+        // verify the required parameter 'taskID' is not empty
+        if (isset($taskID) && '' === $taskID) {
             throw new \InvalidArgumentException(
                 'Parameter `taskID` is required when calling `deleteTask`.'
             );
@@ -2172,6 +2220,12 @@ class IngestionClient
                 'Parameter `taskID` is required when calling `deleteTaskV1`.'
             );
         }
+        // verify the required parameter 'taskID' is not empty
+        if (isset($taskID) && '' === $taskID) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `deleteTaskV1`.'
+            );
+        }
 
         $resourcePath = '/1/tasks/{taskID}';
         $queryParameters = [];
@@ -2209,6 +2263,12 @@ class IngestionClient
     {
         // verify the required parameter 'transformationID' is set
         if (!isset($transformationID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `transformationID` is required when calling `deleteTransformation`.'
+            );
+        }
+        // verify the required parameter 'transformationID' is not empty
+        if (isset($transformationID) && '' === $transformationID) {
             throw new \InvalidArgumentException(
                 'Parameter `transformationID` is required when calling `deleteTransformation`.'
             );
@@ -2254,6 +2314,12 @@ class IngestionClient
                 'Parameter `taskID` is required when calling `disableTask`.'
             );
         }
+        // verify the required parameter 'taskID' is not empty
+        if (isset($taskID) && '' === $taskID) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `disableTask`.'
+            );
+        }
 
         $resourcePath = '/2/tasks/{taskID}/disable';
         $queryParameters = [];
@@ -2291,6 +2357,12 @@ class IngestionClient
     {
         // verify the required parameter 'taskID' is set
         if (!isset($taskID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `disableTaskV1`.'
+            );
+        }
+        // verify the required parameter 'taskID' is not empty
+        if (isset($taskID) && '' === $taskID) {
             throw new \InvalidArgumentException(
                 'Parameter `taskID` is required when calling `disableTaskV1`.'
             );
@@ -2336,6 +2408,12 @@ class IngestionClient
                 'Parameter `taskID` is required when calling `enableTask`.'
             );
         }
+        // verify the required parameter 'taskID' is not empty
+        if (isset($taskID) && '' === $taskID) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `enableTask`.'
+            );
+        }
 
         $resourcePath = '/2/tasks/{taskID}/enable';
         $queryParameters = [];
@@ -2373,6 +2451,12 @@ class IngestionClient
     {
         // verify the required parameter 'taskID' is set
         if (!isset($taskID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `enableTaskV1`.'
+            );
+        }
+        // verify the required parameter 'taskID' is not empty
+        if (isset($taskID) && '' === $taskID) {
             throw new \InvalidArgumentException(
                 'Parameter `taskID` is required when calling `enableTaskV1`.'
             );
@@ -2418,6 +2502,12 @@ class IngestionClient
                 'Parameter `authenticationID` is required when calling `getAuthentication`.'
             );
         }
+        // verify the required parameter 'authenticationID' is not empty
+        if (isset($authenticationID) && '' === $authenticationID) {
+            throw new \InvalidArgumentException(
+                'Parameter `authenticationID` is required when calling `getAuthentication`.'
+            );
+        }
 
         $resourcePath = '/1/authentications/{authenticationID}';
         $queryParameters = [];
@@ -2455,6 +2545,12 @@ class IngestionClient
     {
         // verify the required parameter 'destinationID' is set
         if (!isset($destinationID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `destinationID` is required when calling `getDestination`.'
+            );
+        }
+        // verify the required parameter 'destinationID' is not empty
+        if (isset($destinationID) && '' === $destinationID) {
             throw new \InvalidArgumentException(
                 'Parameter `destinationID` is required when calling `getDestination`.'
             );
@@ -2501,8 +2597,20 @@ class IngestionClient
                 'Parameter `runID` is required when calling `getEvent`.'
             );
         }
+        // verify the required parameter 'runID' is not empty
+        if (isset($runID) && '' === $runID) {
+            throw new \InvalidArgumentException(
+                'Parameter `runID` is required when calling `getEvent`.'
+            );
+        }
         // verify the required parameter 'eventID' is set
         if (!isset($eventID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `eventID` is required when calling `getEvent`.'
+            );
+        }
+        // verify the required parameter 'eventID' is not empty
+        if (isset($eventID) && '' === $eventID) {
             throw new \InvalidArgumentException(
                 'Parameter `eventID` is required when calling `getEvent`.'
             );
@@ -2557,6 +2665,12 @@ class IngestionClient
                 'Parameter `runID` is required when calling `getRun`.'
             );
         }
+        // verify the required parameter 'runID' is not empty
+        if (isset($runID) && '' === $runID) {
+            throw new \InvalidArgumentException(
+                'Parameter `runID` is required when calling `getRun`.'
+            );
+        }
 
         $resourcePath = '/1/runs/{runID}';
         $queryParameters = [];
@@ -2594,6 +2708,12 @@ class IngestionClient
     {
         // verify the required parameter 'sourceID' is set
         if (!isset($sourceID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `sourceID` is required when calling `getSource`.'
+            );
+        }
+        // verify the required parameter 'sourceID' is not empty
+        if (isset($sourceID) && '' === $sourceID) {
             throw new \InvalidArgumentException(
                 'Parameter `sourceID` is required when calling `getSource`.'
             );
@@ -2639,6 +2759,12 @@ class IngestionClient
                 'Parameter `taskID` is required when calling `getTask`.'
             );
         }
+        // verify the required parameter 'taskID' is not empty
+        if (isset($taskID) && '' === $taskID) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `getTask`.'
+            );
+        }
 
         $resourcePath = '/2/tasks/{taskID}';
         $queryParameters = [];
@@ -2680,6 +2806,12 @@ class IngestionClient
                 'Parameter `taskID` is required when calling `getTaskV1`.'
             );
         }
+        // verify the required parameter 'taskID' is not empty
+        if (isset($taskID) && '' === $taskID) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `getTaskV1`.'
+            );
+        }
 
         $resourcePath = '/1/tasks/{taskID}';
         $queryParameters = [];
@@ -2717,6 +2849,12 @@ class IngestionClient
     {
         // verify the required parameter 'transformationID' is set
         if (!isset($transformationID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `transformationID` is required when calling `getTransformation`.'
+            );
+        }
+        // verify the required parameter 'transformationID' is not empty
+        if (isset($transformationID) && '' === $transformationID) {
             throw new \InvalidArgumentException(
                 'Parameter `transformationID` is required when calling `getTransformation`.'
             );
@@ -2894,6 +3032,12 @@ class IngestionClient
     {
         // verify the required parameter 'runID' is set
         if (!isset($runID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `runID` is required when calling `listEvents`.'
+            );
+        }
+        // verify the required parameter 'runID' is not empty
+        if (isset($runID) && '' === $runID) {
             throw new \InvalidArgumentException(
                 'Parameter `runID` is required when calling `listEvents`.'
             );
@@ -3327,6 +3471,12 @@ class IngestionClient
                 'Parameter `indexName` is required when calling `push`.'
             );
         }
+        // verify the required parameter 'indexName' is not empty
+        if (isset($indexName) && '' === $indexName) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `push`.'
+            );
+        }
         // verify the required parameter 'pushTaskPayload' is set
         if (!isset($pushTaskPayload)) {
             throw new \InvalidArgumentException(
@@ -3394,6 +3544,12 @@ class IngestionClient
                 'Parameter `taskID` is required when calling `pushTask`.'
             );
         }
+        // verify the required parameter 'taskID' is not empty
+        if (isset($taskID) && '' === $taskID) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `pushTask`.'
+            );
+        }
         // verify the required parameter 'pushTaskPayload' is set
         if (!isset($pushTaskPayload)) {
             throw new \InvalidArgumentException(
@@ -3456,6 +3612,12 @@ class IngestionClient
                 'Parameter `taskID` is required when calling `replaceTask`.'
             );
         }
+        // verify the required parameter 'taskID' is not empty
+        if (isset($taskID) && '' === $taskID) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `replaceTask`.'
+            );
+        }
         // verify the required parameter 'taskReplace' is set
         if (!isset($taskReplace)) {
             throw new \InvalidArgumentException(
@@ -3504,6 +3666,12 @@ class IngestionClient
                 'Parameter `sourceID` is required when calling `runSource`.'
             );
         }
+        // verify the required parameter 'sourceID' is not empty
+        if (isset($sourceID) && '' === $sourceID) {
+            throw new \InvalidArgumentException(
+                'Parameter `sourceID` is required when calling `runSource`.'
+            );
+        }
 
         $resourcePath = '/1/sources/{sourceID}/run';
         $queryParameters = [];
@@ -3546,6 +3714,12 @@ class IngestionClient
                 'Parameter `taskID` is required when calling `runTask`.'
             );
         }
+        // verify the required parameter 'taskID' is not empty
+        if (isset($taskID) && '' === $taskID) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `runTask`.'
+            );
+        }
 
         $resourcePath = '/2/tasks/{taskID}/run';
         $queryParameters = [];
@@ -3584,6 +3758,12 @@ class IngestionClient
     {
         // verify the required parameter 'taskID' is set
         if (!isset($taskID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `runTaskV1`.'
+            );
+        }
+        // verify the required parameter 'taskID' is not empty
+        if (isset($taskID) && '' === $taskID) {
             throw new \InvalidArgumentException(
                 'Parameter `taskID` is required when calling `runTaskV1`.'
             );
@@ -3821,6 +4001,12 @@ class IngestionClient
                 'Parameter `sourceID` is required when calling `triggerDockerSourceDiscover`.'
             );
         }
+        // verify the required parameter 'sourceID' is not empty
+        if (isset($sourceID) && '' === $sourceID) {
+            throw new \InvalidArgumentException(
+                'Parameter `sourceID` is required when calling `triggerDockerSourceDiscover`.'
+            );
+        }
 
         $resourcePath = '/1/sources/{sourceID}/discover';
         $queryParameters = [];
@@ -3905,6 +4091,12 @@ class IngestionClient
                 'Parameter `transformationID` is required when calling `tryTransformationBeforeUpdate`.'
             );
         }
+        // verify the required parameter 'transformationID' is not empty
+        if (isset($transformationID) && '' === $transformationID) {
+            throw new \InvalidArgumentException(
+                'Parameter `transformationID` is required when calling `tryTransformationBeforeUpdate`.'
+            );
+        }
         // verify the required parameter 'transformationTry' is set
         if (!isset($transformationTry)) {
             throw new \InvalidArgumentException(
@@ -3949,6 +4141,12 @@ class IngestionClient
     {
         // verify the required parameter 'authenticationID' is set
         if (!isset($authenticationID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `authenticationID` is required when calling `updateAuthentication`.'
+            );
+        }
+        // verify the required parameter 'authenticationID' is not empty
+        if (isset($authenticationID) && '' === $authenticationID) {
             throw new \InvalidArgumentException(
                 'Parameter `authenticationID` is required when calling `updateAuthentication`.'
             );
@@ -4001,6 +4199,12 @@ class IngestionClient
                 'Parameter `destinationID` is required when calling `updateDestination`.'
             );
         }
+        // verify the required parameter 'destinationID' is not empty
+        if (isset($destinationID) && '' === $destinationID) {
+            throw new \InvalidArgumentException(
+                'Parameter `destinationID` is required when calling `updateDestination`.'
+            );
+        }
         // verify the required parameter 'destinationUpdate' is set
         if (!isset($destinationUpdate)) {
             throw new \InvalidArgumentException(
@@ -4045,6 +4249,12 @@ class IngestionClient
     {
         // verify the required parameter 'sourceID' is set
         if (!isset($sourceID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `sourceID` is required when calling `updateSource`.'
+            );
+        }
+        // verify the required parameter 'sourceID' is not empty
+        if (isset($sourceID) && '' === $sourceID) {
             throw new \InvalidArgumentException(
                 'Parameter `sourceID` is required when calling `updateSource`.'
             );
@@ -4097,6 +4307,12 @@ class IngestionClient
                 'Parameter `taskID` is required when calling `updateTask`.'
             );
         }
+        // verify the required parameter 'taskID' is not empty
+        if (isset($taskID) && '' === $taskID) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `updateTask`.'
+            );
+        }
         // verify the required parameter 'taskUpdate' is set
         if (!isset($taskUpdate)) {
             throw new \InvalidArgumentException(
@@ -4145,6 +4361,12 @@ class IngestionClient
                 'Parameter `taskID` is required when calling `updateTaskV1`.'
             );
         }
+        // verify the required parameter 'taskID' is not empty
+        if (isset($taskID) && '' === $taskID) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `updateTaskV1`.'
+            );
+        }
         // verify the required parameter 'taskUpdate' is set
         if (!isset($taskUpdate)) {
             throw new \InvalidArgumentException(
@@ -4189,6 +4411,12 @@ class IngestionClient
     {
         // verify the required parameter 'transformationID' is set
         if (!isset($transformationID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `transformationID` is required when calling `updateTransformation`.'
+            );
+        }
+        // verify the required parameter 'transformationID' is not empty
+        if (isset($transformationID) && '' === $transformationID) {
             throw new \InvalidArgumentException(
                 'Parameter `transformationID` is required when calling `updateTransformation`.'
             );
@@ -4272,6 +4500,12 @@ class IngestionClient
     {
         // verify the required parameter 'sourceID' is set
         if (!isset($sourceID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `sourceID` is required when calling `validateSourceBeforeUpdate`.'
+            );
+        }
+        // verify the required parameter 'sourceID' is not empty
+        if (isset($sourceID) && '' === $sourceID) {
             throw new \InvalidArgumentException(
                 'Parameter `sourceID` is required when calling `validateSourceBeforeUpdate`.'
             );

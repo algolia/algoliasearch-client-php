@@ -286,6 +286,12 @@ class PersonalizationClient
                 'Parameter `path` is required when calling `customDelete`.'
             );
         }
+        // verify the required parameter 'path' is not empty
+        if (isset($path) && '' === $path) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customDelete`.'
+            );
+        }
 
         $resourcePath = '/{path}';
         $queryParameters = [];
@@ -324,6 +330,12 @@ class PersonalizationClient
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customGet`.'
+            );
+        }
+        // verify the required parameter 'path' is not empty
+        if (isset($path) && '' === $path) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `customGet`.'
             );
@@ -371,6 +383,12 @@ class PersonalizationClient
                 'Parameter `path` is required when calling `customPost`.'
             );
         }
+        // verify the required parameter 'path' is not empty
+        if (isset($path) && '' === $path) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customPost`.'
+            );
+        }
 
         $resourcePath = '/{path}';
         $queryParameters = [];
@@ -414,6 +432,12 @@ class PersonalizationClient
                 'Parameter `path` is required when calling `customPut`.'
             );
         }
+        // verify the required parameter 'path' is not empty
+        if (isset($path) && '' === $path) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customPut`.'
+            );
+        }
 
         $resourcePath = '/{path}';
         $queryParameters = [];
@@ -453,6 +477,12 @@ class PersonalizationClient
     {
         // verify the required parameter 'userToken' is set
         if (!isset($userToken)) {
+            throw new \InvalidArgumentException(
+                'Parameter `userToken` is required when calling `deleteUserProfile`.'
+            );
+        }
+        // verify the required parameter 'userToken' is not empty
+        if (isset($userToken) && '' === $userToken) {
             throw new \InvalidArgumentException(
                 'Parameter `userToken` is required when calling `deleteUserProfile`.'
             );
@@ -514,6 +544,12 @@ class PersonalizationClient
     {
         // verify the required parameter 'userToken' is set
         if (!isset($userToken)) {
+            throw new \InvalidArgumentException(
+                'Parameter `userToken` is required when calling `getUserTokenProfile`.'
+            );
+        }
+        // verify the required parameter 'userToken' is not empty
+        if (isset($userToken) && '' === $userToken) {
             throw new \InvalidArgumentException(
                 'Parameter `userToken` is required when calling `getUserTokenProfile`.'
             );

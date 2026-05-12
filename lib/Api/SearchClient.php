@@ -76,6 +76,7 @@ use Algolia\AlgoliaSearch\RetryStrategy\AlgoliaResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
+use Algolia\AlgoliaSearch\Support\ChunkedHelperOptions;
 use Algolia\AlgoliaSearch\Support\Helpers;
 use GuzzleHttp\Psr7\Query;
 
@@ -4579,13 +4580,14 @@ class SearchClient
     /**
      * Helper: Similar to the `replaceAllObjects` method but requires a Push connector (https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/connectors/push/) to be created first, in order to transform records before indexing them to Algolia. The `region` must have been passed to the client instantiation method.
      *
-     * @param string $indexName      the `indexName` to replace `objects` in
-     * @param array  $objects        the array of `objects` to store in the given Algolia `indexName`
-     * @param array  $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
-     * @param array  $requestOptions Request options
-     * @param mixed  $scopes
+     * @param string                    $indexName      the `indexName` to replace `objects` in
+     * @param array                     $objects        the array of `objects` to store in the given Algolia `indexName`
+     * @param array                     $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
+     * @param array                     $requestOptions Request options
+     * @param null|ChunkedHelperOptions $chunkedOptions Optional configuration shared across chunked helpers (e.g. `maxRetries`).
+     * @param mixed                     $scopes
      */
-    public function replaceAllObjectsWithTransformation($indexName, $objects, $batchSize = 1000, $scopes = ['settings', 'rules', 'synonyms'], $requestOptions = [])
+    public function replaceAllObjectsWithTransformation($indexName, $objects, $batchSize = 1000, $scopes = ['settings', 'rules', 'synonyms'], $requestOptions = [], ?ChunkedHelperOptions $chunkedOptions = null)
     {
         if (null == $this->ingestionTransporter) {
             throw new \InvalidArgumentException('`setTransformationRegion` must have been called before calling this method.');
@@ -4604,9 +4606,9 @@ class SearchClient
                 $requestOptions
             );
 
-            $watchResponses = $this->ingestionTransporter->chunkedPush($tmpIndexName, $objects, 'addObject', true, $batchSize, $indexName, $requestOptions);
+            $watchResponses = $this->ingestionTransporter->chunkedPush($tmpIndexName, $objects, 'addObject', true, $batchSize, $indexName, $requestOptions, $chunkedOptions);
 
-            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID']);
+            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID'], [], $chunkedOptions?->maxRetries);
 
             $copyOperationResponse = $this->operationIndex(
                 $indexName,
@@ -4618,7 +4620,7 @@ class SearchClient
                 $requestOptions
             );
 
-            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID']);
+            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID'], [], $chunkedOptions?->maxRetries);
 
             $moveOperationResponse = $this->operationIndex(
                 $tmpIndexName,
@@ -4629,7 +4631,7 @@ class SearchClient
                 $requestOptions
             );
 
-            $this->waitForTask($tmpIndexName, $moveOperationResponse['taskID']);
+            $this->waitForTask($tmpIndexName, $moveOperationResponse['taskID'], [], $chunkedOptions?->maxRetries);
 
             return [
                 'copyOperationResponse' => $copyOperationResponse,
@@ -4647,13 +4649,14 @@ class SearchClient
      * Helper: Replace all objects in an index using a temporary one.
      * See https://api-clients-automation.netlify.app/docs/custom-helpers/#replaceallobjects for implementation details.
      *
-     * @param string $indexName      the `indexName` to replace `objects` in
-     * @param array  $objects        the array of `objects` to store in the given Algolia `indexName`
-     * @param array  $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
-     * @param array  $requestOptions Request options
-     * @param mixed  $scopes
+     * @param string                    $indexName      the `indexName` to replace `objects` in
+     * @param array                     $objects        the array of `objects` to store in the given Algolia `indexName`
+     * @param array                     $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
+     * @param array                     $requestOptions Request options
+     * @param null|ChunkedHelperOptions $chunkedOptions Optional configuration shared across chunked helpers (e.g. `maxRetries`).
+     * @param mixed                     $scopes
      */
-    public function replaceAllObjects($indexName, $objects, $batchSize = 1000, $scopes = ['settings', 'rules', 'synonyms'], $requestOptions = [])
+    public function replaceAllObjects($indexName, $objects, $batchSize = 1000, $scopes = ['settings', 'rules', 'synonyms'], $requestOptions = [], ?ChunkedHelperOptions $chunkedOptions = null)
     {
         $tmpIndexName = $indexName.'_tmp_'.rand(10000000, 99999999);
 
@@ -4668,9 +4671,9 @@ class SearchClient
                 $requestOptions
             );
 
-            $batchResponses = $this->chunkedBatch($tmpIndexName, $objects, 'addObject', true, $batchSize, $requestOptions);
+            $batchResponses = $this->chunkedBatch($tmpIndexName, $objects, 'addObject', true, $batchSize, $requestOptions, $chunkedOptions);
 
-            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID']);
+            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID'], [], $chunkedOptions?->maxRetries);
 
             $copyOperationResponse = $this->operationIndex(
                 $indexName,
@@ -4682,7 +4685,7 @@ class SearchClient
                 $requestOptions
             );
 
-            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID']);
+            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID'], [], $chunkedOptions?->maxRetries);
 
             $moveOperationResponse = $this->operationIndex(
                 $tmpIndexName,
@@ -4693,7 +4696,7 @@ class SearchClient
                 $requestOptions
             );
 
-            $this->waitForTask($tmpIndexName, $moveOperationResponse['taskID']);
+            $this->waitForTask($tmpIndexName, $moveOperationResponse['taskID'], [], $chunkedOptions?->maxRetries);
 
             return [
                 'copyOperationResponse' => $copyOperationResponse,
@@ -4710,15 +4713,16 @@ class SearchClient
     /**
      * Helper: Saves the given array of objects in the given index. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objects in it.
      *
-     * @param string $indexName      the `indexName` to replace `objects` in
-     * @param array  $objects        the array of `objects` to store in the given Algolia `indexName`
-     * @param bool   $waitForTasks   Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
-     * @param int    $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
-     * @param array  $requestOptions Request options
+     * @param string                    $indexName      the `indexName` to replace `objects` in
+     * @param array                     $objects        the array of `objects` to store in the given Algolia `indexName`
+     * @param bool                      $waitForTasks   Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
+     * @param int                       $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
+     * @param array                     $requestOptions Request options
+     * @param null|ChunkedHelperOptions $chunkedOptions Optional configuration shared across chunked helpers (e.g. `maxRetries`).
      */
-    public function saveObjects($indexName, $objects, $waitForTasks = false, $batchSize = 1000, $requestOptions = [])
+    public function saveObjects($indexName, $objects, $waitForTasks = false, $batchSize = 1000, $requestOptions = [], ?ChunkedHelperOptions $chunkedOptions = null)
     {
-        return $this->chunkedBatch($indexName, $objects, 'addObject', $waitForTasks, $batchSize, $requestOptions);
+        return $this->chunkedBatch($indexName, $objects, 'addObject', $waitForTasks, $batchSize, $requestOptions, $chunkedOptions);
     }
 
     /**
@@ -4727,31 +4731,33 @@ class SearchClient
      * to be created first, in order to transform records before indexing them to Algolia. The
      * `region` must have been passed to the client instantiation method.
      *
-     * @param string $indexName      the `indexName` to replace `objects` in
-     * @param array  $objects        the array of `objects` to store in the given Algolia `indexName`
-     * @param bool   $waitForTasks   Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
-     * @param int    $batchSize      The size of the chunk of `objects`. The number of `push` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
-     * @param array  $requestOptions Request options
+     * @param string                    $indexName      the `indexName` to replace `objects` in
+     * @param array                     $objects        the array of `objects` to store in the given Algolia `indexName`
+     * @param bool                      $waitForTasks   Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
+     * @param int                       $batchSize      The size of the chunk of `objects`. The number of `push` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
+     * @param array                     $requestOptions Request options
+     * @param null|ChunkedHelperOptions $chunkedOptions Optional configuration shared across chunked helpers (e.g. `maxRetries`).
      */
-    public function saveObjectsWithTransformation($indexName, $objects, $waitForTasks = false, $batchSize = 1000, $requestOptions = [])
+    public function saveObjectsWithTransformation($indexName, $objects, $waitForTasks = false, $batchSize = 1000, $requestOptions = [], ?ChunkedHelperOptions $chunkedOptions = null)
     {
         if (null == $this->ingestionTransporter) {
             throw new \InvalidArgumentException('`setTransformationRegion` must have been called before calling this method.');
         }
 
-        return $this->ingestionTransporter->chunkedPush($indexName, $objects, 'addObject', $waitForTasks, $batchSize, null, $requestOptions);
+        return $this->ingestionTransporter->chunkedPush($indexName, $objects, 'addObject', $waitForTasks, $batchSize, null, $requestOptions, $chunkedOptions);
     }
 
     /**
      * Helper: Deletes every records for the given objectIDs. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objectIDs in it.
      *
-     * @param string $indexName      the `indexName` to delete `objectIDs` from
-     * @param array  $objectIDs      the `objectIDs` to delete
-     * @param bool   $waitForTasks   Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
-     * @param int    $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
-     * @param array  $requestOptions Request options
+     * @param string                    $indexName      the `indexName` to delete `objectIDs` from
+     * @param array                     $objectIDs      the `objectIDs` to delete
+     * @param bool                      $waitForTasks   Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
+     * @param int                       $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
+     * @param array                     $requestOptions Request options
+     * @param null|ChunkedHelperOptions $chunkedOptions Optional configuration shared across chunked helpers (e.g. `maxRetries`).
      */
-    public function deleteObjects($indexName, $objectIDs, $waitForTasks = false, $batchSize = 1000, $requestOptions = [])
+    public function deleteObjects($indexName, $objectIDs, $waitForTasks = false, $batchSize = 1000, $requestOptions = [], ?ChunkedHelperOptions $chunkedOptions = null)
     {
         $objects = [];
 
@@ -4759,22 +4765,23 @@ class SearchClient
             $objects[] = ['objectID' => $id];
         }
 
-        return $this->chunkedBatch($indexName, $objects, 'deleteObject', $waitForTasks, $batchSize, $requestOptions);
+        return $this->chunkedBatch($indexName, $objects, 'deleteObject', $waitForTasks, $batchSize, $requestOptions, $chunkedOptions);
     }
 
     /**
      * Helper: Replaces object content of all the given objects according to their respective `objectID` field. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objects in it.
      *
-     * @param string $indexName         the `indexName` to replace `objects` in
-     * @param array  $objects           the array of `objects` to store in the given Algolia `indexName`
-     * @param bool   $createIfNotExists to be provided if non-existing objects are passed, otherwise, the call will fail
-     * @param bool   $waitForTasks      Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
-     * @param int    $batchSize         The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
-     * @param array  $requestOptions    Request options
+     * @param string                    $indexName         the `indexName` to replace `objects` in
+     * @param array                     $objects           the array of `objects` to store in the given Algolia `indexName`
+     * @param bool                      $createIfNotExists to be provided if non-existing objects are passed, otherwise, the call will fail
+     * @param bool                      $waitForTasks      Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
+     * @param int                       $batchSize         The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
+     * @param array                     $requestOptions    Request options
+     * @param null|ChunkedHelperOptions $chunkedOptions    Optional configuration shared across chunked helpers (e.g. `maxRetries`).
      */
-    public function partialUpdateObjects($indexName, $objects, $createIfNotExists, $waitForTasks = false, $batchSize = 1000, $requestOptions = [])
+    public function partialUpdateObjects($indexName, $objects, $createIfNotExists, $waitForTasks = false, $batchSize = 1000, $requestOptions = [], ?ChunkedHelperOptions $chunkedOptions = null)
     {
-        return $this->chunkedBatch($indexName, $objects, (true == $createIfNotExists) ? 'partialUpdateObject' : 'partialUpdateObjectNoCreate', $waitForTasks, $batchSize, $requestOptions);
+        return $this->chunkedBatch($indexName, $objects, (true == $createIfNotExists) ? 'partialUpdateObject' : 'partialUpdateObjectNoCreate', $waitForTasks, $batchSize, $requestOptions, $chunkedOptions);
     }
 
     /**
@@ -4783,31 +4790,33 @@ class SearchClient
      * to be created first, in order to transform records before indexing them to Algolia. The
      * `region` must have been passed to the client instantiation method.
      *
-     * @param string $indexName         the `indexName` to replace `objects` in
-     * @param array  $objects           the array of `objects` to store in the given Algolia `indexName`
-     * @param bool   $createIfNotExists to be provided if non-existing objects are passed, otherwise, the call will fail
-     * @param bool   $waitForTasks      Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
-     * @param int    $batchSize         The size of the chunk of `objects`. The number of `push` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
-     * @param array  $requestOptions    Request options
+     * @param string                    $indexName         the `indexName` to replace `objects` in
+     * @param array                     $objects           the array of `objects` to store in the given Algolia `indexName`
+     * @param bool                      $createIfNotExists to be provided if non-existing objects are passed, otherwise, the call will fail
+     * @param bool                      $waitForTasks      Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
+     * @param int                       $batchSize         The size of the chunk of `objects`. The number of `push` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
+     * @param array                     $requestOptions    Request options
+     * @param null|ChunkedHelperOptions $chunkedOptions    Optional configuration shared across chunked helpers (e.g. `maxRetries`).
      */
-    public function partialUpdateObjectsWithTransformation($indexName, $objects, $createIfNotExists, $waitForTasks = false, $batchSize = 1000, $requestOptions = [])
+    public function partialUpdateObjectsWithTransformation($indexName, $objects, $createIfNotExists, $waitForTasks = false, $batchSize = 1000, $requestOptions = [], ?ChunkedHelperOptions $chunkedOptions = null)
     {
         if (null == $this->ingestionTransporter) {
             throw new \InvalidArgumentException('`setTransformationRegion` must have been called before calling this method.');
         }
 
-        return $this->ingestionTransporter->chunkedPush($indexName, $objects, (true == $createIfNotExists) ? 'partialUpdateObject' : 'partialUpdateObjectNoCreate', $waitForTasks, $batchSize, null, $requestOptions);
+        return $this->ingestionTransporter->chunkedPush($indexName, $objects, (true == $createIfNotExists) ? 'partialUpdateObject' : 'partialUpdateObjectNoCreate', $waitForTasks, $batchSize, null, $requestOptions, $chunkedOptions);
     }
 
     /**
      * Helper: Chunks the given `objects` list in subset of 1000 elements max in order to make it fit in `batch` requests.
      *
-     * @param string $indexName      the `indexName` to replace `objects` in
-     * @param array  $objects        the array of `objects` to store in the given Algolia `indexName`
-     * @param array  $action         the `batch` `action` to perform on the given array of `objects`, defaults to `addObject`
-     * @param bool   $waitForTasks   whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
-     * @param int    $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
-     * @param array  $requestOptions Request options
+     * @param string                    $indexName      the `indexName` to replace `objects` in
+     * @param array                     $objects        the array of `objects` to store in the given Algolia `indexName`
+     * @param array                     $action         the `batch` `action` to perform on the given array of `objects`, defaults to `addObject`
+     * @param bool                      $waitForTasks   whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
+     * @param int                       $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
+     * @param array                     $requestOptions Request options
+     * @param null|ChunkedHelperOptions $chunkedOptions Optional configuration shared across chunked helpers (e.g. `maxRetries`).
      */
     public function chunkedBatch(
         $indexName,
@@ -4815,7 +4824,8 @@ class SearchClient
         $action = 'addObject',
         $waitForTasks = true,
         $batchSize = 1000,
-        $requestOptions = []
+        $requestOptions = [],
+        ?ChunkedHelperOptions $chunkedOptions = null
     ) {
         $responses = [];
         $requests = [];
@@ -4849,7 +4859,7 @@ class SearchClient
 
         if ($waitForTasks && !empty($responses)) {
             foreach ($responses as $response) {
-                $this->waitForTask($indexName, $response['taskID']);
+                $this->waitForTask($indexName, $response['taskID'], [], $chunkedOptions?->maxRetries);
             }
         }
 

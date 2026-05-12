@@ -65,6 +65,8 @@ use Algolia\AlgoliaSearch\RetryStrategy\AlgoliaResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
+use Algolia\AlgoliaSearch\Support\ChunkedHelperOptions;
+use Algolia\AlgoliaSearch\Support\Helpers;
 use GuzzleHttp\Psr7\Query;
 
 /**
@@ -4547,13 +4549,14 @@ class IngestionClient
     /**
      * Helper: Chunks the given `objects` list in subset of 1000 elements max in order to make it fit in `batch` requests.
      *
-     * @param string $indexName          the `indexName` to replace `objects` in
-     * @param array  $objects            the array of `objects` to store in the given Algolia `indexName`
-     * @param array  $action             the `batch` `action` to perform on the given array of `objects`, defaults to `addObject`
-     * @param bool   $waitForTasks       whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
-     * @param array  $batchSize          The size of the chunk of `objects`. The number of `push` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
-     * @param array  $referenceIndexName This is required when targeting an index that does not have a push connector setup (e.g. a tmp index), but you wish to attach another index's transformation to it (e.g. the source index name).
-     * @param array  $requestOptions     Request options
+     * @param string                    $indexName          the `indexName` to replace `objects` in
+     * @param array                     $objects            the array of `objects` to store in the given Algolia `indexName`
+     * @param array                     $action             the `batch` `action` to perform on the given array of `objects`, defaults to `addObject`
+     * @param bool                      $waitForTasks       whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
+     * @param array                     $batchSize          The size of the chunk of `objects`. The number of `push` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
+     * @param array                     $referenceIndexName This is required when targeting an index that does not have a push connector setup (e.g. a tmp index), but you wish to attach another index's transformation to it (e.g. the source index name).
+     * @param array                     $requestOptions     Request options
+     * @param null|ChunkedHelperOptions $chunkedOptions     Optional configuration shared across chunked helpers (e.g. `maxRetries`).
      */
     public function chunkedPush(
         $indexName,
@@ -4562,8 +4565,10 @@ class IngestionClient
         $waitForTasks = true,
         $batchSize = 1000,
         $referenceIndexName = null,
-        $requestOptions = []
+        $requestOptions = [],
+        ?ChunkedHelperOptions $chunkedOptions = null
     ) {
+        $maxRetries = $chunkedOptions?->maxRetries ?? 100;
         $responses = [];
         $records = [];
         $count = 0;
@@ -4593,7 +4598,7 @@ class IngestionClient
                 foreach (array_slice($responses, $offset, $waitBatchSize) as $response) {
                     $retry = 0;
 
-                    while ($retry < 50) {
+                    while ($retry < $maxRetries) {
                         try {
                             $this->getEvent($response['runID'], $response['eventID']);
 
@@ -4609,7 +4614,7 @@ class IngestionClient
                     }
 
                     if (false === $ok) {
-                        throw new ExceededRetriesException('Maximum number of retries (50) exceeded.');
+                        throw new ExceededRetriesException('Stopped waiting for the task after '.$maxRetries.' retries. This does not mean the operation failed; it may still complete. If you need to keep polling, retry with a higher $maxRetries.');
                     }
                 }
                 $offset = $offset + $waitBatchSize;

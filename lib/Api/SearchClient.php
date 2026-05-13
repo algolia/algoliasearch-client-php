@@ -7,6 +7,7 @@ namespace Algolia\AlgoliaSearch\Api;
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\IngestionConfig;
 use Algolia\AlgoliaSearch\Configuration\SearchConfig;
+use Algolia\AlgoliaSearch\Configuration\TransformationOptions;
 use Algolia\AlgoliaSearch\Exceptions\ExceededRetriesException;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\ValidUntilNotFoundException;
@@ -138,18 +139,8 @@ class SearchClient
 
         $client = new static($apiWrapper, $config);
 
-        if (null !== $config->getTransformationRegion()) {
-            $ingestionConfig = IngestionConfig::create($config->getAppId(), $config->getAlgoliaApiKey(), $config->getTransformationRegion());
-
-            if ($hosts = $config->getHosts()) {
-                if ($config->getHasFullHosts()) {
-                    $ingestionConfig = $ingestionConfig->setFullHosts($hosts);
-                } else {
-                    $ingestionConfig = $ingestionConfig->setHosts($hosts);
-                }
-            }
-
-            $client->ingestionTransporter = IngestionClient::createWithConfig($ingestionConfig);
+        if (null !== $config->getTransformationOptions()) {
+            $client->ingestionTransporter = self::buildIngestionTransporter($config, $config->getTransformationOptions());
         }
 
         $logger = Algolia::getLogger();
@@ -198,6 +189,20 @@ class SearchClient
     public function setClientApiKey($apiKey)
     {
         $this->config->setClientApiKey($apiKey);
+    }
+
+    /**
+     * Sets (or replaces) the ingestion transporter used by the `*WithTransformation` helpers.
+     * The transporter is built from the Ingestion API defaults (25s timeouts, region-derived
+     * hosts); only the fields set on `$transformationOptions` override those defaults — the
+     * parent `SearchConfig` is never forwarded.
+     *
+     * @see https://www.algolia.com/doc/libraries/sdk/methods/ingestion/
+     */
+    public function setTransformationOptions(TransformationOptions $transformationOptions)
+    {
+        $this->config->setTransformationOptions($transformationOptions);
+        $this->ingestionTransporter = self::buildIngestionTransporter($this->config, $transformationOptions);
     }
 
     /**
@@ -4578,7 +4583,13 @@ class SearchClient
     }
 
     /**
-     * Helper: Similar to the `replaceAllObjects` method but requires a Push connector (https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/connectors/push/) to be created first, in order to transform records before indexing them to Algolia. The `region` must have been passed to the client instantiation method.
+     * Helper: Similar to the `replaceAllObjects` method but requires a Push connector
+     * (https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/connectors/push/)
+     * to be created first, in order to transform records before indexing them to Algolia.
+     * `transformationOptions` must be set on the `SearchConfig` before creating the client,
+     * or via `SearchClient::setTransformationOptions()` before calling this method.
+     *
+     * @see https://www.algolia.com/doc/libraries/sdk/methods/ingestion/
      *
      * @param string                    $indexName      the `indexName` to replace `objects` in
      * @param array                     $objects        the array of `objects` to store in the given Algolia `indexName`
@@ -4590,7 +4601,7 @@ class SearchClient
     public function replaceAllObjectsWithTransformation($indexName, $objects, $batchSize = 1000, $scopes = ['settings', 'rules', 'synonyms'], $requestOptions = [], ?ChunkedHelperOptions $chunkedOptions = null)
     {
         if (null == $this->ingestionTransporter) {
-            throw new \InvalidArgumentException('`setTransformationRegion` must have been called before calling this method.');
+            throw new \InvalidArgumentException('`transformationOptions` must be set on `SearchConfig` before creating the client, or via `SearchClient::setTransformationOptions(...)` before calling this method. It defaults to the Ingestion API defaults. See https://www.algolia.com/doc/libraries/sdk/methods/ingestion/');
         }
 
         $tmpIndexName = $indexName.'_tmp_'.rand(10000000, 99999999);
@@ -4728,8 +4739,11 @@ class SearchClient
     /**
      * Helper: Similar to the `saveObjects` method but requires a Push connector
      * (https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/connectors/push/)
-     * to be created first, in order to transform records before indexing them to Algolia. The
-     * `region` must have been passed to the client instantiation method.
+     * to be created first, in order to transform records before indexing them to Algolia.
+     * `transformationOptions` must be set on the `SearchConfig` before creating the client,
+     * or via `SearchClient::setTransformationOptions()` before calling this method.
+     *
+     * @see https://www.algolia.com/doc/libraries/sdk/methods/ingestion/
      *
      * @param string                    $indexName      the `indexName` to replace `objects` in
      * @param array                     $objects        the array of `objects` to store in the given Algolia `indexName`
@@ -4741,7 +4755,7 @@ class SearchClient
     public function saveObjectsWithTransformation($indexName, $objects, $waitForTasks = false, $batchSize = 1000, $requestOptions = [], ?ChunkedHelperOptions $chunkedOptions = null)
     {
         if (null == $this->ingestionTransporter) {
-            throw new \InvalidArgumentException('`setTransformationRegion` must have been called before calling this method.');
+            throw new \InvalidArgumentException('`transformationOptions` must be set on `SearchConfig` before creating the client, or via `SearchClient::setTransformationOptions(...)` before calling this method. It defaults to the Ingestion API defaults. See https://www.algolia.com/doc/libraries/sdk/methods/ingestion/');
         }
 
         return $this->ingestionTransporter->chunkedPush($indexName, $objects, 'addObject', $waitForTasks, $batchSize, null, $requestOptions, $chunkedOptions);
@@ -4787,8 +4801,11 @@ class SearchClient
     /**
      * Helper: Similar to the `partialUpdateObjects` method but requires a Push connector
      * (https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/connectors/push/)
-     * to be created first, in order to transform records before indexing them to Algolia. The
-     * `region` must have been passed to the client instantiation method.
+     * to be created first, in order to transform records before indexing them to Algolia.
+     * `transformationOptions` must be set on the `SearchConfig` before creating the client,
+     * or via `SearchClient::setTransformationOptions()` before calling this method.
+     *
+     * @see https://www.algolia.com/doc/libraries/sdk/methods/ingestion/
      *
      * @param string                    $indexName         the `indexName` to replace `objects` in
      * @param array                     $objects           the array of `objects` to store in the given Algolia `indexName`
@@ -4801,7 +4818,7 @@ class SearchClient
     public function partialUpdateObjectsWithTransformation($indexName, $objects, $createIfNotExists, $waitForTasks = false, $batchSize = 1000, $requestOptions = [], ?ChunkedHelperOptions $chunkedOptions = null)
     {
         if (null == $this->ingestionTransporter) {
-            throw new \InvalidArgumentException('`setTransformationRegion` must have been called before calling this method.');
+            throw new \InvalidArgumentException('`transformationOptions` must be set on `SearchConfig` before creating the client, or via `SearchClient::setTransformationOptions(...)` before calling this method. It defaults to the Ingestion API defaults. See https://www.algolia.com/doc/libraries/sdk/methods/ingestion/');
         }
 
         return $this->ingestionTransporter->chunkedPush($indexName, $objects, (true == $createIfNotExists) ? 'partialUpdateObject' : 'partialUpdateObjectNoCreate', $waitForTasks, $batchSize, null, $requestOptions, $chunkedOptions);
@@ -4928,6 +4945,49 @@ class SearchClient
         }
 
         return true;
+    }
+
+    /**
+     * Builds an ingestion transporter from a `TransformationOptions`, using the Ingestion API
+     * defaults and overriding only the fields explicitly set on `$transformationOptions`.
+     *
+     * @return IngestionClient
+     */
+    private static function buildIngestionTransporter(SearchConfig $config, TransformationOptions $transformationOptions)
+    {
+        $ingestionConfig = IngestionConfig::create(
+            $config->getAppId(),
+            $config->getAlgoliaApiKey(),
+            $transformationOptions->getRegion()
+        );
+
+        if (null !== ($hosts = $transformationOptions->getHosts())) {
+            if ($transformationOptions->getHasFullHosts()) {
+                $ingestionConfig->setFullHosts($hosts);
+            } else {
+                $ingestionConfig->setHosts($hosts);
+            }
+        }
+        if (null !== ($readTimeout = $transformationOptions->getReadTimeout())) {
+            $ingestionConfig->setReadTimeout($readTimeout);
+        }
+        if (null !== ($writeTimeout = $transformationOptions->getWriteTimeout())) {
+            $ingestionConfig->setWriteTimeout($writeTimeout);
+        }
+        if (null !== ($connectTimeout = $transformationOptions->getConnectTimeout())) {
+            $ingestionConfig->setConnectTimeout($connectTimeout);
+        }
+        if (null !== ($waitTaskTimeBeforeRetry = $transformationOptions->getWaitTaskTimeBeforeRetry())) {
+            $ingestionConfig->setWaitTaskTimeBeforeRetry($waitTaskTimeBeforeRetry);
+        }
+        if (null !== ($defaultHeaders = $transformationOptions->getDefaultHeaders())) {
+            $ingestionConfig->setDefaultHeaders($defaultHeaders);
+        }
+        if (null !== ($compressionType = $transformationOptions->getCompressionType())) {
+            $ingestionConfig->setCompressionType($compressionType);
+        }
+
+        return IngestionClient::createWithConfig($ingestionConfig);
     }
 
     private function sendRequestWithHttpInfo($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)

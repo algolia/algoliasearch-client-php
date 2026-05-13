@@ -32,11 +32,6 @@ class PersonalizationClient
     protected $api;
 
     /**
-     * @var IngestionClient
-     */
-    protected $ingestionTransporter;
-
-    /**
      * @var PersonalizationConfig
      */
     protected $config;

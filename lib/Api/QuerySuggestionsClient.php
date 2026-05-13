@@ -34,11 +34,6 @@ class QuerySuggestionsClient
     protected $api;
 
     /**
-     * @var IngestionClient
-     */
-    protected $ingestionTransporter;
-
-    /**
      * @var QuerySuggestionsConfig
      */
     protected $config;

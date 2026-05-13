@@ -53,15 +53,55 @@ class SearchConfig extends Configuration
     }
 
     /**
-     * Sets the region of the current algolia application to the configuration, this is required to be called if you wish to leverage the transformation pipeline (via the *WithTransformation methods).
+     * Sets the `TransformationOptions` used by the `*WithTransformation` helpers.
      *
-     * @param string $region the user agent of the api client
+     * Read by `SearchClient::createWithConfig` to build the ingestion transporter; only the
+     * fields set on `TransformationOptions` override the Ingestion API defaults (25s timeouts,
+     * region-derived hosts) — the parent `SearchConfig` is never forwarded.
+     *
+     * To replace the transporter on an existing client, use `SearchClient::setTransformationOptions`.
+     *
+     * @see https://www.algolia.com/doc/libraries/sdk/methods/ingestion/
+     *
+     * @return $this
+     */
+    public function setTransformationOptions(TransformationOptions $transformationOptions)
+    {
+        $this->config['transformationOptions'] = $transformationOptions;
+        // Mirror the region into the legacy slot so `getTransformationRegion()` stays consistent.
+        $this->config['region'] = $transformationOptions->getRegion();
+
+        return $this;
+    }
+
+    /**
+     * @return null|TransformationOptions
+     */
+    public function getTransformationOptions()
+    {
+        return $this->config['transformationOptions'];
+    }
+
+    /**
+     * Sets the region used by the transformation pipeline (via the `*WithTransformation` methods).
+     *
+     * @deprecated The old setter forwarded the parent `SearchConfig` (hosts, timeouts, headers,
+     *             compression) to the ingestion transporter, letting search settings bleed into
+     *             ingestion calls. Use {@see SearchConfig::setTransformationOptions()} instead — it
+     *             defaults to the Ingestion API defaults (25s timeouts, region-derived hosts, no
+     *             compression) and only overrides fields explicitly set on `TransformationOptions`.
+     * @see https://www.algolia.com/doc/libraries/sdk/methods/ingestion/
+     *
+     * @param string $region the Algolia region for the Ingestion API (`"us"` or `"eu"`)
      *
      * @return $this
      */
     public function setTransformationRegion($region)
     {
         $this->config['region'] = $region;
+        $this->config['transformationOptions'] = (null === $region || '' === $region)
+            ? null
+            : new TransformationOptions($region);
 
         return $this;
     }
@@ -83,6 +123,7 @@ class SearchConfig extends Configuration
             'connectTimeout' => 2,
             'defaultHeaders' => [],
             'region' => null,
+            'transformationOptions' => null,
             'waitTaskTimeBeforeRetry' => $this->defaultWaitTaskTimeBeforeRetry,
             'defaultMaxRetries' => $this->defaultMaxRetries,
             'defaultForwardToReplicas' => null,

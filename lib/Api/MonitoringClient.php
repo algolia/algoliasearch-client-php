@@ -34,11 +34,6 @@ class MonitoringClient
     protected $api;
 
     /**
-     * @var IngestionClient
-     */
-    protected $ingestionTransporter;
-
-    /**
      * @var MonitoringConfig
      */
     protected $config;

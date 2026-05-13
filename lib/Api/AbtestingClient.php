@@ -34,11 +34,6 @@ class AbtestingClient
     protected $api;
 
     /**
-     * @var IngestionClient
-     */
-    protected $ingestionTransporter;
-
-    /**
      * @var AbtestingConfig
      */
     protected $config;

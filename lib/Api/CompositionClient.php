@@ -43,11 +43,6 @@ class CompositionClient
     protected $api;
 
     /**
-     * @var IngestionClient
-     */
-    protected $ingestionTransporter;
-
-    /**
      * @var CompositionConfig
      */
     protected $config;

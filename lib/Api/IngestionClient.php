@@ -84,11 +84,6 @@ class IngestionClient
     protected $api;
 
     /**
-     * @var IngestionClient
-     */
-    protected $ingestionTransporter;
-
-    /**
      * @var IngestionConfig
      */
     protected $config;

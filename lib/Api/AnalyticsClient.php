@@ -48,11 +48,6 @@ class AnalyticsClient
     protected $api;
 
     /**
-     * @var IngestionClient
-     */
-    protected $ingestionTransporter;
-
-    /**
      * @var AnalyticsConfig
      */
     protected $config;

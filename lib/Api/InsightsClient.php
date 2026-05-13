@@ -30,11 +30,6 @@ class InsightsClient
     protected $api;
 
     /**
-     * @var IngestionClient
-     */
-    protected $ingestionTransporter;
-
-    /**
      * @var InsightsConfig
      */
     protected $config;

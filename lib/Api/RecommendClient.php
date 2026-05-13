@@ -36,11 +36,6 @@ class RecommendClient
     protected $api;
 
     /**
-     * @var IngestionClient
-     */
-    protected $ingestionTransporter;
-
-    /**
      * @var RecommendConfig
      */
     protected $config;

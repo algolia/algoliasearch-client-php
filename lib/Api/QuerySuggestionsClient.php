@@ -306,7 +306,7 @@ class QuerySuggestionsClient
      * @param array|Configuration $configuration configuration (required)
      *                                           - $configuration['sourceIndices'] => (array) Algolia indices from which to get the popular searches for query suggestions. (required)
      *                                           - $configuration['languages'] => (array)
-     *                                           - $configuration['exclude'] => (array)
+     *                                           - $configuration['exclude'] => (array) Words or regular expressions to exclude from the suggestions.
      *                                           - $configuration['enablePersonalization'] => (bool) Whether to turn on personalized query suggestions.
      *                                           - $configuration['allowSpecialCharacters'] => (bool) Whether to include suggestions with special characters.
      *

@@ -320,7 +320,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Sets clickSignificance.
      *
-     * @param null|float $clickSignificance clickSignificance
+     * @param null|float $clickSignificance A/B test significance calculated from click events.  Values of 0.95 or higher can be considered significant, that is, the difference between A and B variants is _not_ due to random variations. Lower values have a.
      *
      * @return self
      */
@@ -344,7 +344,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Sets conversionSignificance.
      *
-     * @param null|float $conversionSignificance conversionSignificance
+     * @param null|float $conversionSignificance A/B test significance calculated from conversion events.  Values of 0.95 or higher can be considered significant, that is, the difference between A and B variants is _not_ due to random variations.
      *
      * @return self
      */
@@ -368,7 +368,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Sets addToCartSignificance.
      *
-     * @param null|float $addToCartSignificance addToCartSignificance
+     * @param null|float $addToCartSignificance A/B test significance calculated from add-to-cart events.  Values of 0.95 or higher can be considered significant, that is, the difference between A and B variants is _not_ due to random variations.
      *
      * @return self
      */
@@ -392,7 +392,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Sets purchaseSignificance.
      *
-     * @param null|float $purchaseSignificance purchaseSignificance
+     * @param null|float $purchaseSignificance A/B test significance calculated from purchase events.  Values of 0.95 or higher can be considered significant, that is, the difference between A and B variants is _not_ due to random variations.
      *
      * @return self
      */
@@ -416,7 +416,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Sets revenueSignificance.
      *
-     * @param null|array<string,float> $revenueSignificance revenueSignificance
+     * @param null|array<string,float> $revenueSignificance A/B test significance calculated from revenue data.  Values of 0.95 or higher can be considered significant, that is, the difference between A and B variants is _not_ due to random variations.
      *
      * @return self
      */

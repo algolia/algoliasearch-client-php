@@ -334,7 +334,7 @@ class ConfigurationResponse extends AbstractModel implements ModelInterface, \Ar
     /**
      * Sets exclude.
      *
-     * @param string[] $exclude exclude
+     * @param string[] $exclude words or regular expressions to exclude from the suggestions
      *
      * @return self
      */

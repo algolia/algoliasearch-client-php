@@ -263,7 +263,7 @@ class ConfigurationWithIndex extends AbstractModel implements ModelInterface, \A
     /**
      * Sets exclude.
      *
-     * @param null|string[] $exclude exclude
+     * @param null|string[] $exclude words or regular expressions to exclude from the suggestions
      *
      * @return self
      */

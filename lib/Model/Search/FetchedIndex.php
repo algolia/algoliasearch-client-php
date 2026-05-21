@@ -32,6 +32,8 @@ class FetchedIndex extends AbstractModel implements ModelInterface, \ArrayAccess
         'primary' => 'string',
         'replicas' => 'string[]',
         'virtual' => 'bool',
+        'abTest' => '\Algolia\AlgoliaSearch\Model\Search\FetchedIndexAbTest',
+        'sourceABTest' => 'string',
     ];
 
     /**
@@ -52,6 +54,8 @@ class FetchedIndex extends AbstractModel implements ModelInterface, \ArrayAccess
         'primary' => null,
         'replicas' => null,
         'virtual' => null,
+        'abTest' => null,
+        'sourceABTest' => null,
     ];
 
     /**
@@ -73,6 +77,8 @@ class FetchedIndex extends AbstractModel implements ModelInterface, \ArrayAccess
         'primary' => 'primary',
         'replicas' => 'replicas',
         'virtual' => 'virtual',
+        'abTest' => 'abTest',
+        'sourceABTest' => 'sourceABTest',
     ];
 
     /**
@@ -93,6 +99,8 @@ class FetchedIndex extends AbstractModel implements ModelInterface, \ArrayAccess
         'primary' => 'setPrimary',
         'replicas' => 'setReplicas',
         'virtual' => 'setVirtual',
+        'abTest' => 'setAbTest',
+        'sourceABTest' => 'setSourceABTest',
     ];
 
     /**
@@ -113,6 +121,8 @@ class FetchedIndex extends AbstractModel implements ModelInterface, \ArrayAccess
         'primary' => 'getPrimary',
         'replicas' => 'getReplicas',
         'virtual' => 'getVirtual',
+        'abTest' => 'getAbTest',
+        'sourceABTest' => 'getSourceABTest',
     ];
 
     /**
@@ -164,6 +174,12 @@ class FetchedIndex extends AbstractModel implements ModelInterface, \ArrayAccess
         }
         if (isset($data['virtual'])) {
             $this->container['virtual'] = $data['virtual'];
+        }
+        if (isset($data['abTest'])) {
+            $this->container['abTest'] = $data['abTest'];
+        }
+        if (isset($data['sourceABTest'])) {
+            $this->container['sourceABTest'] = $data['sourceABTest'];
         }
     }
 
@@ -553,6 +569,54 @@ class FetchedIndex extends AbstractModel implements ModelInterface, \ArrayAccess
     public function setVirtual($virtual)
     {
         $this->container['virtual'] = $virtual;
+
+        return $this;
+    }
+
+    /**
+     * Gets abTest.
+     *
+     * @return null|FetchedIndexAbTest
+     */
+    public function getAbTest()
+    {
+        return $this->container['abTest'] ?? null;
+    }
+
+    /**
+     * Sets abTest.
+     *
+     * @param null|FetchedIndexAbTest $abTest abTest
+     *
+     * @return self
+     */
+    public function setAbTest($abTest)
+    {
+        $this->container['abTest'] = $abTest;
+
+        return $this;
+    }
+
+    /**
+     * Gets sourceABTest.
+     *
+     * @return null|string
+     */
+    public function getSourceABTest()
+    {
+        return $this->container['sourceABTest'] ?? null;
+    }
+
+    /**
+     * Sets sourceABTest.
+     *
+     * @param null|string $sourceABTest Name of the index that owns the A/B test configuration. Only present when this index participates in an A/B test configured on another index.
+     *
+     * @return self
+     */
+    public function setSourceABTest($sourceABTest)
+    {
+        $this->container['sourceABTest'] = $sourceABTest;
 
         return $this;
     }

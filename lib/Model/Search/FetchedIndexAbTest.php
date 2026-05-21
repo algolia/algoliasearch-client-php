@@ -27,7 +27,6 @@ class FetchedIndexAbTest extends AbstractModel implements ModelInterface, \Array
      */
     protected static $modelTypes = [
         'id' => 'int',
-        'isDark' => 'bool',
         'version' => 'int',
         'type' => 'string',
         'target' => '\Algolia\AlgoliaSearch\Model\Search\FetchedIndexAbTestTarget',
@@ -41,7 +40,6 @@ class FetchedIndexAbTest extends AbstractModel implements ModelInterface, \Array
      */
     protected static $modelFormats = [
         'id' => null,
-        'isDark' => null,
         'version' => null,
         'type' => null,
         'target' => null,
@@ -56,7 +54,6 @@ class FetchedIndexAbTest extends AbstractModel implements ModelInterface, \Array
      */
     protected static $attributeMap = [
         'id' => 'id',
-        'isDark' => 'isDark',
         'version' => 'version',
         'type' => 'type',
         'target' => 'target',
@@ -70,7 +67,6 @@ class FetchedIndexAbTest extends AbstractModel implements ModelInterface, \Array
      */
     protected static $setters = [
         'id' => 'setId',
-        'isDark' => 'setIsDark',
         'version' => 'setVersion',
         'type' => 'setType',
         'target' => 'setTarget',
@@ -84,7 +80,6 @@ class FetchedIndexAbTest extends AbstractModel implements ModelInterface, \Array
      */
     protected static $getters = [
         'id' => 'getId',
-        'isDark' => 'getIsDark',
         'version' => 'getVersion',
         'type' => 'getType',
         'target' => 'getTarget',
@@ -107,9 +102,6 @@ class FetchedIndexAbTest extends AbstractModel implements ModelInterface, \Array
     {
         if (isset($data['id'])) {
             $this->container['id'] = $data['id'];
-        }
-        if (isset($data['isDark'])) {
-            $this->container['isDark'] = $data['isDark'];
         }
         if (isset($data['version'])) {
             $this->container['version'] = $data['version'];
@@ -226,30 +218,6 @@ class FetchedIndexAbTest extends AbstractModel implements ModelInterface, \Array
     public function setId($id)
     {
         $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets isDark.
-     *
-     * @return null|bool
-     */
-    public function getIsDark()
-    {
-        return $this->container['isDark'] ?? null;
-    }
-
-    /**
-     * Sets isDark.
-     *
-     * @param null|bool $isDark Whether the A/B test is a dark test (server-side measured, not user-facing). Only present when true.
-     *
-     * @return self
-     */
-    public function setIsDark($isDark)
-    {
-        $this->container['isDark'] = $isDark;
 
         return $this;
     }

@@ -8,11 +8,13 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * SearchResult Class Doc Comment.
+ * SearchResponsePartial Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Partial search response returned when the `responseFields` parameter excludes fields like `hits`. Contains all possible search response properties but none are required, so it acts as an unconditional fallback during oneOf deserialization.
  */
-class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SearchResponsePartial extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -54,7 +56,6 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
         'query' => 'string',
         'params' => 'string',
         'extensions' => '\Algolia\AlgoliaSearch\Model\Search\ResponseExtensions',
-        'facetHits' => '\Algolia\AlgoliaSearch\Model\Search\FacetHits[]',
     ];
 
     /**
@@ -97,7 +98,6 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
         'query' => null,
         'params' => null,
         'extensions' => null,
-        'facetHits' => null,
     ];
 
     /**
@@ -141,7 +141,6 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
         'query' => 'query',
         'params' => 'params',
         'extensions' => 'extensions',
-        'facetHits' => 'facetHits',
     ];
 
     /**
@@ -184,7 +183,6 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
         'query' => 'setQuery',
         'params' => 'setParams',
         'extensions' => 'setExtensions',
-        'facetHits' => 'setFacetHits',
     ];
 
     /**
@@ -227,7 +225,6 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
         'query' => 'getQuery',
         'params' => 'getParams',
         'extensions' => 'getExtensions',
-        'facetHits' => 'getFacetHits',
     ];
 
     /**
@@ -346,9 +343,6 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
         if (isset($data['extensions'])) {
             $this->container['extensions'] = $data['extensions'];
         }
-        if (isset($data['facetHits'])) {
-            $this->container['facetHits'] = $data['facetHits'];
-        }
     }
 
     /**
@@ -409,19 +403,7 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (!isset($this->container['exhaustiveFacetsCount']) || null === $this->container['exhaustiveFacetsCount']) {
-            $invalidProperties[] = "'exhaustiveFacetsCount' can't be null";
-        }
-        if (!isset($this->container['hits']) || null === $this->container['hits']) {
-            $invalidProperties[] = "'hits' can't be null";
-        }
-        if (!isset($this->container['facetHits']) || null === $this->container['facetHits']) {
-            $invalidProperties[] = "'facetHits' can't be null";
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -582,7 +564,7 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets exhaustiveFacetsCount.
      *
-     * @return bool
+     * @return null|bool
      *
      * @deprecated
      */
@@ -594,7 +576,7 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets exhaustiveFacetsCount.
      *
-     * @param bool $exhaustiveFacetsCount see the `facetsCount` field of the `exhaustive` object in the response
+     * @param null|bool $exhaustiveFacetsCount see the `facetsCount` field of the `exhaustive` object in the response
      *
      * @return self
      *
@@ -1170,7 +1152,7 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets hits.
      *
-     * @return Hit[]
+     * @return null|Hit[]
      */
     public function getHits()
     {
@@ -1180,7 +1162,7 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets hits.
      *
-     * @param Hit[] $hits Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.
+     * @param null|Hit[] $hits Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.
      *
      * @return self
      */
@@ -1259,30 +1241,6 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
     public function setExtensions($extensions)
     {
         $this->container['extensions'] = $extensions;
-
-        return $this;
-    }
-
-    /**
-     * Gets facetHits.
-     *
-     * @return FacetHits[]
-     */
-    public function getFacetHits()
-    {
-        return $this->container['facetHits'] ?? null;
-    }
-
-    /**
-     * Sets facetHits.
-     *
-     * @param FacetHits[] $facetHits matching facet values
-     *
-     * @return self
-     */
-    public function setFacetHits($facetHits)
-    {
-        $this->container['facetHits'] = $facetHits;
 
         return $this;
     }

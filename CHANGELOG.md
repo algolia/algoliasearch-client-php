@@ -1,3 +1,17 @@
+## [4.44.0](https://github.com/algolia/algoliasearch-client-php/compare/4.43.1...4.44.0)
+
+BREAKING CHANGES: this minor version includes breaking changes. See below for more details.
+
+- [3e6df652cb](https://github.com/algolia/api-clients-automation/commit/3e6df652cb) feat(php): BREAKING CHANGE – expose maximum number of retries ([#6401](https://github.com/algolia/api-clients-automation/pull/6401)) by [@eric-zaharia](https://github.com/eric-zaharia/)
+  - We updated the default number of retries to account for customers with huge indices, and made it configurable if you prefer to fail early. The impact is that the retry time will be longer in case of issue, but it shouldn't impact most customers: those who don't have issues.
+- [dced3f23ff](https://github.com/algolia/api-clients-automation/commit/dced3f23ff) feat(php): BREAKING CHANGE – add TransformationOptions for ingestion transporter ([#6349](https://github.com/algolia/api-clients-automation/pull/6349)) by [@eric-zaharia](https://github.com/eric-zaharia/)
+  - Search client configs were leaking into the ingestion layer when using transformation helpers, which could lead to custom host, timeout or other properties overwrite.
+- [90da6bf0ae](https://github.com/algolia/api-clients-automation/commit/90da6bf0ae) chore(deps): dependencies 2026-05-18 ([#6429](https://github.com/algolia/api-clients-automation/pull/6429)) by [@Fluf22](https://github.com/Fluf22/)
+- [eddd51e349](https://github.com/algolia/api-clients-automation/commit/eddd51e349) fix(specs): document abTest field on listIndices response ([#6443](https://github.com/algolia/api-clients-automation/pull/6443)) by [@eric-zaharia](https://github.com/eric-zaharia/)
+- [1d3f2c149b](https://github.com/algolia/api-clients-automation/commit/1d3f2c149b) fix(specs): clean up abTest schema on listIndices response ([#6448](https://github.com/algolia/api-clients-automation/pull/6448)) by [@Fluf22](https://github.com/Fluf22/)
+- [35bf16c848](https://github.com/algolia/api-clients-automation/commit/35bf16c848) fix(specs): BREAKING CHANGE – add searchResponsePartial fallback to searchResult oneOf ([#6350](https://github.com/algolia/api-clients-automation/pull/6350)) by [@Fluf22](https://github.com/Fluf22/)
+  - For those of you who want really clean responses without hits nor facets, we added a third fallback type to the search response. It should not impact the rest of the users.
+
 ## [4.43.1](https://github.com/algolia/algoliasearch-client-php/compare/4.43.0...4.43.1)
 
 - [363cc2d91b](https://github.com/algolia/api-clients-automation/commit/363cc2d91b) fix(specs): Ingestion API - update destination payload ([#6320](https://github.com/algolia/api-clients-automation/pull/6320)) by [@sbellone](https://github.com/sbellone/)

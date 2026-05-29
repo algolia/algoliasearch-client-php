@@ -76,7 +76,7 @@ use GuzzleHttp\Psr7\Query;
  */
 class IngestionClient
 {
-    public const VERSION = '4.43.1';
+    public const VERSION = '4.44.0';
 
     /**
      * @var ApiWrapperInterface

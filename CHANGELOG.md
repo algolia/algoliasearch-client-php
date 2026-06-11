@@ -1,3 +1,7 @@
+## [4.45.0](https://github.com/algolia/algoliasearch-client-php/compare/4.44.0...4.45.0)
+
+- [7f2ce8cd3a](https://github.com/algolia/api-clients-automation/commit/7f2ce8cd3a) feat(clients): Agent Studio v1 ([#6097](https://github.com/algolia/api-clients-automation/pull/6097)) by [@Fluf22](https://github.com/Fluf22/)
+
 ## [4.44.0](https://github.com/algolia/algoliasearch-client-php/compare/4.43.1...4.44.0)
 
 BREAKING CHANGES: this minor version includes breaking changes. See below for more details.

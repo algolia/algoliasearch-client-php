@@ -284,15 +284,19 @@ final class ApiWrapper implements ApiWrapperInterface
             throw new AlgoliaException($statusCode.': '.$response->getReasonPhrase(), $statusCode);
         }
 
-        try {
-            $deserializeStart = microtime(true);
-            $responseArray = Helpers::json_decode($body, true);
-            $deserializeDurationMs = round((microtime(true) - $deserializeStart) * 1000);
-            $this->log(LogLevel::DEBUG, 'Response body deserialized in '.$deserializeDurationMs.'ms');
-        } catch (\InvalidArgumentException $e) {
-            $this->log(LogLevel::ERROR, 'Failed to deserialize response: '.$e->getMessage());
+        if (204 === $statusCode || '' === $body) {
+            $responseArray = null;
+        } else {
+            try {
+                $deserializeStart = microtime(true);
+                $responseArray = Helpers::json_decode($body, true);
+                $deserializeDurationMs = round((microtime(true) - $deserializeStart) * 1000);
+                $this->log(LogLevel::DEBUG, 'Response body deserialized in '.$deserializeDurationMs.'ms');
+            } catch (\InvalidArgumentException $e) {
+                $this->log(LogLevel::ERROR, 'Failed to deserialize response: '.$e->getMessage());
 
-            throw $e;
+                throw $e;
+            }
         }
 
         if (404 === $statusCode) {

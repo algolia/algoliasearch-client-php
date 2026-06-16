@@ -42,8 +42,6 @@ use GuzzleHttp\Psr7\Query;
  * AgentStudioClient Class Doc Comment.
  *
  * @category Class
- *
- * @experimental This API is in beta and subject to breaking changes. See https://www.algolia.com/doc/rest-api/agent-studio
  */
 class AgentStudioClient
 {

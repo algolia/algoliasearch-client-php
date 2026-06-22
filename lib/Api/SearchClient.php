@@ -4604,6 +4604,7 @@ class SearchClient
             throw new \InvalidArgumentException('`transformationOptions` must be set on `SearchConfig` before creating the client, or via `SearchClient::setTransformationOptions(...)` before calling this method. It defaults to the Ingestion API defaults. See https://www.algolia.com/doc/libraries/sdk/methods/ingestion/');
         }
 
+        $chunkedOptions ??= new ChunkedHelperOptions(ChunkedHelperOptions::DEFAULT_REPLACE_ALL_OBJECTS_MAX_RETRIES);
         $tmpIndexName = $indexName.'_tmp_'.rand(10000000, 99999999);
 
         try {
@@ -4669,6 +4670,7 @@ class SearchClient
      */
     public function replaceAllObjects($indexName, $objects, $batchSize = 1000, $scopes = ['settings', 'rules', 'synonyms'], $requestOptions = [], ?ChunkedHelperOptions $chunkedOptions = null)
     {
+        $chunkedOptions ??= new ChunkedHelperOptions(ChunkedHelperOptions::DEFAULT_REPLACE_ALL_OBJECTS_MAX_RETRIES);
         $tmpIndexName = $indexName.'_tmp_'.rand(10000000, 99999999);
 
         try {

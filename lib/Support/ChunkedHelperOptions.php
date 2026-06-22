@@ -10,6 +10,8 @@ namespace Algolia\AlgoliaSearch\Support;
  */
 final class ChunkedHelperOptions
 {
+    public const DEFAULT_REPLACE_ALL_OBJECTS_MAX_RETRIES = 800;
+
     public function __construct(
         public ?int $maxRetries = null,
     ) {}

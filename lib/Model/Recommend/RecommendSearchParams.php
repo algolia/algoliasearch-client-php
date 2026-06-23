@@ -24,7 +24,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
     protected static $modelTypes = [
         'similarQuery' => 'string',
         'filters' => 'string',
-        'facetFilters' => '\Algolia\AlgoliaSearch\Model\Recommend\FacetFilters',
         'optionalFilters' => '\Algolia\AlgoliaSearch\Model\Recommend\OptionalFilters',
         'numericFilters' => '\Algolia\AlgoliaSearch\Model\Recommend\NumericFilters',
         'tagFilters' => '\Algolia\AlgoliaSearch\Model\Recommend\TagFilters',
@@ -49,7 +48,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'analytics' => 'bool',
         'analyticsTags' => 'string[]',
         'percentileComputation' => 'bool',
-        'enableABTest' => 'bool',
         'query' => 'string',
         'attributesForFaceting' => 'string[]',
         'replicas' => 'string[]',
@@ -72,7 +70,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'keepDiacriticsOnCharacters' => 'string',
         'customRanking' => 'string[]',
         'attributesToRetrieve' => 'string[]',
-        'ranking' => 'string[]',
         'relevancyStrictness' => 'int',
         'attributesToHighlight' => 'string[]',
         'attributesToSnippet' => 'string[]',
@@ -89,7 +86,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'removeStopWords' => '\Algolia\AlgoliaSearch\Model\Recommend\RemoveStopWords',
         'queryLanguages' => '\Algolia\AlgoliaSearch\Model\Recommend\SupportedLanguage[]',
         'decompoundQuery' => 'bool',
-        'enableRules' => 'bool',
         'enablePersonalization' => 'bool',
         'queryType' => '\Algolia\AlgoliaSearch\Model\Recommend\QueryType',
         'removeWordsIfNoResults' => '\Algolia\AlgoliaSearch\Model\Recommend\RemoveWordsIfNoResults',
@@ -109,6 +105,7 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'renderingContent' => '\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent',
         'enableReRanking' => 'bool',
         'reRankingApplyFilter' => '\Algolia\AlgoliaSearch\Model\Recommend\ReRankingApplyFilter',
+        'enableRules' => 'bool',
     ];
 
     /**
@@ -119,7 +116,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
     protected static $modelFormats = [
         'similarQuery' => null,
         'filters' => null,
-        'facetFilters' => null,
         'optionalFilters' => null,
         'numericFilters' => null,
         'tagFilters' => null,
@@ -144,7 +140,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'analytics' => null,
         'analyticsTags' => null,
         'percentileComputation' => null,
-        'enableABTest' => null,
         'query' => null,
         'attributesForFaceting' => null,
         'replicas' => null,
@@ -167,7 +162,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'keepDiacriticsOnCharacters' => null,
         'customRanking' => null,
         'attributesToRetrieve' => null,
-        'ranking' => null,
         'relevancyStrictness' => null,
         'attributesToHighlight' => null,
         'attributesToSnippet' => null,
@@ -184,7 +178,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'removeStopWords' => null,
         'queryLanguages' => null,
         'decompoundQuery' => null,
-        'enableRules' => null,
         'enablePersonalization' => null,
         'queryType' => null,
         'removeWordsIfNoResults' => null,
@@ -204,6 +197,7 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'renderingContent' => null,
         'enableReRanking' => null,
         'reRankingApplyFilter' => null,
+        'enableRules' => null,
     ];
 
     /**
@@ -215,7 +209,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
     protected static $attributeMap = [
         'similarQuery' => 'similarQuery',
         'filters' => 'filters',
-        'facetFilters' => 'facetFilters',
         'optionalFilters' => 'optionalFilters',
         'numericFilters' => 'numericFilters',
         'tagFilters' => 'tagFilters',
@@ -240,7 +233,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'analytics' => 'analytics',
         'analyticsTags' => 'analyticsTags',
         'percentileComputation' => 'percentileComputation',
-        'enableABTest' => 'enableABTest',
         'query' => 'query',
         'attributesForFaceting' => 'attributesForFaceting',
         'replicas' => 'replicas',
@@ -263,7 +255,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'keepDiacriticsOnCharacters' => 'keepDiacriticsOnCharacters',
         'customRanking' => 'customRanking',
         'attributesToRetrieve' => 'attributesToRetrieve',
-        'ranking' => 'ranking',
         'relevancyStrictness' => 'relevancyStrictness',
         'attributesToHighlight' => 'attributesToHighlight',
         'attributesToSnippet' => 'attributesToSnippet',
@@ -280,7 +271,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'removeStopWords' => 'removeStopWords',
         'queryLanguages' => 'queryLanguages',
         'decompoundQuery' => 'decompoundQuery',
-        'enableRules' => 'enableRules',
         'enablePersonalization' => 'enablePersonalization',
         'queryType' => 'queryType',
         'removeWordsIfNoResults' => 'removeWordsIfNoResults',
@@ -300,6 +290,7 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'renderingContent' => 'renderingContent',
         'enableReRanking' => 'enableReRanking',
         'reRankingApplyFilter' => 'reRankingApplyFilter',
+        'enableRules' => 'enableRules',
     ];
 
     /**
@@ -310,7 +301,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
     protected static $setters = [
         'similarQuery' => 'setSimilarQuery',
         'filters' => 'setFilters',
-        'facetFilters' => 'setFacetFilters',
         'optionalFilters' => 'setOptionalFilters',
         'numericFilters' => 'setNumericFilters',
         'tagFilters' => 'setTagFilters',
@@ -335,7 +325,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'analytics' => 'setAnalytics',
         'analyticsTags' => 'setAnalyticsTags',
         'percentileComputation' => 'setPercentileComputation',
-        'enableABTest' => 'setEnableABTest',
         'query' => 'setQuery',
         'attributesForFaceting' => 'setAttributesForFaceting',
         'replicas' => 'setReplicas',
@@ -358,7 +347,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'keepDiacriticsOnCharacters' => 'setKeepDiacriticsOnCharacters',
         'customRanking' => 'setCustomRanking',
         'attributesToRetrieve' => 'setAttributesToRetrieve',
-        'ranking' => 'setRanking',
         'relevancyStrictness' => 'setRelevancyStrictness',
         'attributesToHighlight' => 'setAttributesToHighlight',
         'attributesToSnippet' => 'setAttributesToSnippet',
@@ -375,7 +363,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'removeStopWords' => 'setRemoveStopWords',
         'queryLanguages' => 'setQueryLanguages',
         'decompoundQuery' => 'setDecompoundQuery',
-        'enableRules' => 'setEnableRules',
         'enablePersonalization' => 'setEnablePersonalization',
         'queryType' => 'setQueryType',
         'removeWordsIfNoResults' => 'setRemoveWordsIfNoResults',
@@ -395,6 +382,7 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'renderingContent' => 'setRenderingContent',
         'enableReRanking' => 'setEnableReRanking',
         'reRankingApplyFilter' => 'setReRankingApplyFilter',
+        'enableRules' => 'setEnableRules',
     ];
 
     /**
@@ -405,7 +393,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
     protected static $getters = [
         'similarQuery' => 'getSimilarQuery',
         'filters' => 'getFilters',
-        'facetFilters' => 'getFacetFilters',
         'optionalFilters' => 'getOptionalFilters',
         'numericFilters' => 'getNumericFilters',
         'tagFilters' => 'getTagFilters',
@@ -430,7 +417,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'analytics' => 'getAnalytics',
         'analyticsTags' => 'getAnalyticsTags',
         'percentileComputation' => 'getPercentileComputation',
-        'enableABTest' => 'getEnableABTest',
         'query' => 'getQuery',
         'attributesForFaceting' => 'getAttributesForFaceting',
         'replicas' => 'getReplicas',
@@ -453,7 +439,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'keepDiacriticsOnCharacters' => 'getKeepDiacriticsOnCharacters',
         'customRanking' => 'getCustomRanking',
         'attributesToRetrieve' => 'getAttributesToRetrieve',
-        'ranking' => 'getRanking',
         'relevancyStrictness' => 'getRelevancyStrictness',
         'attributesToHighlight' => 'getAttributesToHighlight',
         'attributesToSnippet' => 'getAttributesToSnippet',
@@ -470,7 +455,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'removeStopWords' => 'getRemoveStopWords',
         'queryLanguages' => 'getQueryLanguages',
         'decompoundQuery' => 'getDecompoundQuery',
-        'enableRules' => 'getEnableRules',
         'enablePersonalization' => 'getEnablePersonalization',
         'queryType' => 'getQueryType',
         'removeWordsIfNoResults' => 'getRemoveWordsIfNoResults',
@@ -490,6 +474,7 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'renderingContent' => 'getRenderingContent',
         'enableReRanking' => 'getEnableReRanking',
         'reRankingApplyFilter' => 'getReRankingApplyFilter',
+        'enableRules' => 'getEnableRules',
     ];
 
     /**
@@ -511,9 +496,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         }
         if (isset($data['filters'])) {
             $this->container['filters'] = $data['filters'];
-        }
-        if (isset($data['facetFilters'])) {
-            $this->container['facetFilters'] = $data['facetFilters'];
         }
         if (isset($data['optionalFilters'])) {
             $this->container['optionalFilters'] = $data['optionalFilters'];
@@ -587,9 +569,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         if (isset($data['percentileComputation'])) {
             $this->container['percentileComputation'] = $data['percentileComputation'];
         }
-        if (isset($data['enableABTest'])) {
-            $this->container['enableABTest'] = $data['enableABTest'];
-        }
         if (isset($data['query'])) {
             $this->container['query'] = $data['query'];
         }
@@ -656,9 +635,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         if (isset($data['attributesToRetrieve'])) {
             $this->container['attributesToRetrieve'] = $data['attributesToRetrieve'];
         }
-        if (isset($data['ranking'])) {
-            $this->container['ranking'] = $data['ranking'];
-        }
         if (isset($data['relevancyStrictness'])) {
             $this->container['relevancyStrictness'] = $data['relevancyStrictness'];
         }
@@ -706,9 +682,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         }
         if (isset($data['decompoundQuery'])) {
             $this->container['decompoundQuery'] = $data['decompoundQuery'];
-        }
-        if (isset($data['enableRules'])) {
-            $this->container['enableRules'] = $data['enableRules'];
         }
         if (isset($data['enablePersonalization'])) {
             $this->container['enablePersonalization'] = $data['enablePersonalization'];
@@ -766,6 +739,9 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         }
         if (isset($data['reRankingApplyFilter'])) {
             $this->container['reRankingApplyFilter'] = $data['reRankingApplyFilter'];
+        }
+        if (isset($data['enableRules'])) {
+            $this->container['enableRules'] = $data['enableRules'];
         }
     }
 
@@ -885,30 +861,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
     public function setFilters($filters)
     {
         $this->container['filters'] = $filters;
-
-        return $this;
-    }
-
-    /**
-     * Gets facetFilters.
-     *
-     * @return null|FacetFilters
-     */
-    public function getFacetFilters()
-    {
-        return $this->container['facetFilters'] ?? null;
-    }
-
-    /**
-     * Sets facetFilters.
-     *
-     * @param null|FacetFilters $facetFilters facetFilters
-     *
-     * @return self
-     */
-    public function setFacetFilters($facetFilters)
-    {
-        $this->container['facetFilters'] = $facetFilters;
 
         return $this;
     }
@@ -1490,30 +1442,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
     }
 
     /**
-     * Gets enableABTest.
-     *
-     * @return null|bool
-     */
-    public function getEnableABTest()
-    {
-        return $this->container['enableABTest'] ?? null;
-    }
-
-    /**
-     * Sets enableABTest.
-     *
-     * @param null|bool $enableABTest whether to enable A/B testing for this search
-     *
-     * @return self
-     */
-    public function setEnableABTest($enableABTest)
-    {
-        $this->container['enableABTest'] = $enableABTest;
-
-        return $this;
-    }
-
-    /**
      * Gets query.
      *
      * @return null|string
@@ -2042,30 +1970,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
     }
 
     /**
-     * Gets ranking.
-     *
-     * @return null|string[]
-     */
-    public function getRanking()
-    {
-        return $this->container['ranking'] ?? null;
-    }
-
-    /**
-     * Sets ranking.
-     *
-     * @param null|string[] $ranking Determines the order in which Algolia returns your results.  By default, each entry corresponds to a [ranking criteria](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria). The tie-breaking algorithm sequentially applies each criterion in the order they're specified. If you configure a replica index for [sorting by an attribute](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/sort-by-attribute), you put the sorting attribute at the top of the list.  **Modifiers**  - `asc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in ascending order. - `desc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in descending order.  Before you modify the default setting, test your changes in the dashboard, and by [A/B testing](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing).
-     *
-     * @return self
-     */
-    public function setRanking($ranking)
-    {
-        $this->container['ranking'] = $ranking;
-
-        return $this;
-    }
-
-    /**
      * Gets relevancyStrictness.
      *
      * @return null|int
@@ -2445,30 +2349,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
     public function setDecompoundQuery($decompoundQuery)
     {
         $this->container['decompoundQuery'] = $decompoundQuery;
-
-        return $this;
-    }
-
-    /**
-     * Gets enableRules.
-     *
-     * @return null|bool
-     */
-    public function getEnableRules()
-    {
-        return $this->container['enableRules'] ?? null;
-    }
-
-    /**
-     * Sets enableRules.
-     *
-     * @param null|bool $enableRules whether to enable rules
-     *
-     * @return self
-     */
-    public function setEnableRules($enableRules)
-    {
-        $this->container['enableRules'] = $enableRules;
 
         return $this;
     }
@@ -2925,6 +2805,30 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
     public function setReRankingApplyFilter($reRankingApplyFilter)
     {
         $this->container['reRankingApplyFilter'] = $reRankingApplyFilter;
+
+        return $this;
+    }
+
+    /**
+     * Gets enableRules.
+     *
+     * @return null|bool
+     */
+    public function getEnableRules()
+    {
+        return $this->container['enableRules'] ?? null;
+    }
+
+    /**
+     * Sets enableRules.
+     *
+     * @param null|bool $enableRules whether to enable rules
+     *
+     * @return self
+     */
+    public function setEnableRules($enableRules)
+    {
+        $this->container['enableRules'] = $enableRules;
 
         return $this;
     }

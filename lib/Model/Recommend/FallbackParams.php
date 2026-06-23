@@ -11,6 +11,8 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  * FallbackParams Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Search parameters to use for a fallback request if there aren't enough recommendations.
  */
 class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -22,7 +24,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
     protected static $modelTypes = [
         'similarQuery' => 'string',
         'filters' => 'string',
-        'facetFilters' => '\Algolia\AlgoliaSearch\Model\Recommend\FacetFilters',
         'optionalFilters' => '\Algolia\AlgoliaSearch\Model\Recommend\OptionalFilters',
         'numericFilters' => '\Algolia\AlgoliaSearch\Model\Recommend\NumericFilters',
         'tagFilters' => '\Algolia\AlgoliaSearch\Model\Recommend\TagFilters',
@@ -47,7 +48,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'analytics' => 'bool',
         'analyticsTags' => 'string[]',
         'percentileComputation' => 'bool',
-        'enableABTest' => 'bool',
         'query' => 'string',
         'attributesForFaceting' => 'string[]',
         'replicas' => 'string[]',
@@ -70,7 +70,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'keepDiacriticsOnCharacters' => 'string',
         'customRanking' => 'string[]',
         'attributesToRetrieve' => 'string[]',
-        'ranking' => 'string[]',
         'relevancyStrictness' => 'int',
         'attributesToHighlight' => 'string[]',
         'attributesToSnippet' => 'string[]',
@@ -87,7 +86,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'removeStopWords' => '\Algolia\AlgoliaSearch\Model\Recommend\RemoveStopWords',
         'queryLanguages' => '\Algolia\AlgoliaSearch\Model\Recommend\SupportedLanguage[]',
         'decompoundQuery' => 'bool',
-        'enableRules' => 'bool',
         'enablePersonalization' => 'bool',
         'queryType' => '\Algolia\AlgoliaSearch\Model\Recommend\QueryType',
         'removeWordsIfNoResults' => '\Algolia\AlgoliaSearch\Model\Recommend\RemoveWordsIfNoResults',
@@ -117,7 +115,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
     protected static $modelFormats = [
         'similarQuery' => null,
         'filters' => null,
-        'facetFilters' => null,
         'optionalFilters' => null,
         'numericFilters' => null,
         'tagFilters' => null,
@@ -142,7 +139,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'analytics' => null,
         'analyticsTags' => null,
         'percentileComputation' => null,
-        'enableABTest' => null,
         'query' => null,
         'attributesForFaceting' => null,
         'replicas' => null,
@@ -165,7 +161,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'keepDiacriticsOnCharacters' => null,
         'customRanking' => null,
         'attributesToRetrieve' => null,
-        'ranking' => null,
         'relevancyStrictness' => null,
         'attributesToHighlight' => null,
         'attributesToSnippet' => null,
@@ -182,7 +177,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'removeStopWords' => null,
         'queryLanguages' => null,
         'decompoundQuery' => null,
-        'enableRules' => null,
         'enablePersonalization' => null,
         'queryType' => null,
         'removeWordsIfNoResults' => null,
@@ -213,7 +207,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
     protected static $attributeMap = [
         'similarQuery' => 'similarQuery',
         'filters' => 'filters',
-        'facetFilters' => 'facetFilters',
         'optionalFilters' => 'optionalFilters',
         'numericFilters' => 'numericFilters',
         'tagFilters' => 'tagFilters',
@@ -238,7 +231,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'analytics' => 'analytics',
         'analyticsTags' => 'analyticsTags',
         'percentileComputation' => 'percentileComputation',
-        'enableABTest' => 'enableABTest',
         'query' => 'query',
         'attributesForFaceting' => 'attributesForFaceting',
         'replicas' => 'replicas',
@@ -261,7 +253,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'keepDiacriticsOnCharacters' => 'keepDiacriticsOnCharacters',
         'customRanking' => 'customRanking',
         'attributesToRetrieve' => 'attributesToRetrieve',
-        'ranking' => 'ranking',
         'relevancyStrictness' => 'relevancyStrictness',
         'attributesToHighlight' => 'attributesToHighlight',
         'attributesToSnippet' => 'attributesToSnippet',
@@ -278,7 +269,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'removeStopWords' => 'removeStopWords',
         'queryLanguages' => 'queryLanguages',
         'decompoundQuery' => 'decompoundQuery',
-        'enableRules' => 'enableRules',
         'enablePersonalization' => 'enablePersonalization',
         'queryType' => 'queryType',
         'removeWordsIfNoResults' => 'removeWordsIfNoResults',
@@ -308,7 +298,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
     protected static $setters = [
         'similarQuery' => 'setSimilarQuery',
         'filters' => 'setFilters',
-        'facetFilters' => 'setFacetFilters',
         'optionalFilters' => 'setOptionalFilters',
         'numericFilters' => 'setNumericFilters',
         'tagFilters' => 'setTagFilters',
@@ -333,7 +322,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'analytics' => 'setAnalytics',
         'analyticsTags' => 'setAnalyticsTags',
         'percentileComputation' => 'setPercentileComputation',
-        'enableABTest' => 'setEnableABTest',
         'query' => 'setQuery',
         'attributesForFaceting' => 'setAttributesForFaceting',
         'replicas' => 'setReplicas',
@@ -356,7 +344,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'keepDiacriticsOnCharacters' => 'setKeepDiacriticsOnCharacters',
         'customRanking' => 'setCustomRanking',
         'attributesToRetrieve' => 'setAttributesToRetrieve',
-        'ranking' => 'setRanking',
         'relevancyStrictness' => 'setRelevancyStrictness',
         'attributesToHighlight' => 'setAttributesToHighlight',
         'attributesToSnippet' => 'setAttributesToSnippet',
@@ -373,7 +360,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'removeStopWords' => 'setRemoveStopWords',
         'queryLanguages' => 'setQueryLanguages',
         'decompoundQuery' => 'setDecompoundQuery',
-        'enableRules' => 'setEnableRules',
         'enablePersonalization' => 'setEnablePersonalization',
         'queryType' => 'setQueryType',
         'removeWordsIfNoResults' => 'setRemoveWordsIfNoResults',
@@ -403,7 +389,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
     protected static $getters = [
         'similarQuery' => 'getSimilarQuery',
         'filters' => 'getFilters',
-        'facetFilters' => 'getFacetFilters',
         'optionalFilters' => 'getOptionalFilters',
         'numericFilters' => 'getNumericFilters',
         'tagFilters' => 'getTagFilters',
@@ -428,7 +413,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'analytics' => 'getAnalytics',
         'analyticsTags' => 'getAnalyticsTags',
         'percentileComputation' => 'getPercentileComputation',
-        'enableABTest' => 'getEnableABTest',
         'query' => 'getQuery',
         'attributesForFaceting' => 'getAttributesForFaceting',
         'replicas' => 'getReplicas',
@@ -451,7 +435,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'keepDiacriticsOnCharacters' => 'getKeepDiacriticsOnCharacters',
         'customRanking' => 'getCustomRanking',
         'attributesToRetrieve' => 'getAttributesToRetrieve',
-        'ranking' => 'getRanking',
         'relevancyStrictness' => 'getRelevancyStrictness',
         'attributesToHighlight' => 'getAttributesToHighlight',
         'attributesToSnippet' => 'getAttributesToSnippet',
@@ -468,7 +451,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'removeStopWords' => 'getRemoveStopWords',
         'queryLanguages' => 'getQueryLanguages',
         'decompoundQuery' => 'getDecompoundQuery',
-        'enableRules' => 'getEnableRules',
         'enablePersonalization' => 'getEnablePersonalization',
         'queryType' => 'getQueryType',
         'removeWordsIfNoResults' => 'getRemoveWordsIfNoResults',
@@ -509,9 +491,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         }
         if (isset($data['filters'])) {
             $this->container['filters'] = $data['filters'];
-        }
-        if (isset($data['facetFilters'])) {
-            $this->container['facetFilters'] = $data['facetFilters'];
         }
         if (isset($data['optionalFilters'])) {
             $this->container['optionalFilters'] = $data['optionalFilters'];
@@ -585,9 +564,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         if (isset($data['percentileComputation'])) {
             $this->container['percentileComputation'] = $data['percentileComputation'];
         }
-        if (isset($data['enableABTest'])) {
-            $this->container['enableABTest'] = $data['enableABTest'];
-        }
         if (isset($data['query'])) {
             $this->container['query'] = $data['query'];
         }
@@ -654,9 +630,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         if (isset($data['attributesToRetrieve'])) {
             $this->container['attributesToRetrieve'] = $data['attributesToRetrieve'];
         }
-        if (isset($data['ranking'])) {
-            $this->container['ranking'] = $data['ranking'];
-        }
         if (isset($data['relevancyStrictness'])) {
             $this->container['relevancyStrictness'] = $data['relevancyStrictness'];
         }
@@ -704,9 +677,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         }
         if (isset($data['decompoundQuery'])) {
             $this->container['decompoundQuery'] = $data['decompoundQuery'];
-        }
-        if (isset($data['enableRules'])) {
-            $this->container['enableRules'] = $data['enableRules'];
         }
         if (isset($data['enablePersonalization'])) {
             $this->container['enablePersonalization'] = $data['enablePersonalization'];
@@ -883,30 +853,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
     public function setFilters($filters)
     {
         $this->container['filters'] = $filters;
-
-        return $this;
-    }
-
-    /**
-     * Gets facetFilters.
-     *
-     * @return null|FacetFilters
-     */
-    public function getFacetFilters()
-    {
-        return $this->container['facetFilters'] ?? null;
-    }
-
-    /**
-     * Sets facetFilters.
-     *
-     * @param null|FacetFilters $facetFilters facetFilters
-     *
-     * @return self
-     */
-    public function setFacetFilters($facetFilters)
-    {
-        $this->container['facetFilters'] = $facetFilters;
 
         return $this;
     }
@@ -1488,30 +1434,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
     }
 
     /**
-     * Gets enableABTest.
-     *
-     * @return null|bool
-     */
-    public function getEnableABTest()
-    {
-        return $this->container['enableABTest'] ?? null;
-    }
-
-    /**
-     * Sets enableABTest.
-     *
-     * @param null|bool $enableABTest whether to enable A/B testing for this search
-     *
-     * @return self
-     */
-    public function setEnableABTest($enableABTest)
-    {
-        $this->container['enableABTest'] = $enableABTest;
-
-        return $this;
-    }
-
-    /**
      * Gets query.
      *
      * @return null|string
@@ -2040,30 +1962,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
     }
 
     /**
-     * Gets ranking.
-     *
-     * @return null|string[]
-     */
-    public function getRanking()
-    {
-        return $this->container['ranking'] ?? null;
-    }
-
-    /**
-     * Sets ranking.
-     *
-     * @param null|string[] $ranking Determines the order in which Algolia returns your results.  By default, each entry corresponds to a [ranking criteria](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria). The tie-breaking algorithm sequentially applies each criterion in the order they're specified. If you configure a replica index for [sorting by an attribute](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/sort-by-attribute), you put the sorting attribute at the top of the list.  **Modifiers**  - `asc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in ascending order. - `desc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in descending order.  Before you modify the default setting, test your changes in the dashboard, and by [A/B testing](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing).
-     *
-     * @return self
-     */
-    public function setRanking($ranking)
-    {
-        $this->container['ranking'] = $ranking;
-
-        return $this;
-    }
-
-    /**
      * Gets relevancyStrictness.
      *
      * @return null|int
@@ -2443,30 +2341,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
     public function setDecompoundQuery($decompoundQuery)
     {
         $this->container['decompoundQuery'] = $decompoundQuery;
-
-        return $this;
-    }
-
-    /**
-     * Gets enableRules.
-     *
-     * @return null|bool
-     */
-    public function getEnableRules()
-    {
-        return $this->container['enableRules'] ?? null;
-    }
-
-    /**
-     * Sets enableRules.
-     *
-     * @param null|bool $enableRules whether to enable rules
-     *
-     * @return self
-     */
-    public function setEnableRules($enableRules)
-    {
-        $this->container['enableRules'] = $enableRules;
 
         return $this;
     }

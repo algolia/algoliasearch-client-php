@@ -4563,6 +4563,10 @@ class IngestionClient
         $requestOptions = [],
         ?ChunkedHelperOptions $chunkedOptions = null
     ) {
+        if ($batchSize < 1) {
+            throw new \InvalidArgumentException('`batchSize` must be at least 1.');
+        }
+
         $maxRetries = $chunkedOptions?->maxRetries ?? 100;
         $responses = [];
         $records = [];
@@ -4578,9 +4582,35 @@ class IngestionClient
         $startTime = microtime(true);
         $logger->info('Algolia API client: Batch operation started: '.$action.' on '.$indexName);
 
+        // Polls every task in the `[$start, $end)` window of `$responses` until it completes.
+        $waitForBatch = function ($start, $end) use (&$responses, $maxRetries) {
+            foreach (array_slice($responses, $start, $end - $start) as $response) {
+                $retry = 0;
+                $ok = false;
+
+                while ($retry < $maxRetries) {
+                    try {
+                        $this->getEvent($response['runID'], $response['eventID']);
+
+                        $ok = true;
+
+                        break;
+                    } catch (NotFoundException $e) {
+                        // just retry
+                    }
+
+                    ++$retry;
+                    usleep(min($retry * 1500, 5000) * 1000);
+                }
+
+                if (false === $ok) {
+                    throw new ExceededRetriesException('Stopped waiting for the task after '.$maxRetries.' retries. This does not mean the operation failed; it may still complete. If you need to keep polling, retry with a higher $maxRetries.');
+                }
+            }
+        };
+
         foreach ($objects as $object) {
             $records[] = $object;
-            $ok = false;
             ++$count;
 
             if (sizeof($records) === $batchSize || $count === sizeof($objects)) {
@@ -4589,31 +4619,17 @@ class IngestionClient
                 $logger->info('Algolia API client: Batch progress: '.$count.'/'.$totalObjects.' objects processed');
             }
 
-            if ($waitForTasks && !empty($responses) && (0 === sizeof($responses) % $waitBatchSize || $count === sizeof($objects))) {
-                foreach (array_slice($responses, $offset, $waitBatchSize) as $response) {
-                    $retry = 0;
-
-                    while ($retry < $maxRetries) {
-                        try {
-                            $this->getEvent($response['runID'], $response['eventID']);
-
-                            $ok = true;
-
-                            break;
-                        } catch (NotFoundException $e) {
-                            // just retry
-                        }
-
-                        ++$retry;
-                        usleep(min($retry * 1500, 5000) * 1000);
-                    }
-
-                    if (false === $ok) {
-                        throw new ExceededRetriesException('Stopped waiting for the task after '.$maxRetries.' retries. This does not mean the operation failed; it may still complete. If you need to keep polling, retry with a higher $maxRetries.');
-                    }
-                }
-                $offset = $offset + $waitBatchSize;
+            // Only wait once at least `$waitBatchSize` un-polled responses have accumulated, and advance
+            // the cursor by exactly that many, so every pushed task is polled once and only once.
+            if ($waitForTasks && sizeof($responses) - $offset >= $waitBatchSize) {
+                $waitForBatch($offset, $offset + $waitBatchSize);
+                $offset += $waitBatchSize;
             }
+        }
+
+        // Drain the remaining responses that didn't fill a complete `$waitBatchSize` window.
+        if ($waitForTasks) {
+            $waitForBatch($offset, sizeof($responses));
         }
 
         $durationMs = round((microtime(true) - $startTime) * 1000);

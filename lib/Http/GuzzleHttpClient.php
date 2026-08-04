@@ -9,6 +9,7 @@ use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
+use GuzzleHttp\Utils;
 use Psr\Http\Message\RequestInterface;
 
 final class GuzzleHttpClient implements HttpClientInterface
@@ -46,7 +47,7 @@ final class GuzzleHttpClient implements HttpClientInterface
 
     private static function buildClient(array $config = [])
     {
-        $handlerStack = new HandlerStack(\GuzzleHttp\choose_handler());
+        $handlerStack = new HandlerStack(Utils::chooseHandler());
         $handlerStack->push(Middleware::prepareBody(), 'prepare_body');
         $config = array_merge(['handler' => $handlerStack], $config);
 

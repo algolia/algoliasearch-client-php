@@ -8,13 +8,11 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * AddedToCartObjectIDsAfterSearch Class Doc Comment.
+ * Instantsearch Class Doc Comment.
  *
  * @category Class
- *
- * @description Use this event to track when users add items to their shopping cart after a previous Algolia request. If you're building your category pages with Algolia, you'll also use this event.
  */
-class AddedToCartObjectIDsAfterSearch extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Instantsearch extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -23,17 +21,11 @@ class AddedToCartObjectIDsAfterSearch extends AbstractModel implements ModelInte
      */
     protected static $modelTypes = [
         'eventName' => 'string',
-        'eventType' => '\Algolia\AlgoliaSearch\Model\Insights\ConversionEvent',
-        'eventSubtype' => '\Algolia\AlgoliaSearch\Model\Insights\AddToCartEvent',
-        'index' => 'string',
-        'queryID' => 'string',
-        'objectIDs' => 'string[]',
+        'eventType' => '\Algolia\AlgoliaSearch\Model\Insights\InstantsearchEvent',
         'userToken' => 'string',
         'authenticatedUserToken' => 'string',
-        'currency' => 'string',
-        'objectData' => '\Algolia\AlgoliaSearch\Model\Insights\ObjectDataAfterSearch[]',
         'timestamp' => 'int',
-        'value' => '\Algolia\AlgoliaSearch\Model\Insights\Value',
+        'agentID' => 'string',
     ];
 
     /**
@@ -44,16 +36,10 @@ class AddedToCartObjectIDsAfterSearch extends AbstractModel implements ModelInte
     protected static $modelFormats = [
         'eventName' => null,
         'eventType' => null,
-        'eventSubtype' => null,
-        'index' => null,
-        'queryID' => null,
-        'objectIDs' => null,
         'userToken' => null,
         'authenticatedUserToken' => null,
-        'currency' => null,
-        'objectData' => null,
         'timestamp' => 'int64',
-        'value' => null,
+        'agentID' => null,
     ];
 
     /**
@@ -65,16 +51,10 @@ class AddedToCartObjectIDsAfterSearch extends AbstractModel implements ModelInte
     protected static $attributeMap = [
         'eventName' => 'eventName',
         'eventType' => 'eventType',
-        'eventSubtype' => 'eventSubtype',
-        'index' => 'index',
-        'queryID' => 'queryID',
-        'objectIDs' => 'objectIDs',
         'userToken' => 'userToken',
         'authenticatedUserToken' => 'authenticatedUserToken',
-        'currency' => 'currency',
-        'objectData' => 'objectData',
         'timestamp' => 'timestamp',
-        'value' => 'value',
+        'agentID' => 'agentID',
     ];
 
     /**
@@ -85,16 +65,10 @@ class AddedToCartObjectIDsAfterSearch extends AbstractModel implements ModelInte
     protected static $setters = [
         'eventName' => 'setEventName',
         'eventType' => 'setEventType',
-        'eventSubtype' => 'setEventSubtype',
-        'index' => 'setIndex',
-        'queryID' => 'setQueryID',
-        'objectIDs' => 'setObjectIDs',
         'userToken' => 'setUserToken',
         'authenticatedUserToken' => 'setAuthenticatedUserToken',
-        'currency' => 'setCurrency',
-        'objectData' => 'setObjectData',
         'timestamp' => 'setTimestamp',
-        'value' => 'setValue',
+        'agentID' => 'setAgentID',
     ];
 
     /**
@@ -105,16 +79,10 @@ class AddedToCartObjectIDsAfterSearch extends AbstractModel implements ModelInte
     protected static $getters = [
         'eventName' => 'getEventName',
         'eventType' => 'getEventType',
-        'eventSubtype' => 'getEventSubtype',
-        'index' => 'getIndex',
-        'queryID' => 'getQueryID',
-        'objectIDs' => 'getObjectIDs',
         'userToken' => 'getUserToken',
         'authenticatedUserToken' => 'getAuthenticatedUserToken',
-        'currency' => 'getCurrency',
-        'objectData' => 'getObjectData',
         'timestamp' => 'getTimestamp',
-        'value' => 'getValue',
+        'agentID' => 'getAgentID',
     ];
 
     /**
@@ -137,35 +105,17 @@ class AddedToCartObjectIDsAfterSearch extends AbstractModel implements ModelInte
         if (isset($data['eventType'])) {
             $this->container['eventType'] = $data['eventType'];
         }
-        if (isset($data['eventSubtype'])) {
-            $this->container['eventSubtype'] = $data['eventSubtype'];
-        }
-        if (isset($data['index'])) {
-            $this->container['index'] = $data['index'];
-        }
-        if (isset($data['queryID'])) {
-            $this->container['queryID'] = $data['queryID'];
-        }
-        if (isset($data['objectIDs'])) {
-            $this->container['objectIDs'] = $data['objectIDs'];
-        }
         if (isset($data['userToken'])) {
             $this->container['userToken'] = $data['userToken'];
         }
         if (isset($data['authenticatedUserToken'])) {
             $this->container['authenticatedUserToken'] = $data['authenticatedUserToken'];
         }
-        if (isset($data['currency'])) {
-            $this->container['currency'] = $data['currency'];
-        }
-        if (isset($data['objectData'])) {
-            $this->container['objectData'] = $data['objectData'];
-        }
         if (isset($data['timestamp'])) {
             $this->container['timestamp'] = $data['timestamp'];
         }
-        if (isset($data['value'])) {
-            $this->container['value'] = $data['value'];
+        if (isset($data['agentID'])) {
+            $this->container['agentID'] = $data['agentID'];
         }
     }
 
@@ -235,18 +185,6 @@ class AddedToCartObjectIDsAfterSearch extends AbstractModel implements ModelInte
         if (!isset($this->container['eventType']) || null === $this->container['eventType']) {
             $invalidProperties[] = "'eventType' can't be null";
         }
-        if (!isset($this->container['eventSubtype']) || null === $this->container['eventSubtype']) {
-            $invalidProperties[] = "'eventSubtype' can't be null";
-        }
-        if (!isset($this->container['index']) || null === $this->container['index']) {
-            $invalidProperties[] = "'index' can't be null";
-        }
-        if (!isset($this->container['queryID']) || null === $this->container['queryID']) {
-            $invalidProperties[] = "'queryID' can't be null";
-        }
-        if (!isset($this->container['objectIDs']) || null === $this->container['objectIDs']) {
-            $invalidProperties[] = "'objectIDs' can't be null";
-        }
         if (!isset($this->container['userToken']) || null === $this->container['userToken']) {
             $invalidProperties[] = "'userToken' can't be null";
         }
@@ -292,7 +230,7 @@ class AddedToCartObjectIDsAfterSearch extends AbstractModel implements ModelInte
     /**
      * Gets eventType.
      *
-     * @return ConversionEvent
+     * @return InstantsearchEvent
      */
     public function getEventType()
     {
@@ -302,109 +240,13 @@ class AddedToCartObjectIDsAfterSearch extends AbstractModel implements ModelInte
     /**
      * Sets eventType.
      *
-     * @param ConversionEvent $eventType eventType
+     * @param InstantsearchEvent $eventType eventType
      *
      * @return self
      */
     public function setEventType($eventType)
     {
         $this->container['eventType'] = $eventType;
-
-        return $this;
-    }
-
-    /**
-     * Gets eventSubtype.
-     *
-     * @return AddToCartEvent
-     */
-    public function getEventSubtype()
-    {
-        return $this->container['eventSubtype'] ?? null;
-    }
-
-    /**
-     * Sets eventSubtype.
-     *
-     * @param AddToCartEvent $eventSubtype eventSubtype
-     *
-     * @return self
-     */
-    public function setEventSubtype($eventSubtype)
-    {
-        $this->container['eventSubtype'] = $eventSubtype;
-
-        return $this;
-    }
-
-    /**
-     * Gets index.
-     *
-     * @return string
-     */
-    public function getIndex()
-    {
-        return $this->container['index'] ?? null;
-    }
-
-    /**
-     * Sets index.
-     *
-     * @param string $index index name (case-sensitive) to which the event's items belong
-     *
-     * @return self
-     */
-    public function setIndex($index)
-    {
-        $this->container['index'] = $index;
-
-        return $this;
-    }
-
-    /**
-     * Gets queryID.
-     *
-     * @return string
-     */
-    public function getQueryID()
-    {
-        return $this->container['queryID'] ?? null;
-    }
-
-    /**
-     * Sets queryID.
-     *
-     * @param string $queryID Unique identifier for a search query.  The query ID is required for events related to search or browse requests. If you add `clickAnalytics: true` as a search request parameter, the query ID is included in the API response. For agentic analytics events, the query ID may be prefixed with `message_` followed by any printable string.
-     *
-     * @return self
-     */
-    public function setQueryID($queryID)
-    {
-        $this->container['queryID'] = $queryID;
-
-        return $this;
-    }
-
-    /**
-     * Gets objectIDs.
-     *
-     * @return string[]
-     */
-    public function getObjectIDs()
-    {
-        return $this->container['objectIDs'] ?? null;
-    }
-
-    /**
-     * Sets objectIDs.
-     *
-     * @param string[] $objectIDs object IDs of the records that are part of the event
-     *
-     * @return self
-     */
-    public function setObjectIDs($objectIDs)
-    {
-        $this->container['objectIDs'] = $objectIDs;
 
         return $this;
     }
@@ -458,54 +300,6 @@ class AddedToCartObjectIDsAfterSearch extends AbstractModel implements ModelInte
     }
 
     /**
-     * Gets currency.
-     *
-     * @return null|string
-     */
-    public function getCurrency()
-    {
-        return $this->container['currency'] ?? null;
-    }
-
-    /**
-     * Sets currency.
-     *
-     * @param null|string $currency Three-letter [currency code](https://www.iso.org/iso-4217-currency-codes.html).
-     *
-     * @return self
-     */
-    public function setCurrency($currency)
-    {
-        $this->container['currency'] = $currency;
-
-        return $this;
-    }
-
-    /**
-     * Gets objectData.
-     *
-     * @return null|ObjectDataAfterSearch[]
-     */
-    public function getObjectData()
-    {
-        return $this->container['objectData'] ?? null;
-    }
-
-    /**
-     * Sets objectData.
-     *
-     * @param null|ObjectDataAfterSearch[] $objectData Extra information about the records involved in a purchase or add-to-cart events.  If provided, it must be the same length as `objectIDs`.
-     *
-     * @return self
-     */
-    public function setObjectData($objectData)
-    {
-        $this->container['objectData'] = $objectData;
-
-        return $this;
-    }
-
-    /**
      * Gets timestamp.
      *
      * @return null|int
@@ -530,25 +324,25 @@ class AddedToCartObjectIDsAfterSearch extends AbstractModel implements ModelInte
     }
 
     /**
-     * Gets value.
+     * Gets agentID.
      *
-     * @return null|Value
+     * @return null|string
      */
-    public function getValue()
+    public function getAgentID()
     {
-        return $this->container['value'] ?? null;
+        return $this->container['agentID'] ?? null;
     }
 
     /**
-     * Sets value.
+     * Sets agentID.
      *
-     * @param null|Value $value value
+     * @param null|string $agentID Unique identifier for an agent session. Used to correlate instantsearch events with a specific agent interaction.
      *
      * @return self
      */
-    public function setValue($value)
+    public function setAgentID($agentID)
     {
-        $this->container['value'] = $value;
+        $this->container['agentID'] = $agentID;
 
         return $this;
     }

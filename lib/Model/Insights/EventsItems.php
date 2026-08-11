@@ -21,7 +21,7 @@ class EventsItems extends AbstractModel implements ModelInterface, \ArrayAccess,
      */
     protected static $modelTypes = [
         'eventName' => 'string',
-        'eventType' => '\Algolia\AlgoliaSearch\Model\Insights\ViewEvent',
+        'eventType' => '\Algolia\AlgoliaSearch\Model\Insights\InstantsearchEvent',
         'index' => 'string',
         'objectIDs' => 'string[]',
         'positions' => 'int[]',
@@ -34,6 +34,7 @@ class EventsItems extends AbstractModel implements ModelInterface, \ArrayAccess,
         'objectData' => '\Algolia\AlgoliaSearch\Model\Insights\ObjectData[]',
         'value' => '\Algolia\AlgoliaSearch\Model\Insights\Value',
         'filters' => 'string[]',
+        'agentID' => 'string',
     ];
 
     /**
@@ -56,6 +57,7 @@ class EventsItems extends AbstractModel implements ModelInterface, \ArrayAccess,
         'objectData' => null,
         'value' => null,
         'filters' => null,
+        'agentID' => null,
     ];
 
     /**
@@ -79,6 +81,7 @@ class EventsItems extends AbstractModel implements ModelInterface, \ArrayAccess,
         'objectData' => 'objectData',
         'value' => 'value',
         'filters' => 'filters',
+        'agentID' => 'agentID',
     ];
 
     /**
@@ -101,6 +104,7 @@ class EventsItems extends AbstractModel implements ModelInterface, \ArrayAccess,
         'objectData' => 'setObjectData',
         'value' => 'setValue',
         'filters' => 'setFilters',
+        'agentID' => 'setAgentID',
     ];
 
     /**
@@ -123,6 +127,7 @@ class EventsItems extends AbstractModel implements ModelInterface, \ArrayAccess,
         'objectData' => 'getObjectData',
         'value' => 'getValue',
         'filters' => 'getFilters',
+        'agentID' => 'getAgentID',
     ];
 
     /**
@@ -180,6 +185,9 @@ class EventsItems extends AbstractModel implements ModelInterface, \ArrayAccess,
         }
         if (isset($data['filters'])) {
             $this->container['filters'] = $data['filters'];
+        }
+        if (isset($data['agentID'])) {
+            $this->container['agentID'] = $data['agentID'];
         }
     }
 
@@ -315,7 +323,7 @@ class EventsItems extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets eventType.
      *
-     * @return ViewEvent
+     * @return InstantsearchEvent
      */
     public function getEventType()
     {
@@ -325,7 +333,7 @@ class EventsItems extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets eventType.
      *
-     * @param ViewEvent $eventType eventType
+     * @param InstantsearchEvent $eventType eventType
      *
      * @return self
      */
@@ -421,7 +429,7 @@ class EventsItems extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets queryID.
      *
-     * @param string $queryID Unique identifier for a search query.  The query ID is required for events related to search or browse requests. If you add `clickAnalytics: true` as a search request parameter, the query ID is included in the API response.
+     * @param string $queryID Unique identifier for a search query.  The query ID is required for events related to search or browse requests. If you add `clickAnalytics: true` as a search request parameter, the query ID is included in the API response. For agentic analytics events, the query ID may be prefixed with `message_` followed by any printable string.
      *
      * @return self
      */
@@ -620,6 +628,30 @@ class EventsItems extends AbstractModel implements ModelInterface, \ArrayAccess,
     public function setFilters($filters)
     {
         $this->container['filters'] = $filters;
+
+        return $this;
+    }
+
+    /**
+     * Gets agentID.
+     *
+     * @return null|string
+     */
+    public function getAgentID()
+    {
+        return $this->container['agentID'] ?? null;
+    }
+
+    /**
+     * Sets agentID.
+     *
+     * @param null|string $agentID Unique identifier for an agent session. Used to correlate instantsearch events with a specific agent interaction.
+     *
+     * @return self
+     */
+    public function setAgentID($agentID)
+    {
+        $this->container['agentID'] = $agentID;
 
         return $this;
     }

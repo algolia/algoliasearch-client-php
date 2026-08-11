@@ -34,6 +34,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'variants' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\Variant[]',
         'configuration' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\ABTestConfiguration',
         'migratedAbTestID' => 'int',
+        'decision' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\Decision',
     ];
 
     /**
@@ -52,6 +53,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'variants' => null,
         'configuration' => null,
         'migratedAbTestID' => null,
+        'decision' => null,
     ];
 
     /**
@@ -71,6 +73,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'variants' => 'variants',
         'configuration' => 'configuration',
         'migratedAbTestID' => 'migratedAbTestID',
+        'decision' => 'decision',
     ];
 
     /**
@@ -89,6 +92,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'variants' => 'setVariants',
         'configuration' => 'setConfiguration',
         'migratedAbTestID' => 'setMigratedAbTestID',
+        'decision' => 'setDecision',
     ];
 
     /**
@@ -107,6 +111,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'variants' => 'getVariants',
         'configuration' => 'getConfiguration',
         'migratedAbTestID' => 'getMigratedAbTestID',
+        'decision' => 'getDecision',
     ];
 
     /**
@@ -152,6 +157,9 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         }
         if (isset($data['migratedAbTestID'])) {
             $this->container['migratedAbTestID'] = $data['migratedAbTestID'];
+        }
+        if (isset($data['decision'])) {
+            $this->container['decision'] = $data['decision'];
         }
     }
 
@@ -487,6 +495,30 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     public function setMigratedAbTestID($migratedAbTestID)
     {
         $this->container['migratedAbTestID'] = $migratedAbTestID;
+
+        return $this;
+    }
+
+    /**
+     * Gets decision.
+     *
+     * @return null|Decision
+     */
+    public function getDecision()
+    {
+        return $this->container['decision'] ?? null;
+    }
+
+    /**
+     * Sets decision.
+     *
+     * @param null|Decision $decision decision
+     *
+     * @return self
+     */
+    public function setDecision($decision)
+    {
+        $this->container['decision'] = $decision;
 
         return $this;
     }

@@ -6,6 +6,8 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\AnalyticsConfig;
+use Algolia\AlgoliaSearch\Model\Analytics\Catalog;
+use Algolia\AlgoliaSearch\Model\Analytics\DistributionPayload;
 use Algolia\AlgoliaSearch\Model\Analytics\GetAddToCartRateResponse;
 use Algolia\AlgoliaSearch\Model\Analytics\GetAverageClickPositionResponse;
 use Algolia\AlgoliaSearch\Model\Analytics\GetClickPositionsResponse;
@@ -26,6 +28,11 @@ use Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsResponse;
 use Algolia\AlgoliaSearch\Model\Analytics\GetTopHitsResponse;
 use Algolia\AlgoliaSearch\Model\Analytics\GetTopSearchesResponse;
 use Algolia\AlgoliaSearch\Model\Analytics\GetUsersCountResponse;
+use Algolia\AlgoliaSearch\Model\Analytics\ScalarPayload;
+use Algolia\AlgoliaSearch\Model\Analytics\TablePayload;
+use Algolia\AlgoliaSearch\Model\Analytics\TableResponse;
+use Algolia\AlgoliaSearch\Model\Analytics\TimeseriesPayload;
+use Algolia\AlgoliaSearch\Model\Analytics\TimeseriesResponse;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\AlgoliaResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
@@ -348,6 +355,20 @@ class AnalyticsClient
     }
 
     /**
+     * **Beta**: this endpoint is under active development and may change without notice.  Returns the static catalog of analytics fields, grouped by domain and usage (metrics, filters, groups, distributions). No authentication is required. Use it to discover valid `(domain, kind)` pairs before building the other `/3/patterns/_*` queries; two fields are combinable in one query only when their `roots` intersect. Each entry's `requires` lists the ACLs needed when that field is actually used in a query.
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|Catalog
+     */
+    public function getPatternsFields($requestOptions = [])
+    {
+        $response = $this->getPatternsFieldsWithHttpInfo($requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
      * Retrieves the purchase rate for all your searches with at least one purchase event, including a daily breakdown.  By default, the analyzed period includes the last eight days, including the current day.  The rate is purchase conversion events divided by tracked searches. A search is tracked if it returns a query ID (`clickAnalytics` is `true`). This differs from the response's `count`, which includes searches where `clickAnalytics` is `false`.  **There's a difference between a 0 and null purchase rate when `clickAnalytics` is enabled:**  - **Null** means there were no queries. Algolia didn't receive any events, so the purchase rate is null. - **0** means there were queries but no [purchase conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started) were received.
      *
      * Required API Key ACLs:
@@ -640,6 +661,117 @@ class AnalyticsClient
     public function getUsersCount($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
     {
         $response = $this->getUsersCountWithHttpInfo($index, $startDate, $endDate, $tags, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * **Beta**: this endpoint is under active development and may change without notice.  Buckets one or more numeric fields into histograms and returns an object keyed by `histogram<Field>`, each mapping a bin label to a count. `distributions` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.
+     *
+     * Required API Key ACLs:
+     *  - analytics
+     *
+     * @param array|DistributionPayload $distributionPayload distributionPayload (required)
+     *                                                       - $distributionPayload['domain'] => (string) Default domain propagated to entries that omit their own.
+     *                                                       - $distributionPayload['distributions'] => (array) Histogram specifications. (required)
+     *                                                       - $distributionPayload['filters'] => (array) Filter conditions.
+     *                                                       - $distributionPayload['parameters'] => (array) Literal values referenced by the query. (required)
+     *
+     * @see DistributionPayload
+     *
+     * @param string $index          Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|array<string,mixed>
+     */
+    public function queryPatternsDistribution($distributionPayload, $index = null, $requestOptions = [])
+    {
+        $response = $this->queryPatternsDistributionWithHttpInfo($distributionPayload, $index, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * **Beta**: this endpoint is under active development and may change without notice.  Aggregates the requested `metrics` over the whole period and returns a single object keyed by metric kind. `metrics` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.
+     *
+     * Required API Key ACLs:
+     *  - analytics
+     *
+     * @param array|ScalarPayload $scalarPayload scalarPayload (required)
+     *                                           - $scalarPayload['domain'] => (string) Default domain propagated to entries that omit their own.
+     *                                           - $scalarPayload['metrics'] => (array) Fields to aggregate. (required)
+     *                                           - $scalarPayload['filters'] => (array) Filter conditions.
+     *                                           - $scalarPayload['parameters'] => (array) Literal values referenced by the query. (required)
+     *
+     * @see ScalarPayload
+     *
+     * @param string $index          Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|array<string,mixed>
+     */
+    public function queryPatternsScalar($scalarPayload, $index = null, $requestOptions = [])
+    {
+        $response = $this->queryPatternsScalarWithHttpInfo($scalarPayload, $index, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * **Beta**: this endpoint is under active development and may change without notice.  Returns `rows`, each a flat object of the requested fields. `metrics` and `parameters` are required; `groupBy`, `filters`, and `orderBy` are optional, though `orderBy` is required when `groupBy` is set. Discover valid field kinds per domain with `/3/patterns/fields`.
+     *
+     * Required API Key ACLs:
+     *  - analytics
+     *
+     * @param array|TablePayload $tablePayload tablePayload (required)
+     *                                         - $tablePayload['domain'] => (string) Default domain propagated to entries that omit their own.
+     *                                         - $tablePayload['metrics'] => (array) Fields to aggregate. (required)
+     *                                         - $tablePayload['groupBy'] => (array) Fields to split rows by.
+     *                                         - $tablePayload['filters'] => (array) Filter conditions.
+     *                                         - $tablePayload['parameters'] => (array) Literal values referenced by the query. (required)
+     *                                         - $tablePayload['orderBy'] => (array) Sort specification. Required when `groupBy` is set.
+     *                                         - $tablePayload['limit'] => (int) Maximum number of rows to return.
+     *                                         - $tablePayload['offset'] => (int) Number of rows to skip.
+     *
+     * @see TablePayload
+     *
+     * @param string $index          Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TableResponse
+     */
+    public function queryPatternsTable($tablePayload, $index = null, $requestOptions = [])
+    {
+        $response = $this->queryPatternsTableWithHttpInfo($tablePayload, $index, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * **Beta**: this endpoint is under active development and may change without notice.  Returns one time series per `groupBy` combination, each with period `totals` and a per-day metric breakdown. `metrics` and `parameters` are required; `groupBy` and `filters` are optional. Discover valid field kinds per domain with `/3/patterns/fields`.
+     *
+     * Required API Key ACLs:
+     *  - analytics
+     *
+     * @param array|TimeseriesPayload $timeseriesPayload timeseriesPayload (required)
+     *                                                   - $timeseriesPayload['domain'] => (string) Default domain propagated to entries that omit their own.
+     *                                                   - $timeseriesPayload['metrics'] => (array) Fields to aggregate. (required)
+     *                                                   - $timeseriesPayload['groupBy'] => (array) Fields to split the series by.
+     *                                                   - $timeseriesPayload['filters'] => (array) Filter conditions.
+     *                                                   - $timeseriesPayload['parameters'] => (array) Literal values referenced by the query. (required)
+     *                                                   - $timeseriesPayload['limit'] => (int) Maximum number of series (groupBy values) to return.
+     *                                                   - $timeseriesPayload['offset'] => (int) Number of series to skip.
+     *
+     * @see TimeseriesPayload
+     *
+     * @param string $index          Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TimeseriesResponse
+     */
+    public function queryPatternsTimeseries($timeseriesPayload, $index = null, $requestOptions = [])
+    {
+        $response = $this->queryPatternsTimeseriesWithHttpInfo($timeseriesPayload, $index, $requestOptions);
 
         return $response->getData();
     }
@@ -1219,6 +1351,26 @@ class AnalyticsClient
         if (null !== $tags) {
             $queryParameters['tags'] = $tags;
         }
+
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * (Beta) Retrieve the field catalog (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * **Beta**: this endpoint is under active development and may change without notice.  Returns the static catalog of analytics fields, grouped by domain and usage (metrics, filters, groups, distributions). No authentication is required. Use it to discover valid `(domain, kind)` pairs before building the other `/3/patterns/_*` queries; two fields are combinable in one query only when their `roots` intersect. Each entry's `requires` lists the ACLs needed when that field is actually used in a query.
+     *
+     * @param array $requestOptions Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function getPatternsFieldsWithHttpInfo($requestOptions = [])
+    {
+        $resourcePath = '/3/patterns/fields';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
 
         return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
@@ -2073,6 +2225,146 @@ class AnalyticsClient
         }
 
         return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * (Beta) Query a numeric distribution (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * **Beta**: this endpoint is under active development and may change without notice.  Buckets one or more numeric fields into histograms and returns an object keyed by `histogram<Field>`, each mapping a bin label to a count. `distributions` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.
+     * Required API Key ACLs:
+     *  - analytics
+     *
+     * @param array|DistributionPayload $distributionPayload (required)
+     * @param string                    $index               Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys. (optional)
+     * @param array                     $requestOptions      Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function queryPatternsDistributionWithHttpInfo($distributionPayload, $index = null, $requestOptions = [])
+    {
+        // verify the required parameter 'distributionPayload' is set
+        if (!isset($distributionPayload)) {
+            throw new \InvalidArgumentException(
+                'Parameter `distributionPayload` is required when calling `queryPatternsDistribution`.'
+            );
+        }
+
+        $resourcePath = '/3/patterns/distribution';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $distributionPayload;
+
+        if (null !== $index) {
+            $queryParameters['index'] = $index;
+        }
+
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * (Beta) Query single-row aggregates (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * **Beta**: this endpoint is under active development and may change without notice.  Aggregates the requested `metrics` over the whole period and returns a single object keyed by metric kind. `metrics` and `parameters` are required; `filters` is optional. Discover valid field kinds per domain with `/3/patterns/fields`.
+     * Required API Key ACLs:
+     *  - analytics
+     *
+     * @param array|ScalarPayload $scalarPayload  (required)
+     * @param string              $index          Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys. (optional)
+     * @param array               $requestOptions Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function queryPatternsScalarWithHttpInfo($scalarPayload, $index = null, $requestOptions = [])
+    {
+        // verify the required parameter 'scalarPayload' is set
+        if (!isset($scalarPayload)) {
+            throw new \InvalidArgumentException(
+                'Parameter `scalarPayload` is required when calling `queryPatternsScalar`.'
+            );
+        }
+
+        $resourcePath = '/3/patterns/scalar';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $scalarPayload;
+
+        if (null !== $index) {
+            $queryParameters['index'] = $index;
+        }
+
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * (Beta) Query a grouped table (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * **Beta**: this endpoint is under active development and may change without notice.  Returns `rows`, each a flat object of the requested fields. `metrics` and `parameters` are required; `groupBy`, `filters`, and `orderBy` are optional, though `orderBy` is required when `groupBy` is set. Discover valid field kinds per domain with `/3/patterns/fields`.
+     * Required API Key ACLs:
+     *  - analytics
+     *
+     * @param array|TablePayload $tablePayload   (required)
+     * @param string             $index          Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys. (optional)
+     * @param array              $requestOptions Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function queryPatternsTableWithHttpInfo($tablePayload, $index = null, $requestOptions = [])
+    {
+        // verify the required parameter 'tablePayload' is set
+        if (!isset($tablePayload)) {
+            throw new \InvalidArgumentException(
+                'Parameter `tablePayload` is required when calling `queryPatternsTable`.'
+            );
+        }
+
+        $resourcePath = '/3/patterns/table';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $tablePayload;
+
+        if (null !== $index) {
+            $queryParameters['index'] = $index;
+        }
+
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * (Beta) Query a metrics time series (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * **Beta**: this endpoint is under active development and may change without notice.  Returns one time series per `groupBy` combination, each with period `totals` and a per-day metric breakdown. `metrics` and `parameters` are required; `groupBy` and `filters` are optional. Discover valid field kinds per domain with `/3/patterns/fields`.
+     * Required API Key ACLs:
+     *  - analytics
+     *
+     * @param array|TimeseriesPayload $timeseriesPayload (required)
+     * @param string                  $index             Comma-separated list of indices the request runs on, used for authorization. Required for index-restricted API keys and must match the indices supplied in the request body's `indices` parameter; optional for unrestricted keys. (optional)
+     * @param array                   $requestOptions    Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function queryPatternsTimeseriesWithHttpInfo($timeseriesPayload, $index = null, $requestOptions = [])
+    {
+        // verify the required parameter 'timeseriesPayload' is set
+        if (!isset($timeseriesPayload)) {
+            throw new \InvalidArgumentException(
+                'Parameter `timeseriesPayload` is required when calling `queryPatternsTimeseries`.'
+            );
+        }
+
+        $resourcePath = '/3/patterns/timeseries';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $timeseriesPayload;
+
+        if (null !== $index) {
+            $queryParameters['index'] = $index;
+        }
+
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     private function sendRequestWithHttpInfo($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)

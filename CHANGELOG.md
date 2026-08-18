@@ -1,3 +1,12 @@
+## [4.47.0](https://github.com/algolia/algoliasearch-client-php/compare/4.46.3...4.47.0)
+
+- [b5880f18d0](https://github.com/algolia/api-clients-automation/commit/b5880f18d0) fix(php): replace deprecated GuzzleHttp\choose_handler() ([#6828](https://github.com/algolia/api-clients-automation/pull/6828)) by [@eric-zaharia](https://github.com/eric-zaharia/)
+- [3bee6d1dee](https://github.com/algolia/api-clients-automation/commit/3bee6d1dee) chore(ci): pin all GitHub Action refs to commit SHAs (API-475) ([#6819](https://github.com/algolia/api-clients-automation/pull/6819)) by [@MarioAlexandruDan](https://github.com/MarioAlexandruDan/)
+- [1861c65242](https://github.com/algolia/api-clients-automation/commit/1861c65242) fix(php): surface last retry error in UnreachableException ([#6831](https://github.com/algolia/api-clients-automation/pull/6831)) by [@eric-zaharia](https://github.com/eric-zaharia/)
+- [1f389d1f7f](https://github.com/algolia/api-clients-automation/commit/1f389d1f7f) feat(specs): add agentic analytics support to insights spec ([#6876](https://github.com/algolia/api-clients-automation/pull/6876)) by [@sirockin](https://github.com/sirockin/)
+- [65cc642811](https://github.com/algolia/api-clients-automation/commit/65cc642811) feat(specs): add decision (declared winner) to abtesting-v3 ABTest ([#6732](https://github.com/algolia/api-clients-automation/pull/6732)) by [@cdhawke](https://github.com/cdhawke/)
+- [637defc23a](https://github.com/algolia/api-clients-automation/commit/637defc23a) feat(specs): add analytics v3 pattern endpoints ([#6795](https://github.com/algolia/api-clients-automation/pull/6795)) by [@Niamsy](https://github.com/Niamsy/)
+
 ## [4.46.3](https://github.com/algolia/algoliasearch-client-php/compare/4.46.2...4.46.3)
 
 - [ac68c1a79c](https://github.com/algolia/api-clients-automation/commit/ac68c1a79c) fix(specs): add facetFilters back to recommend fallbackParameters ([#6727](https://github.com/algolia/api-clients-automation/pull/6727)) by [@raed667](https://github.com/raed667/)

@@ -22,7 +22,8 @@ final class RuleIterator extends AbstractAlgoliaIterator
 
         $this->response = $this->searchClient->searchRules(
             $this->indexName,
-            array_merge($this->requestOptions, ['page' => $this->page])
+            array_merge($this->requestOptions, ['page' => $this->page]),
+            $this->transportRequestOptions
         );
 
         $this->batchKey = 0;

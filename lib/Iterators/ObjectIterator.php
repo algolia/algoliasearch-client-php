@@ -35,7 +35,8 @@ final class ObjectIterator extends AbstractAlgoliaIterator
 
         $this->response = $this->searchClient->browse(
             $this->indexName,
-            array_merge($this->requestOptions, $cursor)
+            array_merge($this->requestOptions, $cursor),
+            $this->transportRequestOptions
         );
 
         $this->batchKey = 0;

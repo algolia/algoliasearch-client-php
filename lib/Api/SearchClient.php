@@ -73,12 +73,14 @@ use Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse;
 use Algolia\AlgoliaSearch\Model\Search\UpdatedAtWithObjectIdResponse;
 use Algolia\AlgoliaSearch\Model\Search\UserId;
 use Algolia\AlgoliaSearch\ObjectSerializer;
+use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RetryStrategy\AlgoliaResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 use Algolia\AlgoliaSearch\Support\ChunkedHelperOptions;
 use Algolia\AlgoliaSearch\Support\Helpers;
+use Algolia\AlgoliaSearch\Support\RequestId;
 use GuzzleHttp\Psr7\Query;
 
 /**
@@ -4453,6 +4455,8 @@ class SearchClient
      */
     public function waitForTask($indexName, $taskId, $requestOptions = [], $maxRetries = null, $timeout = null)
     {
+        $requestOptions = $this->withRequestId($requestOptions);
+
         if (null === $timeout) {
             $timeout = $this->config->getWaitTaskTimeBeforeRetry();
         }
@@ -4485,6 +4489,8 @@ class SearchClient
      */
     public function waitForAppTask($taskId, $requestOptions = [], $maxRetries = null, $timeout = null)
     {
+        $requestOptions = $this->withRequestId($requestOptions);
+
         if (null === $timeout) {
             $timeout = $this->config->getWaitTaskTimeBeforeRetry();
         }
@@ -4523,6 +4529,8 @@ class SearchClient
         $timeout = null,
         $requestOptions = []
     ) {
+        $requestOptions = $this->withRequestId($requestOptions);
+
         if (null === $timeout) {
             $timeout = $this->config->getWaitTaskTimeBeforeRetry();
         }
@@ -4546,40 +4554,49 @@ class SearchClient
     /**
      * Helper: Iterate on the `browse` method of the client to allow aggregating objects of an index.
      *
-     * @param string $indexName      Index name
-     * @param array  $requestOptions Request options
+     * @param string               $indexName      Index name
+     * @param array                $browseParams   the `browse` parameters sent in each request body
+     * @param array|RequestOptions $requestOptions Request options
      *
      * @return ObjectIterator
      */
-    public function browseObjects($indexName, $requestOptions = [])
+    public function browseObjects($indexName, $browseParams = [], $requestOptions = [])
     {
-        return new ObjectIterator($indexName, $this, $requestOptions);
+        [$browseParams, $requestOptions] = $this->splitBrowseOptions($browseParams, $requestOptions);
+
+        return new ObjectIterator($indexName, $this, $browseParams, $this->withRequestId($requestOptions));
     }
 
     /**
      * Helper: Iterate on the `searchRules` method of the client to allow aggregating rules of an index.
      *
-     * @param string $indexName      Index name
-     * @param array  $requestOptions Request options
+     * @param string               $indexName         Index name
+     * @param array                $searchRulesParams the `searchRules` parameters sent in each request body
+     * @param array|RequestOptions $requestOptions    Request options
      *
      * @return RuleIterator
      */
-    public function browseRules($indexName, $requestOptions = [])
+    public function browseRules($indexName, $searchRulesParams = [], $requestOptions = [])
     {
-        return new RuleIterator($indexName, $this, $requestOptions);
+        [$searchRulesParams, $requestOptions] = $this->splitBrowseOptions($searchRulesParams, $requestOptions);
+
+        return new RuleIterator($indexName, $this, $searchRulesParams, $this->withRequestId($requestOptions));
     }
 
     /**
      * Helper: Iterate on the `searchSynonyms` method of the client to allow aggregating synonyms of an index.
      *
-     * @param string $indexName      Index name
-     * @param array  $requestOptions Request options
+     * @param string               $indexName            Index name
+     * @param array                $searchSynonymsParams the `searchSynonyms` parameters sent in each request body
+     * @param array|RequestOptions $requestOptions       Request options
      *
      * @return SynonymIterator
      */
-    public function browseSynonyms($indexName, $requestOptions = [])
+    public function browseSynonyms($indexName, $searchSynonymsParams = [], $requestOptions = [])
     {
-        return new SynonymIterator($indexName, $this, $requestOptions);
+        [$searchSynonymsParams, $requestOptions] = $this->splitBrowseOptions($searchSynonymsParams, $requestOptions);
+
+        return new SynonymIterator($indexName, $this, $searchSynonymsParams, $this->withRequestId($requestOptions));
     }
 
     /**
@@ -4612,6 +4629,7 @@ class SearchClient
 
         $chunkedOptions ??= new ChunkedHelperOptions(ChunkedHelperOptions::DEFAULT_REPLACE_ALL_OBJECTS_MAX_RETRIES);
         $tmpIndexName = $indexName.'_tmp_'.rand(10000000, 99999999);
+        $searchRequestOptions = $this->withRequestId($requestOptions);
 
         try {
             $copyOperationResponse = $this->operationIndex(
@@ -4621,12 +4639,12 @@ class SearchClient
                     'destination' => $tmpIndexName,
                     'scope' => $scopes,
                 ],
-                $requestOptions
+                $searchRequestOptions
             );
 
             $watchResponses = $this->ingestionTransporter->chunkedPush($tmpIndexName, $objects, 'addObject', true, $batchSize, $indexName, $requestOptions, $chunkedOptions);
 
-            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID'], [], $chunkedOptions?->maxRetries);
+            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID'], $searchRequestOptions, $chunkedOptions?->maxRetries);
 
             $copyOperationResponse = $this->operationIndex(
                 $indexName,
@@ -4635,10 +4653,10 @@ class SearchClient
                     'destination' => $tmpIndexName,
                     'scope' => $scopes,
                 ],
-                $requestOptions
+                $searchRequestOptions
             );
 
-            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID'], [], $chunkedOptions?->maxRetries);
+            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID'], $searchRequestOptions, $chunkedOptions?->maxRetries);
 
             $moveOperationResponse = $this->operationIndex(
                 $tmpIndexName,
@@ -4646,10 +4664,10 @@ class SearchClient
                     'operation' => 'move',
                     'destination' => $indexName,
                 ],
-                $requestOptions
+                $searchRequestOptions
             );
 
-            $this->waitForTask($tmpIndexName, $moveOperationResponse['taskID'], [], $chunkedOptions?->maxRetries);
+            $this->waitForTask($tmpIndexName, $moveOperationResponse['taskID'], $searchRequestOptions, $chunkedOptions?->maxRetries);
 
             return [
                 'copyOperationResponse' => $copyOperationResponse,
@@ -4657,7 +4675,7 @@ class SearchClient
                 'moveOperationResponse' => $moveOperationResponse,
             ];
         } catch (\Throwable $e) {
-            $this->deleteIndex($tmpIndexName);
+            $this->deleteIndex($tmpIndexName, $searchRequestOptions);
 
             throw $e;
         }
@@ -4684,6 +4702,7 @@ class SearchClient
 
         $chunkedOptions ??= new ChunkedHelperOptions(ChunkedHelperOptions::DEFAULT_REPLACE_ALL_OBJECTS_MAX_RETRIES);
         $tmpIndexName = $indexName.'_tmp_'.rand(10000000, 99999999);
+        $requestOptions = $this->withRequestId($requestOptions);
 
         try {
             $copyOperationResponse = $this->operationIndex(
@@ -4698,7 +4717,7 @@ class SearchClient
 
             $batchResponses = $this->chunkedBatch($tmpIndexName, $objects, 'addObject', true, $batchSize, $requestOptions, $chunkedOptions);
 
-            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID'], [], $chunkedOptions?->maxRetries);
+            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID'], $requestOptions, $chunkedOptions?->maxRetries);
 
             $copyOperationResponse = $this->operationIndex(
                 $indexName,
@@ -4710,7 +4729,7 @@ class SearchClient
                 $requestOptions
             );
 
-            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID'], [], $chunkedOptions?->maxRetries);
+            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID'], $requestOptions, $chunkedOptions?->maxRetries);
 
             $moveOperationResponse = $this->operationIndex(
                 $tmpIndexName,
@@ -4721,7 +4740,7 @@ class SearchClient
                 $requestOptions
             );
 
-            $this->waitForTask($tmpIndexName, $moveOperationResponse['taskID'], [], $chunkedOptions?->maxRetries);
+            $this->waitForTask($tmpIndexName, $moveOperationResponse['taskID'], $requestOptions, $chunkedOptions?->maxRetries);
 
             return [
                 'copyOperationResponse' => $copyOperationResponse,
@@ -4729,7 +4748,7 @@ class SearchClient
                 'moveOperationResponse' => $moveOperationResponse,
             ];
         } catch (\Throwable $e) {
-            $this->deleteIndex($tmpIndexName);
+            $this->deleteIndex($tmpIndexName, $requestOptions);
 
             throw $e;
         }
@@ -4858,6 +4877,7 @@ class SearchClient
         $requestOptions = [],
         ?ChunkedHelperOptions $chunkedOptions = null
     ) {
+        $requestOptions = $this->withRequestId($requestOptions);
         $responses = [];
         $requests = [];
         $count = 0;
@@ -4890,7 +4910,7 @@ class SearchClient
 
         if ($waitForTasks && !empty($responses)) {
             foreach ($responses as $response) {
-                $this->waitForTask($indexName, $response['taskID'], [], $chunkedOptions?->maxRetries);
+                $this->waitForTask($indexName, $response['taskID'], $requestOptions, $chunkedOptions?->maxRetries);
             }
         }
 
@@ -4948,10 +4968,18 @@ class SearchClient
         return $validUntil - time();
     }
 
-    public function indexExists($indexName)
+    /**
+     * Helper: Checks if the given `indexName` exists.
+     *
+     * @param string $indexName      the `indexName` to check
+     * @param array  $requestOptions Request options
+     *
+     * @return bool
+     */
+    public function indexExists($indexName, $requestOptions = [])
     {
         try {
-            $this->getSettings($indexName);
+            $this->getSettings($indexName, null, $requestOptions);
         } catch (NotFoundException $e) {
             return false;
         } catch (\Throwable $e) {
@@ -5002,6 +5030,73 @@ class SearchClient
         }
 
         return IngestionClient::createWithConfig($ingestionConfig);
+    }
+
+    /**
+     * Derives the request options carrying the Request-ID shared by every request of one helper
+     * invocation. The caller's value is returned untouched when the client opted out or when an
+     * id is already present on either channel.
+     *
+     * @param array|RequestOptions $requestOptions Request options
+     *
+     * @return array|RequestOptions
+     */
+    private function withRequestId($requestOptions)
+    {
+        if (!$this->config->getRequestIdEnabled()) {
+            return $requestOptions;
+        }
+
+        $isObject = $requestOptions instanceof RequestOptions;
+        $headers = $isObject ? $requestOptions->getHeaders() : ($requestOptions['headers'] ?? []);
+        $queryParameters = $isObject ? $requestOptions->getQueryParameters() : ($requestOptions['queryParameters'] ?? []);
+
+        if (RequestId::isPresentInHeaders($headers)
+            || RequestId::isPresentInHeaders($this->config->getDefaultHeaders())
+            || RequestId::isPresentInQueryParameters($queryParameters)) {
+            return $requestOptions;
+        }
+
+        $headers[RequestId::HEADER] = RequestId::generate();
+
+        if ($isObject) {
+            return new RequestOptions([
+                'headers' => $headers,
+                'queryParameters' => $queryParameters,
+                'body' => $requestOptions->getBody(),
+                'readTimeout' => $requestOptions->getReadTimeout(),
+                'writeTimeout' => $requestOptions->getWriteTimeout(),
+                'connectTimeout' => $requestOptions->getConnectTimeout(),
+            ]);
+        }
+
+        $requestOptions['headers'] = $headers;
+
+        return $requestOptions;
+    }
+
+    /**
+     * Restores the historical contract of the browse helpers, whose single options argument was
+     * merged into each request body: keys of `$requestOptions` that are not request options are
+     * treated as browse/search parameters.
+     *
+     * @param array                $params         browse/search parameters sent in each request body
+     * @param array|RequestOptions $requestOptions Request options
+     *
+     * @return array{0: array, 1: array|RequestOptions}
+     */
+    private function splitBrowseOptions($params, $requestOptions)
+    {
+        if (!is_array($requestOptions) || [] === $requestOptions) {
+            return [$params, $requestOptions];
+        }
+
+        $transportKeys = array_flip(['headers', 'queryParameters', 'body', 'readTimeout', 'writeTimeout', 'connectTimeout']);
+
+        return [
+            $params + array_diff_key($requestOptions, $transportKeys),
+            array_intersect_key($requestOptions, $transportKeys),
+        ];
     }
 
     private function sendRequestWithHttpInfo($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)

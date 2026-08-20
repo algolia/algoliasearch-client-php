@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Exceptions;
 
-class AlgoliaException extends \Exception
+final class DeserializationException extends \InvalidArgumentException
 {
     use HasCorrelationId;
 

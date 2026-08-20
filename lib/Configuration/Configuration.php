@@ -174,6 +174,7 @@ abstract class Configuration
             'connectTimeout' => $this->defaultConnectTimeout,
             'defaultHeaders' => [],
             'compressionType' => 'none',
+            'requestIdEnabled' => false,
         ];
     }
 
@@ -262,6 +263,29 @@ abstract class Configuration
     public function setDefaultHeaders(array $defaultHeaders)
     {
         $this->config['defaultHeaders'] = $defaultHeaders;
+
+        return $this;
+    }
+
+    /**
+     * Whether this client sends the `request-id` tracing header. Only the search, recommend and
+     * composition clients enable it by default.
+     *
+     * @return bool
+     */
+    public function getRequestIdEnabled()
+    {
+        return $this->config['requestIdEnabled'] ?? false;
+    }
+
+    /**
+     * @param bool $requestIdEnabled
+     *
+     * @return $this
+     */
+    public function setRequestIdEnabled($requestIdEnabled)
+    {
+        $this->config['requestIdEnabled'] = $requestIdEnabled;
 
         return $this;
     }

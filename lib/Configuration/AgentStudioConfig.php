@@ -19,6 +19,7 @@ class AgentStudioConfig extends Configuration
             'writeTimeout' => 25,
             'connectTimeout' => 25,
             'defaultHeaders' => [],
+            'requestIdEnabled' => false,
         ];
     }
 }

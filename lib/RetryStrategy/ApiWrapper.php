@@ -6,6 +6,7 @@ use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\Configuration;
 use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
+use Algolia\AlgoliaSearch\Exceptions\DeserializationException;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
 use Algolia\AlgoliaSearch\Exceptions\TimeoutException;
@@ -16,6 +17,7 @@ use Algolia\AlgoliaSearch\Http\Psr7\Uri;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use Algolia\AlgoliaSearch\Support\Helpers;
+use Algolia\AlgoliaSearch\Support\RequestId;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
@@ -142,6 +144,8 @@ final class ApiWrapper implements ApiWrapperInterface
         $data = [],
         $returnHttpInfo = false
     ) {
+        $this->mintRequestId($requestOptions);
+
         $uri = $this->createUri($path)
             ->withQuery($requestOptions->getBuiltQueryParameters())
             ->withScheme('https')
@@ -222,7 +226,7 @@ final class ApiWrapper implements ApiWrapperInterface
                 }
 
                 // DEBUG: response details
-                $this->log(LogLevel::DEBUG, 'Response headers: '.json_encode($response->getHeaders()), $logParams);
+                $this->log(LogLevel::DEBUG, 'Response headers: '.json_encode($this->filterHeaders($response->getHeaders())), $logParams);
                 $this->log(LogLevel::DEBUG, 'Response body: '.json_encode($responseBody), $logParams);
 
                 return $responseBody;
@@ -254,6 +258,24 @@ final class ApiWrapper implements ApiWrapperInterface
         throw UnreachableException::fromErrors($errors);
     }
 
+    /**
+     * Sets the per-execution `request-id` header, unless the client opted out or an id is already
+     * present on either channel.
+     */
+    private function mintRequestId(RequestOptions $requestOptions)
+    {
+        if (!$this->config->getRequestIdEnabled()) {
+            return;
+        }
+
+        if (RequestId::isPresentInHeaders($requestOptions->getHeaders())
+            || RequestId::isPresentInQueryParameters($requestOptions->getQueryParameters())) {
+            return;
+        }
+
+        $requestOptions->addHeader(RequestId::HEADER, RequestId::generate());
+    }
+
     private function handleResponse(
         ResponseInterface $response,
         RequestInterface $request,
@@ -261,6 +283,7 @@ final class ApiWrapper implements ApiWrapperInterface
     ) {
         $body = (string) $response->getBody();
         $statusCode = $response->getStatusCode();
+        $correlationId = RequestId::correlationIdOf($response);
 
         if (
             0 === $statusCode
@@ -275,12 +298,12 @@ final class ApiWrapper implements ApiWrapperInterface
                     : 'Unreachable Host';
             }
 
-            throw new RetriableException('Retriable failure on '.$request->getUri()->getHost().': '.$reason, $statusCode);
+            throw new RetriableException('Retriable failure on '.$request->getUri()->getHost().': '.$reason, $statusCode, null, $correlationId);
         }
 
         // handle HTML error responses
         if (false !== strpos($response->getHeaderLine('Content-Type'), 'text/html')) {
-            throw new AlgoliaException($statusCode.': '.$response->getReasonPhrase(), $statusCode);
+            throw new AlgoliaException($statusCode.': '.$response->getReasonPhrase(), $statusCode, null, $correlationId);
         }
 
         if (204 === $statusCode || '' === $body) {
@@ -294,18 +317,18 @@ final class ApiWrapper implements ApiWrapperInterface
             } catch (\InvalidArgumentException $e) {
                 $this->log(LogLevel::ERROR, 'Failed to deserialize response: '.$e->getMessage());
 
-                throw $e;
+                throw new DeserializationException($e->getMessage(), $e->getCode(), $e, $correlationId);
             }
         }
 
         if (404 === $statusCode) {
-            throw new NotFoundException($responseArray['message'], $statusCode);
+            throw new NotFoundException($responseArray['message'], $statusCode, null, $correlationId);
         }
         if ($statusCode >= 400) {
-            throw new BadRequestException($responseArray['message'], $statusCode);
+            throw new BadRequestException($responseArray['message'], $statusCode, null, $correlationId);
         }
         if (2 !== (int) ($statusCode / 100)) {
-            throw new AlgoliaException($statusCode.': '.$body, $statusCode);
+            throw new AlgoliaException($statusCode.': '.$body, $statusCode, null, $correlationId);
         }
 
         if ($returnHttpInfo) {

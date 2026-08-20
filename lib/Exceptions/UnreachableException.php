@@ -11,13 +11,13 @@ final class UnreachableException extends AlgoliaException
      */
     private $errors = [];
 
-    public function __construct($message = '', $code = 0, $previous = null)
+    public function __construct($message = '', $code = 0, $previous = null, $correlationId = null)
     {
         if (!$message) {
             $message = self::DEFAULT_MESSAGE;
         }
 
-        parent::__construct($message, $code, $previous);
+        parent::__construct($message, $code, $previous, $correlationId);
     }
 
     /**
@@ -36,7 +36,8 @@ final class UnreachableException extends AlgoliaException
         $exception = new self(
             self::DEFAULT_MESSAGE.' Last error for '.$lastError['host'].': '.$lastError['error']->getMessage(),
             $lastError['error']->getCode(),
-            $lastError['error']
+            $lastError['error'],
+            self::lastCorrelationId($errors)
         );
         $exception->errors = $errors;
 
@@ -49,5 +50,23 @@ final class UnreachableException extends AlgoliaException
     public function getErrors()
     {
         return $this->errors;
+    }
+
+    /**
+     * @param array<int, array{host: string, error: RequestException}> $errors
+     *
+     * @return null|string the `Correlation-ID` of the last attempt that carried one, null for pure timeouts
+     */
+    private static function lastCorrelationId(array $errors)
+    {
+        foreach (array_reverse($errors) as $attempt) {
+            $error = isset($attempt['error']) ? $attempt['error'] : null;
+
+            if ($error instanceof AlgoliaException && null !== $error->getCorrelationId()) {
+                return $error->getCorrelationId();
+            }
+        }
+
+        return null;
     }
 }

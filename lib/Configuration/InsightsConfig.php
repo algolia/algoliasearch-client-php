@@ -37,6 +37,7 @@ class InsightsConfig extends ConfigWithRegion
             'writeTimeout' => 30,
             'connectTimeout' => 2,
             'defaultHeaders' => [],
+            'requestIdEnabled' => false,
         ];
     }
 }

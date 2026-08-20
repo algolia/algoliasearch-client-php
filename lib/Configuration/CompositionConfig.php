@@ -19,6 +19,7 @@ class CompositionConfig extends Configuration
             'writeTimeout' => 30,
             'connectTimeout' => 2,
             'defaultHeaders' => [],
+            'requestIdEnabled' => true,
         ];
     }
 }

@@ -121,7 +121,7 @@ class AbtestingClient
     }
 
     /**
-     * Creates a new A/B test.
+     * This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `POST /3/abtests`.  Creates a new A/B test.
      *
      * Required API Key ACLs:
      *  - editSettings
@@ -136,6 +136,8 @@ class AbtestingClient
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return ABTestResponse|array<string, mixed>
+     *
+     * @deprecated
      */
     public function addABTests($addABTestsRequest, $requestOptions = [])
     {
@@ -211,7 +213,7 @@ class AbtestingClient
     }
 
     /**
-     * Deletes an A/B test by its ID.
+     * This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `DELETE /3/abtests/{id}`.  Deletes an A/B test by its ID.
      *
      * Required API Key ACLs:
      *  - editSettings
@@ -220,6 +222,8 @@ class AbtestingClient
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return ABTestResponse|array<string, mixed>
+     *
+     * @deprecated
      */
     public function deleteABTest($id, $requestOptions = [])
     {
@@ -229,7 +233,7 @@ class AbtestingClient
     }
 
     /**
-     * Given the traffic percentage and the expected effect size, this endpoint estimates the sample size and duration of an A/B test based on historical traffic.
+     * This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `POST /3/abtests/estimate`.  Given the traffic percentage and the expected effect size, this endpoint estimates the sample size and duration of an A/B test based on historical traffic.
      *
      * Required API Key ACLs:
      *  - analytics
@@ -243,6 +247,8 @@ class AbtestingClient
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|EstimateABTestResponse
+     *
+     * @deprecated
      */
     public function estimateABTest($estimateABTestRequest, $requestOptions = [])
     {
@@ -252,7 +258,7 @@ class AbtestingClient
     }
 
     /**
-     * Retrieves the details for an A/B test by its ID.
+     * This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `GET /3/abtests/{id}`.  Retrieves the details for an A/B test by its ID.
      *
      * Required API Key ACLs:
      *  - analytics
@@ -261,6 +267,8 @@ class AbtestingClient
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return ABTest|array<string, mixed>
+     *
+     * @deprecated
      */
     public function getABTest($id, $requestOptions = [])
     {
@@ -270,7 +278,7 @@ class AbtestingClient
     }
 
     /**
-     * Lists all A/B tests you configured for this application.
+     * This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `GET /3/abtests`.  Lists all A/B tests you configured for this application.
      *
      * Required API Key ACLs:
      *  - analytics
@@ -282,6 +290,8 @@ class AbtestingClient
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|ListABTestsResponse
+     *
+     * @deprecated
      */
     public function listABTests($offset = null, $limit = null, $indexPrefix = null, $indexSuffix = null, $requestOptions = [])
     {
@@ -291,7 +301,7 @@ class AbtestingClient
     }
 
     /**
-     * Stops an A/B test by its ID.  You can't restart stopped A/B tests.
+     * This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `POST /3/abtests/{id}/stop`.  Stops an A/B test by its ID.  You can't restart stopped A/B tests.
      *
      * Required API Key ACLs:
      *  - editSettings
@@ -300,6 +310,8 @@ class AbtestingClient
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return ABTestResponse|array<string, mixed>
+     *
+     * @deprecated
      */
     public function stopABTest($id, $requestOptions = [])
     {
@@ -312,7 +324,7 @@ class AbtestingClient
      * Create an A/B test (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
-     * Creates a new A/B test.
+     * This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `POST /3/abtests`.  Creates a new A/B test.
      * Required API Key ACLs:
      *  - editSettings
      *
@@ -536,7 +548,7 @@ class AbtestingClient
      * Delete an A/B test (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
-     * Deletes an A/B test by its ID.
+     * This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `DELETE /3/abtests/{id}`.  Deletes an A/B test by its ID.
      * Required API Key ACLs:
      *  - editSettings
      *
@@ -575,7 +587,7 @@ class AbtestingClient
      * Estimate the sample size and duration of an A/B test (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
-     * Given the traffic percentage and the expected effect size, this endpoint estimates the sample size and duration of an A/B test based on historical traffic.
+     * This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `POST /3/abtests/estimate`.  Given the traffic percentage and the expected effect size, this endpoint estimates the sample size and duration of an A/B test based on historical traffic.
      * Required API Key ACLs:
      *  - analytics
      *
@@ -605,7 +617,7 @@ class AbtestingClient
      * Retrieve A/B test details (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
-     * Retrieves the details for an A/B test by its ID.
+     * This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `GET /3/abtests/{id}`.  Retrieves the details for an A/B test by its ID.
      * Required API Key ACLs:
      *  - analytics
      *
@@ -644,7 +656,7 @@ class AbtestingClient
      * List all A/B tests (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
-     * Lists all A/B tests you configured for this application.
+     * This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `GET /3/abtests`.  Lists all A/B tests you configured for this application.
      * Required API Key ACLs:
      *  - analytics
      *
@@ -686,7 +698,7 @@ class AbtestingClient
      * Stop an A/B test (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
-     * Stops an A/B test by its ID.  You can't restart stopped A/B tests.
+     * This endpoint is deprecated. Use the A/B Testing API v3 instead.  Replaced by `POST /3/abtests/{id}/stop`.  Stops an A/B test by its ID.  You can't restart stopped A/B tests.
      * Required API Key ACLs:
      *  - editSettings
      *

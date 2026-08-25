@@ -26,7 +26,7 @@ use GuzzleHttp\Psr7\Query;
  */
 class MonitoringClient
 {
-    public const VERSION = '4.47.0';
+    public const VERSION = '4.48.0';
 
     /**
      * @var ApiWrapperInterface

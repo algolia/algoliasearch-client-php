@@ -20,6 +20,7 @@ class Log extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $modelTypes = [
+        'cid' => 'string',
         'timestamp' => 'string',
         'method' => 'string',
         'answerCode' => 'string',
@@ -43,6 +44,7 @@ class Log extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $modelFormats = [
+        'cid' => null,
         'timestamp' => null,
         'method' => null,
         'answerCode' => null,
@@ -67,6 +69,7 @@ class Log extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $attributeMap = [
+        'cid' => 'cid',
         'timestamp' => 'timestamp',
         'method' => 'method',
         'answerCode' => 'answer_code',
@@ -90,6 +93,7 @@ class Log extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $setters = [
+        'cid' => 'setCid',
         'timestamp' => 'setTimestamp',
         'method' => 'setMethod',
         'answerCode' => 'setAnswerCode',
@@ -113,6 +117,7 @@ class Log extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $getters = [
+        'cid' => 'getCid',
         'timestamp' => 'getTimestamp',
         'method' => 'getMethod',
         'answerCode' => 'getAnswerCode',
@@ -144,6 +149,9 @@ class Log extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
      */
     public function __construct(?array $data = null)
     {
+        if (isset($data['cid'])) {
+            $this->container['cid'] = $data['cid'];
+        }
         if (isset($data['timestamp'])) {
             $this->container['timestamp'] = $data['timestamp'];
         }
@@ -294,6 +302,30 @@ class Log extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
     public function valid()
     {
         return 0 === count($this->listInvalidProperties());
+    }
+
+    /**
+     * Gets cid.
+     *
+     * @return null|string
+     */
+    public function getCid()
+    {
+        return $this->container['cid'] ?? null;
+    }
+
+    /**
+     * Sets cid.
+     *
+     * @param null|string $cid correlation ID of the logged API request, also returned in that request's `Correlation-ID` response header
+     *
+     * @return self
+     */
+    public function setCid($cid)
+    {
+        $this->container['cid'] = $cid;
+
+        return $this;
     }
 
     /**

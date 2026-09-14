@@ -123,6 +123,7 @@ class SearchConfig extends Configuration
             'connectTimeout' => 2,
             'defaultHeaders' => [],
             'requestIdEnabled' => true,
+            'maxRateLimitRetries' => 3,
             'region' => null,
             'transformationOptions' => null,
             'waitTaskTimeBeforeRetry' => $this->defaultWaitTaskTimeBeforeRetry,

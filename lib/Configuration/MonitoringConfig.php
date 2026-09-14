@@ -20,6 +20,7 @@ class MonitoringConfig extends Configuration
             'connectTimeout' => 2,
             'defaultHeaders' => [],
             'requestIdEnabled' => false,
+            'maxRateLimitRetries' => 3,
         ];
     }
 }

@@ -5028,6 +5028,9 @@ class SearchClient
         if (null !== ($compressionType = $transformationOptions->getCompressionType())) {
             $ingestionConfig->setCompressionType($compressionType);
         }
+        if (null !== ($maxRateLimitRetries = $transformationOptions->getMaxRateLimitRetries())) {
+            $ingestionConfig->setMaxRateLimitRetries($maxRateLimitRetries);
+        }
 
         return IngestionClient::createWithConfig($ingestionConfig);
     }

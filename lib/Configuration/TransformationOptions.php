@@ -67,6 +67,11 @@ final class TransformationOptions
     private $compressionType;
 
     /**
+     * @var null|int
+     */
+    private $maxRateLimitRetries;
+
+    /**
      * @param string $region Algolia region for the Ingestion API (`"us"` or `"eu"`). Required.
      *
      * @throws AlgoliaException if `$region` is missing or empty
@@ -254,5 +259,25 @@ final class TransformationOptions
     public function getCompressionType()
     {
         return $this->compressionType;
+    }
+
+    /**
+     * @param int $maxRateLimitRetries `0` fails on the first 429, without waiting
+     *
+     * @return $this
+     */
+    public function setMaxRateLimitRetries($maxRateLimitRetries)
+    {
+        $this->maxRateLimitRetries = $maxRateLimitRetries;
+
+        return $this;
+    }
+
+    /**
+     * @return null|int
+     */
+    public function getMaxRateLimitRetries()
+    {
+        return $this->maxRateLimitRetries;
     }
 }

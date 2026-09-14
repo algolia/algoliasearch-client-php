@@ -39,6 +39,7 @@ class PersonalizationConfig extends ConfigWithRegion
             'connectTimeout' => 2,
             'defaultHeaders' => [],
             'requestIdEnabled' => false,
+            'maxRateLimitRetries' => 3,
         ];
     }
 }

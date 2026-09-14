@@ -175,6 +175,7 @@ abstract class Configuration
             'defaultHeaders' => [],
             'compressionType' => 'none',
             'requestIdEnabled' => false,
+            'maxRateLimitRetries' => 3,
         ];
     }
 
@@ -360,6 +361,29 @@ abstract class Configuration
     public function setCompressionType($compressionType)
     {
         $this->config['compressionType'] = $compressionType;
+
+        return $this;
+    }
+
+    /**
+     * How many times to wait and retry on the same host after HTTP 429. Wait time is `Retry-After`
+     * in whole seconds, or 1 second if the header is missing or invalid.
+     *
+     * @return int
+     */
+    public function getMaxRateLimitRetries()
+    {
+        return $this->config['maxRateLimitRetries'] ?? 3;
+    }
+
+    /**
+     * @param int $maxRateLimitRetries `0` fails on the first 429, without waiting
+     *
+     * @return $this
+     */
+    public function setMaxRateLimitRetries($maxRateLimitRetries)
+    {
+        $this->config['maxRateLimitRetries'] = $maxRateLimitRetries;
 
         return $this;
     }

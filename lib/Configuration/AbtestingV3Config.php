@@ -38,6 +38,7 @@ class AbtestingV3Config extends ConfigWithRegion
             'connectTimeout' => 2,
             'defaultHeaders' => [],
             'requestIdEnabled' => false,
+            'maxRateLimitRetries' => 3,
         ];
     }
 }

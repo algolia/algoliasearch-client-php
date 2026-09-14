@@ -20,6 +20,7 @@ class AgentStudioConfig extends Configuration
             'connectTimeout' => 25,
             'defaultHeaders' => [],
             'requestIdEnabled' => false,
+            'maxRateLimitRetries' => 3,
         ];
     }
 }

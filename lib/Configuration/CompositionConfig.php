@@ -20,6 +20,7 @@ class CompositionConfig extends Configuration
             'connectTimeout' => 2,
             'defaultHeaders' => [],
             'requestIdEnabled' => true,
+            'maxRateLimitRetries' => 3,
         ];
     }
 }

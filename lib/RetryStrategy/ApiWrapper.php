@@ -28,6 +28,10 @@ final class ApiWrapper implements ApiWrapperInterface
 {
     private const COMPRESSION_THRESHOLD = 750;
 
+    private const DEFAULT_RATE_LIMIT_WAIT_SECONDS = 1;
+
+    private const MAX_RATE_LIMIT_WAIT_SECONDS = 4294967295;
+
     /**
      * @var HttpClientInterface
      */
@@ -168,6 +172,7 @@ final class ApiWrapper implements ApiWrapperInterface
 
         $hostCount = count($hosts);
         $attemptNumber = 0;
+        $rateLimitRetriesLeft = $this->config->getMaxRateLimitRetries();
         $totalStartTime = microtime(true);
         $errors = [];
 
@@ -211,6 +216,23 @@ final class ApiWrapper implements ApiWrapperInterface
                     $timeout,
                     $connectTimeout
                 );
+
+                while (429 === $response->getStatusCode() && $rateLimitRetriesLeft > 0) {
+                    --$rateLimitRetriesLeft;
+                    $waitSeconds = $this->rateLimitWaitSeconds($response);
+
+                    $this->log(LogLevel::INFO, 'Retryable failure: '.$method.' '.$sanitizedUrl.' - 429, waiting '.($waitSeconds * 1000).'ms ('.$rateLimitRetriesLeft.' rate limit retries left)', $logParams);
+
+                    sleep($waitSeconds);
+
+                    $startTime = microtime(true);
+
+                    $response = $this->http->sendRequest(
+                        $request,
+                        $timeout,
+                        $connectTimeout
+                    );
+                }
 
                 $statusCode = $response->getStatusCode();
                 $durationMs = round((microtime(true) - $startTime) * 1000);
@@ -392,6 +414,22 @@ final class ApiWrapper implements ApiWrapperInterface
     private function log($level, $message, array $context = [])
     {
         $this->logger->log($level, 'Algolia API client: '.$message, $context);
+    }
+
+    /**
+     * `Retry-After` as a wait in whole seconds. Only a positive whole number of seconds is honored;
+     * a missing, empty, zero, negative, non-numeric or HTTP-date value waits 1 second. A value above
+     * what `sleep()` accepts waits its maximum.
+     */
+    private function rateLimitWaitSeconds(ResponseInterface $response): int
+    {
+        $retryAfter = trim($response->getHeaderLine('Retry-After'));
+
+        if (preg_match('/^\d+$/', $retryAfter) && (int) $retryAfter > 0) {
+            return min((int) $retryAfter, self::MAX_RATE_LIMIT_WAIT_SECONDS);
+        }
+
+        return self::DEFAULT_RATE_LIMIT_WAIT_SECONDS;
     }
 
     private function filterHeaders(array $headers): array

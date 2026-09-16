@@ -174,7 +174,7 @@ class InjectedItemHitsMetadata extends AbstractModel implements ModelInterface, 
     /**
      * Sets addItemKey.
      *
-     * @param null|bool $addItemKey when true, the `_injectedItemKey` field is set in the `_extra` object of each affected hit
+     * @param null|bool $addItemKey When true, each affected hit's `_extra` object includes an `_injectedItemKey` field identifying the injectedItem that inserted it. Defaults to false, meaning hits don't include `_injectedItemKey`. To identify injected hits without this flag, define your own key-value pairs in `extra`.
      *
      * @return self
      */

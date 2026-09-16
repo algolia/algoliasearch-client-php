@@ -275,7 +275,7 @@ class CatalogEntry extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets requires.
      *
-     * @param string[] $requires public ACL identifiers required to read the field, for example `clickAnalyticsEnabled`
+     * @param string[] $requires public ACL identifiers required to read the field, for example `revenueAnalyticsEnabled`
      *
      * @return self
      */

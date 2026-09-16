@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description An object that contains the extra key-value pairs provided in the injectedItem definition.
+ * @description An object that contains the extra key-value pairs provided in the injectedItem definition. Only present on hits inserted by an injectedItem that defines metadata, either in its `metadata` field or sent by an external source.
  */
 class HitMetadata extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -166,7 +166,7 @@ class HitMetadata extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets injectedItemKey.
      *
-     * @param null|string $injectedItemKey the key of the injectedItem that inserted this metadata
+     * @param null|string $injectedItemKey The key of the injectedItem that inserted this metadata. Only present when the injectedItem's `metadata.hits.addItemKey` is `true`.
      *
      * @return self
      */

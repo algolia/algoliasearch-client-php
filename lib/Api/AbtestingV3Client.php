@@ -8,10 +8,12 @@ use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\AbtestingV3Config;
 use Algolia\AlgoliaSearch\Model\AbtestingV3\ABTest;
 use Algolia\AlgoliaSearch\Model\AbtestingV3\ABTestResponse;
+use Algolia\AlgoliaSearch\Model\AbtestingV3\ABTestSettingsResponse;
 use Algolia\AlgoliaSearch\Model\AbtestingV3\AddABTestsRequest;
 use Algolia\AlgoliaSearch\Model\AbtestingV3\EstimateABTestRequest;
 use Algolia\AlgoliaSearch\Model\AbtestingV3\EstimateABTestResponse;
 use Algolia\AlgoliaSearch\Model\AbtestingV3\ListABTestsResponse;
+use Algolia\AlgoliaSearch\Model\AbtestingV3\SaveSettingsRequest;
 use Algolia\AlgoliaSearch\Model\AbtestingV3\Timeseries;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\AlgoliaResponse;
@@ -148,6 +150,24 @@ class AbtestingV3Client
     }
 
     /**
+     * Applies the captured settings of the given variant to the control index.  The settings must first be captured with the `saveVariantSettings` operation. To revert previously applied settings on the control index, use this operation with the control variant (variant 1).  Settings can be applied up to 14 days after the A/B test ends, and reverted up to 15 days after. Later requests return `400`.  Each set of captured settings can only be applied once, and settings that were reverted can't be applied again. Both cases return `400`.  The control index must not be in use by an active A/B test. Otherwise, the request returns `422`.
+     *
+     * Required API Key ACLs:
+     *  - analytics
+     *  - editSettings
+     *
+     * @param int   $id             Unique A/B test identifier. (required)
+     * @param int   $variantId      One-based index of the A/B test variant. The control is variant 1. (required)
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     */
+    public function applyVariantSettings($id, $variantId, $requestOptions = [])
+    {
+        $response = $this->applyVariantSettingsWithHttpInfo($id, $variantId, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
      * This method lets you send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
@@ -273,6 +293,24 @@ class AbtestingV3Client
     }
 
     /**
+     * Retrieves the settings captured for each variant of an A/B test, and whether another active A/B test is using the control index.  Settings are captured by the `saveVariantSettings` operation. The response includes an entry for the control (variant 1) alongside the captured variant, so the control's original configuration can be restored later.  Returns `404` if the A/B test doesn't exist or no settings have been captured for it.
+     *
+     * Required API Key ACLs:
+     *  - analytics
+     *
+     * @param int   $id             Unique A/B test identifier. (required)
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return ABTestSettingsResponse|array<string, mixed>
+     */
+    public function getABTestSettings($id, $requestOptions = [])
+    {
+        $response = $this->getABTestSettingsWithHttpInfo($id, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
      * Retrieves timeseries for an A/B test by its ID.
      *
      * Required API Key ACLs:
@@ -311,6 +349,29 @@ class AbtestingV3Client
     public function listABTests($offset = null, $limit = null, $indexPrefix = null, $indexSuffix = null, $direction = null, $requestOptions = [])
     {
         $response = $this->listABTestsWithHttpInfo($offset, $limit, $indexPrefix, $indexSuffix, $direction, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Captures the settings of the given variant and of the control, then stops the A/B test.  The captured settings can later be applied to the control index with the `applyVariantSettings` operation, and read back with the `getABTestSettings` operation.  The A/B test must have reached 80% of its planned duration. Earlier requests return `400`.  Settings can only be captured once per A/B test. A second request returns `409`.  `synonyms` and `enableRules` are not captured, so applying the captured settings never changes them on the control index.
+     *
+     * Required API Key ACLs:
+     *  - analytics
+     *  - editSettings
+     *
+     * @param int                       $id                  Unique A/B test identifier. (required)
+     * @param int                       $variantId           One-based index of the A/B test variant. The control is variant 1. (required)
+     * @param array|SaveSettingsRequest $saveSettingsRequest saveSettingsRequest (required)
+     *                                                       - $saveSettingsRequest['saveFeaturesSettings'] => (bool) Whether to also capture the variant's index settings and feature-specific settings. This must be true for A/B tests whose variants use different indices so that the captured variant settings can later be applied.
+     *
+     * @see SaveSettingsRequest
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     */
+    public function saveVariantSettings($id, $variantId, $saveSettingsRequest, $requestOptions = [])
+    {
+        $response = $this->saveVariantSettingsWithHttpInfo($id, $variantId, $saveSettingsRequest, $requestOptions);
 
         return $response->getData();
     }
@@ -359,6 +420,62 @@ class AbtestingV3Client
         $queryParameters = [];
         $headers = [];
         $httpBody = $addABTestsRequest;
+
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Apply a variant&#39;s captured settings to the control index (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Applies the captured settings of the given variant to the control index.  The settings must first be captured with the `saveVariantSettings` operation. To revert previously applied settings on the control index, use this operation with the control variant (variant 1).  Settings can be applied up to 14 days after the A/B test ends, and reverted up to 15 days after. Later requests return `400`.  Each set of captured settings can only be applied once, and settings that were reverted can't be applied again. Both cases return `400`.  The control index must not be in use by an active A/B test. Otherwise, the request returns `422`.
+     * Required API Key ACLs:
+     *  - analytics
+     *  - editSettings
+     *
+     * @param int   $id             Unique A/B test identifier. (required)
+     * @param int   $variantId      One-based index of the A/B test variant. The control is variant 1. (required)
+     * @param array $requestOptions Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function applyVariantSettingsWithHttpInfo($id, $variantId, $requestOptions = [])
+    {
+        // verify the required parameter 'id' is set
+        if (!isset($id)) {
+            throw new \InvalidArgumentException(
+                'Parameter `id` is required when calling `applyVariantSettings`.'
+            );
+        }
+        // verify the required parameter 'variantId' is set
+        if (!isset($variantId)) {
+            throw new \InvalidArgumentException(
+                'Parameter `variantId` is required when calling `applyVariantSettings`.'
+            );
+        }
+
+        $resourcePath = '/3/abtests/{id}/settings/{variantId}/apply';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        // path params
+        if (null !== $id) {
+            $resourcePath = str_replace(
+                '{id}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+        // path params
+        if (null !== $variantId) {
+            $resourcePath = str_replace(
+                '{variantId}',
+                ObjectSerializer::toPathValue($variantId),
+                $resourcePath
+            );
+        }
 
         return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
@@ -666,6 +783,45 @@ class AbtestingV3Client
     }
 
     /**
+     * Retrieve captured A/B test settings (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Retrieves the settings captured for each variant of an A/B test, and whether another active A/B test is using the control index.  Settings are captured by the `saveVariantSettings` operation. The response includes an entry for the control (variant 1) alongside the captured variant, so the control's original configuration can be restored later.  Returns `404` if the A/B test doesn't exist or no settings have been captured for it.
+     * Required API Key ACLs:
+     *  - analytics
+     *
+     * @param int   $id             Unique A/B test identifier. (required)
+     * @param array $requestOptions Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function getABTestSettingsWithHttpInfo($id, $requestOptions = [])
+    {
+        // verify the required parameter 'id' is set
+        if (!isset($id)) {
+            throw new \InvalidArgumentException(
+                'Parameter `id` is required when calling `getABTestSettings`.'
+            );
+        }
+
+        $resourcePath = '/3/abtests/{id}/settings';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        // path params
+        if (null !== $id) {
+            $resourcePath = str_replace(
+                '{id}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
      * Retrieve timeseries of an A/B test (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
@@ -764,6 +920,69 @@ class AbtestingV3Client
         }
 
         return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Capture a variant&#39;s settings and stop the A/B test (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Captures the settings of the given variant and of the control, then stops the A/B test.  The captured settings can later be applied to the control index with the `applyVariantSettings` operation, and read back with the `getABTestSettings` operation.  The A/B test must have reached 80% of its planned duration. Earlier requests return `400`.  Settings can only be captured once per A/B test. A second request returns `409`.  `synonyms` and `enableRules` are not captured, so applying the captured settings never changes them on the control index.
+     * Required API Key ACLs:
+     *  - analytics
+     *  - editSettings
+     *
+     * @param int                       $id                  Unique A/B test identifier. (required)
+     * @param int                       $variantId           One-based index of the A/B test variant. The control is variant 1. (required)
+     * @param array|SaveSettingsRequest $saveSettingsRequest (required)
+     * @param array                     $requestOptions      Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function saveVariantSettingsWithHttpInfo($id, $variantId, $saveSettingsRequest, $requestOptions = [])
+    {
+        // verify the required parameter 'id' is set
+        if (!isset($id)) {
+            throw new \InvalidArgumentException(
+                'Parameter `id` is required when calling `saveVariantSettings`.'
+            );
+        }
+        // verify the required parameter 'variantId' is set
+        if (!isset($variantId)) {
+            throw new \InvalidArgumentException(
+                'Parameter `variantId` is required when calling `saveVariantSettings`.'
+            );
+        }
+        // verify the required parameter 'saveSettingsRequest' is set
+        if (!isset($saveSettingsRequest)) {
+            throw new \InvalidArgumentException(
+                'Parameter `saveSettingsRequest` is required when calling `saveVariantSettings`.'
+            );
+        }
+
+        $resourcePath = '/3/abtests/{id}/settings/{variantId}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $saveSettingsRequest;
+
+        // path params
+        if (null !== $id) {
+            $resourcePath = str_replace(
+                '{id}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+        // path params
+        if (null !== $variantId) {
+            $resourcePath = str_replace(
+                '{variantId}',
+                ObjectSerializer::toPathValue($variantId),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**

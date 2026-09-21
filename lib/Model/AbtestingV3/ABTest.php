@@ -30,6 +30,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'endAt' => 'string',
         'stoppedAt' => 'string',
         'name' => 'string',
+        'hypothesis' => 'string',
         'status' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\Status',
         'variants' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\Variant[]',
         'configuration' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\ABTestConfiguration',
@@ -48,6 +49,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'endAt' => null,
         'stoppedAt' => null,
         'name' => null,
+        'hypothesis' => null,
         'status' => null,
         'variants' => null,
         'configuration' => null,
@@ -67,6 +69,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'endAt' => 'endAt',
         'stoppedAt' => 'stoppedAt',
         'name' => 'name',
+        'hypothesis' => 'hypothesis',
         'status' => 'status',
         'variants' => 'variants',
         'configuration' => 'configuration',
@@ -85,6 +88,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'endAt' => 'setEndAt',
         'stoppedAt' => 'setStoppedAt',
         'name' => 'setName',
+        'hypothesis' => 'setHypothesis',
         'status' => 'setStatus',
         'variants' => 'setVariants',
         'configuration' => 'setConfiguration',
@@ -103,6 +107,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'endAt' => 'getEndAt',
         'stoppedAt' => 'getStoppedAt',
         'name' => 'getName',
+        'hypothesis' => 'getHypothesis',
         'status' => 'getStatus',
         'variants' => 'getVariants',
         'configuration' => 'getConfiguration',
@@ -140,6 +145,9 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         }
         if (isset($data['name'])) {
             $this->container['name'] = $data['name'];
+        }
+        if (isset($data['hypothesis'])) {
+            $this->container['hypothesis'] = $data['hypothesis'];
         }
         if (isset($data['status'])) {
             $this->container['status'] = $data['status'];
@@ -229,6 +237,9 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         }
         if (!isset($this->container['name']) || null === $this->container['name']) {
             $invalidProperties[] = "'name' can't be null";
+        }
+        if (!isset($this->container['hypothesis']) || null === $this->container['hypothesis']) {
+            $invalidProperties[] = "'hypothesis' can't be null";
         }
         if (!isset($this->container['status']) || null === $this->container['status']) {
             $invalidProperties[] = "'status' can't be null";
@@ -391,6 +402,30 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     public function setName($name)
     {
         $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets hypothesis.
+     *
+     * @return string
+     */
+    public function getHypothesis()
+    {
+        return $this->container['hypothesis'] ?? null;
+    }
+
+    /**
+     * Sets hypothesis.
+     *
+     * @param string $hypothesis expected outcome of the A/B test
+     *
+     * @return self
+     */
+    public function setHypothesis($hypothesis)
+    {
+        $this->container['hypothesis'] = $hypothesis;
 
         return $this;
     }

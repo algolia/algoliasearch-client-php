@@ -21,6 +21,7 @@ class AddABTestsRequest extends AbstractModel implements ModelInterface, \ArrayA
      */
     protected static $modelTypes = [
         'name' => 'string',
+        'hypothesis' => 'string',
         'variants' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\AddABTestsVariant[]',
         'metrics' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\CreateMetric[]',
         'configuration' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\ABTestConfiguration',
@@ -34,6 +35,7 @@ class AddABTestsRequest extends AbstractModel implements ModelInterface, \ArrayA
      */
     protected static $modelFormats = [
         'name' => null,
+        'hypothesis' => null,
         'variants' => null,
         'metrics' => null,
         'configuration' => null,
@@ -48,6 +50,7 @@ class AddABTestsRequest extends AbstractModel implements ModelInterface, \ArrayA
      */
     protected static $attributeMap = [
         'name' => 'name',
+        'hypothesis' => 'hypothesis',
         'variants' => 'variants',
         'metrics' => 'metrics',
         'configuration' => 'configuration',
@@ -61,6 +64,7 @@ class AddABTestsRequest extends AbstractModel implements ModelInterface, \ArrayA
      */
     protected static $setters = [
         'name' => 'setName',
+        'hypothesis' => 'setHypothesis',
         'variants' => 'setVariants',
         'metrics' => 'setMetrics',
         'configuration' => 'setConfiguration',
@@ -74,6 +78,7 @@ class AddABTestsRequest extends AbstractModel implements ModelInterface, \ArrayA
      */
     protected static $getters = [
         'name' => 'getName',
+        'hypothesis' => 'getHypothesis',
         'variants' => 'getVariants',
         'metrics' => 'getMetrics',
         'configuration' => 'getConfiguration',
@@ -96,6 +101,9 @@ class AddABTestsRequest extends AbstractModel implements ModelInterface, \ArrayA
     {
         if (isset($data['name'])) {
             $this->container['name'] = $data['name'];
+        }
+        if (isset($data['hypothesis'])) {
+            $this->container['hypothesis'] = $data['hypothesis'];
         }
         if (isset($data['variants'])) {
             $this->container['variants'] = $data['variants'];
@@ -218,6 +226,30 @@ class AddABTestsRequest extends AbstractModel implements ModelInterface, \ArrayA
     public function setName($name)
     {
         $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets hypothesis.
+     *
+     * @return null|string
+     */
+    public function getHypothesis()
+    {
+        return $this->container['hypothesis'] ?? null;
+    }
+
+    /**
+     * Sets hypothesis.
+     *
+     * @param null|string $hypothesis expected outcome of the A/B test
+     *
+     * @return self
+     */
+    public function setHypothesis($hypothesis)
+    {
+        $this->container['hypothesis'] = $hypothesis;
 
         return $this;
     }

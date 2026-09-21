@@ -131,6 +131,7 @@ class AbtestingV3Client
      *
      * @param AddABTestsRequest|array $addABTestsRequest addABTestsRequest (required)
      *                                                   - $addABTestsRequest['name'] => (string) A/B test name. (required)
+     *                                                   - $addABTestsRequest['hypothesis'] => (string) Expected outcome of the A/B test.
      *                                                   - $addABTestsRequest['variants'] => (array) A/B test variants. (required)
      *                                                   - $addABTestsRequest['metrics'] => (array) A/B test metrics involved in the test. Only these metrics will be considered when calculating results. (required)
      *                                                   - $addABTestsRequest['configuration'] => (array)

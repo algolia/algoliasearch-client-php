@@ -25,6 +25,8 @@ class ABTestConfiguration extends AbstractModel implements ModelInterface, \Arra
         'minimumDetectableEffect' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\MinimumDetectableEffect',
         'filters' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\MetricsFilter[]',
         'errorCorrection' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\ErrorCorrectionType',
+        'method' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\AnalysisMethod',
+        'primaryMetric' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\PrimaryMetric',
     ];
 
     /**
@@ -36,6 +38,8 @@ class ABTestConfiguration extends AbstractModel implements ModelInterface, \Arra
         'minimumDetectableEffect' => null,
         'filters' => null,
         'errorCorrection' => null,
+        'method' => null,
+        'primaryMetric' => null,
     ];
 
     /**
@@ -48,6 +52,8 @@ class ABTestConfiguration extends AbstractModel implements ModelInterface, \Arra
         'minimumDetectableEffect' => 'minimumDetectableEffect',
         'filters' => 'filters',
         'errorCorrection' => 'errorCorrection',
+        'method' => 'method',
+        'primaryMetric' => 'primaryMetric',
     ];
 
     /**
@@ -59,6 +65,8 @@ class ABTestConfiguration extends AbstractModel implements ModelInterface, \Arra
         'minimumDetectableEffect' => 'setMinimumDetectableEffect',
         'filters' => 'setFilters',
         'errorCorrection' => 'setErrorCorrection',
+        'method' => 'setMethod',
+        'primaryMetric' => 'setPrimaryMetric',
     ];
 
     /**
@@ -70,6 +78,8 @@ class ABTestConfiguration extends AbstractModel implements ModelInterface, \Arra
         'minimumDetectableEffect' => 'getMinimumDetectableEffect',
         'filters' => 'getFilters',
         'errorCorrection' => 'getErrorCorrection',
+        'method' => 'getMethod',
+        'primaryMetric' => 'getPrimaryMetric',
     ];
 
     /**
@@ -94,6 +104,12 @@ class ABTestConfiguration extends AbstractModel implements ModelInterface, \Arra
         }
         if (isset($data['errorCorrection'])) {
             $this->container['errorCorrection'] = $data['errorCorrection'];
+        }
+        if (isset($data['method'])) {
+            $this->container['method'] = $data['method'];
+        }
+        if (isset($data['primaryMetric'])) {
+            $this->container['primaryMetric'] = $data['primaryMetric'];
         }
     }
 
@@ -237,6 +253,54 @@ class ABTestConfiguration extends AbstractModel implements ModelInterface, \Arra
     public function setErrorCorrection($errorCorrection)
     {
         $this->container['errorCorrection'] = $errorCorrection;
+
+        return $this;
+    }
+
+    /**
+     * Gets method.
+     *
+     * @return null|AnalysisMethod
+     */
+    public function getMethod()
+    {
+        return $this->container['method'] ?? null;
+    }
+
+    /**
+     * Sets method.
+     *
+     * @param null|AnalysisMethod $method method
+     *
+     * @return self
+     */
+    public function setMethod($method)
+    {
+        $this->container['method'] = $method;
+
+        return $this;
+    }
+
+    /**
+     * Gets primaryMetric.
+     *
+     * @return null|PrimaryMetric
+     */
+    public function getPrimaryMetric()
+    {
+        return $this->container['primaryMetric'] ?? null;
+    }
+
+    /**
+     * Sets primaryMetric.
+     *
+     * @param null|PrimaryMetric $primaryMetric primaryMetric
+     *
+     * @return self
+     */
+    public function setPrimaryMetric($primaryMetric)
+    {
+        $this->container['primaryMetric'] = $primaryMetric;
 
         return $this;
     }

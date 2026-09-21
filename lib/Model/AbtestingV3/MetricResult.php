@@ -30,6 +30,7 @@ class MetricResult extends AbstractModel implements ModelInterface, \ArrayAccess
         'metadata' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\MetricMetadata',
         'criticalValue' => 'float',
         'significant' => 'bool',
+        'bayesian' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\BayesianMetricResult',
     ];
 
     /**
@@ -48,6 +49,7 @@ class MetricResult extends AbstractModel implements ModelInterface, \ArrayAccess
         'metadata' => null,
         'criticalValue' => 'double',
         'significant' => null,
+        'bayesian' => null,
     ];
 
     /**
@@ -67,6 +69,7 @@ class MetricResult extends AbstractModel implements ModelInterface, \ArrayAccess
         'metadata' => 'metadata',
         'criticalValue' => 'criticalValue',
         'significant' => 'significant',
+        'bayesian' => 'bayesian',
     ];
 
     /**
@@ -85,6 +88,7 @@ class MetricResult extends AbstractModel implements ModelInterface, \ArrayAccess
         'metadata' => 'setMetadata',
         'criticalValue' => 'setCriticalValue',
         'significant' => 'setSignificant',
+        'bayesian' => 'setBayesian',
     ];
 
     /**
@@ -103,6 +107,7 @@ class MetricResult extends AbstractModel implements ModelInterface, \ArrayAccess
         'metadata' => 'getMetadata',
         'criticalValue' => 'getCriticalValue',
         'significant' => 'getSignificant',
+        'bayesian' => 'getBayesian',
     ];
 
     /**
@@ -148,6 +153,9 @@ class MetricResult extends AbstractModel implements ModelInterface, \ArrayAccess
         }
         if (isset($data['significant'])) {
             $this->container['significant'] = $data['significant'];
+        }
+        if (isset($data['bayesian'])) {
+            $this->container['bayesian'] = $data['bayesian'];
         }
     }
 
@@ -220,9 +228,6 @@ class MetricResult extends AbstractModel implements ModelInterface, \ArrayAccess
         if (!isset($this->container['value']) || null === $this->container['value']) {
             $invalidProperties[] = "'value' can't be null";
         }
-        if (!isset($this->container['pValue']) || null === $this->container['pValue']) {
-            $invalidProperties[] = "'pValue' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -251,7 +256,7 @@ class MetricResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets name.
      *
-     * @param string $name name
+     * @param string $name Metric name. Revenue per search results use `revenue_per_search`.
      *
      * @return self
      */
@@ -299,7 +304,7 @@ class MetricResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets value.
      *
-     * @param float $value value
+     * @param float $value Metric value. For `revenue_per_search`, this is the winsorized mean revenue per search in the specified currency.
      *
      * @return self
      */
@@ -361,7 +366,7 @@ class MetricResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets pValue.
      *
-     * @return float
+     * @return null|float
      */
     public function getPValue()
     {
@@ -371,7 +376,7 @@ class MetricResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets pValue.
      *
-     * @param float $pValue PValue for the first variant (control) will always be 0. For the other variants, pValue is calculated for the current variant based on the control.
+     * @param null|float $pValue P-value for this variant compared to the control. Omitted when no p-value is available for this metric.
      *
      * @return self
      */
@@ -395,7 +400,7 @@ class MetricResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets dimension.
      *
-     * @param null|string $dimension dimension defined during test creation
+     * @param null|string $dimension Dimension defined during test creation. For revenue metrics, including `revenue_per_search`, this is the currency.
      *
      * @return self
      */
@@ -474,6 +479,30 @@ class MetricResult extends AbstractModel implements ModelInterface, \ArrayAccess
     public function setSignificant($significant)
     {
         $this->container['significant'] = $significant;
+
+        return $this;
+    }
+
+    /**
+     * Gets bayesian.
+     *
+     * @return null|BayesianMetricResult
+     */
+    public function getBayesian()
+    {
+        return $this->container['bayesian'] ?? null;
+    }
+
+    /**
+     * Sets bayesian.
+     *
+     * @param null|BayesianMetricResult $bayesian bayesian
+     *
+     * @return self
+     */
+    public function setBayesian($bayesian)
+    {
+        $this->container['bayesian'] = $bayesian;
 
         return $this;
     }

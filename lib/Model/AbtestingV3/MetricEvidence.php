@@ -8,13 +8,13 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * MinimumDetectableEffect Class Doc Comment.
+ * MetricEvidence Class Doc Comment.
  *
  * @category Class
  *
- * @description Configuration for the smallest difference between test variants you want to detect, used to estimate the required sample size.
+ * @description Evidence status for this variant metric's comparison with the control. Only present when the API has an evidence status for the comparison. Omitted when evidence isn't applicable or no status exists.
  */
-class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class MetricEvidence extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -22,8 +22,7 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $modelTypes = [
-        'size' => 'float',
-        'metric' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\EffectMetric',
+        'status' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\EvidenceStatus',
     ];
 
     /**
@@ -32,8 +31,7 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $modelFormats = [
-        'size' => 'double',
-        'metric' => null,
+        'status' => null,
     ];
 
     /**
@@ -43,8 +41,7 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $attributeMap = [
-        'size' => 'size',
-        'metric' => 'metric',
+        'status' => 'status',
     ];
 
     /**
@@ -53,8 +50,7 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $setters = [
-        'size' => 'setSize',
-        'metric' => 'setMetric',
+        'status' => 'setStatus',
     ];
 
     /**
@@ -63,8 +59,7 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $getters = [
-        'size' => 'getSize',
-        'metric' => 'getMetric',
+        'status' => 'getStatus',
     ];
 
     /**
@@ -81,11 +76,8 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['size'])) {
-            $this->container['size'] = $data['size'];
-        }
-        if (isset($data['metric'])) {
-            $this->container['metric'] = $data['metric'];
+        if (isset($data['status'])) {
+            $this->container['status'] = $data['status'];
         }
     }
 
@@ -149,11 +141,8 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['size']) || null === $this->container['size']) {
-            $invalidProperties[] = "'size' can't be null";
-        }
-        if (!isset($this->container['metric']) || null === $this->container['metric']) {
-            $invalidProperties[] = "'metric' can't be null";
+        if (!isset($this->container['status']) || null === $this->container['status']) {
+            $invalidProperties[] = "'status' can't be null";
         }
 
         return $invalidProperties;
@@ -171,49 +160,25 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
     }
 
     /**
-     * Gets size.
+     * Gets status.
      *
-     * @return float
+     * @return EvidenceStatus
      */
-    public function getSize()
+    public function getStatus()
     {
-        return $this->container['size'] ?? null;
+        return $this->container['status'] ?? null;
     }
 
     /**
-     * Sets size.
+     * Sets status.
      *
-     * @param float $size Smallest difference in an observable metric between variants. For example, to detect a 10% difference between variants, set this value to 0.1.
+     * @param EvidenceStatus $status status
      *
      * @return self
      */
-    public function setSize($size)
+    public function setStatus($status)
     {
-        $this->container['size'] = $size;
-
-        return $this;
-    }
-
-    /**
-     * Gets metric.
-     *
-     * @return EffectMetric
-     */
-    public function getMetric()
-    {
-        return $this->container['metric'] ?? null;
-    }
-
-    /**
-     * Sets metric.
-     *
-     * @param EffectMetric $metric metric
-     *
-     * @return self
-     */
-    public function setMetric($metric)
-    {
-        $this->container['metric'] = $metric;
+        $this->container['status'] = $status;
 
         return $this;
     }

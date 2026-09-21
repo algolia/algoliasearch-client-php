@@ -8,13 +8,13 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * MinimumDetectableEffect Class Doc Comment.
+ * BayesianMetricResult Class Doc Comment.
  *
  * @category Class
  *
- * @description Configuration for the smallest difference between test variants you want to detect, used to estimate the required sample size.
+ * @description Bayesian inference results for this variant metric. Omitted when Bayesian results aren't requested or no Bayesian result is available for this metric. Individual inference fields can be omitted when their values aren't available.
  */
-class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BayesianMetricResult extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -22,8 +22,10 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $modelTypes = [
-        'size' => 'float',
-        'metric' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\EffectMetric',
+        'probabilityToBeBetter' => 'float',
+        'relativeEffectCILow' => 'float',
+        'relativeEffectCIHigh' => 'float',
+        'evidence' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\MetricEvidence',
     ];
 
     /**
@@ -32,8 +34,10 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $modelFormats = [
-        'size' => 'double',
-        'metric' => null,
+        'probabilityToBeBetter' => 'double',
+        'relativeEffectCILow' => 'double',
+        'relativeEffectCIHigh' => 'double',
+        'evidence' => null,
     ];
 
     /**
@@ -43,8 +47,10 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $attributeMap = [
-        'size' => 'size',
-        'metric' => 'metric',
+        'probabilityToBeBetter' => 'probabilityToBeBetter',
+        'relativeEffectCILow' => 'relativeEffectCILow',
+        'relativeEffectCIHigh' => 'relativeEffectCIHigh',
+        'evidence' => 'evidence',
     ];
 
     /**
@@ -53,8 +59,10 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $setters = [
-        'size' => 'setSize',
-        'metric' => 'setMetric',
+        'probabilityToBeBetter' => 'setProbabilityToBeBetter',
+        'relativeEffectCILow' => 'setRelativeEffectCILow',
+        'relativeEffectCIHigh' => 'setRelativeEffectCIHigh',
+        'evidence' => 'setEvidence',
     ];
 
     /**
@@ -63,8 +71,10 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $getters = [
-        'size' => 'getSize',
-        'metric' => 'getMetric',
+        'probabilityToBeBetter' => 'getProbabilityToBeBetter',
+        'relativeEffectCILow' => 'getRelativeEffectCILow',
+        'relativeEffectCIHigh' => 'getRelativeEffectCIHigh',
+        'evidence' => 'getEvidence',
     ];
 
     /**
@@ -81,11 +91,17 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['size'])) {
-            $this->container['size'] = $data['size'];
+        if (isset($data['probabilityToBeBetter'])) {
+            $this->container['probabilityToBeBetter'] = $data['probabilityToBeBetter'];
         }
-        if (isset($data['metric'])) {
-            $this->container['metric'] = $data['metric'];
+        if (isset($data['relativeEffectCILow'])) {
+            $this->container['relativeEffectCILow'] = $data['relativeEffectCILow'];
+        }
+        if (isset($data['relativeEffectCIHigh'])) {
+            $this->container['relativeEffectCIHigh'] = $data['relativeEffectCIHigh'];
+        }
+        if (isset($data['evidence'])) {
+            $this->container['evidence'] = $data['evidence'];
         }
     }
 
@@ -147,16 +163,7 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (!isset($this->container['size']) || null === $this->container['size']) {
-            $invalidProperties[] = "'size' can't be null";
-        }
-        if (!isset($this->container['metric']) || null === $this->container['metric']) {
-            $invalidProperties[] = "'metric' can't be null";
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -171,49 +178,97 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
     }
 
     /**
-     * Gets size.
+     * Gets probabilityToBeBetter.
      *
-     * @return float
+     * @return null|float
      */
-    public function getSize()
+    public function getProbabilityToBeBetter()
     {
-        return $this->container['size'] ?? null;
+        return $this->container['probabilityToBeBetter'] ?? null;
     }
 
     /**
-     * Sets size.
+     * Sets probabilityToBeBetter.
      *
-     * @param float $size Smallest difference in an observable metric between variants. For example, to detect a 10% difference between variants, set this value to 0.1.
+     * @param null|float $probabilityToBeBetter probability that this variant is better than the control
      *
      * @return self
      */
-    public function setSize($size)
+    public function setProbabilityToBeBetter($probabilityToBeBetter)
     {
-        $this->container['size'] = $size;
+        $this->container['probabilityToBeBetter'] = $probabilityToBeBetter;
 
         return $this;
     }
 
     /**
-     * Gets metric.
+     * Gets relativeEffectCILow.
      *
-     * @return EffectMetric
+     * @return null|float
      */
-    public function getMetric()
+    public function getRelativeEffectCILow()
     {
-        return $this->container['metric'] ?? null;
+        return $this->container['relativeEffectCILow'] ?? null;
     }
 
     /**
-     * Sets metric.
+     * Sets relativeEffectCILow.
      *
-     * @param EffectMetric $metric metric
+     * @param null|float $relativeEffectCILow lower bound of the 95% credible interval for the relative effect (variant/control minus 1)
      *
      * @return self
      */
-    public function setMetric($metric)
+    public function setRelativeEffectCILow($relativeEffectCILow)
     {
-        $this->container['metric'] = $metric;
+        $this->container['relativeEffectCILow'] = $relativeEffectCILow;
+
+        return $this;
+    }
+
+    /**
+     * Gets relativeEffectCIHigh.
+     *
+     * @return null|float
+     */
+    public function getRelativeEffectCIHigh()
+    {
+        return $this->container['relativeEffectCIHigh'] ?? null;
+    }
+
+    /**
+     * Sets relativeEffectCIHigh.
+     *
+     * @param null|float $relativeEffectCIHigh upper bound of the 95% credible interval for the relative effect (variant/control minus 1)
+     *
+     * @return self
+     */
+    public function setRelativeEffectCIHigh($relativeEffectCIHigh)
+    {
+        $this->container['relativeEffectCIHigh'] = $relativeEffectCIHigh;
+
+        return $this;
+    }
+
+    /**
+     * Gets evidence.
+     *
+     * @return null|MetricEvidence
+     */
+    public function getEvidence()
+    {
+        return $this->container['evidence'] ?? null;
+    }
+
+    /**
+     * Sets evidence.
+     *
+     * @param null|MetricEvidence $evidence evidence
+     *
+     * @return self
+     */
+    public function setEvidence($evidence)
+    {
+        $this->container['evidence'] = $evidence;
 
         return $this;
     }

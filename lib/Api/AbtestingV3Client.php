@@ -282,13 +282,14 @@ class AbtestingV3Client
      *  - analytics
      *
      * @param int   $id             Unique A/B test identifier. (required)
+     * @param array $methods        Statistical analysis results to include, as a comma-separated list. When omitted, each test uses its configured method, or `frequentist` if no method is configured. Request both methods to include both sets of available results. This doesn't change the test configuration or compute missing results. Duplicate values aren't allowed. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return ABTest|array<string, mixed>
      */
-    public function getABTest($id, $requestOptions = [])
+    public function getABTest($id, $methods = null, $requestOptions = [])
     {
-        $response = $this->getABTestWithHttpInfo($id, $requestOptions);
+        $response = $this->getABTestWithHttpInfo($id, $methods, $requestOptions);
 
         return $response->getData();
     }
@@ -321,13 +322,14 @@ class AbtestingV3Client
      * @param string $startDate      Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param string $endDate        End date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param array  $metric         List of metrics to retrieve. If not specified, all metrics are returned. (optional)
+     * @param array  $methods        Statistical analysis results to include, as a comma-separated list. When omitted, each test uses its configured method, or `frequentist` if no method is configured. Request both methods to include both sets of available results. This doesn't change the test configuration or compute missing results. Duplicate values aren't allowed. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|Timeseries
      */
-    public function getTimeseries($id, $startDate = null, $endDate = null, $metric = null, $requestOptions = [])
+    public function getTimeseries($id, $startDate = null, $endDate = null, $metric = null, $methods = null, $requestOptions = [])
     {
-        $response = $this->getTimeseriesWithHttpInfo($id, $startDate, $endDate, $metric, $requestOptions);
+        $response = $this->getTimeseriesWithHttpInfo($id, $startDate, $endDate, $metric, $methods, $requestOptions);
 
         return $response->getData();
     }
@@ -343,13 +345,14 @@ class AbtestingV3Client
      * @param string $indexPrefix    Index name prefix. Only A/B tests for indices starting with this string are included in the response. (optional)
      * @param string $indexSuffix    Index name suffix. Only A/B tests for indices ending with this string are included in the response. (optional)
      * @param array  $direction      Sort order for A/B tests by start date. Use 'asc' for ascending or 'desc' for descending. Active A/B tests are always listed first. (optional)
+     * @param array  $methods        Statistical analysis results to include, as a comma-separated list. When omitted, each test uses its configured method, or `frequentist` if no method is configured. Request both methods to include both sets of available results. This doesn't change the test configuration or compute missing results. Duplicate values aren't allowed. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|ListABTestsResponse
      */
-    public function listABTests($offset = null, $limit = null, $indexPrefix = null, $indexSuffix = null, $direction = null, $requestOptions = [])
+    public function listABTests($offset = null, $limit = null, $indexPrefix = null, $indexSuffix = null, $direction = null, $methods = null, $requestOptions = [])
     {
-        $response = $this->listABTestsWithHttpInfo($offset, $limit, $indexPrefix, $indexSuffix, $direction, $requestOptions);
+        $response = $this->listABTestsWithHttpInfo($offset, $limit, $indexPrefix, $indexSuffix, $direction, $methods, $requestOptions);
 
         return $response->getData();
     }
@@ -753,11 +756,12 @@ class AbtestingV3Client
      *  - analytics
      *
      * @param int   $id             Unique A/B test identifier. (required)
+     * @param array $methods        Statistical analysis results to include, as a comma-separated list. When omitted, each test uses its configured method, or `frequentist` if no method is configured. Request both methods to include both sets of available results. This doesn't change the test configuration or compute missing results. Duplicate values aren't allowed. (optional)
      * @param array $requestOptions Request options
      *
      * @return AlgoliaResponse
      */
-    public function getABTestWithHttpInfo($id, $requestOptions = [])
+    public function getABTestWithHttpInfo($id, $methods = null, $requestOptions = [])
     {
         // verify the required parameter 'id' is set
         if (!isset($id)) {
@@ -770,6 +774,13 @@ class AbtestingV3Client
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
+
+        if (is_array($methods)) {
+            $methods = ObjectSerializer::serializeCollection($methods, 'form', true);
+        }
+        if (null !== $methods) {
+            $queryParameters['methods'] = $methods;
+        }
 
         // path params
         if (null !== $id) {
@@ -834,11 +845,12 @@ class AbtestingV3Client
      * @param string $startDate      Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param string $endDate        End date of the period to analyze, in `YYYY-MM-DD` format. (optional)
      * @param array  $metric         List of metrics to retrieve. If not specified, all metrics are returned. (optional)
+     * @param array  $methods        Statistical analysis results to include, as a comma-separated list. When omitted, each test uses its configured method, or `frequentist` if no method is configured. Request both methods to include both sets of available results. This doesn't change the test configuration or compute missing results. Duplicate values aren't allowed. (optional)
      * @param array  $requestOptions Request options
      *
      * @return AlgoliaResponse
      */
-    public function getTimeseriesWithHttpInfo($id, $startDate = null, $endDate = null, $metric = null, $requestOptions = [])
+    public function getTimeseriesWithHttpInfo($id, $startDate = null, $endDate = null, $metric = null, $methods = null, $requestOptions = [])
     {
         // verify the required parameter 'id' is set
         if (!isset($id)) {
@@ -862,6 +874,13 @@ class AbtestingV3Client
 
         if (null !== $metric) {
             $queryParameters['metric'] = $metric;
+        }
+
+        if (is_array($methods)) {
+            $methods = ObjectSerializer::serializeCollection($methods, 'form', true);
+        }
+        if (null !== $methods) {
+            $queryParameters['methods'] = $methods;
         }
 
         // path params
@@ -889,11 +908,12 @@ class AbtestingV3Client
      * @param string $indexPrefix    Index name prefix. Only A/B tests for indices starting with this string are included in the response. (optional)
      * @param string $indexSuffix    Index name suffix. Only A/B tests for indices ending with this string are included in the response. (optional)
      * @param array  $direction      Sort order for A/B tests by start date. Use 'asc' for ascending or 'desc' for descending. Active A/B tests are always listed first. (optional)
+     * @param array  $methods        Statistical analysis results to include, as a comma-separated list. When omitted, each test uses its configured method, or `frequentist` if no method is configured. Request both methods to include both sets of available results. This doesn't change the test configuration or compute missing results. Duplicate values aren't allowed. (optional)
      * @param array  $requestOptions Request options
      *
      * @return AlgoliaResponse
      */
-    public function listABTestsWithHttpInfo($offset = null, $limit = null, $indexPrefix = null, $indexSuffix = null, $direction = null, $requestOptions = [])
+    public function listABTestsWithHttpInfo($offset = null, $limit = null, $indexPrefix = null, $indexSuffix = null, $direction = null, $methods = null, $requestOptions = [])
     {
         $resourcePath = '/3/abtests';
         $queryParameters = [];
@@ -918,6 +938,13 @@ class AbtestingV3Client
 
         if (null !== $direction) {
             $queryParameters['direction'] = $direction;
+        }
+
+        if (is_array($methods)) {
+            $methods = ObjectSerializer::serializeCollection($methods, 'form', true);
+        }
+        if (null !== $methods) {
+            $queryParameters['methods'] = $methods;
         }
 
         return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);

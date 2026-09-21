@@ -24,6 +24,8 @@ class MetricName
 
     public const NO_RESULT_COUNT = 'no_result_count';
 
+    public const TRACKED_NO_RESULT_COUNT = 'tracked_no_result_count';
+
     public const ADD_TO_CART_COUNT = 'add_to_cart_count';
 
     public const PURCHASE_COUNT = 'purchase_count';
@@ -44,6 +46,10 @@ class MetricName
 
     public const REVENUE = 'revenue';
 
+    public const REVENUE_PER_SEARCH = 'revenue_per_search';
+
+    public const AVERAGE_ORDER_VALUE = 'average_order_value';
+
     /**
      * Gets allowable values of the enum.
      *
@@ -57,6 +63,7 @@ class MetricName
             self::USER_COUNT,
             self::TRACKED_USER_COUNT,
             self::NO_RESULT_COUNT,
+            self::TRACKED_NO_RESULT_COUNT,
             self::ADD_TO_CART_COUNT,
             self::PURCHASE_COUNT,
             self::CLICKED_SEARCH_COUNT,
@@ -67,6 +74,8 @@ class MetricName
             self::PURCHASE_RATE,
             self::AVERAGE_CLICK_POSITION,
             self::REVENUE,
+            self::REVENUE_PER_SEARCH,
+            self::AVERAGE_ORDER_VALUE,
         ];
     }
 }

@@ -8,11 +8,11 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * RequestBody Class Doc Comment.
+ * MainExternalProvider Class Doc Comment.
  *
  * @category Class
  */
-class RequestBody extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class MainExternalProvider extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -20,9 +20,11 @@ class RequestBody extends AbstractModel implements ModelInterface, \ArrayAccess,
      * @var string[]
      */
     protected static $modelTypes = [
-        'params' => '\Algolia\AlgoliaSearch\Model\Composition\Params',
-        'feedsOrder' => 'string[]',
-        'externalProvider' => '\Algolia\AlgoliaSearch\Model\Composition\ExternalProvider',
+        'index' => 'string',
+        'configurationID' => 'string',
+        'configurationParams' => 'array<string,mixed>',
+        'params' => '\Algolia\AlgoliaSearch\Model\Composition\MainInjectionQueryParameters',
+        'ordering' => '\Algolia\AlgoliaSearch\Model\Composition\ExternalProviderOrdering',
     ];
 
     /**
@@ -31,9 +33,11 @@ class RequestBody extends AbstractModel implements ModelInterface, \ArrayAccess,
      * @var string[]
      */
     protected static $modelFormats = [
+        'index' => null,
+        'configurationID' => null,
+        'configurationParams' => null,
         'params' => null,
-        'feedsOrder' => null,
-        'externalProvider' => null,
+        'ordering' => null,
     ];
 
     /**
@@ -43,9 +47,11 @@ class RequestBody extends AbstractModel implements ModelInterface, \ArrayAccess,
      * @var string[]
      */
     protected static $attributeMap = [
+        'index' => 'index',
+        'configurationID' => 'configurationID',
+        'configurationParams' => 'configurationParams',
         'params' => 'params',
-        'feedsOrder' => 'feedsOrder',
-        'externalProvider' => 'externalProvider',
+        'ordering' => 'ordering',
     ];
 
     /**
@@ -54,9 +60,11 @@ class RequestBody extends AbstractModel implements ModelInterface, \ArrayAccess,
      * @var string[]
      */
     protected static $setters = [
+        'index' => 'setIndex',
+        'configurationID' => 'setConfigurationID',
+        'configurationParams' => 'setConfigurationParams',
         'params' => 'setParams',
-        'feedsOrder' => 'setFeedsOrder',
-        'externalProvider' => 'setExternalProvider',
+        'ordering' => 'setOrdering',
     ];
 
     /**
@@ -65,9 +73,11 @@ class RequestBody extends AbstractModel implements ModelInterface, \ArrayAccess,
      * @var string[]
      */
     protected static $getters = [
+        'index' => 'getIndex',
+        'configurationID' => 'getConfigurationID',
+        'configurationParams' => 'getConfigurationParams',
         'params' => 'getParams',
-        'feedsOrder' => 'getFeedsOrder',
-        'externalProvider' => 'getExternalProvider',
+        'ordering' => 'getOrdering',
     ];
 
     /**
@@ -84,14 +94,20 @@ class RequestBody extends AbstractModel implements ModelInterface, \ArrayAccess,
      */
     public function __construct(?array $data = null)
     {
+        if (isset($data['index'])) {
+            $this->container['index'] = $data['index'];
+        }
+        if (isset($data['configurationID'])) {
+            $this->container['configurationID'] = $data['configurationID'];
+        }
+        if (isset($data['configurationParams'])) {
+            $this->container['configurationParams'] = $data['configurationParams'];
+        }
         if (isset($data['params'])) {
             $this->container['params'] = $data['params'];
         }
-        if (isset($data['feedsOrder'])) {
-            $this->container['feedsOrder'] = $data['feedsOrder'];
-        }
-        if (isset($data['externalProvider'])) {
-            $this->container['externalProvider'] = $data['externalProvider'];
+        if (isset($data['ordering'])) {
+            $this->container['ordering'] = $data['ordering'];
         }
     }
 
@@ -153,7 +169,16 @@ class RequestBody extends AbstractModel implements ModelInterface, \ArrayAccess,
      */
     public function listInvalidProperties()
     {
-        return [];
+        $invalidProperties = [];
+
+        if (!isset($this->container['index']) || null === $this->container['index']) {
+            $invalidProperties[] = "'index' can't be null";
+        }
+        if (!isset($this->container['configurationID']) || null === $this->container['configurationID']) {
+            $invalidProperties[] = "'configurationID' can't be null";
+        }
+
+        return $invalidProperties;
     }
 
     /**
@@ -168,9 +193,81 @@ class RequestBody extends AbstractModel implements ModelInterface, \ArrayAccess,
     }
 
     /**
+     * Gets index.
+     *
+     * @return string
+     */
+    public function getIndex()
+    {
+        return $this->container['index'] ?? null;
+    }
+
+    /**
+     * Sets index.
+     *
+     * @param string $index algolia index used to fetch the records
+     *
+     * @return self
+     */
+    public function setIndex($index)
+    {
+        $this->container['index'] = $index;
+
+        return $this;
+    }
+
+    /**
+     * Gets configurationID.
+     *
+     * @return string
+     */
+    public function getConfigurationID()
+    {
+        return $this->container['configurationID'] ?? null;
+    }
+
+    /**
+     * Sets configurationID.
+     *
+     * @param string $configurationID identifier of the external provider configuration
+     *
+     * @return self
+     */
+    public function setConfigurationID($configurationID)
+    {
+        $this->container['configurationID'] = $configurationID;
+
+        return $this;
+    }
+
+    /**
+     * Gets configurationParams.
+     *
+     * @return null|array<string,mixed>
+     */
+    public function getConfigurationParams()
+    {
+        return $this->container['configurationParams'] ?? null;
+    }
+
+    /**
+     * Sets configurationParams.
+     *
+     * @param null|array<string,mixed> $configurationParams default values for the configuration placeholders that are not reserved Composition placeholders
+     *
+     * @return self
+     */
+    public function setConfigurationParams($configurationParams)
+    {
+        $this->container['configurationParams'] = $configurationParams;
+
+        return $this;
+    }
+
+    /**
      * Gets params.
      *
-     * @return null|Params
+     * @return null|MainInjectionQueryParameters
      */
     public function getParams()
     {
@@ -180,7 +277,7 @@ class RequestBody extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets params.
      *
-     * @param null|Params $params params
+     * @param null|MainInjectionQueryParameters $params params
      *
      * @return self
      */
@@ -192,49 +289,25 @@ class RequestBody extends AbstractModel implements ModelInterface, \ArrayAccess,
     }
 
     /**
-     * Gets feedsOrder.
+     * Gets ordering.
      *
-     * @return null|string[]
+     * @return null|ExternalProviderOrdering
      */
-    public function getFeedsOrder()
+    public function getOrdering()
     {
-        return $this->container['feedsOrder'] ?? null;
+        return $this->container['ordering'] ?? null;
     }
 
     /**
-     * Sets feedsOrder.
+     * Sets ordering.
      *
-     * @param null|string[] $feedsOrder A list of Feed IDs that specifies the order in which to order the results in the response.  The IDs should be a subset of those in the `feeds` object of the targeted `multifeed` Composition / Composition Rule, and only those specified will be processed.   The value overrides the value in the defined behavior, and when unspecified, the value defined in the behavior is used. When neither value is present, all feeds are processed.
+     * @param null|ExternalProviderOrdering $ordering ordering
      *
      * @return self
      */
-    public function setFeedsOrder($feedsOrder)
+    public function setOrdering($ordering)
     {
-        $this->container['feedsOrder'] = $feedsOrder;
-
-        return $this;
-    }
-
-    /**
-     * Gets externalProvider.
-     *
-     * @return null|ExternalProvider
-     */
-    public function getExternalProvider()
-    {
-        return $this->container['externalProvider'] ?? null;
-    }
-
-    /**
-     * Sets externalProvider.
-     *
-     * @param null|ExternalProvider $externalProvider externalProvider
-     *
-     * @return self
-     */
-    public function setExternalProvider($externalProvider)
-    {
-        $this->container['externalProvider'] = $externalProvider;
+        $this->container['ordering'] = $ordering;
 
         return $this;
     }

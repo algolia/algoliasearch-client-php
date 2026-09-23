@@ -23,6 +23,7 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
         'search' => '\Algolia\AlgoliaSearch\Model\Composition\InjectedItemSearch',
         'external' => '\Algolia\AlgoliaSearch\Model\Composition\InjectedItemExternal',
         'recommend' => '\Algolia\AlgoliaSearch\Model\Composition\Recommend',
+        'externalProvider' => '\Algolia\AlgoliaSearch\Model\Composition\InjectedItemExternalProvider',
     ];
 
     /**
@@ -34,6 +35,7 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
         'search' => null,
         'external' => null,
         'recommend' => null,
+        'externalProvider' => null,
     ];
 
     /**
@@ -46,6 +48,7 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
         'search' => 'search',
         'external' => 'external',
         'recommend' => 'recommend',
+        'externalProvider' => 'externalProvider',
     ];
 
     /**
@@ -57,6 +60,7 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
         'search' => 'setSearch',
         'external' => 'setExternal',
         'recommend' => 'setRecommend',
+        'externalProvider' => 'setExternalProvider',
     ];
 
     /**
@@ -68,6 +72,7 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
         'search' => 'getSearch',
         'external' => 'getExternal',
         'recommend' => 'getRecommend',
+        'externalProvider' => 'getExternalProvider',
     ];
 
     /**
@@ -92,6 +97,9 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
         }
         if (isset($data['recommend'])) {
             $this->container['recommend'] = $data['recommend'];
+        }
+        if (isset($data['externalProvider'])) {
+            $this->container['externalProvider'] = $data['externalProvider'];
         }
     }
 
@@ -163,6 +171,9 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
         }
         if (!isset($this->container['recommend']) || null === $this->container['recommend']) {
             $invalidProperties[] = "'recommend' can't be null";
+        }
+        if (!isset($this->container['externalProvider']) || null === $this->container['externalProvider']) {
+            $invalidProperties[] = "'externalProvider' can't be null";
         }
 
         return $invalidProperties;
@@ -247,6 +258,30 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
     public function setRecommend($recommend)
     {
         $this->container['recommend'] = $recommend;
+
+        return $this;
+    }
+
+    /**
+     * Gets externalProvider.
+     *
+     * @return InjectedItemExternalProvider
+     */
+    public function getExternalProvider()
+    {
+        return $this->container['externalProvider'] ?? null;
+    }
+
+    /**
+     * Sets externalProvider.
+     *
+     * @param InjectedItemExternalProvider $externalProvider externalProvider
+     *
+     * @return self
+     */
+    public function setExternalProvider($externalProvider)
+    {
+        $this->container['externalProvider'] = $externalProvider;
 
         return $this;
     }

@@ -22,6 +22,7 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     protected static $modelTypes = [
         'compositions' => '\Algolia\AlgoliaSearch\Model\Composition\CompositionsSearchResponse',
         'results' => '\Algolia\AlgoliaSearch\Model\Composition\SearchResultsItem[]',
+        'errors' => '\Algolia\AlgoliaSearch\Model\Composition\ProcessingError[]',
     ];
 
     /**
@@ -32,6 +33,7 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     protected static $modelFormats = [
         'compositions' => null,
         'results' => null,
+        'errors' => null,
     ];
 
     /**
@@ -43,6 +45,7 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     protected static $attributeMap = [
         'compositions' => 'compositions',
         'results' => 'results',
+        'errors' => 'errors',
     ];
 
     /**
@@ -53,6 +56,7 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     protected static $setters = [
         'compositions' => 'setCompositions',
         'results' => 'setResults',
+        'errors' => 'setErrors',
     ];
 
     /**
@@ -63,6 +67,7 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     protected static $getters = [
         'compositions' => 'getCompositions',
         'results' => 'getResults',
+        'errors' => 'getErrors',
     ];
 
     /**
@@ -84,6 +89,9 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
         }
         if (isset($data['results'])) {
             $this->container['results'] = $data['results'];
+        }
+        if (isset($data['errors'])) {
+            $this->container['errors'] = $data['errors'];
         }
     }
 
@@ -209,6 +217,30 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     public function setResults($results)
     {
         $this->container['results'] = $results;
+
+        return $this;
+    }
+
+    /**
+     * Gets errors.
+     *
+     * @return null|ProcessingError[]
+     */
+    public function getErrors()
+    {
+        return $this->container['errors'] ?? null;
+    }
+
+    /**
+     * Sets errors.
+     *
+     * @param null|ProcessingError[] $errors non-critical errors encountered while processing the request that may have affected the returned results (for example, an external provider failure that fell back to another result set)
+     *
+     * @return self
+     */
+    public function setErrors($errors)
+    {
+        $this->container['errors'] = $errors;
 
         return $this;
     }

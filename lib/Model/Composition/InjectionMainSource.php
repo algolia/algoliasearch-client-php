@@ -24,6 +24,7 @@ class InjectionMainSource extends AbstractModel implements ModelInterface, \Arra
     protected static $modelTypes = [
         'search' => '\Algolia\AlgoliaSearch\Model\Composition\MainSearch',
         'recommend' => '\Algolia\AlgoliaSearch\Model\Composition\MainRecommend',
+        'externalProvider' => '\Algolia\AlgoliaSearch\Model\Composition\MainExternalProvider',
     ];
 
     /**
@@ -34,6 +35,7 @@ class InjectionMainSource extends AbstractModel implements ModelInterface, \Arra
     protected static $modelFormats = [
         'search' => null,
         'recommend' => null,
+        'externalProvider' => null,
     ];
 
     /**
@@ -45,6 +47,7 @@ class InjectionMainSource extends AbstractModel implements ModelInterface, \Arra
     protected static $attributeMap = [
         'search' => 'search',
         'recommend' => 'recommend',
+        'externalProvider' => 'externalProvider',
     ];
 
     /**
@@ -55,6 +58,7 @@ class InjectionMainSource extends AbstractModel implements ModelInterface, \Arra
     protected static $setters = [
         'search' => 'setSearch',
         'recommend' => 'setRecommend',
+        'externalProvider' => 'setExternalProvider',
     ];
 
     /**
@@ -65,6 +69,7 @@ class InjectionMainSource extends AbstractModel implements ModelInterface, \Arra
     protected static $getters = [
         'search' => 'getSearch',
         'recommend' => 'getRecommend',
+        'externalProvider' => 'getExternalProvider',
     ];
 
     /**
@@ -86,6 +91,9 @@ class InjectionMainSource extends AbstractModel implements ModelInterface, \Arra
         }
         if (isset($data['recommend'])) {
             $this->container['recommend'] = $data['recommend'];
+        }
+        if (isset($data['externalProvider'])) {
+            $this->container['externalProvider'] = $data['externalProvider'];
         }
     }
 
@@ -155,6 +163,9 @@ class InjectionMainSource extends AbstractModel implements ModelInterface, \Arra
         if (!isset($this->container['recommend']) || null === $this->container['recommend']) {
             $invalidProperties[] = "'recommend' can't be null";
         }
+        if (!isset($this->container['externalProvider']) || null === $this->container['externalProvider']) {
+            $invalidProperties[] = "'externalProvider' can't be null";
+        }
 
         return $invalidProperties;
     }
@@ -214,6 +225,30 @@ class InjectionMainSource extends AbstractModel implements ModelInterface, \Arra
     public function setRecommend($recommend)
     {
         $this->container['recommend'] = $recommend;
+
+        return $this;
+    }
+
+    /**
+     * Gets externalProvider.
+     *
+     * @return MainExternalProvider
+     */
+    public function getExternalProvider()
+    {
+        return $this->container['externalProvider'] ?? null;
+    }
+
+    /**
+     * Sets externalProvider.
+     *
+     * @param MainExternalProvider $externalProvider externalProvider
+     *
+     * @return self
+     */
+    public function setExternalProvider($externalProvider)
+    {
+        $this->container['externalProvider'] = $externalProvider;
 
         return $this;
     }

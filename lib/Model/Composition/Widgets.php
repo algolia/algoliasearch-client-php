@@ -23,6 +23,7 @@ class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
      */
     protected static $modelTypes = [
         'banners' => '\Algolia\AlgoliaSearch\Model\Composition\Banner[]',
+        'resultCard' => '\Algolia\AlgoliaSearch\Model\Composition\ResultCard',
     ];
 
     /**
@@ -32,6 +33,7 @@ class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
      */
     protected static $modelFormats = [
         'banners' => null,
+        'resultCard' => null,
     ];
 
     /**
@@ -42,6 +44,7 @@ class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
      */
     protected static $attributeMap = [
         'banners' => 'banners',
+        'resultCard' => 'resultCard',
     ];
 
     /**
@@ -51,6 +54,7 @@ class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
      */
     protected static $setters = [
         'banners' => 'setBanners',
+        'resultCard' => 'setResultCard',
     ];
 
     /**
@@ -60,6 +64,7 @@ class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
      */
     protected static $getters = [
         'banners' => 'getBanners',
+        'resultCard' => 'getResultCard',
     ];
 
     /**
@@ -78,6 +83,9 @@ class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     {
         if (isset($data['banners'])) {
             $this->container['banners'] = $data['banners'];
+        }
+        if (isset($data['resultCard'])) {
+            $this->container['resultCard'] = $data['resultCard'];
         }
     }
 
@@ -173,6 +181,30 @@ class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     public function setBanners($banners)
     {
         $this->container['banners'] = $banners;
+
+        return $this;
+    }
+
+    /**
+     * Gets resultCard.
+     *
+     * @return null|ResultCard
+     */
+    public function getResultCard()
+    {
+        return $this->container['resultCard'] ?? null;
+    }
+
+    /**
+     * Sets resultCard.
+     *
+     * @param null|ResultCard $resultCard resultCard
+     *
+     * @return self
+     */
+    public function setResultCard($resultCard)
+    {
+        $this->container['resultCard'] = $resultCard;
 
         return $this;
     }

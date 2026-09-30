@@ -8,13 +8,13 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * Widgets Class Doc Comment.
+ * ResultCard Class Doc Comment.
  *
  * @category Class
  *
- * @description Widgets returned from any rules that are applied to the current search.
+ * @description Agent Studio Result Card to display for a given search.
  */
-class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ResultCard extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -22,8 +22,7 @@ class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
      * @var string[]
      */
     protected static $modelTypes = [
-        'banners' => '\Algolia\AlgoliaSearch\Model\Recommend\Banner[]',
-        'resultCard' => '\Algolia\AlgoliaSearch\Model\Recommend\ResultCard',
+        'enabled' => 'bool',
     ];
 
     /**
@@ -32,8 +31,7 @@ class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
      * @var string[]
      */
     protected static $modelFormats = [
-        'banners' => null,
-        'resultCard' => null,
+        'enabled' => null,
     ];
 
     /**
@@ -43,8 +41,7 @@ class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
      * @var string[]
      */
     protected static $attributeMap = [
-        'banners' => 'banners',
-        'resultCard' => 'resultCard',
+        'enabled' => 'enabled',
     ];
 
     /**
@@ -53,8 +50,7 @@ class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
      * @var string[]
      */
     protected static $setters = [
-        'banners' => 'setBanners',
-        'resultCard' => 'setResultCard',
+        'enabled' => 'setEnabled',
     ];
 
     /**
@@ -63,8 +59,7 @@ class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
      * @var string[]
      */
     protected static $getters = [
-        'banners' => 'getBanners',
-        'resultCard' => 'getResultCard',
+        'enabled' => 'getEnabled',
     ];
 
     /**
@@ -81,11 +76,8 @@ class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['banners'])) {
-            $this->container['banners'] = $data['banners'];
-        }
-        if (isset($data['resultCard'])) {
-            $this->container['resultCard'] = $data['resultCard'];
+        if (isset($data['enabled'])) {
+            $this->container['enabled'] = $data['enabled'];
         }
     }
 
@@ -162,49 +154,25 @@ class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     }
 
     /**
-     * Gets banners.
+     * Gets enabled.
      *
-     * @return null|Banner[]
+     * @return null|bool
      */
-    public function getBanners()
+    public function getEnabled()
     {
-        return $this->container['banners'] ?? null;
+        return $this->container['enabled'] ?? null;
     }
 
     /**
-     * Sets banners.
+     * Sets enabled.
      *
-     * @param null|Banner[] $banners banners defined in the Merchandising Studio for a given search
+     * @param null|bool $enabled whether to show the Result Card for the current search
      *
      * @return self
      */
-    public function setBanners($banners)
+    public function setEnabled($enabled)
     {
-        $this->container['banners'] = $banners;
-
-        return $this;
-    }
-
-    /**
-     * Gets resultCard.
-     *
-     * @return null|ResultCard
-     */
-    public function getResultCard()
-    {
-        return $this->container['resultCard'] ?? null;
-    }
-
-    /**
-     * Sets resultCard.
-     *
-     * @param null|ResultCard $resultCard resultCard
-     *
-     * @return self
-     */
-    public function setResultCard($resultCard)
-    {
-        $this->container['resultCard'] = $resultCard;
+        $this->container['enabled'] = $enabled;
 
         return $this;
     }

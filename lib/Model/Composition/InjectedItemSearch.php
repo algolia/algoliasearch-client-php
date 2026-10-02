@@ -178,7 +178,7 @@ class InjectedItemSearch extends AbstractModel implements ModelInterface, \Array
     /**
      * Sets index.
      *
-     * @param string $index composition Index name
+     * @param string $index algolia index used to retrieve records
      *
      * @return self
      */

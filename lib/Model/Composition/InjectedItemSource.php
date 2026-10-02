@@ -22,7 +22,7 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
     protected static $modelTypes = [
         'search' => '\Algolia\AlgoliaSearch\Model\Composition\InjectedItemSearch',
         'external' => '\Algolia\AlgoliaSearch\Model\Composition\InjectedItemExternal',
-        'recommend' => '\Algolia\AlgoliaSearch\Model\Composition\Recommend',
+        'recommend' => '\Algolia\AlgoliaSearch\Model\Composition\InjectedItemRecommend',
         'externalProvider' => '\Algolia\AlgoliaSearch\Model\Composition\InjectedItemExternalProvider',
     ];
 
@@ -241,7 +241,7 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
     /**
      * Gets recommend.
      *
-     * @return Recommend
+     * @return InjectedItemRecommend
      */
     public function getRecommend()
     {
@@ -251,7 +251,7 @@ class InjectedItemSource extends AbstractModel implements ModelInterface, \Array
     /**
      * Sets recommend.
      *
-     * @param Recommend $recommend recommend
+     * @param InjectedItemRecommend $recommend recommend
      *
      * @return self
      */

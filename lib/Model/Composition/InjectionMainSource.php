@@ -22,9 +22,9 @@ class InjectionMainSource extends AbstractModel implements ModelInterface, \Arra
      * @var string[]
      */
     protected static $modelTypes = [
-        'search' => '\Algolia\AlgoliaSearch\Model\Composition\MainSearch',
-        'recommend' => '\Algolia\AlgoliaSearch\Model\Composition\MainRecommend',
-        'externalProvider' => '\Algolia\AlgoliaSearch\Model\Composition\MainExternalProvider',
+        'search' => '\Algolia\AlgoliaSearch\Model\Composition\InjectionMainSearch',
+        'recommend' => '\Algolia\AlgoliaSearch\Model\Composition\InjectionMainRecommend',
+        'externalProvider' => '\Algolia\AlgoliaSearch\Model\Composition\InjectionMainExternalProvider',
     ];
 
     /**
@@ -184,7 +184,7 @@ class InjectionMainSource extends AbstractModel implements ModelInterface, \Arra
     /**
      * Gets search.
      *
-     * @return MainSearch
+     * @return InjectionMainSearch
      */
     public function getSearch()
     {
@@ -194,7 +194,7 @@ class InjectionMainSource extends AbstractModel implements ModelInterface, \Arra
     /**
      * Sets search.
      *
-     * @param MainSearch $search search
+     * @param InjectionMainSearch $search search
      *
      * @return self
      */
@@ -208,7 +208,7 @@ class InjectionMainSource extends AbstractModel implements ModelInterface, \Arra
     /**
      * Gets recommend.
      *
-     * @return MainRecommend
+     * @return InjectionMainRecommend
      */
     public function getRecommend()
     {
@@ -218,7 +218,7 @@ class InjectionMainSource extends AbstractModel implements ModelInterface, \Arra
     /**
      * Sets recommend.
      *
-     * @param MainRecommend $recommend recommend
+     * @param InjectionMainRecommend $recommend recommend
      *
      * @return self
      */
@@ -232,7 +232,7 @@ class InjectionMainSource extends AbstractModel implements ModelInterface, \Arra
     /**
      * Gets externalProvider.
      *
-     * @return MainExternalProvider
+     * @return InjectionMainExternalProvider
      */
     public function getExternalProvider()
     {
@@ -242,7 +242,7 @@ class InjectionMainSource extends AbstractModel implements ModelInterface, \Arra
     /**
      * Sets externalProvider.
      *
-     * @param MainExternalProvider $externalProvider externalProvider
+     * @param InjectionMainExternalProvider $externalProvider externalProvider
      *
      * @return self
      */

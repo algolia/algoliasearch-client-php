@@ -23,8 +23,8 @@ class InjectedItemExternalProvider extends AbstractModel implements ModelInterfa
         'index' => 'string',
         'configurationID' => 'string',
         'configurationParams' => 'array<string,mixed>',
-        'params' => '\Algolia\AlgoliaSearch\Model\Composition\BaseInjectionQueryParameters',
         'ordering' => '\Algolia\AlgoliaSearch\Model\Composition\ExternalProviderOrdering',
+        'params' => '\Algolia\AlgoliaSearch\Model\Composition\BaseInjectionQueryParameters',
     ];
 
     /**
@@ -36,8 +36,8 @@ class InjectedItemExternalProvider extends AbstractModel implements ModelInterfa
         'index' => null,
         'configurationID' => null,
         'configurationParams' => null,
-        'params' => null,
         'ordering' => null,
+        'params' => null,
     ];
 
     /**
@@ -50,8 +50,8 @@ class InjectedItemExternalProvider extends AbstractModel implements ModelInterfa
         'index' => 'index',
         'configurationID' => 'configurationID',
         'configurationParams' => 'configurationParams',
-        'params' => 'params',
         'ordering' => 'ordering',
+        'params' => 'params',
     ];
 
     /**
@@ -63,8 +63,8 @@ class InjectedItemExternalProvider extends AbstractModel implements ModelInterfa
         'index' => 'setIndex',
         'configurationID' => 'setConfigurationID',
         'configurationParams' => 'setConfigurationParams',
-        'params' => 'setParams',
         'ordering' => 'setOrdering',
+        'params' => 'setParams',
     ];
 
     /**
@@ -76,8 +76,8 @@ class InjectedItemExternalProvider extends AbstractModel implements ModelInterfa
         'index' => 'getIndex',
         'configurationID' => 'getConfigurationID',
         'configurationParams' => 'getConfigurationParams',
-        'params' => 'getParams',
         'ordering' => 'getOrdering',
+        'params' => 'getParams',
     ];
 
     /**
@@ -103,11 +103,11 @@ class InjectedItemExternalProvider extends AbstractModel implements ModelInterfa
         if (isset($data['configurationParams'])) {
             $this->container['configurationParams'] = $data['configurationParams'];
         }
-        if (isset($data['params'])) {
-            $this->container['params'] = $data['params'];
-        }
         if (isset($data['ordering'])) {
             $this->container['ordering'] = $data['ordering'];
+        }
+        if (isset($data['params'])) {
+            $this->container['params'] = $data['params'];
         }
     }
 
@@ -265,30 +265,6 @@ class InjectedItemExternalProvider extends AbstractModel implements ModelInterfa
     }
 
     /**
-     * Gets params.
-     *
-     * @return null|BaseInjectionQueryParameters
-     */
-    public function getParams()
-    {
-        return $this->container['params'] ?? null;
-    }
-
-    /**
-     * Sets params.
-     *
-     * @param null|BaseInjectionQueryParameters $params params
-     *
-     * @return self
-     */
-    public function setParams($params)
-    {
-        $this->container['params'] = $params;
-
-        return $this;
-    }
-
-    /**
      * Gets ordering.
      *
      * @return null|ExternalProviderOrdering
@@ -308,6 +284,30 @@ class InjectedItemExternalProvider extends AbstractModel implements ModelInterfa
     public function setOrdering($ordering)
     {
         $this->container['ordering'] = $ordering;
+
+        return $this;
+    }
+
+    /**
+     * Gets params.
+     *
+     * @return null|BaseInjectionQueryParameters
+     */
+    public function getParams()
+    {
+        return $this->container['params'] ?? null;
+    }
+
+    /**
+     * Sets params.
+     *
+     * @param null|BaseInjectionQueryParameters $params params
+     *
+     * @return self
+     */
+    public function setParams($params)
+    {
+        $this->container['params'] = $params;
 
         return $this;
     }

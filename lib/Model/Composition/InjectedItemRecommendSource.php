@@ -22,7 +22,7 @@ class InjectedItemRecommendSource extends AbstractModel implements ModelInterfac
      * @var string[]
      */
     protected static $modelTypes = [
-        'recommend' => '\Algolia\AlgoliaSearch\Model\Composition\Recommend',
+        'recommend' => '\Algolia\AlgoliaSearch\Model\Composition\InjectedItemRecommend',
     ];
 
     /**
@@ -162,7 +162,7 @@ class InjectedItemRecommendSource extends AbstractModel implements ModelInterfac
     /**
      * Gets recommend.
      *
-     * @return Recommend
+     * @return InjectedItemRecommend
      */
     public function getRecommend()
     {
@@ -172,7 +172,7 @@ class InjectedItemRecommendSource extends AbstractModel implements ModelInterfac
     /**
      * Sets recommend.
      *
-     * @param Recommend $recommend recommend
+     * @param InjectedItemRecommend $recommend recommend
      *
      * @return self
      */

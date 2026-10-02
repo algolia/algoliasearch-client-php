@@ -8,11 +8,11 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * MainSearch Class Doc Comment.
+ * InjectionMainSearch Class Doc Comment.
  *
  * @category Class
  */
-class MainSearch extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class InjectionMainSearch extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -178,7 +178,7 @@ class MainSearch extends AbstractModel implements ModelInterface, \ArrayAccess, 
     /**
      * Sets index.
      *
-     * @param string $index index to retrieve search results from
+     * @param string $index algolia index used to retrieve records
      *
      * @return self
      */

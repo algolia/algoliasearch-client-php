@@ -8,11 +8,11 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * Recommend Class Doc Comment.
+ * InjectionMainRecommend Class Doc Comment.
  *
  * @category Class
  */
-class Recommend extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class InjectionMainRecommend extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -23,8 +23,8 @@ class Recommend extends AbstractModel implements ModelInterface, \ArrayAccess, \
         'indexName' => 'string',
         'model' => '\Algolia\AlgoliaSearch\Model\Composition\Model',
         'threshold' => 'int',
-        'queryParameters' => '\Algolia\AlgoliaSearch\Model\Composition\BaseInjectionQueryParameters',
-        'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Composition\BaseInjectionQueryParameters',
+        'queryParameters' => '\Algolia\AlgoliaSearch\Model\Composition\MainInjectionQueryParameters',
+        'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Composition\MainInjectionQueryParameters',
     ];
 
     /**
@@ -270,7 +270,7 @@ class Recommend extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Gets queryParameters.
      *
-     * @return null|BaseInjectionQueryParameters
+     * @return null|MainInjectionQueryParameters
      */
     public function getQueryParameters()
     {
@@ -280,7 +280,7 @@ class Recommend extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Sets queryParameters.
      *
-     * @param null|BaseInjectionQueryParameters $queryParameters queryParameters
+     * @param null|MainInjectionQueryParameters $queryParameters queryParameters
      *
      * @return self
      */
@@ -294,7 +294,7 @@ class Recommend extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Gets fallbackParameters.
      *
-     * @return null|BaseInjectionQueryParameters
+     * @return null|MainInjectionQueryParameters
      */
     public function getFallbackParameters()
     {
@@ -304,7 +304,7 @@ class Recommend extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Sets fallbackParameters.
      *
-     * @param null|BaseInjectionQueryParameters $fallbackParameters fallbackParameters
+     * @param null|MainInjectionQueryParameters $fallbackParameters fallbackParameters
      *
      * @return self
      */

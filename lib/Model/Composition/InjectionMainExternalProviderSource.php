@@ -22,7 +22,7 @@ class InjectionMainExternalProviderSource extends AbstractModel implements Model
      * @var string[]
      */
     protected static $modelTypes = [
-        'externalProvider' => '\Algolia\AlgoliaSearch\Model\Composition\MainExternalProvider',
+        'externalProvider' => '\Algolia\AlgoliaSearch\Model\Composition\InjectionMainExternalProvider',
     ];
 
     /**
@@ -162,7 +162,7 @@ class InjectionMainExternalProviderSource extends AbstractModel implements Model
     /**
      * Gets externalProvider.
      *
-     * @return MainExternalProvider
+     * @return InjectionMainExternalProvider
      */
     public function getExternalProvider()
     {
@@ -172,7 +172,7 @@ class InjectionMainExternalProviderSource extends AbstractModel implements Model
     /**
      * Sets externalProvider.
      *
-     * @param MainExternalProvider $externalProvider externalProvider
+     * @param InjectionMainExternalProvider $externalProvider externalProvider
      *
      * @return self
      */

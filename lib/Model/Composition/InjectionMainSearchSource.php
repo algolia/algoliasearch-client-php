@@ -22,7 +22,7 @@ class InjectionMainSearchSource extends AbstractModel implements ModelInterface,
      * @var string[]
      */
     protected static $modelTypes = [
-        'search' => '\Algolia\AlgoliaSearch\Model\Composition\MainSearch',
+        'search' => '\Algolia\AlgoliaSearch\Model\Composition\InjectionMainSearch',
     ];
 
     /**
@@ -162,7 +162,7 @@ class InjectionMainSearchSource extends AbstractModel implements ModelInterface,
     /**
      * Gets search.
      *
-     * @return MainSearch
+     * @return InjectionMainSearch
      */
     public function getSearch()
     {
@@ -172,7 +172,7 @@ class InjectionMainSearchSource extends AbstractModel implements ModelInterface,
     /**
      * Sets search.
      *
-     * @param MainSearch $search search
+     * @param InjectionMainSearch $search search
      *
      * @return self
      */

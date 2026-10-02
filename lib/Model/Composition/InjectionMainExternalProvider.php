@@ -8,11 +8,11 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * MainExternalProvider Class Doc Comment.
+ * InjectionMainExternalProvider Class Doc Comment.
  *
  * @category Class
  */
-class MainExternalProvider extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class InjectionMainExternalProvider extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -23,8 +23,8 @@ class MainExternalProvider extends AbstractModel implements ModelInterface, \Arr
         'index' => 'string',
         'configurationID' => 'string',
         'configurationParams' => 'array<string,mixed>',
-        'params' => '\Algolia\AlgoliaSearch\Model\Composition\MainInjectionQueryParameters',
         'ordering' => '\Algolia\AlgoliaSearch\Model\Composition\ExternalProviderOrdering',
+        'params' => '\Algolia\AlgoliaSearch\Model\Composition\MainInjectionQueryParameters',
     ];
 
     /**
@@ -36,8 +36,8 @@ class MainExternalProvider extends AbstractModel implements ModelInterface, \Arr
         'index' => null,
         'configurationID' => null,
         'configurationParams' => null,
-        'params' => null,
         'ordering' => null,
+        'params' => null,
     ];
 
     /**
@@ -50,8 +50,8 @@ class MainExternalProvider extends AbstractModel implements ModelInterface, \Arr
         'index' => 'index',
         'configurationID' => 'configurationID',
         'configurationParams' => 'configurationParams',
-        'params' => 'params',
         'ordering' => 'ordering',
+        'params' => 'params',
     ];
 
     /**
@@ -63,8 +63,8 @@ class MainExternalProvider extends AbstractModel implements ModelInterface, \Arr
         'index' => 'setIndex',
         'configurationID' => 'setConfigurationID',
         'configurationParams' => 'setConfigurationParams',
-        'params' => 'setParams',
         'ordering' => 'setOrdering',
+        'params' => 'setParams',
     ];
 
     /**
@@ -76,8 +76,8 @@ class MainExternalProvider extends AbstractModel implements ModelInterface, \Arr
         'index' => 'getIndex',
         'configurationID' => 'getConfigurationID',
         'configurationParams' => 'getConfigurationParams',
-        'params' => 'getParams',
         'ordering' => 'getOrdering',
+        'params' => 'getParams',
     ];
 
     /**
@@ -103,11 +103,11 @@ class MainExternalProvider extends AbstractModel implements ModelInterface, \Arr
         if (isset($data['configurationParams'])) {
             $this->container['configurationParams'] = $data['configurationParams'];
         }
-        if (isset($data['params'])) {
-            $this->container['params'] = $data['params'];
-        }
         if (isset($data['ordering'])) {
             $this->container['ordering'] = $data['ordering'];
+        }
+        if (isset($data['params'])) {
+            $this->container['params'] = $data['params'];
         }
     }
 
@@ -265,30 +265,6 @@ class MainExternalProvider extends AbstractModel implements ModelInterface, \Arr
     }
 
     /**
-     * Gets params.
-     *
-     * @return null|MainInjectionQueryParameters
-     */
-    public function getParams()
-    {
-        return $this->container['params'] ?? null;
-    }
-
-    /**
-     * Sets params.
-     *
-     * @param null|MainInjectionQueryParameters $params params
-     *
-     * @return self
-     */
-    public function setParams($params)
-    {
-        $this->container['params'] = $params;
-
-        return $this;
-    }
-
-    /**
      * Gets ordering.
      *
      * @return null|ExternalProviderOrdering
@@ -308,6 +284,30 @@ class MainExternalProvider extends AbstractModel implements ModelInterface, \Arr
     public function setOrdering($ordering)
     {
         $this->container['ordering'] = $ordering;
+
+        return $this;
+    }
+
+    /**
+     * Gets params.
+     *
+     * @return null|MainInjectionQueryParameters
+     */
+    public function getParams()
+    {
+        return $this->container['params'] ?? null;
+    }
+
+    /**
+     * Sets params.
+     *
+     * @param null|MainInjectionQueryParameters $params params
+     *
+     * @return self
+     */
+    public function setParams($params)
+    {
+        $this->container['params'] = $params;
 
         return $this;
     }

@@ -21,8 +21,8 @@ class InjectedItemExternal extends AbstractModel implements ModelInterface, \Arr
      */
     protected static $modelTypes = [
         'index' => 'string',
-        'params' => '\Algolia\AlgoliaSearch\Model\Composition\BaseInjectionQueryParameters',
         'ordering' => '\Algolia\AlgoliaSearch\Model\Composition\ExternalOrdering',
+        'params' => '\Algolia\AlgoliaSearch\Model\Composition\BaseInjectionQueryParameters',
     ];
 
     /**
@@ -32,8 +32,8 @@ class InjectedItemExternal extends AbstractModel implements ModelInterface, \Arr
      */
     protected static $modelFormats = [
         'index' => null,
-        'params' => null,
         'ordering' => null,
+        'params' => null,
     ];
 
     /**
@@ -44,8 +44,8 @@ class InjectedItemExternal extends AbstractModel implements ModelInterface, \Arr
      */
     protected static $attributeMap = [
         'index' => 'index',
-        'params' => 'params',
         'ordering' => 'ordering',
+        'params' => 'params',
     ];
 
     /**
@@ -55,8 +55,8 @@ class InjectedItemExternal extends AbstractModel implements ModelInterface, \Arr
      */
     protected static $setters = [
         'index' => 'setIndex',
-        'params' => 'setParams',
         'ordering' => 'setOrdering',
+        'params' => 'setParams',
     ];
 
     /**
@@ -66,8 +66,8 @@ class InjectedItemExternal extends AbstractModel implements ModelInterface, \Arr
      */
     protected static $getters = [
         'index' => 'getIndex',
-        'params' => 'getParams',
         'ordering' => 'getOrdering',
+        'params' => 'getParams',
     ];
 
     /**
@@ -87,11 +87,11 @@ class InjectedItemExternal extends AbstractModel implements ModelInterface, \Arr
         if (isset($data['index'])) {
             $this->container['index'] = $data['index'];
         }
-        if (isset($data['params'])) {
-            $this->container['params'] = $data['params'];
-        }
         if (isset($data['ordering'])) {
             $this->container['ordering'] = $data['ordering'];
+        }
+        if (isset($data['params'])) {
+            $this->container['params'] = $data['params'];
         }
     }
 
@@ -186,37 +186,13 @@ class InjectedItemExternal extends AbstractModel implements ModelInterface, \Arr
     /**
      * Sets index.
      *
-     * @param string $index composition Index name
+     * @param string $index algolia index used to retrieve records
      *
      * @return self
      */
     public function setIndex($index)
     {
         $this->container['index'] = $index;
-
-        return $this;
-    }
-
-    /**
-     * Gets params.
-     *
-     * @return null|BaseInjectionQueryParameters
-     */
-    public function getParams()
-    {
-        return $this->container['params'] ?? null;
-    }
-
-    /**
-     * Sets params.
-     *
-     * @param null|BaseInjectionQueryParameters $params params
-     *
-     * @return self
-     */
-    public function setParams($params)
-    {
-        $this->container['params'] = $params;
 
         return $this;
     }
@@ -241,6 +217,30 @@ class InjectedItemExternal extends AbstractModel implements ModelInterface, \Arr
     public function setOrdering($ordering)
     {
         $this->container['ordering'] = $ordering;
+
+        return $this;
+    }
+
+    /**
+     * Gets params.
+     *
+     * @return null|BaseInjectionQueryParameters
+     */
+    public function getParams()
+    {
+        return $this->container['params'] ?? null;
+    }
+
+    /**
+     * Sets params.
+     *
+     * @param null|BaseInjectionQueryParameters $params params
+     *
+     * @return self
+     */
+    public function setParams($params)
+    {
+        $this->container['params'] = $params;
 
         return $this;
     }

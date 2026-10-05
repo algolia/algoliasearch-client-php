@@ -8,13 +8,11 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * AlgoliaRecommendToolConfigInput Class Doc Comment.
+ * AguiCompletionRequest Class Doc Comment.
  *
  * @category Class
- *
- * @description Configuration for the Algolia Recommend tool. Allows specifying recommend models and related parameters.
  */
-class AlgoliaRecommendToolConfigInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class AguiCompletionRequest extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -22,10 +20,12 @@ class AlgoliaRecommendToolConfigInput extends AbstractModel implements ModelInte
      * @var string[]
      */
     protected static $modelTypes = [
-        'name' => 'string',
-        'type' => 'string',
-        'allowedConfigs' => '\Algolia\AlgoliaSearch\Model\AgentStudio\AlgoliaRecommendToolIndexConfig[]',
-        'predefinedRecommendParameters' => 'array<string,mixed>',
+        'threadId' => 'string',
+        'runId' => 'string',
+        'parentRunId' => 'string',
+        'messages' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ItemsUnionAguiCompletionRequest[]',
+        'forwardedProps' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ForwardedProps',
+        'resume' => '\Algolia\AlgoliaSearch\Model\AgentStudio\AguiResume[]',
     ];
 
     /**
@@ -34,10 +34,12 @@ class AlgoliaRecommendToolConfigInput extends AbstractModel implements ModelInte
      * @var string[]
      */
     protected static $modelFormats = [
-        'name' => null,
-        'type' => null,
-        'allowedConfigs' => null,
-        'predefinedRecommendParameters' => null,
+        'threadId' => null,
+        'runId' => null,
+        'parentRunId' => null,
+        'messages' => null,
+        'forwardedProps' => null,
+        'resume' => null,
     ];
 
     /**
@@ -47,10 +49,12 @@ class AlgoliaRecommendToolConfigInput extends AbstractModel implements ModelInte
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'type' => 'type',
-        'allowedConfigs' => 'allowedConfigs',
-        'predefinedRecommendParameters' => 'predefinedRecommendParameters',
+        'threadId' => 'threadId',
+        'runId' => 'runId',
+        'parentRunId' => 'parentRunId',
+        'messages' => 'messages',
+        'forwardedProps' => 'forwardedProps',
+        'resume' => 'resume',
     ];
 
     /**
@@ -59,10 +63,12 @@ class AlgoliaRecommendToolConfigInput extends AbstractModel implements ModelInte
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'type' => 'setType',
-        'allowedConfigs' => 'setAllowedConfigs',
-        'predefinedRecommendParameters' => 'setPredefinedRecommendParameters',
+        'threadId' => 'setThreadId',
+        'runId' => 'setRunId',
+        'parentRunId' => 'setParentRunId',
+        'messages' => 'setMessages',
+        'forwardedProps' => 'setForwardedProps',
+        'resume' => 'setResume',
     ];
 
     /**
@@ -71,10 +77,12 @@ class AlgoliaRecommendToolConfigInput extends AbstractModel implements ModelInte
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'type' => 'getType',
-        'allowedConfigs' => 'getAllowedConfigs',
-        'predefinedRecommendParameters' => 'getPredefinedRecommendParameters',
+        'threadId' => 'getThreadId',
+        'runId' => 'getRunId',
+        'parentRunId' => 'getParentRunId',
+        'messages' => 'getMessages',
+        'forwardedProps' => 'getForwardedProps',
+        'resume' => 'getResume',
     ];
 
     /**
@@ -91,17 +99,23 @@ class AlgoliaRecommendToolConfigInput extends AbstractModel implements ModelInte
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['name'])) {
-            $this->container['name'] = $data['name'];
+        if (isset($data['threadId'])) {
+            $this->container['threadId'] = $data['threadId'];
         }
-        if (isset($data['type'])) {
-            $this->container['type'] = $data['type'];
+        if (isset($data['runId'])) {
+            $this->container['runId'] = $data['runId'];
         }
-        if (isset($data['allowedConfigs'])) {
-            $this->container['allowedConfigs'] = $data['allowedConfigs'];
+        if (isset($data['parentRunId'])) {
+            $this->container['parentRunId'] = $data['parentRunId'];
         }
-        if (isset($data['predefinedRecommendParameters'])) {
-            $this->container['predefinedRecommendParameters'] = $data['predefinedRecommendParameters'];
+        if (isset($data['messages'])) {
+            $this->container['messages'] = $data['messages'];
+        }
+        if (isset($data['forwardedProps'])) {
+            $this->container['forwardedProps'] = $data['forwardedProps'];
+        }
+        if (isset($data['resume'])) {
+            $this->container['resume'] = $data['resume'];
         }
     }
 
@@ -165,11 +179,14 @@ class AlgoliaRecommendToolConfigInput extends AbstractModel implements ModelInte
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['name']) || null === $this->container['name']) {
-            $invalidProperties[] = "'name' can't be null";
+        if (!isset($this->container['threadId']) || null === $this->container['threadId']) {
+            $invalidProperties[] = "'threadId' can't be null";
         }
-        if (!isset($this->container['type']) || null === $this->container['type']) {
-            $invalidProperties[] = "'type' can't be null";
+        if (!isset($this->container['runId']) || null === $this->container['runId']) {
+            $invalidProperties[] = "'runId' can't be null";
+        }
+        if (!isset($this->container['messages']) || null === $this->container['messages']) {
+            $invalidProperties[] = "'messages' can't be null";
         }
 
         return $invalidProperties;
@@ -187,97 +204,145 @@ class AlgoliaRecommendToolConfigInput extends AbstractModel implements ModelInte
     }
 
     /**
-     * Gets name.
+     * Gets threadId.
      *
      * @return string
      */
-    public function getName()
+    public function getThreadId()
     {
-        return $this->container['name'] ?? null;
+        return $this->container['threadId'] ?? null;
     }
 
     /**
-     * Sets name.
+     * Sets threadId.
      *
-     * @param string $name name
+     * @param string $threadId conversation (thread) id
      *
      * @return self
      */
-    public function setName($name)
+    public function setThreadId($threadId)
     {
-        $this->container['name'] = $name;
+        $this->container['threadId'] = $threadId;
 
         return $this;
     }
 
     /**
-     * Gets type.
+     * Gets runId.
      *
      * @return string
      */
-    public function getType()
+    public function getRunId()
     {
-        return $this->container['type'] ?? null;
+        return $this->container['runId'] ?? null;
     }
 
     /**
-     * Sets type.
+     * Sets runId.
      *
-     * @param string $type type
+     * @param string $runId identifier for the current AG-UI run
      *
      * @return self
      */
-    public function setType($type)
+    public function setRunId($runId)
     {
-        $this->container['type'] = $type;
+        $this->container['runId'] = $runId;
 
         return $this;
     }
 
     /**
-     * Gets allowedConfigs.
+     * Gets parentRunId.
      *
-     * @return null|AlgoliaRecommendToolIndexConfig[]
+     * @return null|string
      */
-    public function getAllowedConfigs()
+    public function getParentRunId()
     {
-        return $this->container['allowedConfigs'] ?? null;
+        return $this->container['parentRunId'] ?? null;
     }
 
     /**
-     * Sets allowedConfigs.
+     * Sets parentRunId.
      *
-     * @param null|AlgoliaRecommendToolIndexConfig[] $allowedConfigs allowedConfigs
+     * @param null|string $parentRunId parentRunId
      *
      * @return self
      */
-    public function setAllowedConfigs($allowedConfigs)
+    public function setParentRunId($parentRunId)
     {
-        $this->container['allowedConfigs'] = $allowedConfigs;
+        $this->container['parentRunId'] = $parentRunId;
 
         return $this;
     }
 
     /**
-     * Gets predefinedRecommendParameters.
+     * Gets messages.
      *
-     * @return null|array<string,mixed>
+     * @return ItemsUnionAguiCompletionRequest[]
      */
-    public function getPredefinedRecommendParameters()
+    public function getMessages()
     {
-        return $this->container['predefinedRecommendParameters'] ?? null;
+        return $this->container['messages'] ?? null;
     }
 
     /**
-     * Sets predefinedRecommendParameters.
+     * Sets messages.
      *
-     * @param null|array<string,mixed> $predefinedRecommendParameters predefinedRecommendParameters
+     * @param ItemsUnionAguiCompletionRequest[] $messages messages
      *
      * @return self
      */
-    public function setPredefinedRecommendParameters($predefinedRecommendParameters)
+    public function setMessages($messages)
     {
-        $this->container['predefinedRecommendParameters'] = $predefinedRecommendParameters;
+        $this->container['messages'] = $messages;
+
+        return $this;
+    }
+
+    /**
+     * Gets forwardedProps.
+     *
+     * @return null|ForwardedProps
+     */
+    public function getForwardedProps()
+    {
+        return $this->container['forwardedProps'] ?? null;
+    }
+
+    /**
+     * Sets forwardedProps.
+     *
+     * @param null|ForwardedProps $forwardedProps forwardedProps
+     *
+     * @return self
+     */
+    public function setForwardedProps($forwardedProps)
+    {
+        $this->container['forwardedProps'] = $forwardedProps;
+
+        return $this;
+    }
+
+    /**
+     * Gets resume.
+     *
+     * @return null|AguiResume[]
+     */
+    public function getResume()
+    {
+        return $this->container['resume'] ?? null;
+    }
+
+    /**
+     * Sets resume.
+     *
+     * @param null|AguiResume[] $resume resume
+     *
+     * @return self
+     */
+    public function setResume($resume)
+    {
+        $this->container['resume'] = $resume;
 
         return $this;
     }

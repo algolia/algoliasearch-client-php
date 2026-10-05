@@ -23,6 +23,8 @@ class AlgoliaSearchToolConfig extends AbstractModel implements ModelInterface, \
         'name' => 'string',
         'type' => 'string',
         'indices' => '\Algolia\AlgoliaSearch\Model\AgentStudio\AlgoliaSearchToolIndexConfig[]',
+        'mode' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ModeEnum',
+        'allowUnlistedIndices' => 'bool',
     ];
 
     /**
@@ -34,6 +36,8 @@ class AlgoliaSearchToolConfig extends AbstractModel implements ModelInterface, \
         'name' => null,
         'type' => null,
         'indices' => null,
+        'mode' => null,
+        'allowUnlistedIndices' => null,
     ];
 
     /**
@@ -46,6 +50,8 @@ class AlgoliaSearchToolConfig extends AbstractModel implements ModelInterface, \
         'name' => 'name',
         'type' => 'type',
         'indices' => 'indices',
+        'mode' => 'mode',
+        'allowUnlistedIndices' => 'allowUnlistedIndices',
     ];
 
     /**
@@ -57,6 +63,8 @@ class AlgoliaSearchToolConfig extends AbstractModel implements ModelInterface, \
         'name' => 'setName',
         'type' => 'setType',
         'indices' => 'setIndices',
+        'mode' => 'setMode',
+        'allowUnlistedIndices' => 'setAllowUnlistedIndices',
     ];
 
     /**
@@ -68,6 +76,8 @@ class AlgoliaSearchToolConfig extends AbstractModel implements ModelInterface, \
         'name' => 'getName',
         'type' => 'getType',
         'indices' => 'getIndices',
+        'mode' => 'getMode',
+        'allowUnlistedIndices' => 'getAllowUnlistedIndices',
     ];
 
     /**
@@ -92,6 +102,12 @@ class AlgoliaSearchToolConfig extends AbstractModel implements ModelInterface, \
         }
         if (isset($data['indices'])) {
             $this->container['indices'] = $data['indices'];
+        }
+        if (isset($data['mode'])) {
+            $this->container['mode'] = $data['mode'];
+        }
+        if (isset($data['allowUnlistedIndices'])) {
+            $this->container['allowUnlistedIndices'] = $data['allowUnlistedIndices'];
         }
     }
 
@@ -247,6 +263,54 @@ class AlgoliaSearchToolConfig extends AbstractModel implements ModelInterface, \
     public function setIndices($indices)
     {
         $this->container['indices'] = $indices;
+
+        return $this;
+    }
+
+    /**
+     * Gets mode.
+     *
+     * @return null|ModeEnum
+     */
+    public function getMode()
+    {
+        return $this->container['mode'] ?? null;
+    }
+
+    /**
+     * Sets mode.
+     *
+     * @param null|ModeEnum $mode mode
+     *
+     * @return self
+     */
+    public function setMode($mode)
+    {
+        $this->container['mode'] = $mode;
+
+        return $this;
+    }
+
+    /**
+     * Gets allowUnlistedIndices.
+     *
+     * @return null|bool
+     */
+    public function getAllowUnlistedIndices()
+    {
+        return $this->container['allowUnlistedIndices'] ?? null;
+    }
+
+    /**
+     * Sets allowUnlistedIndices.
+     *
+     * @param null|bool $allowUnlistedIndices allowUnlistedIndices
+     *
+     * @return self
+     */
+    public function setAllowUnlistedIndices($allowUnlistedIndices)
+    {
+        $this->container['allowUnlistedIndices'] = $allowUnlistedIndices;
 
         return $this;
     }

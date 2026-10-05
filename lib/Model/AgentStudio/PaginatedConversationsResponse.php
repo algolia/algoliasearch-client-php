@@ -22,6 +22,7 @@ class PaginatedConversationsResponse extends AbstractModel implements ModelInter
     protected static $modelTypes = [
         'data' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ConversationBaseResponse[]',
         'pagination' => '\Algolia\AlgoliaSearch\Model\AgentStudio\PaginationMetadata',
+        'analyticsDegraded' => 'bool',
     ];
 
     /**
@@ -32,6 +33,7 @@ class PaginatedConversationsResponse extends AbstractModel implements ModelInter
     protected static $modelFormats = [
         'data' => null,
         'pagination' => null,
+        'analyticsDegraded' => null,
     ];
 
     /**
@@ -43,6 +45,7 @@ class PaginatedConversationsResponse extends AbstractModel implements ModelInter
     protected static $attributeMap = [
         'data' => 'data',
         'pagination' => 'pagination',
+        'analyticsDegraded' => 'analyticsDegraded',
     ];
 
     /**
@@ -53,6 +56,7 @@ class PaginatedConversationsResponse extends AbstractModel implements ModelInter
     protected static $setters = [
         'data' => 'setData',
         'pagination' => 'setPagination',
+        'analyticsDegraded' => 'setAnalyticsDegraded',
     ];
 
     /**
@@ -63,6 +67,7 @@ class PaginatedConversationsResponse extends AbstractModel implements ModelInter
     protected static $getters = [
         'data' => 'getData',
         'pagination' => 'getPagination',
+        'analyticsDegraded' => 'getAnalyticsDegraded',
     ];
 
     /**
@@ -84,6 +89,9 @@ class PaginatedConversationsResponse extends AbstractModel implements ModelInter
         }
         if (isset($data['pagination'])) {
             $this->container['pagination'] = $data['pagination'];
+        }
+        if (isset($data['analyticsDegraded'])) {
+            $this->container['analyticsDegraded'] = $data['analyticsDegraded'];
         }
     }
 
@@ -212,6 +220,30 @@ class PaginatedConversationsResponse extends AbstractModel implements ModelInter
     public function setPagination($pagination)
     {
         $this->container['pagination'] = $pagination;
+
+        return $this;
+    }
+
+    /**
+     * Gets analyticsDegraded.
+     *
+     * @return null|bool
+     */
+    public function getAnalyticsDegraded()
+    {
+        return $this->container['analyticsDegraded'] ?? null;
+    }
+
+    /**
+     * Sets analyticsDegraded.
+     *
+     * @param null|bool $analyticsDegraded analyticsDegraded
+     *
+     * @return self
+     */
+    public function setAnalyticsDegraded($analyticsDegraded)
+    {
+        $this->container['analyticsDegraded'] = $analyticsDegraded;
 
         return $this;
     }

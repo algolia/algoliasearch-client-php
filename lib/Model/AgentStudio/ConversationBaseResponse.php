@@ -36,6 +36,7 @@ class ConversationBaseResponse extends AbstractModel implements ModelInterface, 
         'totalTokens' => 'int',
         'conversationMetadata' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ConversationMetadata',
         'feedback' => '\Algolia\AlgoliaSearch\Model\AgentStudio\FeedbackResponse[]',
+        'impactAnalytics' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ImpactAnalytics',
     ];
 
     /**
@@ -58,6 +59,7 @@ class ConversationBaseResponse extends AbstractModel implements ModelInterface, 
         'totalTokens' => null,
         'conversationMetadata' => null,
         'feedback' => null,
+        'impactAnalytics' => null,
     ];
 
     /**
@@ -81,6 +83,7 @@ class ConversationBaseResponse extends AbstractModel implements ModelInterface, 
         'totalTokens' => 'totalTokens',
         'conversationMetadata' => 'conversationMetadata',
         'feedback' => 'feedback',
+        'impactAnalytics' => 'impactAnalytics',
     ];
 
     /**
@@ -103,6 +106,7 @@ class ConversationBaseResponse extends AbstractModel implements ModelInterface, 
         'totalTokens' => 'setTotalTokens',
         'conversationMetadata' => 'setConversationMetadata',
         'feedback' => 'setFeedback',
+        'impactAnalytics' => 'setImpactAnalytics',
     ];
 
     /**
@@ -125,6 +129,7 @@ class ConversationBaseResponse extends AbstractModel implements ModelInterface, 
         'totalTokens' => 'getTotalTokens',
         'conversationMetadata' => 'getConversationMetadata',
         'feedback' => 'getFeedback',
+        'impactAnalytics' => 'getImpactAnalytics',
     ];
 
     /**
@@ -182,6 +187,9 @@ class ConversationBaseResponse extends AbstractModel implements ModelInterface, 
         }
         if (isset($data['feedback'])) {
             $this->container['feedback'] = $data['feedback'];
+        }
+        if (isset($data['impactAnalytics'])) {
+            $this->container['impactAnalytics'] = $data['impactAnalytics'];
         }
     }
 
@@ -604,6 +612,30 @@ class ConversationBaseResponse extends AbstractModel implements ModelInterface, 
     public function setFeedback($feedback)
     {
         $this->container['feedback'] = $feedback;
+
+        return $this;
+    }
+
+    /**
+     * Gets impactAnalytics.
+     *
+     * @return null|ImpactAnalytics
+     */
+    public function getImpactAnalytics()
+    {
+        return $this->container['impactAnalytics'] ?? null;
+    }
+
+    /**
+     * Sets impactAnalytics.
+     *
+     * @param null|ImpactAnalytics $impactAnalytics impactAnalytics
+     *
+     * @return self
+     */
+    public function setImpactAnalytics($impactAnalytics)
+    {
+        $this->container['impactAnalytics'] = $impactAnalytics;
 
         return $this;
     }

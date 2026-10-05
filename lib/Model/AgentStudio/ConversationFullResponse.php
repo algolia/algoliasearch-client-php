@@ -36,7 +36,9 @@ class ConversationFullResponse extends AbstractModel implements ModelInterface, 
         'totalTokens' => 'int',
         'conversationMetadata' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ConversationMetadata',
         'feedback' => '\Algolia\AlgoliaSearch\Model\AgentStudio\FeedbackResponse[]',
+        'impactAnalytics' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ImpactAnalytics',
         'messages' => '\Algolia\AlgoliaSearch\Model\AgentStudio\MessageResponse[]',
+        'analyticsDegraded' => 'bool',
     ];
 
     /**
@@ -59,7 +61,9 @@ class ConversationFullResponse extends AbstractModel implements ModelInterface, 
         'totalTokens' => null,
         'conversationMetadata' => null,
         'feedback' => null,
+        'impactAnalytics' => null,
         'messages' => null,
+        'analyticsDegraded' => null,
     ];
 
     /**
@@ -83,7 +87,9 @@ class ConversationFullResponse extends AbstractModel implements ModelInterface, 
         'totalTokens' => 'totalTokens',
         'conversationMetadata' => 'conversationMetadata',
         'feedback' => 'feedback',
+        'impactAnalytics' => 'impactAnalytics',
         'messages' => 'messages',
+        'analyticsDegraded' => 'analyticsDegraded',
     ];
 
     /**
@@ -106,7 +112,9 @@ class ConversationFullResponse extends AbstractModel implements ModelInterface, 
         'totalTokens' => 'setTotalTokens',
         'conversationMetadata' => 'setConversationMetadata',
         'feedback' => 'setFeedback',
+        'impactAnalytics' => 'setImpactAnalytics',
         'messages' => 'setMessages',
+        'analyticsDegraded' => 'setAnalyticsDegraded',
     ];
 
     /**
@@ -129,7 +137,9 @@ class ConversationFullResponse extends AbstractModel implements ModelInterface, 
         'totalTokens' => 'getTotalTokens',
         'conversationMetadata' => 'getConversationMetadata',
         'feedback' => 'getFeedback',
+        'impactAnalytics' => 'getImpactAnalytics',
         'messages' => 'getMessages',
+        'analyticsDegraded' => 'getAnalyticsDegraded',
     ];
 
     /**
@@ -188,8 +198,14 @@ class ConversationFullResponse extends AbstractModel implements ModelInterface, 
         if (isset($data['feedback'])) {
             $this->container['feedback'] = $data['feedback'];
         }
+        if (isset($data['impactAnalytics'])) {
+            $this->container['impactAnalytics'] = $data['impactAnalytics'];
+        }
         if (isset($data['messages'])) {
             $this->container['messages'] = $data['messages'];
+        }
+        if (isset($data['analyticsDegraded'])) {
+            $this->container['analyticsDegraded'] = $data['analyticsDegraded'];
         }
     }
 
@@ -620,6 +636,30 @@ class ConversationFullResponse extends AbstractModel implements ModelInterface, 
     }
 
     /**
+     * Gets impactAnalytics.
+     *
+     * @return null|ImpactAnalytics
+     */
+    public function getImpactAnalytics()
+    {
+        return $this->container['impactAnalytics'] ?? null;
+    }
+
+    /**
+     * Sets impactAnalytics.
+     *
+     * @param null|ImpactAnalytics $impactAnalytics impactAnalytics
+     *
+     * @return self
+     */
+    public function setImpactAnalytics($impactAnalytics)
+    {
+        $this->container['impactAnalytics'] = $impactAnalytics;
+
+        return $this;
+    }
+
+    /**
      * Gets messages.
      *
      * @return MessageResponse[]
@@ -639,6 +679,30 @@ class ConversationFullResponse extends AbstractModel implements ModelInterface, 
     public function setMessages($messages)
     {
         $this->container['messages'] = $messages;
+
+        return $this;
+    }
+
+    /**
+     * Gets analyticsDegraded.
+     *
+     * @return null|bool
+     */
+    public function getAnalyticsDegraded()
+    {
+        return $this->container['analyticsDegraded'] ?? null;
+    }
+
+    /**
+     * Sets analyticsDegraded.
+     *
+     * @param null|bool $analyticsDegraded analyticsDegraded
+     *
+     * @return self
+     */
+    public function setAnalyticsDegraded($analyticsDegraded)
+    {
+        $this->container['analyticsDegraded'] = $analyticsDegraded;
 
         return $this;
     }

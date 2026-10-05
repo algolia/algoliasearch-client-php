@@ -29,7 +29,7 @@ class AgentWithVersionResponse extends AbstractModel implements ModelInterface, 
         'instructions' => 'string',
         'systemPrompt' => 'string',
         'config' => 'array<string,mixed>',
-        'tools' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ToolConfigInput[]',
+        'tools' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ToolConfigOutput[]',
         'templateType' => 'string',
         'createdAt' => 'string',
         'updatedAt' => 'string',
@@ -507,7 +507,7 @@ class AgentWithVersionResponse extends AbstractModel implements ModelInterface, 
     /**
      * Gets tools.
      *
-     * @return null|ToolConfigInput[]
+     * @return null|ToolConfigOutput[]
      */
     public function getTools()
     {
@@ -517,7 +517,7 @@ class AgentWithVersionResponse extends AbstractModel implements ModelInterface, 
     /**
      * Sets tools.
      *
-     * @param null|ToolConfigInput[] $tools tools
+     * @param null|ToolConfigOutput[] $tools tools
      *
      * @return self
      */

@@ -22,10 +22,13 @@ class AssistantPartV5 extends AbstractModel implements ModelInterface, \ArrayAcc
     protected static $modelTypes = [
         'type' => 'string',
         'text' => 'string',
+        'data' => 'array<string,mixed>',
         'toolCallId' => 'string',
         'state' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ToolState',
         'input' => 'array<string,mixed>',
+        'rawInput' => 'array<string,mixed>',
         'output' => 'array<string,mixed>',
+        'outputMetadata' => 'array<string,mixed>',
         'errorText' => 'string',
         'providerOptions' => 'array<string,mixed>',
         'requiresApproval' => 'bool',
@@ -41,10 +44,13 @@ class AssistantPartV5 extends AbstractModel implements ModelInterface, \ArrayAcc
     protected static $modelFormats = [
         'type' => null,
         'text' => null,
+        'data' => null,
         'toolCallId' => null,
         'state' => null,
         'input' => null,
+        'rawInput' => null,
         'output' => null,
+        'outputMetadata' => null,
         'errorText' => null,
         'providerOptions' => null,
         'requiresApproval' => null,
@@ -61,10 +67,13 @@ class AssistantPartV5 extends AbstractModel implements ModelInterface, \ArrayAcc
     protected static $attributeMap = [
         'type' => 'type',
         'text' => 'text',
+        'data' => 'data',
         'toolCallId' => 'toolCallId',
         'state' => 'state',
         'input' => 'input',
+        'rawInput' => 'rawInput',
         'output' => 'output',
+        'outputMetadata' => 'outputMetadata',
         'errorText' => 'errorText',
         'providerOptions' => 'providerOptions',
         'requiresApproval' => 'requiresApproval',
@@ -80,10 +89,13 @@ class AssistantPartV5 extends AbstractModel implements ModelInterface, \ArrayAcc
     protected static $setters = [
         'type' => 'setType',
         'text' => 'setText',
+        'data' => 'setData',
         'toolCallId' => 'setToolCallId',
         'state' => 'setState',
         'input' => 'setInput',
+        'rawInput' => 'setRawInput',
         'output' => 'setOutput',
+        'outputMetadata' => 'setOutputMetadata',
         'errorText' => 'setErrorText',
         'providerOptions' => 'setProviderOptions',
         'requiresApproval' => 'setRequiresApproval',
@@ -99,10 +111,13 @@ class AssistantPartV5 extends AbstractModel implements ModelInterface, \ArrayAcc
     protected static $getters = [
         'type' => 'getType',
         'text' => 'getText',
+        'data' => 'getData',
         'toolCallId' => 'getToolCallId',
         'state' => 'getState',
         'input' => 'getInput',
+        'rawInput' => 'getRawInput',
         'output' => 'getOutput',
+        'outputMetadata' => 'getOutputMetadata',
         'errorText' => 'getErrorText',
         'providerOptions' => 'getProviderOptions',
         'requiresApproval' => 'getRequiresApproval',
@@ -130,6 +145,9 @@ class AssistantPartV5 extends AbstractModel implements ModelInterface, \ArrayAcc
         if (isset($data['text'])) {
             $this->container['text'] = $data['text'];
         }
+        if (isset($data['data'])) {
+            $this->container['data'] = $data['data'];
+        }
         if (isset($data['toolCallId'])) {
             $this->container['toolCallId'] = $data['toolCallId'];
         }
@@ -139,8 +157,14 @@ class AssistantPartV5 extends AbstractModel implements ModelInterface, \ArrayAcc
         if (isset($data['input'])) {
             $this->container['input'] = $data['input'];
         }
+        if (isset($data['rawInput'])) {
+            $this->container['rawInput'] = $data['rawInput'];
+        }
         if (isset($data['output'])) {
             $this->container['output'] = $data['output'];
+        }
+        if (isset($data['outputMetadata'])) {
+            $this->container['outputMetadata'] = $data['outputMetadata'];
         }
         if (isset($data['errorText'])) {
             $this->container['errorText'] = $data['errorText'];
@@ -225,6 +249,9 @@ class AssistantPartV5 extends AbstractModel implements ModelInterface, \ArrayAcc
         if (!isset($this->container['text']) || null === $this->container['text']) {
             $invalidProperties[] = "'text' can't be null";
         }
+        if (!isset($this->container['data']) || null === $this->container['data']) {
+            $invalidProperties[] = "'data' can't be null";
+        }
         if (!isset($this->container['toolCallId']) || null === $this->container['toolCallId']) {
             $invalidProperties[] = "'toolCallId' can't be null";
         }
@@ -287,6 +314,30 @@ class AssistantPartV5 extends AbstractModel implements ModelInterface, \ArrayAcc
     public function setText($text)
     {
         $this->container['text'] = $text;
+
+        return $this;
+    }
+
+    /**
+     * Gets data.
+     *
+     * @return array<string,mixed>
+     */
+    public function getData()
+    {
+        return $this->container['data'] ?? null;
+    }
+
+    /**
+     * Sets data.
+     *
+     * @param array<string,mixed> $data data
+     *
+     * @return self
+     */
+    public function setData($data)
+    {
+        $this->container['data'] = $data;
 
         return $this;
     }
@@ -364,6 +415,30 @@ class AssistantPartV5 extends AbstractModel implements ModelInterface, \ArrayAcc
     }
 
     /**
+     * Gets rawInput.
+     *
+     * @return null|array<string,mixed>
+     */
+    public function getRawInput()
+    {
+        return $this->container['rawInput'] ?? null;
+    }
+
+    /**
+     * Sets rawInput.
+     *
+     * @param null|array<string,mixed> $rawInput rawInput
+     *
+     * @return self
+     */
+    public function setRawInput($rawInput)
+    {
+        $this->container['rawInput'] = $rawInput;
+
+        return $this;
+    }
+
+    /**
      * Gets output.
      *
      * @return null|array<string,mixed>
@@ -383,6 +458,30 @@ class AssistantPartV5 extends AbstractModel implements ModelInterface, \ArrayAcc
     public function setOutput($output)
     {
         $this->container['output'] = $output;
+
+        return $this;
+    }
+
+    /**
+     * Gets outputMetadata.
+     *
+     * @return null|array<string,mixed>
+     */
+    public function getOutputMetadata()
+    {
+        return $this->container['outputMetadata'] ?? null;
+    }
+
+    /**
+     * Sets outputMetadata.
+     *
+     * @param null|array<string,mixed> $outputMetadata outputMetadata
+     *
+     * @return self
+     */
+    public function setOutputMetadata($outputMetadata)
+    {
+        $this->container['outputMetadata'] = $outputMetadata;
 
         return $this;
     }

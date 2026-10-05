@@ -27,6 +27,7 @@ class IndexSearchParameters extends AbstractModel implements ModelInterface, \Ar
         'page' => '\Algolia\AlgoliaSearch\Model\AgentStudio\NumberParam',
         'attributesToRetrieve' => '\Algolia\AlgoliaSearch\Model\AgentStudio\StringArrayParam',
         'responseFields' => '\Algolia\AlgoliaSearch\Model\AgentStudio\StringArrayParam',
+        'distinct' => '\Algolia\AlgoliaSearch\Model\AgentStudio\BooleanParam',
         'facets' => '\Algolia\AlgoliaSearch\Model\AgentStudio\FacetsParam',
         'custom' => 'array<string,mixed>',
     ];
@@ -42,6 +43,7 @@ class IndexSearchParameters extends AbstractModel implements ModelInterface, \Ar
         'page' => null,
         'attributesToRetrieve' => null,
         'responseFields' => null,
+        'distinct' => null,
         'facets' => null,
         'custom' => null,
     ];
@@ -58,6 +60,7 @@ class IndexSearchParameters extends AbstractModel implements ModelInterface, \Ar
         'page' => 'page',
         'attributesToRetrieve' => 'attributesToRetrieve',
         'responseFields' => 'responseFields',
+        'distinct' => 'distinct',
         'facets' => 'facets',
         'custom' => 'custom',
     ];
@@ -73,6 +76,7 @@ class IndexSearchParameters extends AbstractModel implements ModelInterface, \Ar
         'page' => 'setPage',
         'attributesToRetrieve' => 'setAttributesToRetrieve',
         'responseFields' => 'setResponseFields',
+        'distinct' => 'setDistinct',
         'facets' => 'setFacets',
         'custom' => 'setCustom',
     ];
@@ -88,6 +92,7 @@ class IndexSearchParameters extends AbstractModel implements ModelInterface, \Ar
         'page' => 'getPage',
         'attributesToRetrieve' => 'getAttributesToRetrieve',
         'responseFields' => 'getResponseFields',
+        'distinct' => 'getDistinct',
         'facets' => 'getFacets',
         'custom' => 'getCustom',
     ];
@@ -120,6 +125,9 @@ class IndexSearchParameters extends AbstractModel implements ModelInterface, \Ar
         }
         if (isset($data['responseFields'])) {
             $this->container['responseFields'] = $data['responseFields'];
+        }
+        if (isset($data['distinct'])) {
+            $this->container['distinct'] = $data['distinct'];
         }
         if (isset($data['facets'])) {
             $this->container['facets'] = $data['facets'];
@@ -317,6 +325,30 @@ class IndexSearchParameters extends AbstractModel implements ModelInterface, \Ar
     public function setResponseFields($responseFields)
     {
         $this->container['responseFields'] = $responseFields;
+
+        return $this;
+    }
+
+    /**
+     * Gets distinct.
+     *
+     * @return null|BooleanParam
+     */
+    public function getDistinct()
+    {
+        return $this->container['distinct'] ?? null;
+    }
+
+    /**
+     * Sets distinct.
+     *
+     * @param null|BooleanParam $distinct distinct
+     *
+     * @return self
+     */
+    public function setDistinct($distinct)
+    {
+        $this->container['distinct'] = $distinct;
 
         return $this;
     }

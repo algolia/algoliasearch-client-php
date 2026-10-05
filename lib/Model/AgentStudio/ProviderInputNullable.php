@@ -294,7 +294,7 @@ class ProviderInputNullable extends AbstractModel implements ModelInterface, \Ar
     /**
      * Sets azureDeployment.
      *
-     * @param string $azureDeployment azure model deployment name is required
+     * @param string $azureDeployment azure model deployment name
      *
      * @return self
      */

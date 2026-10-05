@@ -24,6 +24,8 @@ class ProviderName
 
     public const OPENAI_COMPATIBLE = 'openai_compatible';
 
+    public const XAI = 'xai';
+
     public const ANTHROPIC = 'anthropic';
 
     /**
@@ -39,6 +41,7 @@ class ProviderName
             self::GOOGLE_GENAI,
             self::DEEPSEEK,
             self::OPENAI_COMPATIBLE,
+            self::XAI,
             self::ANTHROPIC,
         ];
     }

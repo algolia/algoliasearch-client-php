@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Universal storage model for all memory types (semantic, episodic).  This is the ONLY model that touches storage (Algolia). Domain models (SemanticMemory, EpisodicMemory) are used for LLM extraction and converted to MemoryRecord before saving.  See https://langchain-ai.github.io/langmem/concepts/conceptual_guide/#memory-types for memory type definitions.
+ * @description A stored memory record.
  */
 class MemoryRecord extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -375,7 +375,7 @@ class MemoryRecord extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets keywords.
      *
-     * @param null|string[] $keywords 5-20 free-form keywords: entities, context, search terms (any words)
+     * @param null|string[] $keywords keywords for retrieval: entities, context, search terms
      *
      * @return self
      */
@@ -399,7 +399,7 @@ class MemoryRecord extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets topics.
      *
-     * @param null|string[] $topics 2-4 topics ONLY from this list: [complaints, entertainment, family, feedback, finance, food, goals, health, history, hobbies, learning, praise, preferences, schedule, shopping, technical, travel, work]
+     * @param null|string[] $topics Topics that classify the memory. Each must be one of: [complaints, entertainment, family, feedback, finance, food, goals, health, history, hobbies, learning, praise, preferences, schedule, shopping, technical, travel, work].
      *
      * @return self
      */
@@ -447,7 +447,7 @@ class MemoryRecord extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets recallTriggers.
      *
-     * @param null|string[] $recallTriggers 3-5 natural phrases that should trigger this memory
+     * @param null|string[] $recallTriggers phrases that cause the API to recall this memory
      *
      * @return self
      */

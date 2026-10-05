@@ -8,11 +8,11 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * ToolConfig Class Doc Comment.
+ * ForwardedProps Class Doc Comment.
  *
  * @category Class
  */
-class ToolConfig extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ForwardedProps extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -20,8 +20,9 @@ class ToolConfig extends AbstractModel implements ModelInterface, \ArrayAccess, 
      * @var string[]
      */
     protected static $modelTypes = [
-        'requiresApproval' => 'bool',
-        'alias' => 'string',
+        'algolia' => '\Algolia\AlgoliaSearch\Model\AgentStudio\AgentCompletionAlgoliaParams',
+        'toolApprovals' => 'array<string,array<string,mixed>>',
+        'configuration' => '\Algolia\AlgoliaSearch\Model\AgentStudio\AgentTestConfiguration',
     ];
 
     /**
@@ -30,8 +31,9 @@ class ToolConfig extends AbstractModel implements ModelInterface, \ArrayAccess, 
      * @var string[]
      */
     protected static $modelFormats = [
-        'requiresApproval' => null,
-        'alias' => null,
+        'algolia' => null,
+        'toolApprovals' => null,
+        'configuration' => null,
     ];
 
     /**
@@ -41,8 +43,9 @@ class ToolConfig extends AbstractModel implements ModelInterface, \ArrayAccess, 
      * @var string[]
      */
     protected static $attributeMap = [
-        'requiresApproval' => 'requiresApproval',
-        'alias' => 'alias',
+        'algolia' => 'algolia',
+        'toolApprovals' => 'toolApprovals',
+        'configuration' => 'configuration',
     ];
 
     /**
@@ -51,8 +54,9 @@ class ToolConfig extends AbstractModel implements ModelInterface, \ArrayAccess, 
      * @var string[]
      */
     protected static $setters = [
-        'requiresApproval' => 'setRequiresApproval',
-        'alias' => 'setAlias',
+        'algolia' => 'setAlgolia',
+        'toolApprovals' => 'setToolApprovals',
+        'configuration' => 'setConfiguration',
     ];
 
     /**
@@ -61,8 +65,9 @@ class ToolConfig extends AbstractModel implements ModelInterface, \ArrayAccess, 
      * @var string[]
      */
     protected static $getters = [
-        'requiresApproval' => 'getRequiresApproval',
-        'alias' => 'getAlias',
+        'algolia' => 'getAlgolia',
+        'toolApprovals' => 'getToolApprovals',
+        'configuration' => 'getConfiguration',
     ];
 
     /**
@@ -79,11 +84,14 @@ class ToolConfig extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['requiresApproval'])) {
-            $this->container['requiresApproval'] = $data['requiresApproval'];
+        if (isset($data['algolia'])) {
+            $this->container['algolia'] = $data['algolia'];
         }
-        if (isset($data['alias'])) {
-            $this->container['alias'] = $data['alias'];
+        if (isset($data['toolApprovals'])) {
+            $this->container['toolApprovals'] = $data['toolApprovals'];
+        }
+        if (isset($data['configuration'])) {
+            $this->container['configuration'] = $data['configuration'];
         }
     }
 
@@ -160,49 +168,73 @@ class ToolConfig extends AbstractModel implements ModelInterface, \ArrayAccess, 
     }
 
     /**
-     * Gets requiresApproval.
+     * Gets algolia.
      *
-     * @return null|bool
+     * @return null|AgentCompletionAlgoliaParams
      */
-    public function getRequiresApproval()
+    public function getAlgolia()
     {
-        return $this->container['requiresApproval'] ?? null;
+        return $this->container['algolia'] ?? null;
     }
 
     /**
-     * Sets requiresApproval.
+     * Sets algolia.
      *
-     * @param null|bool $requiresApproval requiresApproval
+     * @param null|AgentCompletionAlgoliaParams $algolia algolia
      *
      * @return self
      */
-    public function setRequiresApproval($requiresApproval)
+    public function setAlgolia($algolia)
     {
-        $this->container['requiresApproval'] = $requiresApproval;
+        $this->container['algolia'] = $algolia;
 
         return $this;
     }
 
     /**
-     * Gets alias.
+     * Gets toolApprovals.
      *
-     * @return null|string
+     * @return null|array<string,array<string,mixed>>
      */
-    public function getAlias()
+    public function getToolApprovals()
     {
-        return $this->container['alias'] ?? null;
+        return $this->container['toolApprovals'] ?? null;
     }
 
     /**
-     * Sets alias.
+     * Sets toolApprovals.
      *
-     * @param null|string $alias alias
+     * @param null|array<string,array<string,mixed>> $toolApprovals toolApprovals
      *
      * @return self
      */
-    public function setAlias($alias)
+    public function setToolApprovals($toolApprovals)
     {
-        $this->container['alias'] = $alias;
+        $this->container['toolApprovals'] = $toolApprovals;
+
+        return $this;
+    }
+
+    /**
+     * Gets configuration.
+     *
+     * @return null|AgentTestConfiguration
+     */
+    public function getConfiguration()
+    {
+        return $this->container['configuration'] ?? null;
+    }
+
+    /**
+     * Sets configuration.
+     *
+     * @param null|AgentTestConfiguration $configuration configuration
+     *
+     * @return self
+     */
+    public function setConfiguration($configuration)
+    {
+        $this->container['configuration'] = $configuration;
 
         return $this;
     }

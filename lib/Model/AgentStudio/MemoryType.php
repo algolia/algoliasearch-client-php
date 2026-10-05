@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\AgentStudio;
  *
  * @category Class
  *
- * @description Memory types implemented so far. Follows LangMem's ontology: https://langchain-ai.github.io/langmem/concepts/conceptual_guide/#memory-types.
+ * @description The type of the stored memory.
  */
 class MemoryType
 {

@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Exists only to ensure that when you change branch from toolX to feat/toolY, your config stays valid.
+ * @description A tool configuration that this version of the API does not recognize.
  */
 class UnknownToolConfig extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

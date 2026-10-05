@@ -24,6 +24,7 @@ class ToolCallPart extends AbstractModel implements ModelInterface, \ArrayAccess
         'toolCallId' => 'string',
         'toolName' => 'string',
         'args' => 'mixed',
+        'rawArgs' => 'array<string,mixed>',
         'requiresApproval' => 'bool',
         'providerOptions' => 'array<string,mixed>',
     ];
@@ -38,6 +39,7 @@ class ToolCallPart extends AbstractModel implements ModelInterface, \ArrayAccess
         'toolCallId' => null,
         'toolName' => null,
         'args' => null,
+        'rawArgs' => null,
         'requiresApproval' => null,
         'providerOptions' => null,
     ];
@@ -53,6 +55,7 @@ class ToolCallPart extends AbstractModel implements ModelInterface, \ArrayAccess
         'toolCallId' => 'toolCallId',
         'toolName' => 'toolName',
         'args' => 'args',
+        'rawArgs' => 'rawArgs',
         'requiresApproval' => 'requiresApproval',
         'providerOptions' => 'providerOptions',
     ];
@@ -67,6 +70,7 @@ class ToolCallPart extends AbstractModel implements ModelInterface, \ArrayAccess
         'toolCallId' => 'setToolCallId',
         'toolName' => 'setToolName',
         'args' => 'setArgs',
+        'rawArgs' => 'setRawArgs',
         'requiresApproval' => 'setRequiresApproval',
         'providerOptions' => 'setProviderOptions',
     ];
@@ -81,6 +85,7 @@ class ToolCallPart extends AbstractModel implements ModelInterface, \ArrayAccess
         'toolCallId' => 'getToolCallId',
         'toolName' => 'getToolName',
         'args' => 'getArgs',
+        'rawArgs' => 'getRawArgs',
         'requiresApproval' => 'getRequiresApproval',
         'providerOptions' => 'getProviderOptions',
     ];
@@ -110,6 +115,9 @@ class ToolCallPart extends AbstractModel implements ModelInterface, \ArrayAccess
         }
         if (isset($data['args'])) {
             $this->container['args'] = $data['args'];
+        }
+        if (isset($data['rawArgs'])) {
+            $this->container['rawArgs'] = $data['rawArgs'];
         }
         if (isset($data['requiresApproval'])) {
             $this->container['requiresApproval'] = $data['requiresApproval'];
@@ -298,6 +306,30 @@ class ToolCallPart extends AbstractModel implements ModelInterface, \ArrayAccess
     public function setArgs($args)
     {
         $this->container['args'] = $args;
+
+        return $this;
+    }
+
+    /**
+     * Gets rawArgs.
+     *
+     * @return null|array<string,mixed>
+     */
+    public function getRawArgs()
+    {
+        return $this->container['rawArgs'] ?? null;
+    }
+
+    /**
+     * Sets rawArgs.
+     *
+     * @param null|array<string,mixed> $rawArgs rawArgs
+     *
+     * @return self
+     */
+    public function setRawArgs($rawArgs)
+    {
+        $this->container['rawArgs'] = $rawArgs;
 
         return $this;
     }

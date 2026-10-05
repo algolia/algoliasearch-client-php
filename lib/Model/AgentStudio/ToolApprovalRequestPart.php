@@ -28,6 +28,7 @@ class ToolApprovalRequestPart extends AbstractModel implements ModelInterface, \
         'providerOptions' => 'array<string,mixed>',
         'argsHash' => 'string',
         'appId' => 'string',
+        'conversationId' => 'string',
     ];
 
     /**
@@ -44,6 +45,7 @@ class ToolApprovalRequestPart extends AbstractModel implements ModelInterface, \
         'providerOptions' => null,
         'argsHash' => null,
         'appId' => null,
+        'conversationId' => null,
     ];
 
     /**
@@ -61,6 +63,7 @@ class ToolApprovalRequestPart extends AbstractModel implements ModelInterface, \
         'providerOptions' => 'providerOptions',
         'argsHash' => 'argsHash',
         'appId' => 'appId',
+        'conversationId' => 'conversationId',
     ];
 
     /**
@@ -77,6 +80,7 @@ class ToolApprovalRequestPart extends AbstractModel implements ModelInterface, \
         'providerOptions' => 'setProviderOptions',
         'argsHash' => 'setArgsHash',
         'appId' => 'setAppId',
+        'conversationId' => 'setConversationId',
     ];
 
     /**
@@ -93,6 +97,7 @@ class ToolApprovalRequestPart extends AbstractModel implements ModelInterface, \
         'providerOptions' => 'getProviderOptions',
         'argsHash' => 'getArgsHash',
         'appId' => 'getAppId',
+        'conversationId' => 'getConversationId',
     ];
 
     /**
@@ -132,6 +137,9 @@ class ToolApprovalRequestPart extends AbstractModel implements ModelInterface, \
         }
         if (isset($data['appId'])) {
             $this->container['appId'] = $data['appId'];
+        }
+        if (isset($data['conversationId'])) {
+            $this->container['conversationId'] = $data['conversationId'];
         }
     }
 
@@ -410,6 +418,30 @@ class ToolApprovalRequestPart extends AbstractModel implements ModelInterface, \
     public function setAppId($appId)
     {
         $this->container['appId'] = $appId;
+
+        return $this;
+    }
+
+    /**
+     * Gets conversationId.
+     *
+     * @return null|string
+     */
+    public function getConversationId()
+    {
+        return $this->container['conversationId'] ?? null;
+    }
+
+    /**
+     * Sets conversationId.
+     *
+     * @param null|string $conversationId conversationId
+     *
+     * @return self
+     */
+    public function setConversationId($conversationId)
+    {
+        $this->container['conversationId'] = $conversationId;
 
         return $this;
     }

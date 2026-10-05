@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Model for tool invocation in a Message.
+ * @description A tool invocation in a message.
  */
 class ToolPartV5 extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -26,7 +26,9 @@ class ToolPartV5 extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'toolCallId' => 'string',
         'state' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ToolState',
         'input' => 'array<string,mixed>',
+        'rawInput' => 'array<string,mixed>',
         'output' => 'array<string,mixed>',
+        'outputMetadata' => 'array<string,mixed>',
         'errorText' => 'string',
         'providerOptions' => 'array<string,mixed>',
         'requiresApproval' => 'bool',
@@ -44,7 +46,9 @@ class ToolPartV5 extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'toolCallId' => null,
         'state' => null,
         'input' => null,
+        'rawInput' => null,
         'output' => null,
+        'outputMetadata' => null,
         'errorText' => null,
         'providerOptions' => null,
         'requiresApproval' => null,
@@ -63,7 +67,9 @@ class ToolPartV5 extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'toolCallId' => 'toolCallId',
         'state' => 'state',
         'input' => 'input',
+        'rawInput' => 'rawInput',
         'output' => 'output',
+        'outputMetadata' => 'outputMetadata',
         'errorText' => 'errorText',
         'providerOptions' => 'providerOptions',
         'requiresApproval' => 'requiresApproval',
@@ -81,7 +87,9 @@ class ToolPartV5 extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'toolCallId' => 'setToolCallId',
         'state' => 'setState',
         'input' => 'setInput',
+        'rawInput' => 'setRawInput',
         'output' => 'setOutput',
+        'outputMetadata' => 'setOutputMetadata',
         'errorText' => 'setErrorText',
         'providerOptions' => 'setProviderOptions',
         'requiresApproval' => 'setRequiresApproval',
@@ -99,7 +107,9 @@ class ToolPartV5 extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'toolCallId' => 'getToolCallId',
         'state' => 'getState',
         'input' => 'getInput',
+        'rawInput' => 'getRawInput',
         'output' => 'getOutput',
+        'outputMetadata' => 'getOutputMetadata',
         'errorText' => 'getErrorText',
         'providerOptions' => 'getProviderOptions',
         'requiresApproval' => 'getRequiresApproval',
@@ -133,8 +143,14 @@ class ToolPartV5 extends AbstractModel implements ModelInterface, \ArrayAccess, 
         if (isset($data['input'])) {
             $this->container['input'] = $data['input'];
         }
+        if (isset($data['rawInput'])) {
+            $this->container['rawInput'] = $data['rawInput'];
+        }
         if (isset($data['output'])) {
             $this->container['output'] = $data['output'];
+        }
+        if (isset($data['outputMetadata'])) {
+            $this->container['outputMetadata'] = $data['outputMetadata'];
         }
         if (isset($data['errorText'])) {
             $this->container['errorText'] = $data['errorText'];
@@ -331,6 +347,30 @@ class ToolPartV5 extends AbstractModel implements ModelInterface, \ArrayAccess, 
     }
 
     /**
+     * Gets rawInput.
+     *
+     * @return null|array<string,mixed>
+     */
+    public function getRawInput()
+    {
+        return $this->container['rawInput'] ?? null;
+    }
+
+    /**
+     * Sets rawInput.
+     *
+     * @param null|array<string,mixed> $rawInput rawInput
+     *
+     * @return self
+     */
+    public function setRawInput($rawInput)
+    {
+        $this->container['rawInput'] = $rawInput;
+
+        return $this;
+    }
+
+    /**
      * Gets output.
      *
      * @return null|array<string,mixed>
@@ -350,6 +390,30 @@ class ToolPartV5 extends AbstractModel implements ModelInterface, \ArrayAccess, 
     public function setOutput($output)
     {
         $this->container['output'] = $output;
+
+        return $this;
+    }
+
+    /**
+     * Gets outputMetadata.
+     *
+     * @return null|array<string,mixed>
+     */
+    public function getOutputMetadata()
+    {
+        return $this->container['outputMetadata'] ?? null;
+    }
+
+    /**
+     * Sets outputMetadata.
+     *
+     * @param null|array<string,mixed> $outputMetadata outputMetadata
+     *
+     * @return self
+     */
+    public function setOutputMetadata($outputMetadata)
+    {
+        $this->container['outputMetadata'] = $outputMetadata;
 
         return $this;
     }

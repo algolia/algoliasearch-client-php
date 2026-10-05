@@ -31,7 +31,13 @@ class MessageResponse extends AbstractModel implements ModelInterface, \ArrayAcc
         'model' => 'string',
         'inputTokens' => 'int',
         'outputTokens' => 'int',
-        'turnContext' => 'array<string,string>',
+        'reasoningTokens' => 'int',
+        'inputTokenDetails' => 'array<string,int>',
+        'outputTokenDetails' => 'array<string,int>',
+        'isCacheHit' => 'bool',
+        'turnContext' => 'array<string,mixed>',
+        'events' => '\Algolia\AlgoliaSearch\Model\AgentStudio\MessageEvent[]',
+        'guardrail' => '\Algolia\AlgoliaSearch\Model\AgentStudio\GuardrailOutcome',
     ];
 
     /**
@@ -49,7 +55,13 @@ class MessageResponse extends AbstractModel implements ModelInterface, \ArrayAcc
         'model' => null,
         'inputTokens' => null,
         'outputTokens' => null,
+        'reasoningTokens' => null,
+        'inputTokenDetails' => null,
+        'outputTokenDetails' => null,
+        'isCacheHit' => null,
         'turnContext' => null,
+        'events' => null,
+        'guardrail' => null,
     ];
 
     /**
@@ -68,7 +80,13 @@ class MessageResponse extends AbstractModel implements ModelInterface, \ArrayAcc
         'model' => 'model',
         'inputTokens' => 'inputTokens',
         'outputTokens' => 'outputTokens',
+        'reasoningTokens' => 'reasoningTokens',
+        'inputTokenDetails' => 'inputTokenDetails',
+        'outputTokenDetails' => 'outputTokenDetails',
+        'isCacheHit' => 'isCacheHit',
         'turnContext' => 'turnContext',
+        'events' => 'events',
+        'guardrail' => 'guardrail',
     ];
 
     /**
@@ -86,7 +104,13 @@ class MessageResponse extends AbstractModel implements ModelInterface, \ArrayAcc
         'model' => 'setModel',
         'inputTokens' => 'setInputTokens',
         'outputTokens' => 'setOutputTokens',
+        'reasoningTokens' => 'setReasoningTokens',
+        'inputTokenDetails' => 'setInputTokenDetails',
+        'outputTokenDetails' => 'setOutputTokenDetails',
+        'isCacheHit' => 'setIsCacheHit',
         'turnContext' => 'setTurnContext',
+        'events' => 'setEvents',
+        'guardrail' => 'setGuardrail',
     ];
 
     /**
@@ -104,7 +128,13 @@ class MessageResponse extends AbstractModel implements ModelInterface, \ArrayAcc
         'model' => 'getModel',
         'inputTokens' => 'getInputTokens',
         'outputTokens' => 'getOutputTokens',
+        'reasoningTokens' => 'getReasoningTokens',
+        'inputTokenDetails' => 'getInputTokenDetails',
+        'outputTokenDetails' => 'getOutputTokenDetails',
+        'isCacheHit' => 'getIsCacheHit',
         'turnContext' => 'getTurnContext',
+        'events' => 'getEvents',
+        'guardrail' => 'getGuardrail',
     ];
 
     /**
@@ -148,8 +178,26 @@ class MessageResponse extends AbstractModel implements ModelInterface, \ArrayAcc
         if (isset($data['outputTokens'])) {
             $this->container['outputTokens'] = $data['outputTokens'];
         }
+        if (isset($data['reasoningTokens'])) {
+            $this->container['reasoningTokens'] = $data['reasoningTokens'];
+        }
+        if (isset($data['inputTokenDetails'])) {
+            $this->container['inputTokenDetails'] = $data['inputTokenDetails'];
+        }
+        if (isset($data['outputTokenDetails'])) {
+            $this->container['outputTokenDetails'] = $data['outputTokenDetails'];
+        }
+        if (isset($data['isCacheHit'])) {
+            $this->container['isCacheHit'] = $data['isCacheHit'];
+        }
         if (isset($data['turnContext'])) {
             $this->container['turnContext'] = $data['turnContext'];
+        }
+        if (isset($data['events'])) {
+            $this->container['events'] = $data['events'];
+        }
+        if (isset($data['guardrail'])) {
+            $this->container['guardrail'] = $data['guardrail'];
         }
     }
 
@@ -463,9 +511,105 @@ class MessageResponse extends AbstractModel implements ModelInterface, \ArrayAcc
     }
 
     /**
+     * Gets reasoningTokens.
+     *
+     * @return null|int
+     */
+    public function getReasoningTokens()
+    {
+        return $this->container['reasoningTokens'] ?? null;
+    }
+
+    /**
+     * Sets reasoningTokens.
+     *
+     * @param null|int $reasoningTokens reasoningTokens
+     *
+     * @return self
+     */
+    public function setReasoningTokens($reasoningTokens)
+    {
+        $this->container['reasoningTokens'] = $reasoningTokens;
+
+        return $this;
+    }
+
+    /**
+     * Gets inputTokenDetails.
+     *
+     * @return null|array<string,int>
+     */
+    public function getInputTokenDetails()
+    {
+        return $this->container['inputTokenDetails'] ?? null;
+    }
+
+    /**
+     * Sets inputTokenDetails.
+     *
+     * @param null|array<string,int> $inputTokenDetails inputTokenDetails
+     *
+     * @return self
+     */
+    public function setInputTokenDetails($inputTokenDetails)
+    {
+        $this->container['inputTokenDetails'] = $inputTokenDetails;
+
+        return $this;
+    }
+
+    /**
+     * Gets outputTokenDetails.
+     *
+     * @return null|array<string,int>
+     */
+    public function getOutputTokenDetails()
+    {
+        return $this->container['outputTokenDetails'] ?? null;
+    }
+
+    /**
+     * Sets outputTokenDetails.
+     *
+     * @param null|array<string,int> $outputTokenDetails outputTokenDetails
+     *
+     * @return self
+     */
+    public function setOutputTokenDetails($outputTokenDetails)
+    {
+        $this->container['outputTokenDetails'] = $outputTokenDetails;
+
+        return $this;
+    }
+
+    /**
+     * Gets isCacheHit.
+     *
+     * @return null|bool
+     */
+    public function getIsCacheHit()
+    {
+        return $this->container['isCacheHit'] ?? null;
+    }
+
+    /**
+     * Sets isCacheHit.
+     *
+     * @param null|bool $isCacheHit isCacheHit
+     *
+     * @return self
+     */
+    public function setIsCacheHit($isCacheHit)
+    {
+        $this->container['isCacheHit'] = $isCacheHit;
+
+        return $this;
+    }
+
+    /**
      * Gets turnContext.
      *
-     * @return null|array<string,string>
+     * @return null|array<string,mixed>
      */
     public function getTurnContext()
     {
@@ -475,13 +619,61 @@ class MessageResponse extends AbstractModel implements ModelInterface, \ArrayAcc
     /**
      * Sets turnContext.
      *
-     * @param null|array<string,string> $turnContext turnContext
+     * @param null|array<string,mixed> $turnContext turnContext
      *
      * @return self
      */
     public function setTurnContext($turnContext)
     {
         $this->container['turnContext'] = $turnContext;
+
+        return $this;
+    }
+
+    /**
+     * Gets events.
+     *
+     * @return null|MessageEvent[]
+     */
+    public function getEvents()
+    {
+        return $this->container['events'] ?? null;
+    }
+
+    /**
+     * Sets events.
+     *
+     * @param null|MessageEvent[] $events events
+     *
+     * @return self
+     */
+    public function setEvents($events)
+    {
+        $this->container['events'] = $events;
+
+        return $this;
+    }
+
+    /**
+     * Gets guardrail.
+     *
+     * @return null|GuardrailOutcome
+     */
+    public function getGuardrail()
+    {
+        return $this->container['guardrail'] ?? null;
+    }
+
+    /**
+     * Sets guardrail.
+     *
+     * @param null|GuardrailOutcome $guardrail guardrail
+     *
+     * @return self
+     */
+    public function setGuardrail($guardrail)
+    {
+        $this->container['guardrail'] = $guardrail;
 
         return $this;
     }

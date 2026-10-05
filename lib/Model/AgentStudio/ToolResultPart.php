@@ -25,6 +25,10 @@ class ToolResultPart extends AbstractModel implements ModelInterface, \ArrayAcce
         'toolName' => 'string',
         'output' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ToolResultOutput',
         'providerOptions' => 'array<string,mixed>',
+        'mcpConfigId' => 'string',
+        'mcpConfigName' => 'string',
+        'isTerminal' => 'bool',
+        'outputMetadata' => 'array<string,mixed>',
     ];
 
     /**
@@ -38,6 +42,10 @@ class ToolResultPart extends AbstractModel implements ModelInterface, \ArrayAcce
         'toolName' => null,
         'output' => null,
         'providerOptions' => null,
+        'mcpConfigId' => null,
+        'mcpConfigName' => null,
+        'isTerminal' => null,
+        'outputMetadata' => null,
     ];
 
     /**
@@ -52,6 +60,10 @@ class ToolResultPart extends AbstractModel implements ModelInterface, \ArrayAcce
         'toolName' => 'toolName',
         'output' => 'output',
         'providerOptions' => 'providerOptions',
+        'mcpConfigId' => 'mcpConfigId',
+        'mcpConfigName' => 'mcpConfigName',
+        'isTerminal' => 'isTerminal',
+        'outputMetadata' => 'outputMetadata',
     ];
 
     /**
@@ -65,6 +77,10 @@ class ToolResultPart extends AbstractModel implements ModelInterface, \ArrayAcce
         'toolName' => 'setToolName',
         'output' => 'setOutput',
         'providerOptions' => 'setProviderOptions',
+        'mcpConfigId' => 'setMcpConfigId',
+        'mcpConfigName' => 'setMcpConfigName',
+        'isTerminal' => 'setIsTerminal',
+        'outputMetadata' => 'setOutputMetadata',
     ];
 
     /**
@@ -78,6 +94,10 @@ class ToolResultPart extends AbstractModel implements ModelInterface, \ArrayAcce
         'toolName' => 'getToolName',
         'output' => 'getOutput',
         'providerOptions' => 'getProviderOptions',
+        'mcpConfigId' => 'getMcpConfigId',
+        'mcpConfigName' => 'getMcpConfigName',
+        'isTerminal' => 'getIsTerminal',
+        'outputMetadata' => 'getOutputMetadata',
     ];
 
     /**
@@ -108,6 +128,18 @@ class ToolResultPart extends AbstractModel implements ModelInterface, \ArrayAcce
         }
         if (isset($data['providerOptions'])) {
             $this->container['providerOptions'] = $data['providerOptions'];
+        }
+        if (isset($data['mcpConfigId'])) {
+            $this->container['mcpConfigId'] = $data['mcpConfigId'];
+        }
+        if (isset($data['mcpConfigName'])) {
+            $this->container['mcpConfigName'] = $data['mcpConfigName'];
+        }
+        if (isset($data['isTerminal'])) {
+            $this->container['isTerminal'] = $data['isTerminal'];
+        }
+        if (isset($data['outputMetadata'])) {
+            $this->container['outputMetadata'] = $data['outputMetadata'];
         }
     }
 
@@ -314,6 +346,102 @@ class ToolResultPart extends AbstractModel implements ModelInterface, \ArrayAcce
     public function setProviderOptions($providerOptions)
     {
         $this->container['providerOptions'] = $providerOptions;
+
+        return $this;
+    }
+
+    /**
+     * Gets mcpConfigId.
+     *
+     * @return null|string
+     */
+    public function getMcpConfigId()
+    {
+        return $this->container['mcpConfigId'] ?? null;
+    }
+
+    /**
+     * Sets mcpConfigId.
+     *
+     * @param null|string $mcpConfigId mcpConfigId
+     *
+     * @return self
+     */
+    public function setMcpConfigId($mcpConfigId)
+    {
+        $this->container['mcpConfigId'] = $mcpConfigId;
+
+        return $this;
+    }
+
+    /**
+     * Gets mcpConfigName.
+     *
+     * @return null|string
+     */
+    public function getMcpConfigName()
+    {
+        return $this->container['mcpConfigName'] ?? null;
+    }
+
+    /**
+     * Sets mcpConfigName.
+     *
+     * @param null|string $mcpConfigName mcpConfigName
+     *
+     * @return self
+     */
+    public function setMcpConfigName($mcpConfigName)
+    {
+        $this->container['mcpConfigName'] = $mcpConfigName;
+
+        return $this;
+    }
+
+    /**
+     * Gets isTerminal.
+     *
+     * @return null|bool
+     */
+    public function getIsTerminal()
+    {
+        return $this->container['isTerminal'] ?? null;
+    }
+
+    /**
+     * Sets isTerminal.
+     *
+     * @param null|bool $isTerminal isTerminal
+     *
+     * @return self
+     */
+    public function setIsTerminal($isTerminal)
+    {
+        $this->container['isTerminal'] = $isTerminal;
+
+        return $this;
+    }
+
+    /**
+     * Gets outputMetadata.
+     *
+     * @return null|array<string,mixed>
+     */
+    public function getOutputMetadata()
+    {
+        return $this->container['outputMetadata'] ?? null;
+    }
+
+    /**
+     * Sets outputMetadata.
+     *
+     * @param null|array<string,mixed> $outputMetadata outputMetadata
+     *
+     * @return self
+     */
+    public function setOutputMetadata($outputMetadata)
+    {
+        $this->container['outputMetadata'] = $outputMetadata;
 
         return $this;
     }

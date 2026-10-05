@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Model for tool invocation in a Message.
+ * @description A tool invocation in a message.
  */
 class ToolInvocationV4 extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

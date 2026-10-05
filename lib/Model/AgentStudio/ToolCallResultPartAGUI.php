@@ -8,13 +8,11 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * AlgoliaDisplayResultsToolConfig Class Doc Comment.
+ * ToolCallResultPartAGUI Class Doc Comment.
  *
  * @category Class
- *
- * @description Configuration for the algolia_display_results tool.
  */
-class AlgoliaDisplayResultsToolConfig extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ToolCallResultPartAGUI extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -22,12 +20,11 @@ class AlgoliaDisplayResultsToolConfig extends AbstractModel implements ModelInte
      * @var string[]
      */
     protected static $modelTypes = [
-        'name' => 'string',
+        'toolCallId' => 'string',
+        'state' => 'string',
         'type' => 'string',
-        'minGroups' => 'int',
-        'maxGroups' => 'int',
-        'minResultsPerGroup' => 'int',
-        'maxResultsPerGroup' => 'int',
+        'content' => 'string',
+        'error' => 'string',
     ];
 
     /**
@@ -36,12 +33,11 @@ class AlgoliaDisplayResultsToolConfig extends AbstractModel implements ModelInte
      * @var string[]
      */
     protected static $modelFormats = [
-        'name' => null,
+        'toolCallId' => null,
+        'state' => null,
         'type' => null,
-        'minGroups' => null,
-        'maxGroups' => null,
-        'minResultsPerGroup' => null,
-        'maxResultsPerGroup' => null,
+        'content' => null,
+        'error' => null,
     ];
 
     /**
@@ -51,12 +47,11 @@ class AlgoliaDisplayResultsToolConfig extends AbstractModel implements ModelInte
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
+        'toolCallId' => 'toolCallId',
+        'state' => 'state',
         'type' => 'type',
-        'minGroups' => 'minGroups',
-        'maxGroups' => 'maxGroups',
-        'minResultsPerGroup' => 'minResultsPerGroup',
-        'maxResultsPerGroup' => 'maxResultsPerGroup',
+        'content' => 'content',
+        'error' => 'error',
     ];
 
     /**
@@ -65,12 +60,11 @@ class AlgoliaDisplayResultsToolConfig extends AbstractModel implements ModelInte
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
+        'toolCallId' => 'setToolCallId',
+        'state' => 'setState',
         'type' => 'setType',
-        'minGroups' => 'setMinGroups',
-        'maxGroups' => 'setMaxGroups',
-        'minResultsPerGroup' => 'setMinResultsPerGroup',
-        'maxResultsPerGroup' => 'setMaxResultsPerGroup',
+        'content' => 'setContent',
+        'error' => 'setError',
     ];
 
     /**
@@ -79,12 +73,11 @@ class AlgoliaDisplayResultsToolConfig extends AbstractModel implements ModelInte
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
+        'toolCallId' => 'getToolCallId',
+        'state' => 'getState',
         'type' => 'getType',
-        'minGroups' => 'getMinGroups',
-        'maxGroups' => 'getMaxGroups',
-        'minResultsPerGroup' => 'getMinResultsPerGroup',
-        'maxResultsPerGroup' => 'getMaxResultsPerGroup',
+        'content' => 'getContent',
+        'error' => 'getError',
     ];
 
     /**
@@ -101,23 +94,20 @@ class AlgoliaDisplayResultsToolConfig extends AbstractModel implements ModelInte
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['name'])) {
-            $this->container['name'] = $data['name'];
+        if (isset($data['toolCallId'])) {
+            $this->container['toolCallId'] = $data['toolCallId'];
+        }
+        if (isset($data['state'])) {
+            $this->container['state'] = $data['state'];
         }
         if (isset($data['type'])) {
             $this->container['type'] = $data['type'];
         }
-        if (isset($data['minGroups'])) {
-            $this->container['minGroups'] = $data['minGroups'];
+        if (isset($data['content'])) {
+            $this->container['content'] = $data['content'];
         }
-        if (isset($data['maxGroups'])) {
-            $this->container['maxGroups'] = $data['maxGroups'];
-        }
-        if (isset($data['minResultsPerGroup'])) {
-            $this->container['minResultsPerGroup'] = $data['minResultsPerGroup'];
-        }
-        if (isset($data['maxResultsPerGroup'])) {
-            $this->container['maxResultsPerGroup'] = $data['maxResultsPerGroup'];
+        if (isset($data['error'])) {
+            $this->container['error'] = $data['error'];
         }
     }
 
@@ -181,8 +171,17 @@ class AlgoliaDisplayResultsToolConfig extends AbstractModel implements ModelInte
     {
         $invalidProperties = [];
 
+        if (!isset($this->container['toolCallId']) || null === $this->container['toolCallId']) {
+            $invalidProperties[] = "'toolCallId' can't be null";
+        }
+        if (!isset($this->container['state']) || null === $this->container['state']) {
+            $invalidProperties[] = "'state' can't be null";
+        }
         if (!isset($this->container['type']) || null === $this->container['type']) {
             $invalidProperties[] = "'type' can't be null";
+        }
+        if (!isset($this->container['content']) || null === $this->container['content']) {
+            $invalidProperties[] = "'content' can't be null";
         }
 
         return $invalidProperties;
@@ -200,25 +199,49 @@ class AlgoliaDisplayResultsToolConfig extends AbstractModel implements ModelInte
     }
 
     /**
-     * Gets name.
+     * Gets toolCallId.
      *
-     * @return null|string
+     * @return string
      */
-    public function getName()
+    public function getToolCallId()
     {
-        return $this->container['name'] ?? null;
+        return $this->container['toolCallId'] ?? null;
     }
 
     /**
-     * Sets name.
+     * Sets toolCallId.
      *
-     * @param null|string $name name
+     * @param string $toolCallId toolCallId
      *
      * @return self
      */
-    public function setName($name)
+    public function setToolCallId($toolCallId)
     {
-        $this->container['name'] = $name;
+        $this->container['toolCallId'] = $toolCallId;
+
+        return $this;
+    }
+
+    /**
+     * Gets state.
+     *
+     * @return string
+     */
+    public function getState()
+    {
+        return $this->container['state'] ?? null;
+    }
+
+    /**
+     * Sets state.
+     *
+     * @param string $state state
+     *
+     * @return self
+     */
+    public function setState($state)
+    {
+        $this->container['state'] = $state;
 
         return $this;
     }
@@ -248,97 +271,49 @@ class AlgoliaDisplayResultsToolConfig extends AbstractModel implements ModelInte
     }
 
     /**
-     * Gets minGroups.
+     * Gets content.
      *
-     * @return null|int
+     * @return string
      */
-    public function getMinGroups()
+    public function getContent()
     {
-        return $this->container['minGroups'] ?? null;
+        return $this->container['content'] ?? null;
     }
 
     /**
-     * Sets minGroups.
+     * Sets content.
      *
-     * @param null|int $minGroups minGroups
+     * @param string $content content
      *
      * @return self
      */
-    public function setMinGroups($minGroups)
+    public function setContent($content)
     {
-        $this->container['minGroups'] = $minGroups;
+        $this->container['content'] = $content;
 
         return $this;
     }
 
     /**
-     * Gets maxGroups.
+     * Gets error.
      *
-     * @return null|int
+     * @return null|string
      */
-    public function getMaxGroups()
+    public function getError()
     {
-        return $this->container['maxGroups'] ?? null;
+        return $this->container['error'] ?? null;
     }
 
     /**
-     * Sets maxGroups.
+     * Sets error.
      *
-     * @param null|int $maxGroups maxGroups
+     * @param null|string $error error
      *
      * @return self
      */
-    public function setMaxGroups($maxGroups)
+    public function setError($error)
     {
-        $this->container['maxGroups'] = $maxGroups;
-
-        return $this;
-    }
-
-    /**
-     * Gets minResultsPerGroup.
-     *
-     * @return null|int
-     */
-    public function getMinResultsPerGroup()
-    {
-        return $this->container['minResultsPerGroup'] ?? null;
-    }
-
-    /**
-     * Sets minResultsPerGroup.
-     *
-     * @param null|int $minResultsPerGroup minResultsPerGroup
-     *
-     * @return self
-     */
-    public function setMinResultsPerGroup($minResultsPerGroup)
-    {
-        $this->container['minResultsPerGroup'] = $minResultsPerGroup;
-
-        return $this;
-    }
-
-    /**
-     * Gets maxResultsPerGroup.
-     *
-     * @return null|int
-     */
-    public function getMaxResultsPerGroup()
-    {
-        return $this->container['maxResultsPerGroup'] ?? null;
-    }
-
-    /**
-     * Sets maxResultsPerGroup.
-     *
-     * @param null|int $maxResultsPerGroup maxResultsPerGroup
-     *
-     * @return self
-     */
-    public function setMaxResultsPerGroup($maxResultsPerGroup)
-    {
-        $this->container['maxResultsPerGroup'] = $maxResultsPerGroup;
+        $this->container['error'] = $error;
 
         return $this;
     }

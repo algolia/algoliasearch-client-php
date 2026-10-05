@@ -6,7 +6,7 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\AgentStudioConfig;
-use Algolia\AlgoliaSearch\Model\AgentStudio\AgentCompletionRequest;
+use Algolia\AlgoliaSearch\Model\AgentStudio\AgentCompletionRequestUnion;
 use Algolia\AlgoliaSearch\Model\AgentStudio\AgentConfigCreate;
 use Algolia\AlgoliaSearch\Model\AgentStudio\AgentConfigUpdate;
 use Algolia\AlgoliaSearch\Model\AgentStudio\AgentWithVersionResponse;
@@ -17,9 +17,13 @@ use Algolia\AlgoliaSearch\Model\AgentStudio\AllowedDomainListResponse;
 use Algolia\AlgoliaSearch\Model\AgentStudio\AllowedDomainResponse;
 use Algolia\AlgoliaSearch\Model\AgentStudio\ApplicationConfigPatch;
 use Algolia\AlgoliaSearch\Model\AgentStudio\ApplicationConfigResponse;
+use Algolia\AlgoliaSearch\Model\AgentStudio\ContextCompactRequest;
+use Algolia\AlgoliaSearch\Model\AgentStudio\ContextResponse;
+use Algolia\AlgoliaSearch\Model\AgentStudio\ContextTrimRequest;
 use Algolia\AlgoliaSearch\Model\AgentStudio\ConversationFullResponse;
 use Algolia\AlgoliaSearch\Model\AgentStudio\FeedbackCreationRequest;
 use Algolia\AlgoliaSearch\Model\AgentStudio\FeedbackResponse;
+use Algolia\AlgoliaSearch\Model\AgentStudio\FeedbackUpdateRequest;
 use Algolia\AlgoliaSearch\Model\AgentStudio\PaginatedAgentsResponse;
 use Algolia\AlgoliaSearch\Model\AgentStudio\PaginatedConversationsResponse;
 use Algolia\AlgoliaSearch\Model\AgentStudio\PaginatedProviderAuthenticationsResponse;
@@ -30,6 +34,8 @@ use Algolia\AlgoliaSearch\Model\AgentStudio\ProviderAuthenticationResponse;
 use Algolia\AlgoliaSearch\Model\AgentStudio\SecretKeyCreate;
 use Algolia\AlgoliaSearch\Model\AgentStudio\SecretKeyPatch;
 use Algolia\AlgoliaSearch\Model\AgentStudio\SecretKeyResponse;
+use Algolia\AlgoliaSearch\Model\AgentStudio\TaskRequest;
+use Algolia\AlgoliaSearch\Model\AgentStudio\TaskResponse;
 use Algolia\AlgoliaSearch\Model\AgentStudio\UserDataResponse;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\AlgoliaResponse;
@@ -184,6 +190,33 @@ class AgentStudioClient
     }
 
     /**
+     * Summarize the older part of a conversation into a single user message via the caller's LLM.  Everything except the trailing `keepLastMessages` messages is summarized; the summary is returned as a user-role message followed by the kept tail verbatim. Your provider runs the summary, so the provider adds the cost to your account.  A conversation too large for the summarizer's context window is split into chunks that each fit, summarized concurrently, then merged in a reduce pass - so payload size alone does not fail the request. When the conversation still cannot be summarized (it needs more chunks than the server allows, or the chunk summaries will not converge), the response is a `400`, not a `500`.  Two optional controls shape the output. `instructions` adds caller guidance inside the server-owned prompt frame, so it steers the summary without the model echoing the wording back. `targetTokensEstimate` sets a desired summary size, translated into word-count guidance.  The `compaction` block reports what happened: `compacted` is `false` when the payload passed through untouched (nothing older than the kept tail), alongside chunk/pass counts and the summarizer's own token usage.
+     *
+     * Required API Key ACLs:
+     *  - search
+     *
+     * @param array|ContextCompactRequest $contextCompactRequest contextCompactRequest (required)
+     *                                                           - $contextCompactRequest['providerID'] => (string) Provider UUID for LLM credentials. (required)
+     *                                                           - $contextCompactRequest['model'] => (string) Model name (e.g., gpt-4o-mini). (required)
+     *                                                           - $contextCompactRequest['messages'] => (array)  (required)
+     *                                                           - $contextCompactRequest['keepLastMessages'] => (int) Number of trailing messages kept verbatim; everything older is summarized.
+     *                                                           - $contextCompactRequest['instructions'] => (string) Extra guidance for the summarizer (e.g. 'keep every product reference'). Appended inside the server-owned prompt frame, so it steers the summary without the model echoing your wording back into it.
+     *                                                           - $contextCompactRequest['targetTokensEstimate'] => (int) Desired size of the final summary, in tokens. Translated into word-count guidance for the summarizer (best-effort, not a hard cap). Omit to let the summarizer default to a concise summary.
+     *
+     * @see ContextCompactRequest
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|ContextResponse
+     */
+    public function compactContext($contextCompactRequest, $requestOptions = [])
+    {
+        $response = $this->compactContextWithHttpInfo($contextCompactRequest, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
      * Create a new agent.
      *
      * Required API Key ACLs:
@@ -237,21 +270,16 @@ class AgentStudioClient
     }
 
     /**
-     * Create a completion for the specified agent.  This endpoint handles two types of requests: 1. Normal completion request: User message -> Agent response 2. Tool approval response: User approval -> Execute tool -> Agent response  Tool Approval Flow (for MCP tools with requiresApproval: true): - Request 1: User sends message -> Agent requests tool call -> Return approval request. - Request 2: User approves -> Execute tool -> Agent continues with result.
+     * Create a completion for the specified agent.  This endpoint handles two types of requests: 1. Normal completion request: User message -> Agent response 2. Tool approval response: User approval -> Execute tool -> Agent response  Tool Approval Flow (for MCP tools with requiresApproval: true): - Request 1: User sends message -> Agent requests tool call -> Return approval request - Request 2: User approves -> Execute tool -> Agent continues with result.
      *
      * Required API Key ACLs:
      *  - search
      *
-     * @param string                       $agentId                The agentId. (required)
-     * @param array                        $compatibilityMode      Compatibility mode for the completion API. (required)
-     * @param AgentCompletionRequest|array $agentCompletionRequest agentCompletionRequest (required)
-     *                                                             - $agentCompletionRequest['configuration'] => (array)
-     *                                                             - $agentCompletionRequest['messages'] => (array)
-     *                                                             - $agentCompletionRequest['id'] => (string) Optional conversation id.
-     *                                                             - $agentCompletionRequest['algolia'] => (array)
-     *                                                             - $agentCompletionRequest['toolApprovals'] => (array) Approval decisions for pending tool calls keyed by toolCallId.
+     * @param string                            $agentId                The agentId. (required)
+     * @param array                             $compatibilityMode      Compatibility mode for the completion API. (required)
+     * @param AgentCompletionRequestUnion|array $agentCompletionRequest agentCompletionRequest (required)
      *
-     * @see AgentCompletionRequest
+     * @see AgentCompletionRequestUnion
      *
      * @param bool   $stream                  Whether to stream the response or not. (optional, default to true)
      * @param bool   $cache                   Use cached responses if available. (optional, default to true)
@@ -265,6 +293,35 @@ class AgentStudioClient
     public function createAgentCompletion($agentId, $compatibilityMode, $agentCompletionRequest, $stream = null, $cache = null, $memory = null, $analytics = null, $xAlgoliaSecureUserToken = null, $requestOptions = [])
     {
         $response = $this->createAgentCompletionWithHttpInfo($agentId, $compatibilityMode, $agentCompletionRequest, $stream, $cache, $memory, $analytics, $xAlgoliaSecureUserToken, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Run a configured task and return the generated object as ``{ output }``.  With ``?stream=true``, returns the raw partial JSON text stream expected by AI SDK v5 ``useObject``. The streamed JSON is the task output itself.
+     *
+     * Required API Key ACLs:
+     *  - search
+     *
+     * @param string            $agentId     The agentId. (required)
+     * @param array|TaskRequest $taskRequest taskRequest (required)
+     *                                       - $taskRequest['task'] => (string) ID of the configured task to run.
+     *                                       - $taskRequest['kind'] => (array)
+     *                                       - $taskRequest['input'] => (array) Arbitrary JSON input passed to the task as data. (required)
+     *                                       - $taskRequest['configuration'] => (array)
+     *
+     * @see TaskRequest
+     *
+     * @param bool  $stream         Whether to stream the response or not. (optional, default to false)
+     * @param bool  $cache          Use cached responses if available. (optional, default to true)
+     * @param bool  $analytics      Set to false to skip endpoint-specific analytics for this task call (default: true). Disables the task analytics event; operational metrics and traces are always emitted. (optional, default to true)
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|TaskResponse
+     */
+    public function createAgentTask($agentId, $taskRequest, $stream = null, $cache = null, $analytics = null, $requestOptions = [])
+    {
+        $response = $this->createAgentTaskWithHttpInfo($agentId, $taskRequest, $stream, $cache, $analytics, $requestOptions);
 
         return $response->getData();
     }
@@ -425,7 +482,7 @@ class AgentStudioClient
     }
 
     /**
-     * Deletes the conversations matching the given filers.
+     * Deletes the conversations matching the given filters.
      *
      * Required API Key ACLs:
      *  - logs
@@ -607,14 +664,16 @@ class AgentStudioClient
      * @param string $conversationId          The conversationId. (required)
      * @param string $agentId                 The agentId. (required)
      * @param bool   $includeFeedback         Include feedback for the conversation. (optional, default to false)
+     * @param bool   $includeMessageEvents    Include Insights events attributed to each assistant message. (optional, default to false)
+     * @param bool   $includeImpactAnalytics  Include outcome signals (hasView, hasClick, hasConversion) for the conversation. (optional, default to false)
      * @param string $xAlgoliaSecureUserToken The X-Algolia-Secure-User-Token. (optional)
      * @param array  $requestOptions          the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|ConversationFullResponse
      */
-    public function getConversation($conversationId, $agentId, $includeFeedback = null, $xAlgoliaSecureUserToken = null, $requestOptions = [])
+    public function getConversation($conversationId, $agentId, $includeFeedback = null, $includeMessageEvents = null, $includeImpactAnalytics = null, $xAlgoliaSecureUserToken = null, $requestOptions = [])
     {
-        $response = $this->getConversationWithHttpInfo($conversationId, $agentId, $includeFeedback, $xAlgoliaSecureUserToken, $requestOptions);
+        $response = $this->getConversationWithHttpInfo($conversationId, $agentId, $includeFeedback, $includeMessageEvents, $includeImpactAnalytics, $xAlgoliaSecureUserToken, $requestOptions);
 
         return $response->getData();
     }
@@ -674,7 +733,7 @@ class AgentStudioClient
     }
 
     /**
-     * Invalidate cached completions for this agent. Filter with `before` (exclusive).
+     * Invalidate cached completions and task outputs for this agent. Filter with `before` (exclusive).
      *
      * Required API Key ACLs:
      *  - editSettings
@@ -721,14 +780,18 @@ class AgentStudioClient
      * @param int    $feedbackVote            Filter by feedback value (requires includeFeedback=true). (optional)
      * @param int    $page                    Page number. (optional, default to 1)
      * @param int    $limit                   Items per page. (optional, default to 20)
+     * @param bool   $includeImpactAnalytics  Include impact analytics (hasView, hasClick, hasConversion) per conversation. (optional)
+     * @param bool   $clicked                 Filter by conversations with at least one item click. (optional)
+     * @param bool   $converted               Filter by conversations with at least one conversion. (optional)
+     * @param bool   $hasAlgoliaSearch        Filter by conversations where the search tool was used. (optional)
      * @param string $xAlgoliaSecureUserToken The X-Algolia-Secure-User-Token. (optional)
      * @param array  $requestOptions          the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|PaginatedConversationsResponse
      */
-    public function listAgentConversations($agentId, $startDate = null, $endDate = null, $includeFeedback = null, $feedbackVote = null, $page = null, $limit = null, $xAlgoliaSecureUserToken = null, $requestOptions = [])
+    public function listAgentConversations($agentId, $startDate = null, $endDate = null, $includeFeedback = null, $feedbackVote = null, $page = null, $limit = null, $includeImpactAnalytics = null, $clicked = null, $converted = null, $hasAlgoliaSearch = null, $xAlgoliaSecureUserToken = null, $requestOptions = [])
     {
-        $response = $this->listAgentConversationsWithHttpInfo($agentId, $startDate, $endDate, $includeFeedback, $feedbackVote, $page, $limit, $xAlgoliaSecureUserToken, $requestOptions);
+        $response = $this->listAgentConversationsWithHttpInfo($agentId, $startDate, $endDate, $includeFeedback, $feedbackVote, $page, $limit, $includeImpactAnalytics, $clicked, $converted, $hasAlgoliaSearch, $xAlgoliaSecureUserToken, $requestOptions);
 
         return $response->getData();
     }
@@ -845,6 +908,31 @@ class AgentStudioClient
     }
 
     /**
+     * Deterministically trim a conversation payload (no LLM calls).  Keep the last N messages and/or fit a heuristic token budget, optionally dropping tool parts from what is kept (tool parts are stripped before the budget is applied). Returns the trimmed messages plus before/after stats.  With no constraints set, the messages are returned unchanged and only the stats are computed - a deliberate, cheap \"how big is my context?\" probe (no LLM call, no mutation).
+     *
+     * Required API Key ACLs:
+     *  - search
+     *
+     * @param array|ContextTrimRequest $contextTrimRequest contextTrimRequest (required)
+     *                                                     - $contextTrimRequest['messages'] => (array)  (required)
+     *                                                     - $contextTrimRequest['keepLastMessages'] => (int) Keep only the last N messages, dropping older ones. Applied before the token budget.
+     *                                                     - $contextTrimRequest['maxTokensEstimate'] => (int) Drop oldest messages until the estimated token total fits this budget (heuristic).
+     *                                                     - $contextTrimRequest['dropToolParts'] => (bool) Strip tool-invocation/result parts from the messages that are kept. Applied before the token budget, so the budget counts only surviving content.
+     *
+     * @see ContextTrimRequest
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|ContextResponse
+     */
+    public function trimContext($contextTrimRequest, $requestOptions = [])
+    {
+        $response = $this->trimContextWithHttpInfo($contextTrimRequest, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
      * Unpublish the specified agent.
      *
      * Required API Key ACLs:
@@ -911,6 +999,32 @@ class AgentStudioClient
     public function updateConfiguration($applicationConfigPatch, $requestOptions = [])
     {
         $response = $this->updateConfigurationWithHttpInfo($applicationConfigPatch, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Update an existing feedback entry.
+     *
+     * Required API Key ACLs:
+     *  - search
+     *
+     * @param array|FeedbackUpdateRequest $feedbackUpdateRequest feedbackUpdateRequest (required)
+     *                                                           - $feedbackUpdateRequest['messageId'] => (string)  (required)
+     *                                                           - $feedbackUpdateRequest['agentId'] => (string)  (required)
+     *                                                           - $feedbackUpdateRequest['vote'] => (array)
+     *                                                           - $feedbackUpdateRequest['tags'] => (array)
+     *                                                           - $feedbackUpdateRequest['notes'] => (string)
+     *
+     * @see FeedbackUpdateRequest
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|FeedbackResponse
+     */
+    public function updateFeedback($feedbackUpdateRequest, $requestOptions = [])
+    {
+        $response = $this->updateFeedbackWithHttpInfo($feedbackUpdateRequest, $requestOptions);
 
         return $response->getData();
     }
@@ -1068,6 +1182,36 @@ class AgentStudioClient
     }
 
     /**
+     * Compact Context (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Summarize the older part of a conversation into a single user message via the caller's LLM.  Everything except the trailing `keepLastMessages` messages is summarized; the summary is returned as a user-role message followed by the kept tail verbatim. Your provider runs the summary, so the provider adds the cost to your account.  A conversation too large for the summarizer's context window is split into chunks that each fit, summarized concurrently, then merged in a reduce pass - so payload size alone does not fail the request. When the conversation still cannot be summarized (it needs more chunks than the server allows, or the chunk summaries will not converge), the response is a `400`, not a `500`.  Two optional controls shape the output. `instructions` adds caller guidance inside the server-owned prompt frame, so it steers the summary without the model echoing the wording back. `targetTokensEstimate` sets a desired summary size, translated into word-count guidance.  The `compaction` block reports what happened: `compacted` is `false` when the payload passed through untouched (nothing older than the kept tail), alongside chunk/pass counts and the summarizer's own token usage.
+     * Required API Key ACLs:
+     *  - search
+     *
+     * @param array|ContextCompactRequest $contextCompactRequest (required)
+     * @param array                       $requestOptions        Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function compactContextWithHttpInfo($contextCompactRequest, $requestOptions = [])
+    {
+        // verify the required parameter 'contextCompactRequest' is set
+        if (!isset($contextCompactRequest)) {
+            throw new \InvalidArgumentException(
+                'Parameter `contextCompactRequest` is required when calling `compactContext`.'
+            );
+        }
+
+        $resourcePath = '/agent-studio/1/unstable/context/compact';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $contextCompactRequest;
+
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
      * Create Agent (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
@@ -1153,19 +1297,19 @@ class AgentStudioClient
      * Create Completion (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
-     * Create a completion for the specified agent.  This endpoint handles two types of requests: 1. Normal completion request: User message -> Agent response 2. Tool approval response: User approval -> Execute tool -> Agent response  Tool Approval Flow (for MCP tools with requiresApproval: true): - Request 1: User sends message -> Agent requests tool call -> Return approval request. - Request 2: User approves -> Execute tool -> Agent continues with result.
+     * Create a completion for the specified agent.  This endpoint handles two types of requests: 1. Normal completion request: User message -> Agent response 2. Tool approval response: User approval -> Execute tool -> Agent response  Tool Approval Flow (for MCP tools with requiresApproval: true): - Request 1: User sends message -> Agent requests tool call -> Return approval request - Request 2: User approves -> Execute tool -> Agent continues with result.
      * Required API Key ACLs:
      *  - search
      *
-     * @param string                       $agentId                 The agentId. (required)
-     * @param array                        $compatibilityMode       Compatibility mode for the completion API. (required)
-     * @param AgentCompletionRequest|array $agentCompletionRequest  (required)
-     * @param bool                         $stream                  Whether to stream the response or not. (optional)
-     * @param bool                         $cache                   Use cached responses if available. (optional)
-     * @param bool                         $memory                  Set to false to disable memory (enabled by default). (optional)
-     * @param bool                         $analytics               Set to false to skip analytics for this completion (default: true). Disables Agent Studio BigQuery analytics, Algolia search analytics, click analytics, and query-suggestions training. Useful for offline-eval workflows. (optional)
-     * @param string                       $xAlgoliaSecureUserToken The X-Algolia-Secure-User-Token. (optional)
-     * @param array                        $requestOptions          Request options
+     * @param string                            $agentId                 The agentId. (required)
+     * @param array                             $compatibilityMode       Compatibility mode for the completion API. (required)
+     * @param AgentCompletionRequestUnion|array $agentCompletionRequest  (required)
+     * @param bool                              $stream                  Whether to stream the response or not. (optional)
+     * @param bool                              $cache                   Use cached responses if available. (optional)
+     * @param bool                              $memory                  Set to false to disable memory (enabled by default). (optional)
+     * @param bool                              $analytics               Set to false to skip analytics for this completion (default: true). Disables Agent Studio BigQuery analytics, Algolia search analytics, click analytics, and query-suggestions training. Useful for offline-eval workflows. (optional)
+     * @param string                            $xAlgoliaSecureUserToken The X-Algolia-Secure-User-Token. (optional)
+     * @param array                             $requestOptions          Request options
      *
      * @return AlgoliaResponse
      */
@@ -1231,6 +1375,73 @@ class AgentStudioClient
         }
 
         $headers['X-Algolia-Secure-User-Token'] = $xAlgoliaSecureUserToken;
+
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Run Task (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Run a configured task and return the generated object as ``{ output }``.  With ``?stream=true``, returns the raw partial JSON text stream expected by AI SDK v5 ``useObject``. The streamed JSON is the task output itself.
+     * Required API Key ACLs:
+     *  - search
+     *
+     * @param string            $agentId        The agentId. (required)
+     * @param array|TaskRequest $taskRequest    (required)
+     * @param bool              $stream         Whether to stream the response or not. (optional)
+     * @param bool              $cache          Use cached responses if available. (optional)
+     * @param bool              $analytics      Set to false to skip endpoint-specific analytics for this task call (default: true). Disables the task analytics event; operational metrics and traces are always emitted. (optional)
+     * @param array             $requestOptions Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function createAgentTaskWithHttpInfo($agentId, $taskRequest, $stream = null, $cache = null, $analytics = null, $requestOptions = [])
+    {
+        // verify the required parameter 'agentId' is set
+        if (!isset($agentId)) {
+            throw new \InvalidArgumentException(
+                'Parameter `agentId` is required when calling `createAgentTask`.'
+            );
+        }
+        // verify the required parameter 'agentId' is not empty
+        if (isset($agentId) && '' === $agentId) {
+            throw new \InvalidArgumentException(
+                'Parameter `agentId` is required when calling `createAgentTask`.'
+            );
+        }
+        // verify the required parameter 'taskRequest' is set
+        if (!isset($taskRequest)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskRequest` is required when calling `createAgentTask`.'
+            );
+        }
+
+        $resourcePath = '/agent-studio/1/agents/{agentId}/tasks';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $taskRequest;
+
+        if (null !== $stream) {
+            $queryParameters['stream'] = $stream;
+        }
+
+        if (null !== $cache) {
+            $queryParameters['cache'] = $cache;
+        }
+
+        if (null !== $analytics) {
+            $queryParameters['analytics'] = $analytics;
+        }
+
+        // path params
+        if (null !== $agentId) {
+            $resourcePath = str_replace(
+                '{agentId}',
+                ObjectSerializer::toPathValue($agentId),
+                $resourcePath
+            );
+        }
 
         return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
@@ -1568,7 +1779,7 @@ class AgentStudioClient
      * Delete Conversations (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
-     * Deletes the conversations matching the given filers.
+     * Deletes the conversations matching the given filters.
      * Required API Key ACLs:
      *  - logs
      *
@@ -2088,12 +2299,14 @@ class AgentStudioClient
      * @param string $conversationId          The conversationId. (required)
      * @param string $agentId                 The agentId. (required)
      * @param bool   $includeFeedback         Include feedback for the conversation. (optional)
+     * @param bool   $includeMessageEvents    Include Insights events attributed to each assistant message. (optional)
+     * @param bool   $includeImpactAnalytics  Include outcome signals (hasView, hasClick, hasConversion) for the conversation. (optional)
      * @param string $xAlgoliaSecureUserToken The X-Algolia-Secure-User-Token. (optional)
      * @param array  $requestOptions          Request options
      *
      * @return AlgoliaResponse
      */
-    public function getConversationWithHttpInfo($conversationId, $agentId, $includeFeedback = null, $xAlgoliaSecureUserToken = null, $requestOptions = [])
+    public function getConversationWithHttpInfo($conversationId, $agentId, $includeFeedback = null, $includeMessageEvents = null, $includeImpactAnalytics = null, $xAlgoliaSecureUserToken = null, $requestOptions = [])
     {
         // verify the required parameter 'conversationId' is set
         if (!isset($conversationId)) {
@@ -2127,6 +2340,14 @@ class AgentStudioClient
 
         if (null !== $includeFeedback) {
             $queryParameters['includeFeedback'] = $includeFeedback;
+        }
+
+        if (null !== $includeMessageEvents) {
+            $queryParameters['includeMessageEvents'] = $includeMessageEvents;
+        }
+
+        if (null !== $includeImpactAnalytics) {
+            $queryParameters['includeImpactAnalytics'] = $includeImpactAnalytics;
         }
 
         // path params
@@ -2291,7 +2512,7 @@ class AgentStudioClient
      * Invalidate Agent Cache (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
-     * Invalidate cached completions for this agent. Filter with `before` (exclusive).
+     * Invalidate cached completions and task outputs for this agent. Filter with `before` (exclusive).
      * Required API Key ACLs:
      *  - editSettings
      *
@@ -2397,12 +2618,16 @@ class AgentStudioClient
      * @param int    $feedbackVote            Filter by feedback value (requires includeFeedback=true). (optional)
      * @param int    $page                    Page number. (optional)
      * @param int    $limit                   Items per page. (optional)
+     * @param bool   $includeImpactAnalytics  Include impact analytics (hasView, hasClick, hasConversion) per conversation. (optional)
+     * @param bool   $clicked                 Filter by conversations with at least one item click. (optional)
+     * @param bool   $converted               Filter by conversations with at least one conversion. (optional)
+     * @param bool   $hasAlgoliaSearch        Filter by conversations where the search tool was used. (optional)
      * @param string $xAlgoliaSecureUserToken The X-Algolia-Secure-User-Token. (optional)
      * @param array  $requestOptions          Request options
      *
      * @return AlgoliaResponse
      */
-    public function listAgentConversationsWithHttpInfo($agentId, $startDate = null, $endDate = null, $includeFeedback = null, $feedbackVote = null, $page = null, $limit = null, $xAlgoliaSecureUserToken = null, $requestOptions = [])
+    public function listAgentConversationsWithHttpInfo($agentId, $startDate = null, $endDate = null, $includeFeedback = null, $feedbackVote = null, $page = null, $limit = null, $includeImpactAnalytics = null, $clicked = null, $converted = null, $hasAlgoliaSearch = null, $xAlgoliaSecureUserToken = null, $requestOptions = [])
     {
         // verify the required parameter 'agentId' is set
         if (!isset($agentId)) {
@@ -2444,6 +2669,22 @@ class AgentStudioClient
 
         if (null !== $limit) {
             $queryParameters['limit'] = $limit;
+        }
+
+        if (null !== $includeImpactAnalytics) {
+            $queryParameters['includeImpactAnalytics'] = $includeImpactAnalytics;
+        }
+
+        if (null !== $clicked) {
+            $queryParameters['clicked'] = $clicked;
+        }
+
+        if (null !== $converted) {
+            $queryParameters['converted'] = $converted;
+        }
+
+        if (null !== $hasAlgoliaSearch) {
+            $queryParameters['hasAlgoliaSearch'] = $hasAlgoliaSearch;
         }
 
         // path params
@@ -2674,6 +2915,36 @@ class AgentStudioClient
     }
 
     /**
+     * Trim Context (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Deterministically trim a conversation payload (no LLM calls).  Keep the last N messages and/or fit a heuristic token budget, optionally dropping tool parts from what is kept (tool parts are stripped before the budget is applied). Returns the trimmed messages plus before/after stats.  With no constraints set, the messages are returned unchanged and only the stats are computed - a deliberate, cheap \"how big is my context?\" probe (no LLM call, no mutation).
+     * Required API Key ACLs:
+     *  - search
+     *
+     * @param array|ContextTrimRequest $contextTrimRequest (required)
+     * @param array                    $requestOptions     Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function trimContextWithHttpInfo($contextTrimRequest, $requestOptions = [])
+    {
+        // verify the required parameter 'contextTrimRequest' is set
+        if (!isset($contextTrimRequest)) {
+            throw new \InvalidArgumentException(
+                'Parameter `contextTrimRequest` is required when calling `trimContext`.'
+            );
+        }
+
+        $resourcePath = '/agent-studio/1/unstable/context/trim';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $contextTrimRequest;
+
+        return $this->sendRequestWithHttpInfo('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
      * Unpublish Agent (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
@@ -2796,6 +3067,36 @@ class AgentStudioClient
         $queryParameters = [];
         $headers = [];
         $httpBody = $applicationConfigPatch;
+
+        return $this->sendRequestWithHttpInfo('PATCH', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Update Feedback (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Update an existing feedback entry.
+     * Required API Key ACLs:
+     *  - search
+     *
+     * @param array|FeedbackUpdateRequest $feedbackUpdateRequest (required)
+     * @param array                       $requestOptions        Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function updateFeedbackWithHttpInfo($feedbackUpdateRequest, $requestOptions = [])
+    {
+        // verify the required parameter 'feedbackUpdateRequest' is set
+        if (!isset($feedbackUpdateRequest)) {
+            throw new \InvalidArgumentException(
+                'Parameter `feedbackUpdateRequest` is required when calling `updateFeedback`.'
+            );
+        }
+
+        $resourcePath = '/agent-studio/1/feedback';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $feedbackUpdateRequest;
 
         return $this->sendRequestWithHttpInfo('PATCH', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }

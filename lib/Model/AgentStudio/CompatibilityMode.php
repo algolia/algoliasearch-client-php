@@ -20,6 +20,8 @@ class CompatibilityMode
 
     public const AI_SDK_5 = 'ai-sdk-5';
 
+    public const AG_UI = 'ag-ui';
+
     /**
      * Gets allowable values of the enum.
      *
@@ -30,6 +32,7 @@ class CompatibilityMode
         return [
             self::AI_SDK_4,
             self::AI_SDK_5,
+            self::AG_UI,
         ];
     }
 }

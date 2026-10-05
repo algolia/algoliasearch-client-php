@@ -25,17 +25,15 @@ class ToolConfigInput extends AbstractModel implements ModelInterface, \ArrayAcc
         'description' => 'string',
         'inputSchema' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ClientToolsArgsSchema',
         'indices' => '\Algolia\AlgoliaSearch\Model\AgentStudio\AlgoliaSearchToolIndexConfig[]',
+        'mode' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ModeEnum',
+        'allowUnlistedIndices' => 'bool',
         'allowedConfigs' => '\Algolia\AlgoliaSearch\Model\AgentStudio\AlgoliaRecommendToolIndexConfig[]',
         'predefinedRecommendParameters' => 'array<string,mixed>',
-        'minGroups' => 'int',
-        'maxGroups' => 'int',
-        'minResultsPerGroup' => 'int',
-        'maxResultsPerGroup' => 'int',
         'url' => 'string',
         'transport' => 'string',
         'headers' => 'array<string,string>',
         'id' => 'string',
-        'allowedTools' => 'array<string,\Algolia\AlgoliaSearch\Model\AgentStudio\ToolConfig>',
+        'allowedTools' => 'array<string,\Algolia\AlgoliaSearch\Model\AgentStudio\ToolConfigOrBooleanUnion>',
     ];
 
     /**
@@ -49,12 +47,10 @@ class ToolConfigInput extends AbstractModel implements ModelInterface, \ArrayAcc
         'description' => null,
         'inputSchema' => null,
         'indices' => null,
+        'mode' => null,
+        'allowUnlistedIndices' => null,
         'allowedConfigs' => null,
         'predefinedRecommendParameters' => null,
-        'minGroups' => null,
-        'maxGroups' => null,
-        'minResultsPerGroup' => null,
-        'maxResultsPerGroup' => null,
         'url' => null,
         'transport' => null,
         'headers' => null,
@@ -74,12 +70,10 @@ class ToolConfigInput extends AbstractModel implements ModelInterface, \ArrayAcc
         'description' => 'description',
         'inputSchema' => 'inputSchema',
         'indices' => 'indices',
+        'mode' => 'mode',
+        'allowUnlistedIndices' => 'allowUnlistedIndices',
         'allowedConfigs' => 'allowedConfigs',
         'predefinedRecommendParameters' => 'predefinedRecommendParameters',
-        'minGroups' => 'minGroups',
-        'maxGroups' => 'maxGroups',
-        'minResultsPerGroup' => 'minResultsPerGroup',
-        'maxResultsPerGroup' => 'maxResultsPerGroup',
         'url' => 'url',
         'transport' => 'transport',
         'headers' => 'headers',
@@ -98,12 +92,10 @@ class ToolConfigInput extends AbstractModel implements ModelInterface, \ArrayAcc
         'description' => 'setDescription',
         'inputSchema' => 'setInputSchema',
         'indices' => 'setIndices',
+        'mode' => 'setMode',
+        'allowUnlistedIndices' => 'setAllowUnlistedIndices',
         'allowedConfigs' => 'setAllowedConfigs',
         'predefinedRecommendParameters' => 'setPredefinedRecommendParameters',
-        'minGroups' => 'setMinGroups',
-        'maxGroups' => 'setMaxGroups',
-        'minResultsPerGroup' => 'setMinResultsPerGroup',
-        'maxResultsPerGroup' => 'setMaxResultsPerGroup',
         'url' => 'setUrl',
         'transport' => 'setTransport',
         'headers' => 'setHeaders',
@@ -122,12 +114,10 @@ class ToolConfigInput extends AbstractModel implements ModelInterface, \ArrayAcc
         'description' => 'getDescription',
         'inputSchema' => 'getInputSchema',
         'indices' => 'getIndices',
+        'mode' => 'getMode',
+        'allowUnlistedIndices' => 'getAllowUnlistedIndices',
         'allowedConfigs' => 'getAllowedConfigs',
         'predefinedRecommendParameters' => 'getPredefinedRecommendParameters',
-        'minGroups' => 'getMinGroups',
-        'maxGroups' => 'getMaxGroups',
-        'minResultsPerGroup' => 'getMinResultsPerGroup',
-        'maxResultsPerGroup' => 'getMaxResultsPerGroup',
         'url' => 'getUrl',
         'transport' => 'getTransport',
         'headers' => 'getHeaders',
@@ -164,23 +154,17 @@ class ToolConfigInput extends AbstractModel implements ModelInterface, \ArrayAcc
         if (isset($data['indices'])) {
             $this->container['indices'] = $data['indices'];
         }
+        if (isset($data['mode'])) {
+            $this->container['mode'] = $data['mode'];
+        }
+        if (isset($data['allowUnlistedIndices'])) {
+            $this->container['allowUnlistedIndices'] = $data['allowUnlistedIndices'];
+        }
         if (isset($data['allowedConfigs'])) {
             $this->container['allowedConfigs'] = $data['allowedConfigs'];
         }
         if (isset($data['predefinedRecommendParameters'])) {
             $this->container['predefinedRecommendParameters'] = $data['predefinedRecommendParameters'];
-        }
-        if (isset($data['minGroups'])) {
-            $this->container['minGroups'] = $data['minGroups'];
-        }
-        if (isset($data['maxGroups'])) {
-            $this->container['maxGroups'] = $data['maxGroups'];
-        }
-        if (isset($data['minResultsPerGroup'])) {
-            $this->container['minResultsPerGroup'] = $data['minResultsPerGroup'];
-        }
-        if (isset($data['maxResultsPerGroup'])) {
-            $this->container['maxResultsPerGroup'] = $data['maxResultsPerGroup'];
         }
         if (isset($data['url'])) {
             $this->container['url'] = $data['url'];
@@ -416,6 +400,54 @@ class ToolConfigInput extends AbstractModel implements ModelInterface, \ArrayAcc
     }
 
     /**
+     * Gets mode.
+     *
+     * @return null|ModeEnum
+     */
+    public function getMode()
+    {
+        return $this->container['mode'] ?? null;
+    }
+
+    /**
+     * Sets mode.
+     *
+     * @param null|ModeEnum $mode mode
+     *
+     * @return self
+     */
+    public function setMode($mode)
+    {
+        $this->container['mode'] = $mode;
+
+        return $this;
+    }
+
+    /**
+     * Gets allowUnlistedIndices.
+     *
+     * @return null|bool
+     */
+    public function getAllowUnlistedIndices()
+    {
+        return $this->container['allowUnlistedIndices'] ?? null;
+    }
+
+    /**
+     * Sets allowUnlistedIndices.
+     *
+     * @param null|bool $allowUnlistedIndices allowUnlistedIndices
+     *
+     * @return self
+     */
+    public function setAllowUnlistedIndices($allowUnlistedIndices)
+    {
+        $this->container['allowUnlistedIndices'] = $allowUnlistedIndices;
+
+        return $this;
+    }
+
+    /**
      * Gets allowedConfigs.
      *
      * @return null|AlgoliaRecommendToolIndexConfig[]
@@ -459,102 +491,6 @@ class ToolConfigInput extends AbstractModel implements ModelInterface, \ArrayAcc
     public function setPredefinedRecommendParameters($predefinedRecommendParameters)
     {
         $this->container['predefinedRecommendParameters'] = $predefinedRecommendParameters;
-
-        return $this;
-    }
-
-    /**
-     * Gets minGroups.
-     *
-     * @return null|int
-     */
-    public function getMinGroups()
-    {
-        return $this->container['minGroups'] ?? null;
-    }
-
-    /**
-     * Sets minGroups.
-     *
-     * @param null|int $minGroups minGroups
-     *
-     * @return self
-     */
-    public function setMinGroups($minGroups)
-    {
-        $this->container['minGroups'] = $minGroups;
-
-        return $this;
-    }
-
-    /**
-     * Gets maxGroups.
-     *
-     * @return null|int
-     */
-    public function getMaxGroups()
-    {
-        return $this->container['maxGroups'] ?? null;
-    }
-
-    /**
-     * Sets maxGroups.
-     *
-     * @param null|int $maxGroups maxGroups
-     *
-     * @return self
-     */
-    public function setMaxGroups($maxGroups)
-    {
-        $this->container['maxGroups'] = $maxGroups;
-
-        return $this;
-    }
-
-    /**
-     * Gets minResultsPerGroup.
-     *
-     * @return null|int
-     */
-    public function getMinResultsPerGroup()
-    {
-        return $this->container['minResultsPerGroup'] ?? null;
-    }
-
-    /**
-     * Sets minResultsPerGroup.
-     *
-     * @param null|int $minResultsPerGroup minResultsPerGroup
-     *
-     * @return self
-     */
-    public function setMinResultsPerGroup($minResultsPerGroup)
-    {
-        $this->container['minResultsPerGroup'] = $minResultsPerGroup;
-
-        return $this;
-    }
-
-    /**
-     * Gets maxResultsPerGroup.
-     *
-     * @return null|int
-     */
-    public function getMaxResultsPerGroup()
-    {
-        return $this->container['maxResultsPerGroup'] ?? null;
-    }
-
-    /**
-     * Sets maxResultsPerGroup.
-     *
-     * @param null|int $maxResultsPerGroup maxResultsPerGroup
-     *
-     * @return self
-     */
-    public function setMaxResultsPerGroup($maxResultsPerGroup)
-    {
-        $this->container['maxResultsPerGroup'] = $maxResultsPerGroup;
 
         return $this;
     }
@@ -658,7 +594,7 @@ class ToolConfigInput extends AbstractModel implements ModelInterface, \ArrayAcc
     /**
      * Gets allowedTools.
      *
-     * @return null|array<string,ToolConfig>
+     * @return null|array<string,ToolConfigOrBooleanUnion>
      */
     public function getAllowedTools()
     {
@@ -668,7 +604,7 @@ class ToolConfigInput extends AbstractModel implements ModelInterface, \ArrayAcc
     /**
      * Sets allowedTools.
      *
-     * @param null|array<string,ToolConfig> $allowedTools allowedTools
+     * @param null|array<string,ToolConfigOrBooleanUnion> $allowedTools allowedTools
      *
      * @return self
      */

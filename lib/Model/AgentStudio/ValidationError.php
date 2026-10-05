@@ -23,8 +23,6 @@ class ValidationError extends AbstractModel implements ModelInterface, \ArrayAcc
         'loc' => '\Algolia\AlgoliaSearch\Model\AgentStudio\LocationItemUnion[]',
         'msg' => 'string',
         'type' => 'string',
-        'input' => 'mixed',
-        'ctx' => 'object',
     ];
 
     /**
@@ -36,8 +34,6 @@ class ValidationError extends AbstractModel implements ModelInterface, \ArrayAcc
         'loc' => null,
         'msg' => null,
         'type' => null,
-        'input' => null,
-        'ctx' => null,
     ];
 
     /**
@@ -50,8 +46,6 @@ class ValidationError extends AbstractModel implements ModelInterface, \ArrayAcc
         'loc' => 'loc',
         'msg' => 'msg',
         'type' => 'type',
-        'input' => 'input',
-        'ctx' => 'ctx',
     ];
 
     /**
@@ -63,8 +57,6 @@ class ValidationError extends AbstractModel implements ModelInterface, \ArrayAcc
         'loc' => 'setLoc',
         'msg' => 'setMsg',
         'type' => 'setType',
-        'input' => 'setInput',
-        'ctx' => 'setCtx',
     ];
 
     /**
@@ -76,8 +68,6 @@ class ValidationError extends AbstractModel implements ModelInterface, \ArrayAcc
         'loc' => 'getLoc',
         'msg' => 'getMsg',
         'type' => 'getType',
-        'input' => 'getInput',
-        'ctx' => 'getCtx',
     ];
 
     /**
@@ -102,12 +92,6 @@ class ValidationError extends AbstractModel implements ModelInterface, \ArrayAcc
         }
         if (isset($data['type'])) {
             $this->container['type'] = $data['type'];
-        }
-        if (isset($data['input'])) {
-            $this->container['input'] = $data['input'];
-        }
-        if (isset($data['ctx'])) {
-            $this->container['ctx'] = $data['ctx'];
         }
     }
 
@@ -263,54 +247,6 @@ class ValidationError extends AbstractModel implements ModelInterface, \ArrayAcc
     public function setType($type)
     {
         $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets input.
-     *
-     * @return null|mixed
-     */
-    public function getInput()
-    {
-        return $this->container['input'] ?? null;
-    }
-
-    /**
-     * Sets input.
-     *
-     * @param null|mixed $input input
-     *
-     * @return self
-     */
-    public function setInput($input)
-    {
-        $this->container['input'] = $input;
-
-        return $this;
-    }
-
-    /**
-     * Gets ctx.
-     *
-     * @return null|object
-     */
-    public function getCtx()
-    {
-        return $this->container['ctx'] ?? null;
-    }
-
-    /**
-     * Sets ctx.
-     *
-     * @param null|object $ctx ctx
-     *
-     * @return self
-     */
-    public function setCtx($ctx)
-    {
-        $this->container['ctx'] = $ctx;
 
         return $this;
     }

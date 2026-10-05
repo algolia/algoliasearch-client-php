@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description OpenAI-compatible provider input. Contrary to the OpenAIProviderInput, the base_url is required. A model is required to verify connectivity and get saved as the default model. This can later be changed at the Agent level.
+ * @description Input for a provider with an OpenAI-compatible API.
  */
 class OpenAICompatibleProviderInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

@@ -25,12 +25,18 @@ class MessagePart extends AbstractModel implements ModelInterface, \ArrayAccess,
         'toolCallId' => 'string',
         'toolName' => 'string',
         'args' => 'mixed',
+        'rawArgs' => 'array<string,mixed>',
         'requiresApproval' => 'bool',
         'providerOptions' => 'array<string,mixed>',
         'output' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ToolResultOutput',
+        'mcpConfigId' => 'string',
+        'mcpConfigName' => 'string',
+        'isTerminal' => 'bool',
+        'outputMetadata' => 'array<string,mixed>',
         'description' => 'string',
         'argsHash' => 'string',
         'appId' => 'string',
+        'conversationId' => 'string',
     ];
 
     /**
@@ -44,12 +50,18 @@ class MessagePart extends AbstractModel implements ModelInterface, \ArrayAccess,
         'toolCallId' => null,
         'toolName' => null,
         'args' => null,
+        'rawArgs' => null,
         'requiresApproval' => null,
         'providerOptions' => null,
         'output' => null,
+        'mcpConfigId' => null,
+        'mcpConfigName' => null,
+        'isTerminal' => null,
+        'outputMetadata' => null,
         'description' => null,
         'argsHash' => null,
         'appId' => null,
+        'conversationId' => null,
     ];
 
     /**
@@ -64,12 +76,18 @@ class MessagePart extends AbstractModel implements ModelInterface, \ArrayAccess,
         'toolCallId' => 'toolCallId',
         'toolName' => 'toolName',
         'args' => 'args',
+        'rawArgs' => 'rawArgs',
         'requiresApproval' => 'requiresApproval',
         'providerOptions' => 'providerOptions',
         'output' => 'output',
+        'mcpConfigId' => 'mcpConfigId',
+        'mcpConfigName' => 'mcpConfigName',
+        'isTerminal' => 'isTerminal',
+        'outputMetadata' => 'outputMetadata',
         'description' => 'description',
         'argsHash' => 'argsHash',
         'appId' => 'appId',
+        'conversationId' => 'conversationId',
     ];
 
     /**
@@ -83,12 +101,18 @@ class MessagePart extends AbstractModel implements ModelInterface, \ArrayAccess,
         'toolCallId' => 'setToolCallId',
         'toolName' => 'setToolName',
         'args' => 'setArgs',
+        'rawArgs' => 'setRawArgs',
         'requiresApproval' => 'setRequiresApproval',
         'providerOptions' => 'setProviderOptions',
         'output' => 'setOutput',
+        'mcpConfigId' => 'setMcpConfigId',
+        'mcpConfigName' => 'setMcpConfigName',
+        'isTerminal' => 'setIsTerminal',
+        'outputMetadata' => 'setOutputMetadata',
         'description' => 'setDescription',
         'argsHash' => 'setArgsHash',
         'appId' => 'setAppId',
+        'conversationId' => 'setConversationId',
     ];
 
     /**
@@ -102,12 +126,18 @@ class MessagePart extends AbstractModel implements ModelInterface, \ArrayAccess,
         'toolCallId' => 'getToolCallId',
         'toolName' => 'getToolName',
         'args' => 'getArgs',
+        'rawArgs' => 'getRawArgs',
         'requiresApproval' => 'getRequiresApproval',
         'providerOptions' => 'getProviderOptions',
         'output' => 'getOutput',
+        'mcpConfigId' => 'getMcpConfigId',
+        'mcpConfigName' => 'getMcpConfigName',
+        'isTerminal' => 'getIsTerminal',
+        'outputMetadata' => 'getOutputMetadata',
         'description' => 'getDescription',
         'argsHash' => 'getArgsHash',
         'appId' => 'getAppId',
+        'conversationId' => 'getConversationId',
     ];
 
     /**
@@ -139,6 +169,9 @@ class MessagePart extends AbstractModel implements ModelInterface, \ArrayAccess,
         if (isset($data['args'])) {
             $this->container['args'] = $data['args'];
         }
+        if (isset($data['rawArgs'])) {
+            $this->container['rawArgs'] = $data['rawArgs'];
+        }
         if (isset($data['requiresApproval'])) {
             $this->container['requiresApproval'] = $data['requiresApproval'];
         }
@@ -148,6 +181,18 @@ class MessagePart extends AbstractModel implements ModelInterface, \ArrayAccess,
         if (isset($data['output'])) {
             $this->container['output'] = $data['output'];
         }
+        if (isset($data['mcpConfigId'])) {
+            $this->container['mcpConfigId'] = $data['mcpConfigId'];
+        }
+        if (isset($data['mcpConfigName'])) {
+            $this->container['mcpConfigName'] = $data['mcpConfigName'];
+        }
+        if (isset($data['isTerminal'])) {
+            $this->container['isTerminal'] = $data['isTerminal'];
+        }
+        if (isset($data['outputMetadata'])) {
+            $this->container['outputMetadata'] = $data['outputMetadata'];
+        }
         if (isset($data['description'])) {
             $this->container['description'] = $data['description'];
         }
@@ -156,6 +201,9 @@ class MessagePart extends AbstractModel implements ModelInterface, \ArrayAccess,
         }
         if (isset($data['appId'])) {
             $this->container['appId'] = $data['appId'];
+        }
+        if (isset($data['conversationId'])) {
+            $this->container['conversationId'] = $data['conversationId'];
         }
     }
 
@@ -373,6 +421,30 @@ class MessagePart extends AbstractModel implements ModelInterface, \ArrayAccess,
     }
 
     /**
+     * Gets rawArgs.
+     *
+     * @return null|array<string,mixed>
+     */
+    public function getRawArgs()
+    {
+        return $this->container['rawArgs'] ?? null;
+    }
+
+    /**
+     * Sets rawArgs.
+     *
+     * @param null|array<string,mixed> $rawArgs rawArgs
+     *
+     * @return self
+     */
+    public function setRawArgs($rawArgs)
+    {
+        $this->container['rawArgs'] = $rawArgs;
+
+        return $this;
+    }
+
+    /**
      * Gets requiresApproval.
      *
      * @return null|bool
@@ -445,6 +517,102 @@ class MessagePart extends AbstractModel implements ModelInterface, \ArrayAccess,
     }
 
     /**
+     * Gets mcpConfigId.
+     *
+     * @return null|string
+     */
+    public function getMcpConfigId()
+    {
+        return $this->container['mcpConfigId'] ?? null;
+    }
+
+    /**
+     * Sets mcpConfigId.
+     *
+     * @param null|string $mcpConfigId mcpConfigId
+     *
+     * @return self
+     */
+    public function setMcpConfigId($mcpConfigId)
+    {
+        $this->container['mcpConfigId'] = $mcpConfigId;
+
+        return $this;
+    }
+
+    /**
+     * Gets mcpConfigName.
+     *
+     * @return null|string
+     */
+    public function getMcpConfigName()
+    {
+        return $this->container['mcpConfigName'] ?? null;
+    }
+
+    /**
+     * Sets mcpConfigName.
+     *
+     * @param null|string $mcpConfigName mcpConfigName
+     *
+     * @return self
+     */
+    public function setMcpConfigName($mcpConfigName)
+    {
+        $this->container['mcpConfigName'] = $mcpConfigName;
+
+        return $this;
+    }
+
+    /**
+     * Gets isTerminal.
+     *
+     * @return null|bool
+     */
+    public function getIsTerminal()
+    {
+        return $this->container['isTerminal'] ?? null;
+    }
+
+    /**
+     * Sets isTerminal.
+     *
+     * @param null|bool $isTerminal isTerminal
+     *
+     * @return self
+     */
+    public function setIsTerminal($isTerminal)
+    {
+        $this->container['isTerminal'] = $isTerminal;
+
+        return $this;
+    }
+
+    /**
+     * Gets outputMetadata.
+     *
+     * @return null|array<string,mixed>
+     */
+    public function getOutputMetadata()
+    {
+        return $this->container['outputMetadata'] ?? null;
+    }
+
+    /**
+     * Sets outputMetadata.
+     *
+     * @param null|array<string,mixed> $outputMetadata outputMetadata
+     *
+     * @return self
+     */
+    public function setOutputMetadata($outputMetadata)
+    {
+        $this->container['outputMetadata'] = $outputMetadata;
+
+        return $this;
+    }
+
+    /**
      * Gets description.
      *
      * @return null|string
@@ -512,6 +680,30 @@ class MessagePart extends AbstractModel implements ModelInterface, \ArrayAccess,
     public function setAppId($appId)
     {
         $this->container['appId'] = $appId;
+
+        return $this;
+    }
+
+    /**
+     * Gets conversationId.
+     *
+     * @return null|string
+     */
+    public function getConversationId()
+    {
+        return $this->container['conversationId'] ?? null;
+    }
+
+    /**
+     * Sets conversationId.
+     *
+     * @param null|string $conversationId conversationId
+     *
+     * @return self
+     */
+    public function setConversationId($conversationId)
+    {
+        $this->container['conversationId'] = $conversationId;
 
         return $this;
     }

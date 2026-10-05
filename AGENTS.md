@@ -129,21 +129,6 @@ declare(strict_types=1); // Required at top of every file
 function search(string $query, int $page): array
 ```
 
-### Null Safety
-
-```php
-// Use null coalescing
-$value = $options['key'] ?? 'default';
-
-// Use null safe operator (PHP 8.0+)
-$hits = $response?->getHits();
-
-// Check before access
-if ($response !== null && $response->getHits() !== null) {
-    // safe to use
-}
-```
-
 ### Array vs Object
 
 ```php

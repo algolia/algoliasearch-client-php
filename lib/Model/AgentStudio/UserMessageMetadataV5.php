@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Client-supplied metadata on a v5 user message.  `turn_context` is namespaced so other callers can use `metadata` for unrelated purposes without collision. Unknown keys are preserved and ignored by this pipeline.  Note: `turn_context` is deliberately typed `dict[str, Any]` (not `TurnContext`). The metadata is parsed eagerly with the request body, but cap/charset validation must be deferred to `extract_turn_context_v5` so the kill-switch (`TURN_CONTEXT_ENABLED=false`) can silently drop payloads instead of 422-ing. See `test_invalid_metadata_does_not_raise_at_model_construction`.
+ * @description Client-supplied metadata on a v5 user message.  `turn_context` is namespaced so other callers can use `metadata` for unrelated purposes without collision. Unknown keys are preserved and ignored by this pipeline.  `turn_context` accepts any JSON object (arbitrarily nested values, no size caps). A value that cannot be serialized as JSON is rejected with a 422.
  */
 class UserMessageMetadataV5 extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

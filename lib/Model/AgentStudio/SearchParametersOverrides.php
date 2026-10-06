@@ -30,6 +30,12 @@ class SearchParametersOverrides extends AbstractModel implements ModelInterface,
         'enablePersonalization' => 'bool',
         'personalizationImpact' => 'int',
         'optionalFilters' => '\Algolia\AlgoliaSearch\Model\AgentStudio\OptionalFiltersUnion',
+        'aroundLatLng' => 'string',
+        'aroundRadius' => '\Algolia\AlgoliaSearch\Model\AgentStudio\AroundRadiusUnion',
+        'aroundPrecision' => '\Algolia\AlgoliaSearch\Model\AgentStudio\AroundPrecisionUnion',
+        'minimumAroundRadius' => 'int',
+        'insideBoundingBox' => '\Algolia\AlgoliaSearch\Model\AgentStudio\InsideBoundingBoxUnion',
+        'insidePolygon' => '\Algolia\AlgoliaSearch\Model\AgentStudio\InsidePolygonUnion',
     ];
 
     /**
@@ -46,6 +52,12 @@ class SearchParametersOverrides extends AbstractModel implements ModelInterface,
         'enablePersonalization' => null,
         'personalizationImpact' => null,
         'optionalFilters' => null,
+        'aroundLatLng' => null,
+        'aroundRadius' => null,
+        'aroundPrecision' => null,
+        'minimumAroundRadius' => null,
+        'insideBoundingBox' => null,
+        'insidePolygon' => null,
     ];
 
     /**
@@ -63,6 +75,12 @@ class SearchParametersOverrides extends AbstractModel implements ModelInterface,
         'enablePersonalization' => 'enablePersonalization',
         'personalizationImpact' => 'personalizationImpact',
         'optionalFilters' => 'optionalFilters',
+        'aroundLatLng' => 'aroundLatLng',
+        'aroundRadius' => 'aroundRadius',
+        'aroundPrecision' => 'aroundPrecision',
+        'minimumAroundRadius' => 'minimumAroundRadius',
+        'insideBoundingBox' => 'insideBoundingBox',
+        'insidePolygon' => 'insidePolygon',
     ];
 
     /**
@@ -79,6 +97,12 @@ class SearchParametersOverrides extends AbstractModel implements ModelInterface,
         'enablePersonalization' => 'setEnablePersonalization',
         'personalizationImpact' => 'setPersonalizationImpact',
         'optionalFilters' => 'setOptionalFilters',
+        'aroundLatLng' => 'setAroundLatLng',
+        'aroundRadius' => 'setAroundRadius',
+        'aroundPrecision' => 'setAroundPrecision',
+        'minimumAroundRadius' => 'setMinimumAroundRadius',
+        'insideBoundingBox' => 'setInsideBoundingBox',
+        'insidePolygon' => 'setInsidePolygon',
     ];
 
     /**
@@ -95,6 +119,12 @@ class SearchParametersOverrides extends AbstractModel implements ModelInterface,
         'enablePersonalization' => 'getEnablePersonalization',
         'personalizationImpact' => 'getPersonalizationImpact',
         'optionalFilters' => 'getOptionalFilters',
+        'aroundLatLng' => 'getAroundLatLng',
+        'aroundRadius' => 'getAroundRadius',
+        'aroundPrecision' => 'getAroundPrecision',
+        'minimumAroundRadius' => 'getMinimumAroundRadius',
+        'insideBoundingBox' => 'getInsideBoundingBox',
+        'insidePolygon' => 'getInsidePolygon',
     ];
 
     /**
@@ -134,6 +164,24 @@ class SearchParametersOverrides extends AbstractModel implements ModelInterface,
         }
         if (isset($data['optionalFilters'])) {
             $this->container['optionalFilters'] = $data['optionalFilters'];
+        }
+        if (isset($data['aroundLatLng'])) {
+            $this->container['aroundLatLng'] = $data['aroundLatLng'];
+        }
+        if (isset($data['aroundRadius'])) {
+            $this->container['aroundRadius'] = $data['aroundRadius'];
+        }
+        if (isset($data['aroundPrecision'])) {
+            $this->container['aroundPrecision'] = $data['aroundPrecision'];
+        }
+        if (isset($data['minimumAroundRadius'])) {
+            $this->container['minimumAroundRadius'] = $data['minimumAroundRadius'];
+        }
+        if (isset($data['insideBoundingBox'])) {
+            $this->container['insideBoundingBox'] = $data['insideBoundingBox'];
+        }
+        if (isset($data['insidePolygon'])) {
+            $this->container['insidePolygon'] = $data['insidePolygon'];
         }
     }
 
@@ -397,6 +445,150 @@ class SearchParametersOverrides extends AbstractModel implements ModelInterface,
     public function setOptionalFilters($optionalFilters)
     {
         $this->container['optionalFilters'] = $optionalFilters;
+
+        return $this;
+    }
+
+    /**
+     * Gets aroundLatLng.
+     *
+     * @return null|string
+     */
+    public function getAroundLatLng()
+    {
+        return $this->container['aroundLatLng'] ?? null;
+    }
+
+    /**
+     * Sets aroundLatLng.
+     *
+     * @param null|string $aroundLatLng aroundLatLng
+     *
+     * @return self
+     */
+    public function setAroundLatLng($aroundLatLng)
+    {
+        $this->container['aroundLatLng'] = $aroundLatLng;
+
+        return $this;
+    }
+
+    /**
+     * Gets aroundRadius.
+     *
+     * @return null|AroundRadiusUnion
+     */
+    public function getAroundRadius()
+    {
+        return $this->container['aroundRadius'] ?? null;
+    }
+
+    /**
+     * Sets aroundRadius.
+     *
+     * @param null|AroundRadiusUnion $aroundRadius aroundRadius
+     *
+     * @return self
+     */
+    public function setAroundRadius($aroundRadius)
+    {
+        $this->container['aroundRadius'] = $aroundRadius;
+
+        return $this;
+    }
+
+    /**
+     * Gets aroundPrecision.
+     *
+     * @return null|AroundPrecisionUnion
+     */
+    public function getAroundPrecision()
+    {
+        return $this->container['aroundPrecision'] ?? null;
+    }
+
+    /**
+     * Sets aroundPrecision.
+     *
+     * @param null|AroundPrecisionUnion $aroundPrecision aroundPrecision
+     *
+     * @return self
+     */
+    public function setAroundPrecision($aroundPrecision)
+    {
+        $this->container['aroundPrecision'] = $aroundPrecision;
+
+        return $this;
+    }
+
+    /**
+     * Gets minimumAroundRadius.
+     *
+     * @return null|int
+     */
+    public function getMinimumAroundRadius()
+    {
+        return $this->container['minimumAroundRadius'] ?? null;
+    }
+
+    /**
+     * Sets minimumAroundRadius.
+     *
+     * @param null|int $minimumAroundRadius minimumAroundRadius
+     *
+     * @return self
+     */
+    public function setMinimumAroundRadius($minimumAroundRadius)
+    {
+        $this->container['minimumAroundRadius'] = $minimumAroundRadius;
+
+        return $this;
+    }
+
+    /**
+     * Gets insideBoundingBox.
+     *
+     * @return null|InsideBoundingBoxUnion
+     */
+    public function getInsideBoundingBox()
+    {
+        return $this->container['insideBoundingBox'] ?? null;
+    }
+
+    /**
+     * Sets insideBoundingBox.
+     *
+     * @param null|InsideBoundingBoxUnion $insideBoundingBox insideBoundingBox
+     *
+     * @return self
+     */
+    public function setInsideBoundingBox($insideBoundingBox)
+    {
+        $this->container['insideBoundingBox'] = $insideBoundingBox;
+
+        return $this;
+    }
+
+    /**
+     * Gets insidePolygon.
+     *
+     * @return null|InsidePolygonUnion
+     */
+    public function getInsidePolygon()
+    {
+        return $this->container['insidePolygon'] ?? null;
+    }
+
+    /**
+     * Sets insidePolygon.
+     *
+     * @param null|InsidePolygonUnion $insidePolygon insidePolygon
+     *
+     * @return self
+     */
+    public function setInsidePolygon($insidePolygon)
+    {
+        $this->container['insidePolygon'] = $insidePolygon;
 
         return $this;
     }

@@ -24,6 +24,7 @@ class ClientSideToolConfig extends AbstractModel implements ModelInterface, \Arr
         'type' => 'string',
         'description' => 'string',
         'inputSchema' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ClientToolsArgsSchema',
+        'isTerminal' => 'bool',
     ];
 
     /**
@@ -36,6 +37,7 @@ class ClientSideToolConfig extends AbstractModel implements ModelInterface, \Arr
         'type' => null,
         'description' => null,
         'inputSchema' => null,
+        'isTerminal' => null,
     ];
 
     /**
@@ -49,6 +51,7 @@ class ClientSideToolConfig extends AbstractModel implements ModelInterface, \Arr
         'type' => 'type',
         'description' => 'description',
         'inputSchema' => 'inputSchema',
+        'isTerminal' => 'isTerminal',
     ];
 
     /**
@@ -61,6 +64,7 @@ class ClientSideToolConfig extends AbstractModel implements ModelInterface, \Arr
         'type' => 'setType',
         'description' => 'setDescription',
         'inputSchema' => 'setInputSchema',
+        'isTerminal' => 'setIsTerminal',
     ];
 
     /**
@@ -73,6 +77,7 @@ class ClientSideToolConfig extends AbstractModel implements ModelInterface, \Arr
         'type' => 'getType',
         'description' => 'getDescription',
         'inputSchema' => 'getInputSchema',
+        'isTerminal' => 'getIsTerminal',
     ];
 
     /**
@@ -100,6 +105,9 @@ class ClientSideToolConfig extends AbstractModel implements ModelInterface, \Arr
         }
         if (isset($data['inputSchema'])) {
             $this->container['inputSchema'] = $data['inputSchema'];
+        }
+        if (isset($data['isTerminal'])) {
+            $this->container['isTerminal'] = $data['isTerminal'];
         }
     }
 
@@ -282,6 +290,30 @@ class ClientSideToolConfig extends AbstractModel implements ModelInterface, \Arr
     public function setInputSchema($inputSchema)
     {
         $this->container['inputSchema'] = $inputSchema;
+
+        return $this;
+    }
+
+    /**
+     * Gets isTerminal.
+     *
+     * @return null|bool
+     */
+    public function getIsTerminal()
+    {
+        return $this->container['isTerminal'] ?? null;
+    }
+
+    /**
+     * Sets isTerminal.
+     *
+     * @param null|bool $isTerminal Server-side declaration that this tool is display/render-only: a resolved result ends the turn and the model is not re-invoked on it (CR-11753). The client's terminal claim on a tool result is honored only when this agrees; leave false for data tools whose result the model must reason about.
+     *
+     * @return self
+     */
+    public function setIsTerminal($isTerminal)
+    {
+        $this->container['isTerminal'] = $isTerminal;
 
         return $this;
     }

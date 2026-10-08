@@ -24,12 +24,12 @@ class ItemsUnion extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'type' => 'string',
         'description' => 'string',
         'inputSchema' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ClientToolsArgsSchema',
+        'isTerminal' => 'bool',
         'indices' => '\Algolia\AlgoliaSearch\Model\AgentStudio\AlgoliaSearchToolIndexConfig[]',
         'mode' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ModeEnum',
         'allowUnlistedIndices' => 'bool',
         'allowedConfigs' => '\Algolia\AlgoliaSearch\Model\AgentStudio\AlgoliaRecommendToolIndexConfig[]',
         'predefinedRecommendParameters' => 'array<string,mixed>',
-        'isTerminal' => 'bool',
         'minGroups' => 'int',
         'maxGroups' => 'int',
         'minResultsPerGroup' => 'int',
@@ -51,12 +51,12 @@ class ItemsUnion extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'type' => null,
         'description' => null,
         'inputSchema' => null,
+        'isTerminal' => null,
         'indices' => null,
         'mode' => null,
         'allowUnlistedIndices' => null,
         'allowedConfigs' => null,
         'predefinedRecommendParameters' => null,
-        'isTerminal' => null,
         'minGroups' => null,
         'maxGroups' => null,
         'minResultsPerGroup' => null,
@@ -79,12 +79,12 @@ class ItemsUnion extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'type' => 'type',
         'description' => 'description',
         'inputSchema' => 'inputSchema',
+        'isTerminal' => 'isTerminal',
         'indices' => 'indices',
         'mode' => 'mode',
         'allowUnlistedIndices' => 'allowUnlistedIndices',
         'allowedConfigs' => 'allowedConfigs',
         'predefinedRecommendParameters' => 'predefinedRecommendParameters',
-        'isTerminal' => 'isTerminal',
         'minGroups' => 'minGroups',
         'maxGroups' => 'maxGroups',
         'minResultsPerGroup' => 'minResultsPerGroup',
@@ -106,12 +106,12 @@ class ItemsUnion extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'type' => 'setType',
         'description' => 'setDescription',
         'inputSchema' => 'setInputSchema',
+        'isTerminal' => 'setIsTerminal',
         'indices' => 'setIndices',
         'mode' => 'setMode',
         'allowUnlistedIndices' => 'setAllowUnlistedIndices',
         'allowedConfigs' => 'setAllowedConfigs',
         'predefinedRecommendParameters' => 'setPredefinedRecommendParameters',
-        'isTerminal' => 'setIsTerminal',
         'minGroups' => 'setMinGroups',
         'maxGroups' => 'setMaxGroups',
         'minResultsPerGroup' => 'setMinResultsPerGroup',
@@ -133,12 +133,12 @@ class ItemsUnion extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'type' => 'getType',
         'description' => 'getDescription',
         'inputSchema' => 'getInputSchema',
+        'isTerminal' => 'getIsTerminal',
         'indices' => 'getIndices',
         'mode' => 'getMode',
         'allowUnlistedIndices' => 'getAllowUnlistedIndices',
         'allowedConfigs' => 'getAllowedConfigs',
         'predefinedRecommendParameters' => 'getPredefinedRecommendParameters',
-        'isTerminal' => 'getIsTerminal',
         'minGroups' => 'getMinGroups',
         'maxGroups' => 'getMaxGroups',
         'minResultsPerGroup' => 'getMinResultsPerGroup',
@@ -176,6 +176,9 @@ class ItemsUnion extends AbstractModel implements ModelInterface, \ArrayAccess, 
         if (isset($data['inputSchema'])) {
             $this->container['inputSchema'] = $data['inputSchema'];
         }
+        if (isset($data['isTerminal'])) {
+            $this->container['isTerminal'] = $data['isTerminal'];
+        }
         if (isset($data['indices'])) {
             $this->container['indices'] = $data['indices'];
         }
@@ -190,9 +193,6 @@ class ItemsUnion extends AbstractModel implements ModelInterface, \ArrayAccess, 
         }
         if (isset($data['predefinedRecommendParameters'])) {
             $this->container['predefinedRecommendParameters'] = $data['predefinedRecommendParameters'];
-        }
-        if (isset($data['isTerminal'])) {
-            $this->container['isTerminal'] = $data['isTerminal'];
         }
         if (isset($data['minGroups'])) {
             $this->container['minGroups'] = $data['minGroups'];
@@ -416,6 +416,30 @@ class ItemsUnion extends AbstractModel implements ModelInterface, \ArrayAccess, 
     }
 
     /**
+     * Gets isTerminal.
+     *
+     * @return null|bool
+     */
+    public function getIsTerminal()
+    {
+        return $this->container['isTerminal'] ?? null;
+    }
+
+    /**
+     * Sets isTerminal.
+     *
+     * @param null|bool $isTerminal When true, a successful tool invocation ends the agent graph (no further LLM turn). Use for chat experiences where the tool payload IS the final response. Leave false to let the main LLM produce a concluding assistant message after the tool runs.
+     *
+     * @return self
+     */
+    public function setIsTerminal($isTerminal)
+    {
+        $this->container['isTerminal'] = $isTerminal;
+
+        return $this;
+    }
+
+    /**
      * Gets indices.
      *
      * @return AlgoliaSearchToolIndexConfig[]
@@ -531,30 +555,6 @@ class ItemsUnion extends AbstractModel implements ModelInterface, \ArrayAccess, 
     public function setPredefinedRecommendParameters($predefinedRecommendParameters)
     {
         $this->container['predefinedRecommendParameters'] = $predefinedRecommendParameters;
-
-        return $this;
-    }
-
-    /**
-     * Gets isTerminal.
-     *
-     * @return null|bool
-     */
-    public function getIsTerminal()
-    {
-        return $this->container['isTerminal'] ?? null;
-    }
-
-    /**
-     * Sets isTerminal.
-     *
-     * @param null|bool $isTerminal When true, a successful tool invocation ends the agent graph (no further LLM turn). Use for chat experiences where the tool payload IS the final response. Leave false to let the main LLM produce a concluding assistant message after the tool runs.
-     *
-     * @return self
-     */
-    public function setIsTerminal($isTerminal)
-    {
-        $this->container['isTerminal'] = $isTerminal;
 
         return $this;
     }

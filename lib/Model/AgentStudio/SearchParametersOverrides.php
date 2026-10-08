@@ -30,6 +30,7 @@ class SearchParametersOverrides extends AbstractModel implements ModelInterface,
         'enablePersonalization' => 'bool',
         'personalizationImpact' => 'int',
         'optionalFilters' => '\Algolia\AlgoliaSearch\Model\AgentStudio\OptionalFiltersUnion',
+        'facetFilters' => '\Algolia\AlgoliaSearch\Model\AgentStudio\FacetFiltersUnionSearchParametersOverrides',
         'aroundLatLng' => 'string',
         'aroundRadius' => '\Algolia\AlgoliaSearch\Model\AgentStudio\AroundRadiusUnion',
         'aroundPrecision' => '\Algolia\AlgoliaSearch\Model\AgentStudio\AroundPrecisionUnion',
@@ -52,6 +53,7 @@ class SearchParametersOverrides extends AbstractModel implements ModelInterface,
         'enablePersonalization' => null,
         'personalizationImpact' => null,
         'optionalFilters' => null,
+        'facetFilters' => null,
         'aroundLatLng' => null,
         'aroundRadius' => null,
         'aroundPrecision' => null,
@@ -75,6 +77,7 @@ class SearchParametersOverrides extends AbstractModel implements ModelInterface,
         'enablePersonalization' => 'enablePersonalization',
         'personalizationImpact' => 'personalizationImpact',
         'optionalFilters' => 'optionalFilters',
+        'facetFilters' => 'facetFilters',
         'aroundLatLng' => 'aroundLatLng',
         'aroundRadius' => 'aroundRadius',
         'aroundPrecision' => 'aroundPrecision',
@@ -97,6 +100,7 @@ class SearchParametersOverrides extends AbstractModel implements ModelInterface,
         'enablePersonalization' => 'setEnablePersonalization',
         'personalizationImpact' => 'setPersonalizationImpact',
         'optionalFilters' => 'setOptionalFilters',
+        'facetFilters' => 'setFacetFilters',
         'aroundLatLng' => 'setAroundLatLng',
         'aroundRadius' => 'setAroundRadius',
         'aroundPrecision' => 'setAroundPrecision',
@@ -119,6 +123,7 @@ class SearchParametersOverrides extends AbstractModel implements ModelInterface,
         'enablePersonalization' => 'getEnablePersonalization',
         'personalizationImpact' => 'getPersonalizationImpact',
         'optionalFilters' => 'getOptionalFilters',
+        'facetFilters' => 'getFacetFilters',
         'aroundLatLng' => 'getAroundLatLng',
         'aroundRadius' => 'getAroundRadius',
         'aroundPrecision' => 'getAroundPrecision',
@@ -164,6 +169,9 @@ class SearchParametersOverrides extends AbstractModel implements ModelInterface,
         }
         if (isset($data['optionalFilters'])) {
             $this->container['optionalFilters'] = $data['optionalFilters'];
+        }
+        if (isset($data['facetFilters'])) {
+            $this->container['facetFilters'] = $data['facetFilters'];
         }
         if (isset($data['aroundLatLng'])) {
             $this->container['aroundLatLng'] = $data['aroundLatLng'];
@@ -445,6 +453,30 @@ class SearchParametersOverrides extends AbstractModel implements ModelInterface,
     public function setOptionalFilters($optionalFilters)
     {
         $this->container['optionalFilters'] = $optionalFilters;
+
+        return $this;
+    }
+
+    /**
+     * Gets facetFilters.
+     *
+     * @return null|FacetFiltersUnionSearchParametersOverrides
+     */
+    public function getFacetFilters()
+    {
+        return $this->container['facetFilters'] ?? null;
+    }
+
+    /**
+     * Sets facetFilters.
+     *
+     * @param null|FacetFiltersUnionSearchParametersOverrides $facetFilters facetFilters
+     *
+     * @return self
+     */
+    public function setFacetFilters($facetFilters)
+    {
+        $this->container['facetFilters'] = $facetFilters;
 
         return $this;
     }

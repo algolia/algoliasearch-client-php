@@ -30,6 +30,7 @@ class AssistantPartV5 extends AbstractModel implements ModelInterface, \ArrayAcc
         'output' => 'array<string,mixed>',
         'outputMetadata' => 'array<string,mixed>',
         'errorText' => 'string',
+        'terminal' => 'bool',
         'providerOptions' => 'array<string,mixed>',
         'requiresApproval' => 'bool',
         'description' => 'string',
@@ -52,6 +53,7 @@ class AssistantPartV5 extends AbstractModel implements ModelInterface, \ArrayAcc
         'output' => null,
         'outputMetadata' => null,
         'errorText' => null,
+        'terminal' => null,
         'providerOptions' => null,
         'requiresApproval' => null,
         'description' => null,
@@ -75,6 +77,7 @@ class AssistantPartV5 extends AbstractModel implements ModelInterface, \ArrayAcc
         'output' => 'output',
         'outputMetadata' => 'outputMetadata',
         'errorText' => 'errorText',
+        'terminal' => 'terminal',
         'providerOptions' => 'providerOptions',
         'requiresApproval' => 'requiresApproval',
         'description' => 'description',
@@ -97,6 +100,7 @@ class AssistantPartV5 extends AbstractModel implements ModelInterface, \ArrayAcc
         'output' => 'setOutput',
         'outputMetadata' => 'setOutputMetadata',
         'errorText' => 'setErrorText',
+        'terminal' => 'setTerminal',
         'providerOptions' => 'setProviderOptions',
         'requiresApproval' => 'setRequiresApproval',
         'description' => 'setDescription',
@@ -119,6 +123,7 @@ class AssistantPartV5 extends AbstractModel implements ModelInterface, \ArrayAcc
         'output' => 'getOutput',
         'outputMetadata' => 'getOutputMetadata',
         'errorText' => 'getErrorText',
+        'terminal' => 'getTerminal',
         'providerOptions' => 'getProviderOptions',
         'requiresApproval' => 'getRequiresApproval',
         'description' => 'getDescription',
@@ -168,6 +173,9 @@ class AssistantPartV5 extends AbstractModel implements ModelInterface, \ArrayAcc
         }
         if (isset($data['errorText'])) {
             $this->container['errorText'] = $data['errorText'];
+        }
+        if (isset($data['terminal'])) {
+            $this->container['terminal'] = $data['terminal'];
         }
         if (isset($data['providerOptions'])) {
             $this->container['providerOptions'] = $data['providerOptions'];
@@ -506,6 +514,30 @@ class AssistantPartV5 extends AbstractModel implements ModelInterface, \ArrayAcc
     public function setErrorText($errorText)
     {
         $this->container['errorText'] = $errorText;
+
+        return $this;
+    }
+
+    /**
+     * Gets terminal.
+     *
+     * @return null|bool
+     */
+    public function getTerminal()
+    {
+        return $this->container['terminal'] ?? null;
+    }
+
+    /**
+     * Sets terminal.
+     *
+     * @param null|bool $terminal terminal
+     *
+     * @return self
+     */
+    public function setTerminal($terminal)
+    {
+        $this->container['terminal'] = $terminal;
 
         return $this;
     }

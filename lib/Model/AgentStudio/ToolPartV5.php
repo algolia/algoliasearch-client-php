@@ -30,6 +30,7 @@ class ToolPartV5 extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'output' => 'array<string,mixed>',
         'outputMetadata' => 'array<string,mixed>',
         'errorText' => 'string',
+        'terminal' => 'bool',
         'providerOptions' => 'array<string,mixed>',
         'requiresApproval' => 'bool',
         'description' => 'string',
@@ -50,6 +51,7 @@ class ToolPartV5 extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'output' => null,
         'outputMetadata' => null,
         'errorText' => null,
+        'terminal' => null,
         'providerOptions' => null,
         'requiresApproval' => null,
         'description' => null,
@@ -71,6 +73,7 @@ class ToolPartV5 extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'output' => 'output',
         'outputMetadata' => 'outputMetadata',
         'errorText' => 'errorText',
+        'terminal' => 'terminal',
         'providerOptions' => 'providerOptions',
         'requiresApproval' => 'requiresApproval',
         'description' => 'description',
@@ -91,6 +94,7 @@ class ToolPartV5 extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'output' => 'setOutput',
         'outputMetadata' => 'setOutputMetadata',
         'errorText' => 'setErrorText',
+        'terminal' => 'setTerminal',
         'providerOptions' => 'setProviderOptions',
         'requiresApproval' => 'setRequiresApproval',
         'description' => 'setDescription',
@@ -111,6 +115,7 @@ class ToolPartV5 extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'output' => 'getOutput',
         'outputMetadata' => 'getOutputMetadata',
         'errorText' => 'getErrorText',
+        'terminal' => 'getTerminal',
         'providerOptions' => 'getProviderOptions',
         'requiresApproval' => 'getRequiresApproval',
         'description' => 'getDescription',
@@ -154,6 +159,9 @@ class ToolPartV5 extends AbstractModel implements ModelInterface, \ArrayAccess, 
         }
         if (isset($data['errorText'])) {
             $this->container['errorText'] = $data['errorText'];
+        }
+        if (isset($data['terminal'])) {
+            $this->container['terminal'] = $data['terminal'];
         }
         if (isset($data['providerOptions'])) {
             $this->container['providerOptions'] = $data['providerOptions'];
@@ -438,6 +446,30 @@ class ToolPartV5 extends AbstractModel implements ModelInterface, \ArrayAccess, 
     public function setErrorText($errorText)
     {
         $this->container['errorText'] = $errorText;
+
+        return $this;
+    }
+
+    /**
+     * Gets terminal.
+     *
+     * @return null|bool
+     */
+    public function getTerminal()
+    {
+        return $this->container['terminal'] ?? null;
+    }
+
+    /**
+     * Sets terminal.
+     *
+     * @param null|bool $terminal terminal
+     *
+     * @return self
+     */
+    public function setTerminal($terminal)
+    {
+        $this->container['terminal'] = $terminal;
 
         return $this;
     }

@@ -9,14 +9,14 @@ namespace Algolia\AlgoliaSearch\Model\Composition;
  *
  * @category Class
  *
- * @description Ordering to apply on the items retrieved from the external provider. 'default' uses the relevance ranking from the Algolia retrieval step. 'providerDefined' uses the ordering returned by the external provider.
+ * @description Ordering to apply on the items retrieved from the external provider. 'algoliaDefined' uses the relevance ranking from the Algolia retrieval step. 'providerDefined' uses the ordering returned by the external provider.
  */
 class ExternalProviderOrdering
 {
     /**
      * Possible values of this enum.
      */
-    public const _DEFAULT = 'default';
+    public const ALGOLIA_DEFINED = 'algoliaDefined';
 
     public const PROVIDER_DEFINED = 'providerDefined';
 
@@ -28,7 +28,7 @@ class ExternalProviderOrdering
     public static function getAllowableEnumValues()
     {
         return [
-            self::_DEFAULT,
+            self::ALGOLIA_DEFINED,
             self::PROVIDER_DEFINED,
         ];
     }

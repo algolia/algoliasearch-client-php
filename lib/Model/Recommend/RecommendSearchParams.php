@@ -950,7 +950,7 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
     /**
      * Sets sumOrFiltersScores.
      *
-     * @param null|bool $sumOrFiltersScores Whether to sum all filter scores. If true, all filter scores are summed. Otherwise, the maximum filter score is kept. For more information, see [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores).
+     * @param null|bool $sumOrFiltersScores Whether to sum all filter scores. If true, all filter scores are summed. Otherwise, the maximum filter score is kept. For more information, see [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulate-scores-with-sumorfiltersscores).
      *
      * @return self
      */
@@ -1238,7 +1238,7 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
     /**
      * Sets ruleContexts.
      *
-     * @param null|string[] $ruleContexts Assigns a rule context to the search query. [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) are strings that you can use to trigger matching rules.
+     * @param null|string[] $ruleContexts Assigns a rule context to the search query. [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#assign-context) are strings that you can use to trigger matching rules.
      *
      * @return self
      */
@@ -1694,7 +1694,7 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
     /**
      * Sets disablePrefixOnAttributes.
      *
-     * @param null|string[] $disablePrefixOnAttributes Searchable attributes for which you want to turn off [prefix matching](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#adjusting-prefix-search). Attribute names are case-sensitive.
+     * @param null|string[] $disablePrefixOnAttributes Searchable attributes for which you want to turn off [prefix matching](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#adjust-prefix-search). Attribute names are case-sensitive.
      *
      * @return self
      */
@@ -1982,7 +1982,7 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
     /**
      * Sets relevancyStrictness.
      *
-     * @param null|int $relevancyStrictness Relevancy threshold below which less relevant results aren't included in the results. You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results.
+     * @param null|int $relevancyStrictness Relevancy threshold below which less relevant results aren't included in the results. You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#standard-and-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results.
      *
      * @return self
      */
@@ -2150,7 +2150,7 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
     /**
      * Sets minWordSizefor1Typo.
      *
-     * @param null|int $minWordSizefor1Typo Minimum number of characters a word in the search query must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
+     * @param null|int $minWordSizefor1Typo Minimum number of characters a word in the search query must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configure-word-size-threshold-for-typos).
      *
      * @return self
      */
@@ -2174,7 +2174,7 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
     /**
      * Sets minWordSizefor2Typos.
      *
-     * @param null|int $minWordSizefor2Typos Minimum number of characters a word in the search query must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
+     * @param null|int $minWordSizefor2Typos Minimum number of characters a word in the search query must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configure-word-size-threshold-for-typos).
      *
      * @return self
      */
@@ -2342,7 +2342,7 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
     /**
      * Sets decompoundQuery.
      *
-     * @param null|bool $decompoundQuery Whether to split compound words in the query into their building blocks. For more information, see [Word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words). Word segmentation is supported for these languages: German, Dutch, Finnish, Swedish, and Norwegian. Decompounding doesn't work for words with [non-spacing mark Unicode characters](https://www.charactercodes.net/category/non-spacing_mark). For example, `Gartenstühle` won't be decompounded if the `ü` consists of `u` (U+0075) and `◌̈` (U+0308).
+     * @param null|bool $decompoundQuery Whether to split compound words in the query into their building blocks. For more information, see [Word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#split-compound-words). Word segmentation is supported for these languages: German, Dutch, Finnish, Swedish, and Norwegian. Decompounding doesn't work for words with [non-spacing mark Unicode characters](https://www.charactercodes.net/category/non-spacing_mark). For example, `Gartenstühle` won't be decompounded if the `ü` consists of `u` (U+0075) and `◌̈` (U+0308).
      *
      * @return self
      */

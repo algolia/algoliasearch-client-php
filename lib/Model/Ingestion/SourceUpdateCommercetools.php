@@ -28,6 +28,7 @@ class SourceUpdateCommercetools extends AbstractModel implements ModelInterface,
         'fallbackIsInStockValue' => 'bool',
         'productQueryPredicate' => 'string',
         'useImagesObjects' => 'bool',
+        'categoriesCustomFieldsFullPath' => 'bool',
         'customFields' => '\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields',
     ];
 
@@ -43,6 +44,7 @@ class SourceUpdateCommercetools extends AbstractModel implements ModelInterface,
         'fallbackIsInStockValue' => null,
         'productQueryPredicate' => null,
         'useImagesObjects' => null,
+        'categoriesCustomFieldsFullPath' => null,
         'customFields' => null,
     ];
 
@@ -59,6 +61,7 @@ class SourceUpdateCommercetools extends AbstractModel implements ModelInterface,
         'fallbackIsInStockValue' => 'fallbackIsInStockValue',
         'productQueryPredicate' => 'productQueryPredicate',
         'useImagesObjects' => 'useImagesObjects',
+        'categoriesCustomFieldsFullPath' => 'categoriesCustomFieldsFullPath',
         'customFields' => 'customFields',
     ];
 
@@ -74,6 +77,7 @@ class SourceUpdateCommercetools extends AbstractModel implements ModelInterface,
         'fallbackIsInStockValue' => 'setFallbackIsInStockValue',
         'productQueryPredicate' => 'setProductQueryPredicate',
         'useImagesObjects' => 'setUseImagesObjects',
+        'categoriesCustomFieldsFullPath' => 'setCategoriesCustomFieldsFullPath',
         'customFields' => 'setCustomFields',
     ];
 
@@ -89,6 +93,7 @@ class SourceUpdateCommercetools extends AbstractModel implements ModelInterface,
         'fallbackIsInStockValue' => 'getFallbackIsInStockValue',
         'productQueryPredicate' => 'getProductQueryPredicate',
         'useImagesObjects' => 'getUseImagesObjects',
+        'categoriesCustomFieldsFullPath' => 'getCategoriesCustomFieldsFullPath',
         'customFields' => 'getCustomFields',
     ];
 
@@ -123,6 +128,9 @@ class SourceUpdateCommercetools extends AbstractModel implements ModelInterface,
         }
         if (isset($data['useImagesObjects'])) {
             $this->container['useImagesObjects'] = $data['useImagesObjects'];
+        }
+        if (isset($data['categoriesCustomFieldsFullPath'])) {
+            $this->container['categoriesCustomFieldsFullPath'] = $data['categoriesCustomFieldsFullPath'];
         }
         if (isset($data['customFields'])) {
             $this->container['customFields'] = $data['customFields'];
@@ -341,6 +349,30 @@ class SourceUpdateCommercetools extends AbstractModel implements ModelInterface,
     public function setUseImagesObjects($useImagesObjects)
     {
         $this->container['useImagesObjects'] = $useImagesObjects;
+
+        return $this;
+    }
+
+    /**
+     * Gets categoriesCustomFieldsFullPath.
+     *
+     * @return null|bool
+     */
+    public function getCategoriesCustomFieldsFullPath()
+    {
+        return $this->container['categoriesCustomFieldsFullPath'] ?? null;
+    }
+
+    /**
+     * Sets categoriesCustomFieldsFullPath.
+     *
+     * @param null|bool $categoriesCustomFieldsFullPath When set to true, the connector uses the complete category path (e.g. \"Root > Level 1 > Category name\") in `categoriesCustomFields`.
+     *
+     * @return self
+     */
+    public function setCategoriesCustomFieldsFullPath($categoriesCustomFieldsFullPath)
+    {
+        $this->container['categoriesCustomFieldsFullPath'] = $categoriesCustomFieldsFullPath;
 
         return $this;
     }

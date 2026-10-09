@@ -1084,7 +1084,7 @@ class BaseInjectionQueryParameters extends AbstractModel implements ModelInterfa
     /**
      * Sets minWordSizefor1Typo.
      *
-     * @param null|int $minWordSizefor1Typo Minimum number of characters a word in the search query must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
+     * @param null|int $minWordSizefor1Typo Minimum number of characters a word in the search query must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configure-word-size-threshold-for-typos).
      *
      * @return self
      */
@@ -1108,7 +1108,7 @@ class BaseInjectionQueryParameters extends AbstractModel implements ModelInterfa
     /**
      * Sets minWordSizefor2Typos.
      *
-     * @param null|int $minWordSizefor2Typos Minimum number of characters a word in the search query must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
+     * @param null|int $minWordSizefor2Typos Minimum number of characters a word in the search query must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configure-word-size-threshold-for-typos).
      *
      * @return self
      */
@@ -1468,7 +1468,7 @@ class BaseInjectionQueryParameters extends AbstractModel implements ModelInterfa
     /**
      * Sets ruleContexts.
      *
-     * @param null|string[] $ruleContexts Assigns a rule context to the search query. [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) are strings that you can use to trigger matching rules.
+     * @param null|string[] $ruleContexts Assigns a rule context to the search query. [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#assign-context) are strings that you can use to trigger matching rules.
      *
      * @return self
      */

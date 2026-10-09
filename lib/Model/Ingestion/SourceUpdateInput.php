@@ -26,6 +26,7 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         'fallbackIsInStockValue' => 'bool',
         'productQueryPredicate' => 'string',
         'useImagesObjects' => 'bool',
+        'categoriesCustomFieldsFullPath' => 'bool',
         'customFields' => '\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields',
         'uniqueIDColumn' => 'string',
         'method' => '\Algolia\AlgoliaSearch\Model\Ingestion\MethodType',
@@ -55,6 +56,7 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         'fallbackIsInStockValue' => null,
         'productQueryPredicate' => null,
         'useImagesObjects' => null,
+        'categoriesCustomFieldsFullPath' => null,
         'customFields' => null,
         'uniqueIDColumn' => null,
         'method' => null,
@@ -85,6 +87,7 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         'fallbackIsInStockValue' => 'fallbackIsInStockValue',
         'productQueryPredicate' => 'productQueryPredicate',
         'useImagesObjects' => 'useImagesObjects',
+        'categoriesCustomFieldsFullPath' => 'categoriesCustomFieldsFullPath',
         'customFields' => 'customFields',
         'uniqueIDColumn' => 'uniqueIDColumn',
         'method' => 'method',
@@ -114,6 +117,7 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         'fallbackIsInStockValue' => 'setFallbackIsInStockValue',
         'productQueryPredicate' => 'setProductQueryPredicate',
         'useImagesObjects' => 'setUseImagesObjects',
+        'categoriesCustomFieldsFullPath' => 'setCategoriesCustomFieldsFullPath',
         'customFields' => 'setCustomFields',
         'uniqueIDColumn' => 'setUniqueIDColumn',
         'method' => 'setMethod',
@@ -143,6 +147,7 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         'fallbackIsInStockValue' => 'getFallbackIsInStockValue',
         'productQueryPredicate' => 'getProductQueryPredicate',
         'useImagesObjects' => 'getUseImagesObjects',
+        'categoriesCustomFieldsFullPath' => 'getCategoriesCustomFieldsFullPath',
         'customFields' => 'getCustomFields',
         'uniqueIDColumn' => 'getUniqueIDColumn',
         'method' => 'getMethod',
@@ -191,6 +196,9 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         }
         if (isset($data['useImagesObjects'])) {
             $this->container['useImagesObjects'] = $data['useImagesObjects'];
+        }
+        if (isset($data['categoriesCustomFieldsFullPath'])) {
+            $this->container['categoriesCustomFieldsFullPath'] = $data['categoriesCustomFieldsFullPath'];
         }
         if (isset($data['customFields'])) {
             $this->container['customFields'] = $data['customFields'];
@@ -469,6 +477,30 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
     public function setUseImagesObjects($useImagesObjects)
     {
         $this->container['useImagesObjects'] = $useImagesObjects;
+
+        return $this;
+    }
+
+    /**
+     * Gets categoriesCustomFieldsFullPath.
+     *
+     * @return null|bool
+     */
+    public function getCategoriesCustomFieldsFullPath()
+    {
+        return $this->container['categoriesCustomFieldsFullPath'] ?? null;
+    }
+
+    /**
+     * Sets categoriesCustomFieldsFullPath.
+     *
+     * @param null|bool $categoriesCustomFieldsFullPath When set to true, the connector uses the complete category path (e.g. \"Root > Level 1 > Category name\") in `categoriesCustomFields`.
+     *
+     * @return self
+     */
+    public function setCategoriesCustomFieldsFullPath($categoriesCustomFieldsFullPath)
+    {
+        $this->container['categoriesCustomFieldsFullPath'] = $categoriesCustomFieldsFullPath;
 
         return $this;
     }

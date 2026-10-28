@@ -50,6 +50,38 @@ class MetricName
 
     public const AVERAGE_ORDER_VALUE = 'average_order_value';
 
+    public const CLICKED_USERS_COUNT = 'clicked_users_count';
+
+    public const CONVERTED_USERS_COUNT = 'converted_users_count';
+
+    public const ADD_TO_CART_USERS_COUNT = 'add_to_cart_users_count';
+
+    public const PURCHASE_USERS_COUNT = 'purchase_users_count';
+
+    public const USERS_WITH_NO_RESULTS_COUNT = 'users_with_no_results_count';
+
+    public const CLICKED_USERS_RATE = 'clicked_users_rate';
+
+    public const CONVERTED_USERS_RATE = 'converted_users_rate';
+
+    public const ADD_TO_CART_USERS_RATE = 'add_to_cart_users_rate';
+
+    public const PURCHASE_USERS_RATE = 'purchase_users_rate';
+
+    public const AVG_CLICK_THROUGH_RATE_PER_USER = 'avg_click_through_rate_per_user';
+
+    public const AVG_CONVERSION_RATE_PER_USER = 'avg_conversion_rate_per_user';
+
+    public const AVG_PURCHASE_RATE_PER_USER = 'avg_purchase_rate_per_user';
+
+    public const AVG_ADD_TO_CART_RATE_PER_USER = 'avg_add_to_cart_rate_per_user';
+
+    public const AVG_CLICK_POSITION_PER_USER = 'avg_click_position_per_user';
+
+    public const WINSORIZED_REVENUE_PER_USER = 'winsorized_revenue_per_user';
+
+    public const WINSORIZED_REVENUE_PER_PURCHASER = 'winsorized_revenue_per_purchaser';
+
     /**
      * Gets allowable values of the enum.
      *
@@ -76,6 +108,22 @@ class MetricName
             self::REVENUE,
             self::REVENUE_PER_SEARCH,
             self::AVERAGE_ORDER_VALUE,
+            self::CLICKED_USERS_COUNT,
+            self::CONVERTED_USERS_COUNT,
+            self::ADD_TO_CART_USERS_COUNT,
+            self::PURCHASE_USERS_COUNT,
+            self::USERS_WITH_NO_RESULTS_COUNT,
+            self::CLICKED_USERS_RATE,
+            self::CONVERTED_USERS_RATE,
+            self::ADD_TO_CART_USERS_RATE,
+            self::PURCHASE_USERS_RATE,
+            self::AVG_CLICK_THROUGH_RATE_PER_USER,
+            self::AVG_CONVERSION_RATE_PER_USER,
+            self::AVG_PURCHASE_RATE_PER_USER,
+            self::AVG_ADD_TO_CART_RATE_PER_USER,
+            self::AVG_CLICK_POSITION_PER_USER,
+            self::WINSORIZED_REVENUE_PER_USER,
+            self::WINSORIZED_REVENUE_PER_PURCHASER,
         ];
     }
 }

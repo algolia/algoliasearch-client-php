@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\AbtestingV3;
  *
  * @category Class
  *
- * @description Primary metric for Bayesian analysis. Required when `method` is `bayesian`. When `method` is omitted and the test defaults to `bayesian`, the default primary metric is `conversion_rate`, or the first metric in `metrics` that supports Bayesian analysis if `metrics` doesn't include conversion rate. If the request includes a non-empty `metrics` list, this metric must be in that list. Revenue per search requires access to revenue analytics.
+ * @description Primary metric for Bayesian analysis. Required when `method` is `bayesian`. When `method` is omitted and the test defaults to `bayesian`, the default primary metric is `conversion_rate`, or the first metric in `metrics` that supports Bayesian analysis if `metrics` doesn't include conversion rate. If the request includes a non-empty `metrics` list, this metric must be in that list. User-level rates (`*_users_rate`) are the share of tracked users with at least one such search. Add-to-cart rates, purchase rates, and revenue per search require access to revenue analytics.
  */
 class PrimaryMetric
 {
@@ -26,6 +26,14 @@ class PrimaryMetric
 
     public const REVENUE_PER_SEARCH = 'revenue_per_search';
 
+    public const ADD_TO_CART_USERS_RATE = 'add_to_cart_users_rate';
+
+    public const CLICKED_USERS_RATE = 'clicked_users_rate';
+
+    public const CONVERTED_USERS_RATE = 'converted_users_rate';
+
+    public const PURCHASE_USERS_RATE = 'purchase_users_rate';
+
     /**
      * Gets allowable values of the enum.
      *
@@ -39,6 +47,10 @@ class PrimaryMetric
             self::CONVERSION_RATE,
             self::PURCHASE_RATE,
             self::REVENUE_PER_SEARCH,
+            self::ADD_TO_CART_USERS_RATE,
+            self::CLICKED_USERS_RATE,
+            self::CONVERTED_USERS_RATE,
+            self::PURCHASE_USERS_RATE,
         ];
     }
 }

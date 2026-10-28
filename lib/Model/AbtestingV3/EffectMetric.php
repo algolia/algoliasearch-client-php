@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\AbtestingV3;
  *
  * @category Class
  *
- * @description Metric for which you want to detect the smallest relative difference.
+ * @description Metric for which you want to detect the smallest relative difference. Metrics ending in `UsersRate` are user-level rates: the share of tracked users with at least one search with a click, conversion, add-to-cart, or purchase. For these metrics, sample sizes count users instead of searches.
  */
 class EffectMetric
 {
@@ -26,6 +26,14 @@ class EffectMetric
 
     public const NO_RESULTS_RATE = 'noResultsRate';
 
+    public const ADD_TO_CART_USERS_RATE = 'addToCartUsersRate';
+
+    public const CLICKED_USERS_RATE = 'clickedUsersRate';
+
+    public const CONVERTED_USERS_RATE = 'convertedUsersRate';
+
+    public const PURCHASE_USERS_RATE = 'purchaseUsersRate';
+
     /**
      * Gets allowable values of the enum.
      *
@@ -39,6 +47,10 @@ class EffectMetric
             self::CONVERSION_RATE,
             self::PURCHASE_RATE,
             self::NO_RESULTS_RATE,
+            self::ADD_TO_CART_USERS_RATE,
+            self::CLICKED_USERS_RATE,
+            self::CONVERTED_USERS_RATE,
+            self::PURCHASE_USERS_RATE,
         ];
     }
 }

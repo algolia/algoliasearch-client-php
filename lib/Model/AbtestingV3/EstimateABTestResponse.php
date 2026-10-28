@@ -196,7 +196,7 @@ class EstimateABTestResponse extends AbstractModel implements ModelInterface, \A
     /**
      * Sets sampleSizes.
      *
-     * @param null|int[] $sampleSizes Sample size estimates for each variant. The first element is the control variant. Each element is the estimated number of searches required to achieve the desired statistical significance.
+     * @param null|int[] $sampleSizes Sample size estimates for each variant. The first element is the control variant. Each element is the estimated number of searches, or users for user-level rates (metrics ending in `UsersRate`), required to achieve the desired statistical significance.
      *
      * @return self
      */

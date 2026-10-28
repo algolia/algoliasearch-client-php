@@ -118,9 +118,13 @@ final class ClusterHosts
 
     public function resetHost($host)
     {
-        $this->read->resetHost($host);
-        $this->write->resetHost($host);
-        $this->updateCache();
+        $readChanged = $this->read->resetHost($host);
+        $writeChanged = $this->write->resetHost($host);
+
+        // Called after every successful request: only write when a host actually changed
+        if ($readChanged || $writeChanged) {
+            $this->updateCache();
+        }
 
         return $this;
     }

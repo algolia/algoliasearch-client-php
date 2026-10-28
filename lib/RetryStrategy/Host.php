@@ -49,11 +49,18 @@ final class Host
         $this->lastCheck = time();
     }
 
+    /**
+     * @return bool whether the host was down or had timed out before the reset
+     */
     public function reset()
     {
+        $changed = !$this->up || 0 !== $this->retryCount;
+
         $this->up = true;
         $this->lastCheck = null;
         $this->retryCount = 0;
+
+        return $changed;
     }
 
     public function getRetryCount(): int

@@ -55,21 +55,10 @@ final class CurlHttpClient implements HttpClientInterface
         //        curl_setopt($curlHandle, CURLOPT_CAINFO, $this->caInfoPath);
 
         curl_setopt($curlHandle, CURLOPT_URL, (string) $request->getUri());
-        $version = curl_version();
-        if (
-            version_compare($version['version'], '7.16.2', '>=')
-            && $connectTimeout < 1
-        ) {
-            curl_setopt(
-                $curlHandle,
-                CURLOPT_CONNECTTIMEOUT_MS,
-                $connectTimeout * 1000
-            );
-            curl_setopt($curlHandle, CURLOPT_TIMEOUT_MS, $timeout * 1000);
-        } else {
-            curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, $connectTimeout);
-            curl_setopt($curlHandle, CURLOPT_TIMEOUT, $timeout);
-        }
+        // Timeouts are in seconds and may be fractional: the second-based options truncate them to
+        // integers (0.5 would become 0, which curl treats as no timeout), so always use milliseconds.
+        curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT_MS, (int) round($connectTimeout * 1000));
+        curl_setopt($curlHandle, CURLOPT_TIMEOUT_MS, (int) round($timeout * 1000));
 
         // The problem is that on (Li|U)nix, when libcurl uses the standard name resolver,
         // a SIGALRM is raised during name resolution which libcurl thinks is the timeout alarm.

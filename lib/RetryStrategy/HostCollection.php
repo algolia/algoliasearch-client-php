@@ -29,11 +29,21 @@ final class HostCollection
         // We pass the result through array_values because sometimes
         // we need to make sure you can access the first element
         // via $result[0]
-        return array_values(
+        $hosts = array_values(
             array_filter($this->hosts, function (Host $host) {
                 return $host->isUp();
             })
         );
+
+        // When every host is down, try them all again rather than
+        // failing without sending anything until Host::TTL expires
+        if (empty($hosts)) {
+            $this->reset();
+
+            return array_values($this->hosts);
+        }
+
+        return $hosts;
     }
 
     public function getUrls()
@@ -90,13 +100,22 @@ final class HostCollection
         }, $this->hosts);
     }
 
+    /**
+     * @param mixed $hostKey
+     *
+     * @return bool whether the host state changed
+     */
     public function resetHost($hostKey)
     {
-        array_map(function (Host $host) use ($hostKey) {
+        $changed = false;
+
+        foreach ($this->hosts as $host) {
             if ($host->getUrl() === $hostKey) {
-                $host->reset();
+                $changed = $host->reset() || $changed;
             }
-        }, $this->hosts);
+        }
+
+        return $changed;
     }
 
     public function setRetryCount($hostKey, int $count)

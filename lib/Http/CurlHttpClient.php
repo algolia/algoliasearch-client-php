@@ -84,25 +84,14 @@ final class CurlHttpClient implements HttpClientInterface
         });
 
         $method = $request->getMethod();
+        $body = (string) $request->getBody();
+        curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, $method);
+
         if ('GET' === $method) {
-            curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'GET');
             curl_setopt($curlHandle, CURLOPT_HTTPGET, true);
-            curl_setopt($curlHandle, CURLOPT_POST, false);
-        } else {
-            if ('POST' === $method) {
-                $body = (string) $request->getBody();
-                curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'POST');
-                curl_setopt($curlHandle, CURLOPT_POST, true);
-                curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $body);
-            } elseif ('DELETE' === $method) {
-                curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'DELETE');
-                curl_setopt($curlHandle, CURLOPT_POST, false);
-            } elseif ('PUT' === $method) {
-                $body = (string) $request->getBody();
-                curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'PUT');
-                curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $body);
-                curl_setopt($curlHandle, CURLOPT_POST, true);
-            }
+        } elseif (in_array($method, ['POST', 'PUT', 'PATCH'], true) || '' !== $body) {
+            // POSTFIELDS sends the body (and a `Content-Length`, even when empty), CUSTOMREQUEST keeps the method
+            curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $body);
         }
         $mhandle = $this->getMHandle($curlHandle);
 

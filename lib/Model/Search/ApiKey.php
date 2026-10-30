@@ -300,7 +300,7 @@ class ApiKey extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Sets maxHitsPerQuery.
      *
-     * @param null|int $maxHitsPerQuery Maximum number of results this API key can retrieve in one query. By default, there's no limit.
+     * @param null|int $maxHitsPerQuery Maximum number of hits this API key can retrieve per page.  If you set this to 0, the maximum allowed value (1,000) applies. If you also set `hitsPerPage` on the index, the engine uses the lower of the two values.
      *
      * @return self
      */

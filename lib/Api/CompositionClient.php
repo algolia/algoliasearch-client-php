@@ -348,7 +348,7 @@ class CompositionClient
      *                                         - $composition['name'] => (string) Composition name. (required)
      *                                         - $composition['description'] => (string) Composition description.
      *                                         - $composition['behavior'] => (array)  (required)
-     *                                         - $composition['sortingStrategy'] => (array) A mapping of sorting labels to the indices (or replicas) that implement those sorting rules. The sorting indices MUST be related to the associated main targeted index in the composition. Each key is the label your frontend sends at runtime (for example, \"Price (asc)\"), and each value is the name of the index that should be queried when that label is selected.  When a request includes a \"sortBy\" parameter, the platform looks up the corresponding index in this mapping and uses it to execute the query. The main targeted index is replaced with the sorting strategy index it is mapped to.  Up to 20 sorting strategies can be defined.
+     *                                         - $composition['sortingStrategy'] => (array) A mapping of sorting labels to the indices (or replicas) that implement those sorting rules. When the composition is run, the API ignores a sorting index that is unrelated to the targeted indices. The response reports it in the `errors` field. Each key is the label your frontend sends at runtime (for example, \"Price (asc)\"), and each value is the name of the index that should be queried when that label is selected.  When a request includes a \"sortBy\" parameter, the platform looks up the corresponding index in this mapping and uses it to execute the query. The main targeted index is replaced with the sorting strategy index it is mapped to.  Up to 20 sorting strategies can be defined.
      *
      * @see Composition
      *
@@ -427,6 +427,7 @@ class CompositionClient
      *                                         - $requestBody['params'] => (array)
      *                                         - $requestBody['feedsOrder'] => (array) A list of Feed IDs that specifies the order in which to order the results in the response.  The IDs should be a subset of those in the `feeds` object of the targeted `multifeed` Composition / Composition Rule, and only those specified will be processed.   The value overrides the value in the defined behavior, and when unspecified, the value defined in the behavior is used. When neither value is present, all feeds are processed.
      *                                         - $requestBody['externalProvider'] => (array)
+     *                                         - $requestBody['feeds'] => (array) Per-feed parameters for `multifeed` compositions. Each key is a feed ID.  Feed `params` take precedence over the root `params`. A feed inherits every root key it doesn't set. A feed value replaces the root value instead of combining with it. This applies to every key, including `filters`, `facetFilters`, `optionalFilters`, and `analyticsTags`. For example, `filters` must repeat the common values. An empty value such as `filters: \"\"` discards the root value.  The API validates feed `params` like the root `params`. An unsupported parameter returns a 400 error.  A feed ID may not exist in the composition (for example, because a rule removed it). The response reports it in the `errors` field but request still succeeds.  Rules match once per request, against the root `params` only.
      *
      * @see RequestBody
      *
@@ -494,7 +495,7 @@ class CompositionClient
     }
 
     /**
-     * Updates the \"sortingStrategy\" field of an existing composition. This endpoint lets you create a new sorting strategy mapping or replace the configured one. The provided sorting indices must be associated indices or replicas of the main targeted index.  This endpoint can't validate whether the sort index is related to the composition's main index. Validation fails at runtime if the index you updated isn't related.  The update is applied to the specified composition within the current Algolia application and returns a taskID that can be used to track the operation’s completion.
+     * Updates the \"sortingStrategy\" field of an existing composition. This endpoint lets you create a new sorting strategy mapping or replace the configured one. This endpoint only validates that the sorting indices exist. At runtime, the API ignores a sorting index that is unrelated to the targeted indices. The response reports it in the `errors` field.  The update is applied to the specified composition within the current Algolia application and returns a taskID that can be used to track the operation’s completion.
      *
      * Required API Key ACLs:
      *  - editSettings
@@ -1408,7 +1409,7 @@ class CompositionClient
      * Set or update the \&quot;sortingStrategy\&quot; configuration for an existing composition (with HTTP info).
      *
      * Returns the response with HTTP metadata (status code, headers, body)
-     * Updates the \"sortingStrategy\" field of an existing composition. This endpoint lets you create a new sorting strategy mapping or replace the configured one. The provided sorting indices must be associated indices or replicas of the main targeted index.  This endpoint can't validate whether the sort index is related to the composition's main index. Validation fails at runtime if the index you updated isn't related.  The update is applied to the specified composition within the current Algolia application and returns a taskID that can be used to track the operation’s completion.
+     * Updates the \"sortingStrategy\" field of an existing composition. This endpoint lets you create a new sorting strategy mapping or replace the configured one. This endpoint only validates that the sorting indices exist. At runtime, the API ignores a sorting index that is unrelated to the targeted indices. The response reports it in the `errors` field.  The update is applied to the specified composition within the current Algolia application and returns a taskID that can be used to track the operation’s completion.
      * Required API Key ACLs:
      *  - editSettings
      *

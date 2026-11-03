@@ -304,7 +304,7 @@ class Composition extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets sortingStrategy.
      *
-     * @param null|array<string,string> $sortingStrategy A mapping of sorting labels to the indices (or replicas) that implement those sorting rules. The sorting indices MUST be related to the associated main targeted index in the composition. Each key is the label your frontend sends at runtime (for example, \"Price (asc)\"), and each value is the name of the index that should be queried when that label is selected.  When a request includes a \"sortBy\" parameter, the platform looks up the corresponding index in this mapping and uses it to execute the query. The main targeted index is replaced with the sorting strategy index it is mapped to.  Up to 20 sorting strategies can be defined.
+     * @param null|array<string,string> $sortingStrategy A mapping of sorting labels to the indices (or replicas) that implement those sorting rules. When the composition is run, the API ignores a sorting index that is unrelated to the targeted indices. The response reports it in the `errors` field. Each key is the label your frontend sends at runtime (for example, \"Price (asc)\"), and each value is the name of the index that should be queried when that label is selected.  When a request includes a \"sortBy\" parameter, the platform looks up the corresponding index in this mapping and uses it to execute the query. The main targeted index is replaced with the sorting strategy index it is mapped to.  Up to 20 sorting strategies can be defined.
      *
      * @return self
      */

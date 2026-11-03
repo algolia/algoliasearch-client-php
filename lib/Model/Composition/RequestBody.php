@@ -23,6 +23,7 @@ class RequestBody extends AbstractModel implements ModelInterface, \ArrayAccess,
         'params' => '\Algolia\AlgoliaSearch\Model\Composition\Params',
         'feedsOrder' => 'string[]',
         'externalProvider' => '\Algolia\AlgoliaSearch\Model\Composition\ExternalProvider',
+        'feeds' => 'array<string,\Algolia\AlgoliaSearch\Model\Composition\FeedRequest>',
     ];
 
     /**
@@ -34,6 +35,7 @@ class RequestBody extends AbstractModel implements ModelInterface, \ArrayAccess,
         'params' => null,
         'feedsOrder' => null,
         'externalProvider' => null,
+        'feeds' => null,
     ];
 
     /**
@@ -46,6 +48,7 @@ class RequestBody extends AbstractModel implements ModelInterface, \ArrayAccess,
         'params' => 'params',
         'feedsOrder' => 'feedsOrder',
         'externalProvider' => 'externalProvider',
+        'feeds' => 'feeds',
     ];
 
     /**
@@ -57,6 +60,7 @@ class RequestBody extends AbstractModel implements ModelInterface, \ArrayAccess,
         'params' => 'setParams',
         'feedsOrder' => 'setFeedsOrder',
         'externalProvider' => 'setExternalProvider',
+        'feeds' => 'setFeeds',
     ];
 
     /**
@@ -68,6 +72,7 @@ class RequestBody extends AbstractModel implements ModelInterface, \ArrayAccess,
         'params' => 'getParams',
         'feedsOrder' => 'getFeedsOrder',
         'externalProvider' => 'getExternalProvider',
+        'feeds' => 'getFeeds',
     ];
 
     /**
@@ -92,6 +97,9 @@ class RequestBody extends AbstractModel implements ModelInterface, \ArrayAccess,
         }
         if (isset($data['externalProvider'])) {
             $this->container['externalProvider'] = $data['externalProvider'];
+        }
+        if (isset($data['feeds'])) {
+            $this->container['feeds'] = $data['feeds'];
         }
     }
 
@@ -235,6 +243,30 @@ class RequestBody extends AbstractModel implements ModelInterface, \ArrayAccess,
     public function setExternalProvider($externalProvider)
     {
         $this->container['externalProvider'] = $externalProvider;
+
+        return $this;
+    }
+
+    /**
+     * Gets feeds.
+     *
+     * @return null|array<string,FeedRequest>
+     */
+    public function getFeeds()
+    {
+        return $this->container['feeds'] ?? null;
+    }
+
+    /**
+     * Sets feeds.
+     *
+     * @param null|array<string,FeedRequest> $feeds Per-feed parameters for `multifeed` compositions. Each key is a feed ID.  Feed `params` take precedence over the root `params`. A feed inherits every root key it doesn't set. A feed value replaces the root value instead of combining with it. This applies to every key, including `filters`, `facetFilters`, `optionalFilters`, and `analyticsTags`. For example, `filters` must repeat the common values. An empty value such as `filters: \"\"` discards the root value.  The API validates feed `params` like the root `params`. An unsupported parameter returns a 400 error.  A feed ID may not exist in the composition (for example, because a rule removed it). The response reports it in the `errors` field but request still succeeds.  Rules match once per request, against the root `params` only.
+     *
+     * @return self
+     */
+    public function setFeeds($feeds)
+    {
+        $this->container['feeds'] = $feeds;
 
         return $this;
     }

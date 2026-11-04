@@ -9,13 +9,15 @@ namespace Algolia\AlgoliaSearch\Model\Composition;
  *
  * @category Class
  *
- * @description Ordering to apply on the injected items coming from the external source. 'default' means the items will be ordered as they are in the index (natural relevance) in the smart group. 'userDefined' means the order in which the objectIDs are provided in the run request payload will be preserved in the smart group.
+ * @description Ordering to apply on the injected items coming from the external source. 'algoliaDefined' means the items will be ordered as they are in the index (natural relevance) in the smart group. 'userDefined' means the order in which the objectIDs are provided in the run request payload will be preserved in the smart group.
  */
 class ExternalOrdering
 {
     /**
      * Possible values of this enum.
      */
+    public const ALGOLIA_DEFINED = 'algoliaDefined';
+
     public const _DEFAULT = 'default';
 
     public const USER_DEFINED = 'userDefined';
@@ -28,6 +30,7 @@ class ExternalOrdering
     public static function getAllowableEnumValues()
     {
         return [
+            self::ALGOLIA_DEFINED,
             self::_DEFAULT,
             self::USER_DEFINED,
         ];

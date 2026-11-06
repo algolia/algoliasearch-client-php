@@ -99,19 +99,38 @@ final class CurlHttpClient implements HttpClientInterface
             } while (CURLM_CALL_MULTI_PERFORM === $mrc);
         }
 
+        // curl_multi only reports the transfer result (curl_errno / curl_error) once it is read here
+        $errorCode = null;
+        while (false !== ($info = curl_multi_info_read($mhandle))) {
+            if ($info['handle'] === $curlHandle) {
+                $errorCode = $info['result'];
+
+                break;
+            }
+        }
+
         $statusCode = (int) curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
         $responseBody = curl_multi_getcontent($curlHandle);
         $error = curl_error($curlHandle);
-        $errorCode = curl_errno($curlHandle);
 
         $this->releaseMHandle($curlHandle);
 
-        // detect timeout: explicit timeout error OR no response with no error (curl_multi behavior)
-        $isTimeout = (CURLE_OPERATION_TIMEDOUT === $errorCode)
-            || (0 === $statusCode && 0 === $errorCode);
+        // curl_multi_exec failed before the transfer completed: there is no result to read, and
+        // the host is treated as unreachable rather than as a timeout
+        if (null === $errorCode) {
+            $reason = CURLM_OK !== $mrc ? curl_multi_strerror($mrc) : null;
 
-        if ($isTimeout) {
+            return new Response(0, [], null, '1.1', $reason ?? 'Transfer did not complete');
+        }
+
+        if (CURLE_OPERATION_TIMEDOUT === $errorCode) {
             throw new TimeoutException('Connection timed out');
+        }
+
+        // any other transfer failure (refused connection, unknown host, TLS error, ...) means the host
+        // could not be reached: a status 0 response, which the retry strategy marks down
+        if (CURLE_OK !== $errorCode) {
+            return new Response(0, [], null, '1.1', $error);
         }
 
         return new Response(

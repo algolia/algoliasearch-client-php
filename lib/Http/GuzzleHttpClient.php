@@ -37,7 +37,14 @@ final class GuzzleHttpClient implements HttpClientInterface
                 'decode_content' => 'gzip',
             ]);
         } catch (HandlerClosedException|NetworkExceptionInterface|ResponseTimeoutException $e) {
-            throw new TimeoutException(self::isTimeout($e) ? 'Connection timed out' : $e->getMessage(), 0, $e);
+            $isTimeout = self::isTimeout($e);
+
+            // a host that could not be reached is not a timeout: a status 0 response, which the retry strategy marks down
+            if (!$isTimeout && $e instanceof NetworkExceptionInterface) {
+                return new Response(0, [], null, '1.1', $e->getMessage());
+            }
+
+            throw new TimeoutException($isTimeout ? 'Connection timed out' : $e->getMessage(), 0, $e);
         } catch (RequestException $e) {
             $response = method_exists($e, 'getResponse') ? $e->getResponse() : null;
             if (null !== $response) {

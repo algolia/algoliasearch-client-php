@@ -320,6 +320,8 @@ final class ApiWrapper implements ApiWrapperInterface
                     : 'Unreachable Host';
             }
 
+            $reason = $this->sanitizeUrl($reason);
+
             throw new RetriableException('Retriable failure on '.$request->getUri()->getHost().': '.$reason, $statusCode, null, $correlationId);
         }
 

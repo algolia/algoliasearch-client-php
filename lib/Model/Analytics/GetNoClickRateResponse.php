@@ -203,7 +203,7 @@ class GetNoClickRateResponse extends AbstractModel implements ModelInterface, \A
     /**
      * Sets rate.
      *
-     * @param float $rate no click rate: calculated as the number of tracked searches without clicks divided by the number of tracked searches
+     * @param float $rate no click rate: calculated as the number of tracked searches with results whose query didn't get any click in the time range, divided by the number of tracked searches with results
      *
      * @return self
      */
@@ -251,7 +251,7 @@ class GetNoClickRateResponse extends AbstractModel implements ModelInterface, \A
     /**
      * Sets noClickCount.
      *
-     * @param int $noClickCount number of times this search was returned as a result without any click
+     * @param int $noClickCount number of tracked searches with results whose query didn't get any click in the time range
      *
      * @return self
      */

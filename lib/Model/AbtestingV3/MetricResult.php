@@ -400,7 +400,7 @@ class MetricResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets dimension.
      *
-     * @param null|string $dimension Dimension defined during test creation. For revenue metrics, including `revenue_per_search`, this is the currency.
+     * @param null|string $dimension Dimension defined during test creation. For revenue metrics, including `revenue_per_search` and `winsorized_revenue_per_user`, this is the currency.
      *
      * @return self
      */

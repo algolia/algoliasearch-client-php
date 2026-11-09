@@ -24,6 +24,7 @@ class MetricMetadata extends AbstractModel implements ModelInterface, \ArrayAcce
     protected static $modelTypes = [
         'winsorizedValue' => 'float',
         'mean' => 'float',
+        'userCount' => 'int',
     ];
 
     /**
@@ -34,6 +35,7 @@ class MetricMetadata extends AbstractModel implements ModelInterface, \ArrayAcce
     protected static $modelFormats = [
         'winsorizedValue' => 'double',
         'mean' => 'double',
+        'userCount' => 'int64',
     ];
 
     /**
@@ -45,6 +47,7 @@ class MetricMetadata extends AbstractModel implements ModelInterface, \ArrayAcce
     protected static $attributeMap = [
         'winsorizedValue' => 'winsorizedValue',
         'mean' => 'mean',
+        'userCount' => 'userCount',
     ];
 
     /**
@@ -55,6 +58,7 @@ class MetricMetadata extends AbstractModel implements ModelInterface, \ArrayAcce
     protected static $setters = [
         'winsorizedValue' => 'setWinsorizedValue',
         'mean' => 'setMean',
+        'userCount' => 'setUserCount',
     ];
 
     /**
@@ -65,6 +69,7 @@ class MetricMetadata extends AbstractModel implements ModelInterface, \ArrayAcce
     protected static $getters = [
         'winsorizedValue' => 'getWinsorizedValue',
         'mean' => 'getMean',
+        'userCount' => 'getUserCount',
     ];
 
     /**
@@ -86,6 +91,9 @@ class MetricMetadata extends AbstractModel implements ModelInterface, \ArrayAcce
         }
         if (isset($data['mean'])) {
             $this->container['mean'] = $data['mean'];
+        }
+        if (isset($data['userCount'])) {
+            $this->container['userCount'] = $data['userCount'];
         }
     }
 
@@ -205,6 +213,30 @@ class MetricMetadata extends AbstractModel implements ModelInterface, \ArrayAcce
     public function setMean($mean)
     {
         $this->container['mean'] = $mean;
+
+        return $this;
+    }
+
+    /**
+     * Gets userCount.
+     *
+     * @return null|int
+     */
+    public function getUserCount()
+    {
+        return $this->container['userCount'] ?? null;
+    }
+
+    /**
+     * Sets userCount.
+     *
+     * @param null|int $userCount Only present for `winsorized_revenue_per_user`. Number of tracked users in this variant with a tracked purchase in the metric's currency (`dimension`), plus tracked users with no tracked purchase in any currency. Users who purchased only in other currencies are excluded. It's the sample size behind the mean, p-value, and intervals, and differs from the overall `user_count` metric. Omitted when the variant has no record for that currency.
+     *
+     * @return self
+     */
+    public function setUserCount($userCount)
+    {
+        $this->container['userCount'] = $userCount;
 
         return $this;
     }

@@ -68,6 +68,8 @@ class MetricName
 
     public const PURCHASE_USERS_RATE = 'purchase_users_rate';
 
+    public const USERS_WITH_NO_RESULTS_RATE = 'users_with_no_results_rate';
+
     public const AVG_CLICK_THROUGH_RATE_PER_USER = 'avg_click_through_rate_per_user';
 
     public const AVG_CONVERSION_RATE_PER_USER = 'avg_conversion_rate_per_user';
@@ -117,6 +119,7 @@ class MetricName
             self::CONVERTED_USERS_RATE,
             self::ADD_TO_CART_USERS_RATE,
             self::PURCHASE_USERS_RATE,
+            self::USERS_WITH_NO_RESULTS_RATE,
             self::AVG_CLICK_THROUGH_RATE_PER_USER,
             self::AVG_CONVERSION_RATE_PER_USER,
             self::AVG_PURCHASE_RATE_PER_USER,

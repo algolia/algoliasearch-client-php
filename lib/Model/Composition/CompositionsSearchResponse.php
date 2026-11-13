@@ -11,6 +11,8 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  * CompositionsSearchResponse Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Information about the compositions processed by the run request. Only present when `getRankingInfo` is `true`.
  */
 class CompositionsSearchResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

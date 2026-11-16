@@ -18,9 +18,9 @@ class RecommendModels
 
     public const BOUGHT_TOGETHER = 'bought-together';
 
-    public const TRENDING_FACETS = 'trending-facets';
-
     public const TRENDING_ITEMS = 'trending-items';
+
+    public const LOOKING_SIMILAR = 'looking-similar';
 
     /**
      * Gets allowable values of the enum.
@@ -32,8 +32,8 @@ class RecommendModels
         return [
             self::RELATED_PRODUCTS,
             self::BOUGHT_TOGETHER,
-            self::TRENDING_FACETS,
             self::TRENDING_ITEMS,
+            self::LOOKING_SIMILAR,
         ];
     }
 }

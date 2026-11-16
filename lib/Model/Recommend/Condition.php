@@ -24,6 +24,7 @@ class Condition extends AbstractModel implements ModelInterface, \ArrayAccess, \
     protected static $modelTypes = [
         'filters' => 'string',
         'context' => 'string',
+        'requestScope' => '\Algolia\AlgoliaSearch\Model\Recommend\RequestScope',
     ];
 
     /**
@@ -34,6 +35,7 @@ class Condition extends AbstractModel implements ModelInterface, \ArrayAccess, \
     protected static $modelFormats = [
         'filters' => null,
         'context' => null,
+        'requestScope' => null,
     ];
 
     /**
@@ -45,6 +47,7 @@ class Condition extends AbstractModel implements ModelInterface, \ArrayAccess, \
     protected static $attributeMap = [
         'filters' => 'filters',
         'context' => 'context',
+        'requestScope' => 'requestScope',
     ];
 
     /**
@@ -55,6 +58,7 @@ class Condition extends AbstractModel implements ModelInterface, \ArrayAccess, \
     protected static $setters = [
         'filters' => 'setFilters',
         'context' => 'setContext',
+        'requestScope' => 'setRequestScope',
     ];
 
     /**
@@ -65,6 +69,7 @@ class Condition extends AbstractModel implements ModelInterface, \ArrayAccess, \
     protected static $getters = [
         'filters' => 'getFilters',
         'context' => 'getContext',
+        'requestScope' => 'getRequestScope',
     ];
 
     /**
@@ -86,6 +91,9 @@ class Condition extends AbstractModel implements ModelInterface, \ArrayAccess, \
         }
         if (isset($data['context'])) {
             $this->container['context'] = $data['context'];
+        }
+        if (isset($data['requestScope'])) {
+            $this->container['requestScope'] = $data['requestScope'];
         }
     }
 
@@ -205,6 +213,30 @@ class Condition extends AbstractModel implements ModelInterface, \ArrayAccess, \
     public function setContext($context)
     {
         $this->container['context'] = $context;
+
+        return $this;
+    }
+
+    /**
+     * Gets requestScope.
+     *
+     * @return null|RequestScope
+     */
+    public function getRequestScope()
+    {
+        return $this->container['requestScope'] ?? null;
+    }
+
+    /**
+     * Sets requestScope.
+     *
+     * @param null|RequestScope $requestScope requestScope
+     *
+     * @return self
+     */
+    public function setRequestScope($requestScope)
+    {
+        $this->container['requestScope'] = $requestScope;
 
         return $this;
     }

@@ -26,6 +26,7 @@ class MetricsFilter extends AbstractModel implements ModelInterface, \ArrayAcces
         'name' => 'string',
         'trackEffects' => 'bool',
         'includes' => 'bool',
+        'parameters' => '\Algolia\AlgoliaSearch\Model\AbtestingV3\MetricsFilterParameters',
     ];
 
     /**
@@ -38,6 +39,7 @@ class MetricsFilter extends AbstractModel implements ModelInterface, \ArrayAcces
         'name' => null,
         'trackEffects' => null,
         'includes' => null,
+        'parameters' => null,
     ];
 
     /**
@@ -51,6 +53,7 @@ class MetricsFilter extends AbstractModel implements ModelInterface, \ArrayAcces
         'name' => 'name',
         'trackEffects' => 'trackEffects',
         'includes' => 'includes',
+        'parameters' => 'parameters',
     ];
 
     /**
@@ -63,6 +66,7 @@ class MetricsFilter extends AbstractModel implements ModelInterface, \ArrayAcces
         'name' => 'setName',
         'trackEffects' => 'setTrackEffects',
         'includes' => 'setIncludes',
+        'parameters' => 'setParameters',
     ];
 
     /**
@@ -75,6 +79,7 @@ class MetricsFilter extends AbstractModel implements ModelInterface, \ArrayAcces
         'name' => 'getName',
         'trackEffects' => 'getTrackEffects',
         'includes' => 'getIncludes',
+        'parameters' => 'getParameters',
     ];
 
     /**
@@ -102,6 +107,9 @@ class MetricsFilter extends AbstractModel implements ModelInterface, \ArrayAcces
         }
         if (isset($data['includes'])) {
             $this->container['includes'] = $data['includes'];
+        }
+        if (isset($data['parameters'])) {
+            $this->container['parameters'] = $data['parameters'];
         }
     }
 
@@ -199,7 +207,7 @@ class MetricsFilter extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Sets domain.
      *
-     * @param string $domain metric domain (for example `abtesting`, `personalization`)
+     * @param string $domain metric domain (for example `abtesting`, `core`, `personalization`)
      *
      * @return self
      */
@@ -247,7 +255,7 @@ class MetricsFilter extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Sets trackEffects.
      *
-     * @param null|bool $trackEffects whether the experiment should record the effects of this filter
+     * @param null|bool $trackEffects Whether the experiment should record the effects of this filter. Not supported by `core.hasExactCategoryFilter`.
      *
      * @return self
      */
@@ -271,13 +279,37 @@ class MetricsFilter extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Sets includes.
      *
-     * @param null|bool $includes if true, keep items that match the filter; if false, exclude them
+     * @param null|bool $includes If true, keep items that match the filter; if false, exclude them. Defaults to false.
      *
      * @return self
      */
     public function setIncludes($includes)
     {
         $this->container['includes'] = $includes;
+
+        return $this;
+    }
+
+    /**
+     * Gets parameters.
+     *
+     * @return null|MetricsFilterParameters
+     */
+    public function getParameters()
+    {
+        return $this->container['parameters'] ?? null;
+    }
+
+    /**
+     * Sets parameters.
+     *
+     * @param null|MetricsFilterParameters $parameters parameters
+     *
+     * @return self
+     */
+    public function setParameters($parameters)
+    {
+        $this->container['parameters'] = $parameters;
 
         return $this;
     }

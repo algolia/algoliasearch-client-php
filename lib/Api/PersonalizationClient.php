@@ -24,7 +24,7 @@ use GuzzleHttp\Psr7\Query;
  */
 class PersonalizationClient
 {
-    public const VERSION = '4.54.0';
+    public const VERSION = '4.55.0';
 
     /**
      * @var ApiWrapperInterface

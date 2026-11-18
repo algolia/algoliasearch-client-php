@@ -605,7 +605,7 @@ class AgentStudioClient
      * Retrieve details of the specified agent.
      *
      * Required API Key ACLs:
-     *  - settings
+     *  - editSettings
      *
      * @param string $agentId        The agentId. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -623,7 +623,7 @@ class AgentStudioClient
      * Get a single allowed domain by id.
      *
      * Required API Key ACLs:
-     *  - settings
+     *  - editSettings
      *
      * @param string $domainId       The domainId. (required)
      * @param string $agentId        The agentId. (required)
@@ -682,7 +682,7 @@ class AgentStudioClient
      * Get Provider.
      *
      * Required API Key ACLs:
-     *  - settings
+     *  - editSettings
      *
      * @param string $providerId     The providerId. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -753,7 +753,7 @@ class AgentStudioClient
      * List all allowed domain patterns for this agent.
      *
      * Required API Key ACLs:
-     *  - settings
+     *  - editSettings
      *
      * @param string $agentId        The agentId. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -800,7 +800,7 @@ class AgentStudioClient
      * List all agents with pagination and filtering.
      *
      * Required API Key ACLs:
-     *  - settings
+     *  - editSettings
      *
      * @param int    $page           Page number. (optional, default to 1)
      * @param int    $limit          Items per page. (optional, default to 10)
@@ -837,7 +837,7 @@ class AgentStudioClient
      * Get available models for a specific provider.
      *
      * Required API Key ACLs:
-     *  - settings
+     *  - editSettings
      *
      * @param string $providerId     The providerId. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -855,7 +855,7 @@ class AgentStudioClient
      * List Providers.
      *
      * Required API Key ACLs:
-     *  - settings
+     *  - editSettings
      *
      * @param int   $page           Page number. (optional, default to 1)
      * @param int   $limit          Items per page. (optional, default to 10)
@@ -2160,7 +2160,7 @@ class AgentStudioClient
      * Returns the response with HTTP metadata (status code, headers, body)
      * Retrieve details of the specified agent.
      * Required API Key ACLs:
-     *  - settings
+     *  - editSettings
      *
      * @param string $agentId        The agentId. (required)
      * @param array  $requestOptions Request options
@@ -2205,7 +2205,7 @@ class AgentStudioClient
      * Returns the response with HTTP metadata (status code, headers, body)
      * Get a single allowed domain by id.
      * Required API Key ACLs:
-     *  - settings
+     *  - editSettings
      *
      * @param string $domainId       The domainId. (required)
      * @param string $agentId        The agentId. (required)
@@ -2379,7 +2379,7 @@ class AgentStudioClient
      * Returns the response with HTTP metadata (status code, headers, body)
      * Get Provider.
      * Required API Key ACLs:
-     *  - settings
+     *  - editSettings
      *
      * @param string $providerId     The providerId. (required)
      * @param array  $requestOptions Request options
@@ -2564,7 +2564,7 @@ class AgentStudioClient
      * Returns the response with HTTP metadata (status code, headers, body)
      * List all allowed domain patterns for this agent.
      * Required API Key ACLs:
-     *  - settings
+     *  - editSettings
      *
      * @param string $agentId        The agentId. (required)
      * @param array  $requestOptions Request options
@@ -2707,7 +2707,7 @@ class AgentStudioClient
      * Returns the response with HTTP metadata (status code, headers, body)
      * List all agents with pagination and filtering.
      * Required API Key ACLs:
-     *  - settings
+     *  - editSettings
      *
      * @param int    $page           Page number. (optional)
      * @param int    $limit          Items per page. (optional)
@@ -2766,7 +2766,7 @@ class AgentStudioClient
      * Returns the response with HTTP metadata (status code, headers, body)
      * Get available models for a specific provider.
      * Required API Key ACLs:
-     *  - settings
+     *  - editSettings
      *
      * @param string $providerId     The providerId. (required)
      * @param array  $requestOptions Request options
@@ -2811,7 +2811,7 @@ class AgentStudioClient
      * Returns the response with HTTP metadata (status code, headers, body)
      * List Providers.
      * Required API Key ACLs:
-     *  - settings
+     *  - editSettings
      *
      * @param int   $page           Page number. (optional)
      * @param int   $limit          Items per page. (optional)

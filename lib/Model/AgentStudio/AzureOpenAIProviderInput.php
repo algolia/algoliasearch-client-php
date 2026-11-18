@@ -25,6 +25,7 @@ class AzureOpenAIProviderInput extends AbstractModel implements ModelInterface, 
         'apiKey' => 'string',
         'azureEndpoint' => 'string',
         'azureDeployment' => 'string',
+        'apiMode' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ApiModeEnum',
         'apiVersion' => 'string',
     ];
 
@@ -37,6 +38,7 @@ class AzureOpenAIProviderInput extends AbstractModel implements ModelInterface, 
         'apiKey' => null,
         'azureEndpoint' => null,
         'azureDeployment' => null,
+        'apiMode' => null,
         'apiVersion' => null,
     ];
 
@@ -50,6 +52,7 @@ class AzureOpenAIProviderInput extends AbstractModel implements ModelInterface, 
         'apiKey' => 'apiKey',
         'azureEndpoint' => 'azureEndpoint',
         'azureDeployment' => 'azureDeployment',
+        'apiMode' => 'apiMode',
         'apiVersion' => 'apiVersion',
     ];
 
@@ -62,6 +65,7 @@ class AzureOpenAIProviderInput extends AbstractModel implements ModelInterface, 
         'apiKey' => 'setApiKey',
         'azureEndpoint' => 'setAzureEndpoint',
         'azureDeployment' => 'setAzureDeployment',
+        'apiMode' => 'setApiMode',
         'apiVersion' => 'setApiVersion',
     ];
 
@@ -74,6 +78,7 @@ class AzureOpenAIProviderInput extends AbstractModel implements ModelInterface, 
         'apiKey' => 'getApiKey',
         'azureEndpoint' => 'getAzureEndpoint',
         'azureDeployment' => 'getAzureDeployment',
+        'apiMode' => 'getApiMode',
         'apiVersion' => 'getApiVersion',
     ];
 
@@ -99,6 +104,9 @@ class AzureOpenAIProviderInput extends AbstractModel implements ModelInterface, 
         }
         if (isset($data['azureDeployment'])) {
             $this->container['azureDeployment'] = $data['azureDeployment'];
+        }
+        if (isset($data['apiMode'])) {
+            $this->container['apiMode'] = $data['apiMode'];
         }
         if (isset($data['apiVersion'])) {
             $this->container['apiVersion'] = $data['apiVersion'];
@@ -257,6 +265,30 @@ class AzureOpenAIProviderInput extends AbstractModel implements ModelInterface, 
     public function setAzureDeployment($azureDeployment)
     {
         $this->container['azureDeployment'] = $azureDeployment;
+
+        return $this;
+    }
+
+    /**
+     * Gets apiMode.
+     *
+     * @return null|ApiModeEnum
+     */
+    public function getApiMode()
+    {
+        return $this->container['apiMode'] ?? null;
+    }
+
+    /**
+     * Sets apiMode.
+     *
+     * @param null|ApiModeEnum $apiMode apiMode
+     *
+     * @return self
+     */
+    public function setApiMode($apiMode)
+    {
+        $this->container['apiMode'] = $apiMode;
 
         return $this;
     }

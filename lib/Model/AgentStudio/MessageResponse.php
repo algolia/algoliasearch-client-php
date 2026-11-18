@@ -38,6 +38,7 @@ class MessageResponse extends AbstractModel implements ModelInterface, \ArrayAcc
         'turnContext' => 'array<string,mixed>',
         'events' => '\Algolia\AlgoliaSearch\Model\AgentStudio\MessageEvent[]',
         'guardrail' => '\Algolia\AlgoliaSearch\Model\AgentStudio\GuardrailOutcome',
+        'metadata' => 'array<string,mixed>',
     ];
 
     /**
@@ -62,6 +63,7 @@ class MessageResponse extends AbstractModel implements ModelInterface, \ArrayAcc
         'turnContext' => null,
         'events' => null,
         'guardrail' => null,
+        'metadata' => null,
     ];
 
     /**
@@ -87,6 +89,7 @@ class MessageResponse extends AbstractModel implements ModelInterface, \ArrayAcc
         'turnContext' => 'turnContext',
         'events' => 'events',
         'guardrail' => 'guardrail',
+        'metadata' => 'metadata',
     ];
 
     /**
@@ -111,6 +114,7 @@ class MessageResponse extends AbstractModel implements ModelInterface, \ArrayAcc
         'turnContext' => 'setTurnContext',
         'events' => 'setEvents',
         'guardrail' => 'setGuardrail',
+        'metadata' => 'setMetadata',
     ];
 
     /**
@@ -135,6 +139,7 @@ class MessageResponse extends AbstractModel implements ModelInterface, \ArrayAcc
         'turnContext' => 'getTurnContext',
         'events' => 'getEvents',
         'guardrail' => 'getGuardrail',
+        'metadata' => 'getMetadata',
     ];
 
     /**
@@ -198,6 +203,9 @@ class MessageResponse extends AbstractModel implements ModelInterface, \ArrayAcc
         }
         if (isset($data['guardrail'])) {
             $this->container['guardrail'] = $data['guardrail'];
+        }
+        if (isset($data['metadata'])) {
+            $this->container['metadata'] = $data['metadata'];
         }
     }
 
@@ -674,6 +682,30 @@ class MessageResponse extends AbstractModel implements ModelInterface, \ArrayAcc
     public function setGuardrail($guardrail)
     {
         $this->container['guardrail'] = $guardrail;
+
+        return $this;
+    }
+
+    /**
+     * Gets metadata.
+     *
+     * @return null|array<string,mixed>
+     */
+    public function getMetadata()
+    {
+        return $this->container['metadata'] ?? null;
+    }
+
+    /**
+     * Sets metadata.
+     *
+     * @param null|array<string,mixed> $metadata metadata
+     *
+     * @return self
+     */
+    public function setMetadata($metadata)
+    {
+        $this->container['metadata'] = $metadata;
 
         return $this;
     }

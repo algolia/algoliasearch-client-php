@@ -20,13 +20,19 @@ class ProviderName
 
     public const GOOGLE_GENAI = 'google_genai';
 
+    public const GOOGLE_VERTEXAI = 'google_vertexai';
+
     public const DEEPSEEK = 'deepseek';
 
     public const OPENAI_COMPATIBLE = 'openai_compatible';
 
+    public const ALGOLIA_MANAGED_LLM = 'algolia_managed_llm';
+
     public const XAI = 'xai';
 
     public const ANTHROPIC = 'anthropic';
+
+    public const MISTRALAI = 'mistralai';
 
     /**
      * Gets allowable values of the enum.
@@ -39,10 +45,13 @@ class ProviderName
             self::OPENAI,
             self::AZURE_OPENAI,
             self::GOOGLE_GENAI,
+            self::GOOGLE_VERTEXAI,
             self::DEEPSEEK,
             self::OPENAI_COMPATIBLE,
+            self::ALGOLIA_MANAGED_LLM,
             self::XAI,
             self::ANTHROPIC,
+            self::MISTRALAI,
         ];
     }
 }

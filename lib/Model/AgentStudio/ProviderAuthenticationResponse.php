@@ -23,11 +23,10 @@ class ProviderAuthenticationResponse extends AbstractModel implements ModelInter
         'id' => 'string',
         'name' => 'string',
         'providerName' => 'string',
-        'input' => '\Algolia\AlgoliaSearch\Model\AgentStudio\InputUnion',
+        'input' => '\Algolia\AlgoliaSearch\Model\AgentStudio\InputUnionProviderAuthenticationResponse',
         'createdAt' => 'string',
         'updatedAt' => 'string',
         'lastUsedAt' => 'string',
-        'isAlgoliaManaged' => 'bool',
     ];
 
     /**
@@ -43,7 +42,6 @@ class ProviderAuthenticationResponse extends AbstractModel implements ModelInter
         'createdAt' => null,
         'updatedAt' => null,
         'lastUsedAt' => null,
-        'isAlgoliaManaged' => null,
     ];
 
     /**
@@ -60,7 +58,6 @@ class ProviderAuthenticationResponse extends AbstractModel implements ModelInter
         'createdAt' => 'createdAt',
         'updatedAt' => 'updatedAt',
         'lastUsedAt' => 'lastUsedAt',
-        'isAlgoliaManaged' => 'isAlgoliaManaged',
     ];
 
     /**
@@ -76,7 +73,6 @@ class ProviderAuthenticationResponse extends AbstractModel implements ModelInter
         'createdAt' => 'setCreatedAt',
         'updatedAt' => 'setUpdatedAt',
         'lastUsedAt' => 'setLastUsedAt',
-        'isAlgoliaManaged' => 'setIsAlgoliaManaged',
     ];
 
     /**
@@ -92,7 +88,6 @@ class ProviderAuthenticationResponse extends AbstractModel implements ModelInter
         'createdAt' => 'getCreatedAt',
         'updatedAt' => 'getUpdatedAt',
         'lastUsedAt' => 'getLastUsedAt',
-        'isAlgoliaManaged' => 'getIsAlgoliaManaged',
     ];
 
     /**
@@ -129,9 +124,6 @@ class ProviderAuthenticationResponse extends AbstractModel implements ModelInter
         }
         if (isset($data['lastUsedAt'])) {
             $this->container['lastUsedAt'] = $data['lastUsedAt'];
-        }
-        if (isset($data['isAlgoliaManaged'])) {
-            $this->container['isAlgoliaManaged'] = $data['isAlgoliaManaged'];
         }
     }
 
@@ -303,7 +295,7 @@ class ProviderAuthenticationResponse extends AbstractModel implements ModelInter
     /**
      * Gets input.
      *
-     * @return InputUnion
+     * @return InputUnionProviderAuthenticationResponse
      */
     public function getInput()
     {
@@ -313,7 +305,7 @@ class ProviderAuthenticationResponse extends AbstractModel implements ModelInter
     /**
      * Sets input.
      *
-     * @param InputUnion $input input
+     * @param InputUnionProviderAuthenticationResponse $input input
      *
      * @return self
      */
@@ -392,30 +384,6 @@ class ProviderAuthenticationResponse extends AbstractModel implements ModelInter
     public function setLastUsedAt($lastUsedAt)
     {
         $this->container['lastUsedAt'] = $lastUsedAt;
-
-        return $this;
-    }
-
-    /**
-     * Gets isAlgoliaManaged.
-     *
-     * @return null|bool
-     */
-    public function getIsAlgoliaManaged()
-    {
-        return $this->container['isAlgoliaManaged'] ?? null;
-    }
-
-    /**
-     * Sets isAlgoliaManaged.
-     *
-     * @param null|bool $isAlgoliaManaged isAlgoliaManaged
-     *
-     * @return self
-     */
-    public function setIsAlgoliaManaged($isAlgoliaManaged)
-    {
-        $this->container['isAlgoliaManaged'] = $isAlgoliaManaged;
 
         return $this;
     }

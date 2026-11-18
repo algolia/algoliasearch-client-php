@@ -24,6 +24,7 @@ class AnthropicProviderInput extends AbstractModel implements ModelInterface, \A
     protected static $modelTypes = [
         'apiKey' => 'string',
         'baseUrl' => 'string',
+        'workspaceId' => 'string',
     ];
 
     /**
@@ -34,6 +35,7 @@ class AnthropicProviderInput extends AbstractModel implements ModelInterface, \A
     protected static $modelFormats = [
         'apiKey' => null,
         'baseUrl' => null,
+        'workspaceId' => null,
     ];
 
     /**
@@ -45,6 +47,7 @@ class AnthropicProviderInput extends AbstractModel implements ModelInterface, \A
     protected static $attributeMap = [
         'apiKey' => 'apiKey',
         'baseUrl' => 'baseUrl',
+        'workspaceId' => 'workspaceId',
     ];
 
     /**
@@ -55,6 +58,7 @@ class AnthropicProviderInput extends AbstractModel implements ModelInterface, \A
     protected static $setters = [
         'apiKey' => 'setApiKey',
         'baseUrl' => 'setBaseUrl',
+        'workspaceId' => 'setWorkspaceId',
     ];
 
     /**
@@ -65,6 +69,7 @@ class AnthropicProviderInput extends AbstractModel implements ModelInterface, \A
     protected static $getters = [
         'apiKey' => 'getApiKey',
         'baseUrl' => 'getBaseUrl',
+        'workspaceId' => 'getWorkspaceId',
     ];
 
     /**
@@ -86,6 +91,9 @@ class AnthropicProviderInput extends AbstractModel implements ModelInterface, \A
         }
         if (isset($data['baseUrl'])) {
             $this->container['baseUrl'] = $data['baseUrl'];
+        }
+        if (isset($data['workspaceId'])) {
+            $this->container['workspaceId'] = $data['workspaceId'];
         }
     }
 
@@ -211,6 +219,30 @@ class AnthropicProviderInput extends AbstractModel implements ModelInterface, \A
     public function setBaseUrl($baseUrl)
     {
         $this->container['baseUrl'] = $baseUrl;
+
+        return $this;
+    }
+
+    /**
+     * Gets workspaceId.
+     *
+     * @return null|string
+     */
+    public function getWorkspaceId()
+    {
+        return $this->container['workspaceId'] ?? null;
+    }
+
+    /**
+     * Sets workspaceId.
+     *
+     * @param null|string $workspaceId Required for API keys not scoped to a single workspace (sk-ant-usr-...). Sent as the anthropic-workspace-id header on every request.
+     *
+     * @return self
+     */
+    public function setWorkspaceId($workspaceId)
+    {
+        $this->container['workspaceId'] = $workspaceId;
 
         return $this;
     }

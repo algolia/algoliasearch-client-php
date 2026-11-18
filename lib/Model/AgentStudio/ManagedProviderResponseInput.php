@@ -139,7 +139,13 @@ class ManagedProviderResponseInput extends AbstractModel implements ModelInterfa
      */
     public function listInvalidProperties()
     {
-        return [];
+        $invalidProperties = [];
+
+        if (!isset($this->container['defaultModel']) || null === $this->container['defaultModel']) {
+            $invalidProperties[] = "'defaultModel' can't be null";
+        }
+
+        return $invalidProperties;
     }
 
     /**
@@ -156,7 +162,7 @@ class ManagedProviderResponseInput extends AbstractModel implements ModelInterfa
     /**
      * Gets defaultModel.
      *
-     * @return null|string
+     * @return string
      */
     public function getDefaultModel()
     {
@@ -166,7 +172,7 @@ class ManagedProviderResponseInput extends AbstractModel implements ModelInterfa
     /**
      * Sets defaultModel.
      *
-     * @param null|string $defaultModel defaultModel
+     * @param string $defaultModel defaultModel
      *
      * @return self
      */

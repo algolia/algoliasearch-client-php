@@ -21,11 +21,16 @@ class InputUnion extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     protected static $modelTypes = [
         'apiKey' => 'string',
-        'baseUrl' => 'string',
         'azureEndpoint' => 'string',
         'azureDeployment' => 'string',
+        'apiMode' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ApiModeEnum',
         'apiVersion' => 'string',
+        'baseUrl' => 'string',
         'defaultModel' => 'string',
+        'workspaceId' => 'string',
+        'project' => 'string',
+        'location' => 'string',
+        'serviceAccountKey' => '\Algolia\AlgoliaSearch\Model\AgentStudio\GoogleServiceAccountKey',
     ];
 
     /**
@@ -35,11 +40,16 @@ class InputUnion extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     protected static $modelFormats = [
         'apiKey' => null,
-        'baseUrl' => null,
         'azureEndpoint' => null,
         'azureDeployment' => null,
+        'apiMode' => null,
         'apiVersion' => null,
+        'baseUrl' => null,
         'defaultModel' => null,
+        'workspaceId' => null,
+        'project' => null,
+        'location' => null,
+        'serviceAccountKey' => null,
     ];
 
     /**
@@ -50,11 +60,16 @@ class InputUnion extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     protected static $attributeMap = [
         'apiKey' => 'apiKey',
-        'baseUrl' => 'baseUrl',
         'azureEndpoint' => 'azureEndpoint',
         'azureDeployment' => 'azureDeployment',
+        'apiMode' => 'apiMode',
         'apiVersion' => 'apiVersion',
+        'baseUrl' => 'baseUrl',
         'defaultModel' => 'defaultModel',
+        'workspaceId' => 'workspaceId',
+        'project' => 'project',
+        'location' => 'location',
+        'serviceAccountKey' => 'serviceAccountKey',
     ];
 
     /**
@@ -64,11 +79,16 @@ class InputUnion extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     protected static $setters = [
         'apiKey' => 'setApiKey',
-        'baseUrl' => 'setBaseUrl',
         'azureEndpoint' => 'setAzureEndpoint',
         'azureDeployment' => 'setAzureDeployment',
+        'apiMode' => 'setApiMode',
         'apiVersion' => 'setApiVersion',
+        'baseUrl' => 'setBaseUrl',
         'defaultModel' => 'setDefaultModel',
+        'workspaceId' => 'setWorkspaceId',
+        'project' => 'setProject',
+        'location' => 'setLocation',
+        'serviceAccountKey' => 'setServiceAccountKey',
     ];
 
     /**
@@ -78,11 +98,16 @@ class InputUnion extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     protected static $getters = [
         'apiKey' => 'getApiKey',
-        'baseUrl' => 'getBaseUrl',
         'azureEndpoint' => 'getAzureEndpoint',
         'azureDeployment' => 'getAzureDeployment',
+        'apiMode' => 'getApiMode',
         'apiVersion' => 'getApiVersion',
+        'baseUrl' => 'getBaseUrl',
         'defaultModel' => 'getDefaultModel',
+        'workspaceId' => 'getWorkspaceId',
+        'project' => 'getProject',
+        'location' => 'getLocation',
+        'serviceAccountKey' => 'getServiceAccountKey',
     ];
 
     /**
@@ -102,20 +127,35 @@ class InputUnion extends AbstractModel implements ModelInterface, \ArrayAccess, 
         if (isset($data['apiKey'])) {
             $this->container['apiKey'] = $data['apiKey'];
         }
-        if (isset($data['baseUrl'])) {
-            $this->container['baseUrl'] = $data['baseUrl'];
-        }
         if (isset($data['azureEndpoint'])) {
             $this->container['azureEndpoint'] = $data['azureEndpoint'];
         }
         if (isset($data['azureDeployment'])) {
             $this->container['azureDeployment'] = $data['azureDeployment'];
         }
+        if (isset($data['apiMode'])) {
+            $this->container['apiMode'] = $data['apiMode'];
+        }
         if (isset($data['apiVersion'])) {
             $this->container['apiVersion'] = $data['apiVersion'];
         }
+        if (isset($data['baseUrl'])) {
+            $this->container['baseUrl'] = $data['baseUrl'];
+        }
         if (isset($data['defaultModel'])) {
             $this->container['defaultModel'] = $data['defaultModel'];
+        }
+        if (isset($data['workspaceId'])) {
+            $this->container['workspaceId'] = $data['workspaceId'];
+        }
+        if (isset($data['project'])) {
+            $this->container['project'] = $data['project'];
+        }
+        if (isset($data['location'])) {
+            $this->container['location'] = $data['location'];
+        }
+        if (isset($data['serviceAccountKey'])) {
+            $this->container['serviceAccountKey'] = $data['serviceAccountKey'];
         }
     }
 
@@ -182,14 +222,14 @@ class InputUnion extends AbstractModel implements ModelInterface, \ArrayAccess, 
         if (!isset($this->container['apiKey']) || null === $this->container['apiKey']) {
             $invalidProperties[] = "'apiKey' can't be null";
         }
-        if (!isset($this->container['baseUrl']) || null === $this->container['baseUrl']) {
-            $invalidProperties[] = "'baseUrl' can't be null";
-        }
         if (!isset($this->container['azureEndpoint']) || null === $this->container['azureEndpoint']) {
             $invalidProperties[] = "'azureEndpoint' can't be null";
         }
         if (!isset($this->container['azureDeployment']) || null === $this->container['azureDeployment']) {
             $invalidProperties[] = "'azureDeployment' can't be null";
+        }
+        if (!isset($this->container['baseUrl']) || null === $this->container['baseUrl']) {
+            $invalidProperties[] = "'baseUrl' can't be null";
         }
         if (!isset($this->container['defaultModel']) || null === $this->container['defaultModel']) {
             $invalidProperties[] = "'defaultModel' can't be null";
@@ -229,30 +269,6 @@ class InputUnion extends AbstractModel implements ModelInterface, \ArrayAccess, 
     public function setApiKey($apiKey)
     {
         $this->container['apiKey'] = $apiKey;
-
-        return $this;
-    }
-
-    /**
-     * Gets baseUrl.
-     *
-     * @return string
-     */
-    public function getBaseUrl()
-    {
-        return $this->container['baseUrl'] ?? null;
-    }
-
-    /**
-     * Sets baseUrl.
-     *
-     * @param string $baseUrl baseUrl
-     *
-     * @return self
-     */
-    public function setBaseUrl($baseUrl)
-    {
-        $this->container['baseUrl'] = $baseUrl;
 
         return $this;
     }
@@ -306,6 +322,30 @@ class InputUnion extends AbstractModel implements ModelInterface, \ArrayAccess, 
     }
 
     /**
+     * Gets apiMode.
+     *
+     * @return null|ApiModeEnum
+     */
+    public function getApiMode()
+    {
+        return $this->container['apiMode'] ?? null;
+    }
+
+    /**
+     * Sets apiMode.
+     *
+     * @param null|ApiModeEnum $apiMode apiMode
+     *
+     * @return self
+     */
+    public function setApiMode($apiMode)
+    {
+        $this->container['apiMode'] = $apiMode;
+
+        return $this;
+    }
+
+    /**
      * Gets apiVersion.
      *
      * @return null|string
@@ -330,6 +370,30 @@ class InputUnion extends AbstractModel implements ModelInterface, \ArrayAccess, 
     }
 
     /**
+     * Gets baseUrl.
+     *
+     * @return string
+     */
+    public function getBaseUrl()
+    {
+        return $this->container['baseUrl'] ?? null;
+    }
+
+    /**
+     * Sets baseUrl.
+     *
+     * @param string $baseUrl baseUrl
+     *
+     * @return self
+     */
+    public function setBaseUrl($baseUrl)
+    {
+        $this->container['baseUrl'] = $baseUrl;
+
+        return $this;
+    }
+
+    /**
      * Gets defaultModel.
      *
      * @return string
@@ -342,13 +406,109 @@ class InputUnion extends AbstractModel implements ModelInterface, \ArrayAccess, 
     /**
      * Sets defaultModel.
      *
-     * @param string $defaultModel defaultModel
+     * @param string $defaultModel Default model for this provider. Used for validation and as fallback when no model is specified at agent level.
      *
      * @return self
      */
     public function setDefaultModel($defaultModel)
     {
         $this->container['defaultModel'] = $defaultModel;
+
+        return $this;
+    }
+
+    /**
+     * Gets workspaceId.
+     *
+     * @return null|string
+     */
+    public function getWorkspaceId()
+    {
+        return $this->container['workspaceId'] ?? null;
+    }
+
+    /**
+     * Sets workspaceId.
+     *
+     * @param null|string $workspaceId Required for API keys not scoped to a single workspace (sk-ant-usr-...). Sent as the anthropic-workspace-id header on every request.
+     *
+     * @return self
+     */
+    public function setWorkspaceId($workspaceId)
+    {
+        $this->container['workspaceId'] = $workspaceId;
+
+        return $this;
+    }
+
+    /**
+     * Gets project.
+     *
+     * @return null|string
+     */
+    public function getProject()
+    {
+        return $this->container['project'] ?? null;
+    }
+
+    /**
+     * Sets project.
+     *
+     * @param null|string $project project
+     *
+     * @return self
+     */
+    public function setProject($project)
+    {
+        $this->container['project'] = $project;
+
+        return $this;
+    }
+
+    /**
+     * Gets location.
+     *
+     * @return null|string
+     */
+    public function getLocation()
+    {
+        return $this->container['location'] ?? null;
+    }
+
+    /**
+     * Sets location.
+     *
+     * @param null|string $location location
+     *
+     * @return self
+     */
+    public function setLocation($location)
+    {
+        $this->container['location'] = $location;
+
+        return $this;
+    }
+
+    /**
+     * Gets serviceAccountKey.
+     *
+     * @return null|GoogleServiceAccountKey
+     */
+    public function getServiceAccountKey()
+    {
+        return $this->container['serviceAccountKey'] ?? null;
+    }
+
+    /**
+     * Sets serviceAccountKey.
+     *
+     * @param null|GoogleServiceAccountKey $serviceAccountKey serviceAccountKey
+     *
+     * @return self
+     */
+    public function setServiceAccountKey($serviceAccountKey)
+    {
+        $this->container['serviceAccountKey'] = $serviceAccountKey;
 
         return $this;
     }

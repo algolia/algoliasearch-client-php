@@ -24,8 +24,13 @@ class ProviderInputNullable extends AbstractModel implements ModelInterface, \Ar
         'baseUrl' => 'string',
         'azureEndpoint' => 'string',
         'azureDeployment' => 'string',
+        'apiMode' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ApiModeEnum',
         'apiVersion' => 'string',
         'defaultModel' => 'string',
+        'workspaceId' => 'string',
+        'project' => 'string',
+        'location' => 'string',
+        'serviceAccountKey' => '\Algolia\AlgoliaSearch\Model\AgentStudio\GoogleServiceAccountKey',
     ];
 
     /**
@@ -38,8 +43,13 @@ class ProviderInputNullable extends AbstractModel implements ModelInterface, \Ar
         'baseUrl' => null,
         'azureEndpoint' => null,
         'azureDeployment' => null,
+        'apiMode' => null,
         'apiVersion' => null,
         'defaultModel' => null,
+        'workspaceId' => null,
+        'project' => null,
+        'location' => null,
+        'serviceAccountKey' => null,
     ];
 
     /**
@@ -53,8 +63,13 @@ class ProviderInputNullable extends AbstractModel implements ModelInterface, \Ar
         'baseUrl' => 'baseUrl',
         'azureEndpoint' => 'azureEndpoint',
         'azureDeployment' => 'azureDeployment',
+        'apiMode' => 'apiMode',
         'apiVersion' => 'apiVersion',
         'defaultModel' => 'defaultModel',
+        'workspaceId' => 'workspaceId',
+        'project' => 'project',
+        'location' => 'location',
+        'serviceAccountKey' => 'serviceAccountKey',
     ];
 
     /**
@@ -67,8 +82,13 @@ class ProviderInputNullable extends AbstractModel implements ModelInterface, \Ar
         'baseUrl' => 'setBaseUrl',
         'azureEndpoint' => 'setAzureEndpoint',
         'azureDeployment' => 'setAzureDeployment',
+        'apiMode' => 'setApiMode',
         'apiVersion' => 'setApiVersion',
         'defaultModel' => 'setDefaultModel',
+        'workspaceId' => 'setWorkspaceId',
+        'project' => 'setProject',
+        'location' => 'setLocation',
+        'serviceAccountKey' => 'setServiceAccountKey',
     ];
 
     /**
@@ -81,8 +101,13 @@ class ProviderInputNullable extends AbstractModel implements ModelInterface, \Ar
         'baseUrl' => 'getBaseUrl',
         'azureEndpoint' => 'getAzureEndpoint',
         'azureDeployment' => 'getAzureDeployment',
+        'apiMode' => 'getApiMode',
         'apiVersion' => 'getApiVersion',
         'defaultModel' => 'getDefaultModel',
+        'workspaceId' => 'getWorkspaceId',
+        'project' => 'getProject',
+        'location' => 'getLocation',
+        'serviceAccountKey' => 'getServiceAccountKey',
     ];
 
     /**
@@ -111,11 +136,26 @@ class ProviderInputNullable extends AbstractModel implements ModelInterface, \Ar
         if (isset($data['azureDeployment'])) {
             $this->container['azureDeployment'] = $data['azureDeployment'];
         }
+        if (isset($data['apiMode'])) {
+            $this->container['apiMode'] = $data['apiMode'];
+        }
         if (isset($data['apiVersion'])) {
             $this->container['apiVersion'] = $data['apiVersion'];
         }
         if (isset($data['defaultModel'])) {
             $this->container['defaultModel'] = $data['defaultModel'];
+        }
+        if (isset($data['workspaceId'])) {
+            $this->container['workspaceId'] = $data['workspaceId'];
+        }
+        if (isset($data['project'])) {
+            $this->container['project'] = $data['project'];
+        }
+        if (isset($data['location'])) {
+            $this->container['location'] = $data['location'];
+        }
+        if (isset($data['serviceAccountKey'])) {
+            $this->container['serviceAccountKey'] = $data['serviceAccountKey'];
         }
     }
 
@@ -306,6 +346,30 @@ class ProviderInputNullable extends AbstractModel implements ModelInterface, \Ar
     }
 
     /**
+     * Gets apiMode.
+     *
+     * @return null|ApiModeEnum
+     */
+    public function getApiMode()
+    {
+        return $this->container['apiMode'] ?? null;
+    }
+
+    /**
+     * Sets apiMode.
+     *
+     * @param null|ApiModeEnum $apiMode apiMode
+     *
+     * @return self
+     */
+    public function setApiMode($apiMode)
+    {
+        $this->container['apiMode'] = $apiMode;
+
+        return $this;
+    }
+
+    /**
      * Gets apiVersion.
      *
      * @return null|string
@@ -349,6 +413,102 @@ class ProviderInputNullable extends AbstractModel implements ModelInterface, \Ar
     public function setDefaultModel($defaultModel)
     {
         $this->container['defaultModel'] = $defaultModel;
+
+        return $this;
+    }
+
+    /**
+     * Gets workspaceId.
+     *
+     * @return null|string
+     */
+    public function getWorkspaceId()
+    {
+        return $this->container['workspaceId'] ?? null;
+    }
+
+    /**
+     * Sets workspaceId.
+     *
+     * @param null|string $workspaceId Required for API keys not scoped to a single workspace (sk-ant-usr-...). Sent as the anthropic-workspace-id header on every request.
+     *
+     * @return self
+     */
+    public function setWorkspaceId($workspaceId)
+    {
+        $this->container['workspaceId'] = $workspaceId;
+
+        return $this;
+    }
+
+    /**
+     * Gets project.
+     *
+     * @return null|string
+     */
+    public function getProject()
+    {
+        return $this->container['project'] ?? null;
+    }
+
+    /**
+     * Sets project.
+     *
+     * @param null|string $project project
+     *
+     * @return self
+     */
+    public function setProject($project)
+    {
+        $this->container['project'] = $project;
+
+        return $this;
+    }
+
+    /**
+     * Gets location.
+     *
+     * @return null|string
+     */
+    public function getLocation()
+    {
+        return $this->container['location'] ?? null;
+    }
+
+    /**
+     * Sets location.
+     *
+     * @param null|string $location location
+     *
+     * @return self
+     */
+    public function setLocation($location)
+    {
+        $this->container['location'] = $location;
+
+        return $this;
+    }
+
+    /**
+     * Gets serviceAccountKey.
+     *
+     * @return null|GoogleServiceAccountKey
+     */
+    public function getServiceAccountKey()
+    {
+        return $this->container['serviceAccountKey'] ?? null;
+    }
+
+    /**
+     * Sets serviceAccountKey.
+     *
+     * @param null|GoogleServiceAccountKey $serviceAccountKey serviceAccountKey
+     *
+     * @return self
+     */
+    public function setServiceAccountKey($serviceAccountKey)
+    {
+        $this->container['serviceAccountKey'] = $serviceAccountKey;
 
         return $this;
     }

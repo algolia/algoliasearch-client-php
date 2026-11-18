@@ -8,11 +8,13 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * ProviderInput Class Doc Comment.
+ * MistralProviderInput Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Mistral-specific provider input.  api_key only, with an optional base_url override (defaults to https://api.mistral.ai/v1), e.g. the EU or US regional endpoint (https://docs.mistral.ai/inference/regional-inference.md).
  */
-class ProviderInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class MistralProviderInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -22,10 +24,6 @@ class ProviderInput extends AbstractModel implements ModelInterface, \ArrayAcces
     protected static $modelTypes = [
         'apiKey' => 'string',
         'baseUrl' => 'string',
-        'azureEndpoint' => 'string',
-        'azureDeployment' => 'string',
-        'apiVersion' => 'string',
-        'defaultModel' => 'string',
     ];
 
     /**
@@ -36,10 +34,6 @@ class ProviderInput extends AbstractModel implements ModelInterface, \ArrayAcces
     protected static $modelFormats = [
         'apiKey' => null,
         'baseUrl' => null,
-        'azureEndpoint' => null,
-        'azureDeployment' => null,
-        'apiVersion' => null,
-        'defaultModel' => null,
     ];
 
     /**
@@ -51,10 +45,6 @@ class ProviderInput extends AbstractModel implements ModelInterface, \ArrayAcces
     protected static $attributeMap = [
         'apiKey' => 'apiKey',
         'baseUrl' => 'baseUrl',
-        'azureEndpoint' => 'azureEndpoint',
-        'azureDeployment' => 'azureDeployment',
-        'apiVersion' => 'apiVersion',
-        'defaultModel' => 'defaultModel',
     ];
 
     /**
@@ -65,10 +55,6 @@ class ProviderInput extends AbstractModel implements ModelInterface, \ArrayAcces
     protected static $setters = [
         'apiKey' => 'setApiKey',
         'baseUrl' => 'setBaseUrl',
-        'azureEndpoint' => 'setAzureEndpoint',
-        'azureDeployment' => 'setAzureDeployment',
-        'apiVersion' => 'setApiVersion',
-        'defaultModel' => 'setDefaultModel',
     ];
 
     /**
@@ -79,10 +65,6 @@ class ProviderInput extends AbstractModel implements ModelInterface, \ArrayAcces
     protected static $getters = [
         'apiKey' => 'getApiKey',
         'baseUrl' => 'getBaseUrl',
-        'azureEndpoint' => 'getAzureEndpoint',
-        'azureDeployment' => 'getAzureDeployment',
-        'apiVersion' => 'getApiVersion',
-        'defaultModel' => 'getDefaultModel',
     ];
 
     /**
@@ -104,18 +86,6 @@ class ProviderInput extends AbstractModel implements ModelInterface, \ArrayAcces
         }
         if (isset($data['baseUrl'])) {
             $this->container['baseUrl'] = $data['baseUrl'];
-        }
-        if (isset($data['azureEndpoint'])) {
-            $this->container['azureEndpoint'] = $data['azureEndpoint'];
-        }
-        if (isset($data['azureDeployment'])) {
-            $this->container['azureDeployment'] = $data['azureDeployment'];
-        }
-        if (isset($data['apiVersion'])) {
-            $this->container['apiVersion'] = $data['apiVersion'];
-        }
-        if (isset($data['defaultModel'])) {
-            $this->container['defaultModel'] = $data['defaultModel'];
         }
     }
 
@@ -182,18 +152,6 @@ class ProviderInput extends AbstractModel implements ModelInterface, \ArrayAcces
         if (!isset($this->container['apiKey']) || null === $this->container['apiKey']) {
             $invalidProperties[] = "'apiKey' can't be null";
         }
-        if (!isset($this->container['baseUrl']) || null === $this->container['baseUrl']) {
-            $invalidProperties[] = "'baseUrl' can't be null";
-        }
-        if (!isset($this->container['azureEndpoint']) || null === $this->container['azureEndpoint']) {
-            $invalidProperties[] = "'azureEndpoint' can't be null";
-        }
-        if (!isset($this->container['azureDeployment']) || null === $this->container['azureDeployment']) {
-            $invalidProperties[] = "'azureDeployment' can't be null";
-        }
-        if (!isset($this->container['defaultModel']) || null === $this->container['defaultModel']) {
-            $invalidProperties[] = "'defaultModel' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -236,7 +194,7 @@ class ProviderInput extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Gets baseUrl.
      *
-     * @return string
+     * @return null|string
      */
     public function getBaseUrl()
     {
@@ -246,109 +204,13 @@ class ProviderInput extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Sets baseUrl.
      *
-     * @param string $baseUrl baseUrl
+     * @param null|string $baseUrl baseUrl
      *
      * @return self
      */
     public function setBaseUrl($baseUrl)
     {
         $this->container['baseUrl'] = $baseUrl;
-
-        return $this;
-    }
-
-    /**
-     * Gets azureEndpoint.
-     *
-     * @return string
-     */
-    public function getAzureEndpoint()
-    {
-        return $this->container['azureEndpoint'] ?? null;
-    }
-
-    /**
-     * Sets azureEndpoint.
-     *
-     * @param string $azureEndpoint azureEndpoint
-     *
-     * @return self
-     */
-    public function setAzureEndpoint($azureEndpoint)
-    {
-        $this->container['azureEndpoint'] = $azureEndpoint;
-
-        return $this;
-    }
-
-    /**
-     * Gets azureDeployment.
-     *
-     * @return string
-     */
-    public function getAzureDeployment()
-    {
-        return $this->container['azureDeployment'] ?? null;
-    }
-
-    /**
-     * Sets azureDeployment.
-     *
-     * @param string $azureDeployment azure model deployment name
-     *
-     * @return self
-     */
-    public function setAzureDeployment($azureDeployment)
-    {
-        $this->container['azureDeployment'] = $azureDeployment;
-
-        return $this;
-    }
-
-    /**
-     * Gets apiVersion.
-     *
-     * @return null|string
-     */
-    public function getApiVersion()
-    {
-        return $this->container['apiVersion'] ?? null;
-    }
-
-    /**
-     * Sets apiVersion.
-     *
-     * @param null|string $apiVersion apiVersion
-     *
-     * @return self
-     */
-    public function setApiVersion($apiVersion)
-    {
-        $this->container['apiVersion'] = $apiVersion;
-
-        return $this;
-    }
-
-    /**
-     * Gets defaultModel.
-     *
-     * @return string
-     */
-    public function getDefaultModel()
-    {
-        return $this->container['defaultModel'] ?? null;
-    }
-
-    /**
-     * Sets defaultModel.
-     *
-     * @param string $defaultModel Default model for this provider. Used for validation and as fallback when no model is specified at agent level.
-     *
-     * @return self
-     */
-    public function setDefaultModel($defaultModel)
-    {
-        $this->container['defaultModel'] = $defaultModel;
 
         return $this;
     }

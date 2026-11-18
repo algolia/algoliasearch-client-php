@@ -22,7 +22,7 @@ class ProviderAuthenticationCreate extends AbstractModel implements ModelInterfa
     protected static $modelTypes = [
         'name' => 'string',
         'providerName' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ProviderName',
-        'input' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ProviderInput',
+        'input' => '\Algolia\AlgoliaSearch\Model\AgentStudio\InputUnion',
     ];
 
     /**
@@ -230,7 +230,7 @@ class ProviderAuthenticationCreate extends AbstractModel implements ModelInterfa
     /**
      * Gets input.
      *
-     * @return ProviderInput
+     * @return InputUnion
      */
     public function getInput()
     {
@@ -240,7 +240,7 @@ class ProviderAuthenticationCreate extends AbstractModel implements ModelInterfa
     /**
      * Sets input.
      *
-     * @param ProviderInput $input input
+     * @param InputUnion $input input
      *
      * @return self
      */

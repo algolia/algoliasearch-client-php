@@ -95,6 +95,7 @@ class SearchForFacets extends AbstractModel implements ModelInterface, \ArrayAcc
         'renderingContent' => '\Algolia\AlgoliaSearch\Model\Search\RenderingContent',
         'enableReRanking' => 'bool',
         'reRankingApplyFilter' => '\Algolia\AlgoliaSearch\Model\Search\ReRankingApplyFilter',
+        'allowReRankingOnPersonalization' => 'bool',
         'facet' => 'string',
         'indexName' => 'string',
         'facetQuery' => 'string',
@@ -183,6 +184,7 @@ class SearchForFacets extends AbstractModel implements ModelInterface, \ArrayAcc
         'renderingContent' => null,
         'enableReRanking' => null,
         'reRankingApplyFilter' => null,
+        'allowReRankingOnPersonalization' => null,
         'facet' => null,
         'indexName' => null,
         'facetQuery' => null,
@@ -272,6 +274,7 @@ class SearchForFacets extends AbstractModel implements ModelInterface, \ArrayAcc
         'renderingContent' => 'renderingContent',
         'enableReRanking' => 'enableReRanking',
         'reRankingApplyFilter' => 'reRankingApplyFilter',
+        'allowReRankingOnPersonalization' => 'allowReRankingOnPersonalization',
         'facet' => 'facet',
         'indexName' => 'indexName',
         'facetQuery' => 'facetQuery',
@@ -360,6 +363,7 @@ class SearchForFacets extends AbstractModel implements ModelInterface, \ArrayAcc
         'renderingContent' => 'setRenderingContent',
         'enableReRanking' => 'setEnableReRanking',
         'reRankingApplyFilter' => 'setReRankingApplyFilter',
+        'allowReRankingOnPersonalization' => 'setAllowReRankingOnPersonalization',
         'facet' => 'setFacet',
         'indexName' => 'setIndexName',
         'facetQuery' => 'setFacetQuery',
@@ -448,6 +452,7 @@ class SearchForFacets extends AbstractModel implements ModelInterface, \ArrayAcc
         'renderingContent' => 'getRenderingContent',
         'enableReRanking' => 'getEnableReRanking',
         'reRankingApplyFilter' => 'getReRankingApplyFilter',
+        'allowReRankingOnPersonalization' => 'getAllowReRankingOnPersonalization',
         'facet' => 'getFacet',
         'indexName' => 'getIndexName',
         'facetQuery' => 'getFacetQuery',
@@ -693,6 +698,9 @@ class SearchForFacets extends AbstractModel implements ModelInterface, \ArrayAcc
         }
         if (isset($data['reRankingApplyFilter'])) {
             $this->container['reRankingApplyFilter'] = $data['reRankingApplyFilter'];
+        }
+        if (isset($data['allowReRankingOnPersonalization'])) {
+            $this->container['allowReRankingOnPersonalization'] = $data['allowReRankingOnPersonalization'];
         }
         if (isset($data['facet'])) {
             $this->container['facet'] = $data['facet'];
@@ -2591,6 +2599,30 @@ class SearchForFacets extends AbstractModel implements ModelInterface, \ArrayAcc
     public function setReRankingApplyFilter($reRankingApplyFilter)
     {
         $this->container['reRankingApplyFilter'] = $reRankingApplyFilter;
+
+        return $this;
+    }
+
+    /**
+     * Gets allowReRankingOnPersonalization.
+     *
+     * @return null|bool
+     */
+    public function getAllowReRankingOnPersonalization()
+    {
+        return $this->container['allowReRankingOnPersonalization'] ?? null;
+    }
+
+    /**
+     * Sets allowReRankingOnPersonalization.
+     *
+     * @param null|bool $allowReRankingOnPersonalization Whether [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) runs concurrently with Personalization.  Dynamic Re-Ranking isn't applied when `distinct` > 1, even if `allowReRankingOnPersonalization` is `true`.
+     *
+     * @return self
+     */
+    public function setAllowReRankingOnPersonalization($allowReRankingOnPersonalization)
+    {
+        $this->container['allowReRankingOnPersonalization'] = $allowReRankingOnPersonalization;
 
         return $this;
     }

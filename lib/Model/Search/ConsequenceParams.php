@@ -96,6 +96,7 @@ class ConsequenceParams extends AbstractModel implements ModelInterface, \ArrayA
         'query' => '\Algolia\AlgoliaSearch\Model\Search\ConsequenceQuery',
         'automaticFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters',
         'automaticOptionalFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters',
+        'allowReRankingOnPersonalization' => 'bool',
     ];
 
     /**
@@ -180,6 +181,7 @@ class ConsequenceParams extends AbstractModel implements ModelInterface, \ArrayA
         'query' => null,
         'automaticFacetFilters' => null,
         'automaticOptionalFacetFilters' => null,
+        'allowReRankingOnPersonalization' => null,
     ];
 
     /**
@@ -265,6 +267,7 @@ class ConsequenceParams extends AbstractModel implements ModelInterface, \ArrayA
         'query' => 'query',
         'automaticFacetFilters' => 'automaticFacetFilters',
         'automaticOptionalFacetFilters' => 'automaticOptionalFacetFilters',
+        'allowReRankingOnPersonalization' => 'allowReRankingOnPersonalization',
     ];
 
     /**
@@ -349,6 +352,7 @@ class ConsequenceParams extends AbstractModel implements ModelInterface, \ArrayA
         'query' => 'setQuery',
         'automaticFacetFilters' => 'setAutomaticFacetFilters',
         'automaticOptionalFacetFilters' => 'setAutomaticOptionalFacetFilters',
+        'allowReRankingOnPersonalization' => 'setAllowReRankingOnPersonalization',
     ];
 
     /**
@@ -433,6 +437,7 @@ class ConsequenceParams extends AbstractModel implements ModelInterface, \ArrayA
         'query' => 'getQuery',
         'automaticFacetFilters' => 'getAutomaticFacetFilters',
         'automaticOptionalFacetFilters' => 'getAutomaticOptionalFacetFilters',
+        'allowReRankingOnPersonalization' => 'getAllowReRankingOnPersonalization',
     ];
 
     /**
@@ -676,6 +681,9 @@ class ConsequenceParams extends AbstractModel implements ModelInterface, \ArrayA
         }
         if (isset($data['automaticOptionalFacetFilters'])) {
             $this->container['automaticOptionalFacetFilters'] = $data['automaticOptionalFacetFilters'];
+        }
+        if (isset($data['allowReRankingOnPersonalization'])) {
+            $this->container['allowReRankingOnPersonalization'] = $data['allowReRankingOnPersonalization'];
         }
     }
 
@@ -2571,6 +2579,30 @@ class ConsequenceParams extends AbstractModel implements ModelInterface, \ArrayA
     public function setAutomaticOptionalFacetFilters($automaticOptionalFacetFilters)
     {
         $this->container['automaticOptionalFacetFilters'] = $automaticOptionalFacetFilters;
+
+        return $this;
+    }
+
+    /**
+     * Gets allowReRankingOnPersonalization.
+     *
+     * @return null|bool
+     */
+    public function getAllowReRankingOnPersonalization()
+    {
+        return $this->container['allowReRankingOnPersonalization'] ?? null;
+    }
+
+    /**
+     * Sets allowReRankingOnPersonalization.
+     *
+     * @param null|bool $allowReRankingOnPersonalization Whether [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) runs concurrently with Personalization.  Dynamic Re-Ranking isn't applied when `distinct` > 1, even if `allowReRankingOnPersonalization` is `true`.
+     *
+     * @return self
+     */
+    public function setAllowReRankingOnPersonalization($allowReRankingOnPersonalization)
+    {
+        $this->container['allowReRankingOnPersonalization'] = $allowReRankingOnPersonalization;
 
         return $this;
     }

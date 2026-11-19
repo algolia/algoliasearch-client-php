@@ -95,6 +95,7 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
         'renderingContent' => '\Algolia\AlgoliaSearch\Model\Search\RenderingContent',
         'enableReRanking' => 'bool',
         'reRankingApplyFilter' => '\Algolia\AlgoliaSearch\Model\Search\ReRankingApplyFilter',
+        'allowReRankingOnPersonalization' => 'bool',
     ];
 
     /**
@@ -178,6 +179,7 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
         'renderingContent' => null,
         'enableReRanking' => null,
         'reRankingApplyFilter' => null,
+        'allowReRankingOnPersonalization' => null,
     ];
 
     /**
@@ -262,6 +264,7 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
         'renderingContent' => 'renderingContent',
         'enableReRanking' => 'enableReRanking',
         'reRankingApplyFilter' => 'reRankingApplyFilter',
+        'allowReRankingOnPersonalization' => 'allowReRankingOnPersonalization',
     ];
 
     /**
@@ -345,6 +348,7 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
         'renderingContent' => 'setRenderingContent',
         'enableReRanking' => 'setEnableReRanking',
         'reRankingApplyFilter' => 'setReRankingApplyFilter',
+        'allowReRankingOnPersonalization' => 'setAllowReRankingOnPersonalization',
     ];
 
     /**
@@ -428,6 +432,7 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
         'renderingContent' => 'getRenderingContent',
         'enableReRanking' => 'getEnableReRanking',
         'reRankingApplyFilter' => 'getReRankingApplyFilter',
+        'allowReRankingOnPersonalization' => 'getAllowReRankingOnPersonalization',
     ];
 
     /**
@@ -668,6 +673,9 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
         }
         if (isset($data['reRankingApplyFilter'])) {
             $this->container['reRankingApplyFilter'] = $data['reRankingApplyFilter'];
+        }
+        if (isset($data['allowReRankingOnPersonalization'])) {
+            $this->container['allowReRankingOnPersonalization'] = $data['allowReRankingOnPersonalization'];
         }
     }
 
@@ -2539,6 +2547,30 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
     public function setReRankingApplyFilter($reRankingApplyFilter)
     {
         $this->container['reRankingApplyFilter'] = $reRankingApplyFilter;
+
+        return $this;
+    }
+
+    /**
+     * Gets allowReRankingOnPersonalization.
+     *
+     * @return null|bool
+     */
+    public function getAllowReRankingOnPersonalization()
+    {
+        return $this->container['allowReRankingOnPersonalization'] ?? null;
+    }
+
+    /**
+     * Sets allowReRankingOnPersonalization.
+     *
+     * @param null|bool $allowReRankingOnPersonalization Whether [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) runs concurrently with Personalization.  Dynamic Re-Ranking isn't applied when `distinct` > 1, even if `allowReRankingOnPersonalization` is `true`.
+     *
+     * @return self
+     */
+    public function setAllowReRankingOnPersonalization($allowReRankingOnPersonalization)
+    {
+        $this->container['allowReRankingOnPersonalization'] = $allowReRankingOnPersonalization;
 
         return $this;
     }

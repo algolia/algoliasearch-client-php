@@ -39,6 +39,7 @@ class ConversationFullResponse extends AbstractModel implements ModelInterface, 
         'impactAnalytics' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ImpactAnalytics',
         'messages' => '\Algolia\AlgoliaSearch\Model\AgentStudio\MessageResponse[]',
         'analyticsDegraded' => 'bool',
+        'isEphemeral' => 'bool',
     ];
 
     /**
@@ -64,6 +65,7 @@ class ConversationFullResponse extends AbstractModel implements ModelInterface, 
         'impactAnalytics' => null,
         'messages' => null,
         'analyticsDegraded' => null,
+        'isEphemeral' => null,
     ];
 
     /**
@@ -90,6 +92,7 @@ class ConversationFullResponse extends AbstractModel implements ModelInterface, 
         'impactAnalytics' => 'impactAnalytics',
         'messages' => 'messages',
         'analyticsDegraded' => 'analyticsDegraded',
+        'isEphemeral' => 'isEphemeral',
     ];
 
     /**
@@ -115,6 +118,7 @@ class ConversationFullResponse extends AbstractModel implements ModelInterface, 
         'impactAnalytics' => 'setImpactAnalytics',
         'messages' => 'setMessages',
         'analyticsDegraded' => 'setAnalyticsDegraded',
+        'isEphemeral' => 'setIsEphemeral',
     ];
 
     /**
@@ -140,6 +144,7 @@ class ConversationFullResponse extends AbstractModel implements ModelInterface, 
         'impactAnalytics' => 'getImpactAnalytics',
         'messages' => 'getMessages',
         'analyticsDegraded' => 'getAnalyticsDegraded',
+        'isEphemeral' => 'getIsEphemeral',
     ];
 
     /**
@@ -206,6 +211,9 @@ class ConversationFullResponse extends AbstractModel implements ModelInterface, 
         }
         if (isset($data['analyticsDegraded'])) {
             $this->container['analyticsDegraded'] = $data['analyticsDegraded'];
+        }
+        if (isset($data['isEphemeral'])) {
+            $this->container['isEphemeral'] = $data['isEphemeral'];
         }
     }
 
@@ -703,6 +711,30 @@ class ConversationFullResponse extends AbstractModel implements ModelInterface, 
     public function setAnalyticsDegraded($analyticsDegraded)
     {
         $this->container['analyticsDegraded'] = $analyticsDegraded;
+
+        return $this;
+    }
+
+    /**
+     * Gets isEphemeral.
+     *
+     * @return null|bool
+     */
+    public function getIsEphemeral()
+    {
+        return $this->container['isEphemeral'] ?? null;
+    }
+
+    /**
+     * Sets isEphemeral.
+     *
+     * @param null|bool $isEphemeral isEphemeral
+     *
+     * @return self
+     */
+    public function setIsEphemeral($isEphemeral)
+    {
+        $this->container['isEphemeral'] = $isEphemeral;
 
         return $this;
     }

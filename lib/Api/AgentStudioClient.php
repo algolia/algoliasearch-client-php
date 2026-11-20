@@ -21,6 +21,7 @@ use Algolia\AlgoliaSearch\Model\AgentStudio\ContextCompactRequest;
 use Algolia\AlgoliaSearch\Model\AgentStudio\ContextResponse;
 use Algolia\AlgoliaSearch\Model\AgentStudio\ContextTrimRequest;
 use Algolia\AlgoliaSearch\Model\AgentStudio\ConversationFullResponse;
+use Algolia\AlgoliaSearch\Model\AgentStudio\ConversationUsageResponse;
 use Algolia\AlgoliaSearch\Model\AgentStudio\FeedbackCreationRequest;
 use Algolia\AlgoliaSearch\Model\AgentStudio\FeedbackResponse;
 use Algolia\AlgoliaSearch\Model\AgentStudio\FeedbackUpdateRequest;
@@ -286,13 +287,14 @@ class AgentStudioClient
      * @param bool   $memory                  Set to false to disable memory (enabled by default). (optional)
      * @param bool   $analytics               Set to false to skip analytics for this completion (default: true). Disables Agent Studio BigQuery analytics, Algolia search analytics, click analytics, and query-suggestions training. Useful for offline-eval workflows. (optional, default to true)
      * @param string $xAlgoliaSecureUserToken The X-Algolia-Secure-User-Token. (optional)
+     * @param bool   $ephemeral               Set to true to not retain the conversation: it is processed and analyzed like any other, but removed by the next cleanup run instead of being kept in the history. Overrides the agent's ephemeralConversations setting; omit to use it. (optional)
      * @param array  $requestOptions          the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|array<string,mixed>
      */
-    public function createAgentCompletion($agentId, $compatibilityMode, $agentCompletionRequest, $stream = null, $cache = null, $memory = null, $analytics = null, $xAlgoliaSecureUserToken = null, $requestOptions = [])
+    public function createAgentCompletion($agentId, $compatibilityMode, $agentCompletionRequest, $stream = null, $cache = null, $memory = null, $analytics = null, $xAlgoliaSecureUserToken = null, $ephemeral = null, $requestOptions = [])
     {
-        $response = $this->createAgentCompletionWithHttpInfo($agentId, $compatibilityMode, $agentCompletionRequest, $stream, $cache, $memory, $analytics, $xAlgoliaSecureUserToken, $requestOptions);
+        $response = $this->createAgentCompletionWithHttpInfo($agentId, $compatibilityMode, $agentCompletionRequest, $stream, $cache, $memory, $analytics, $xAlgoliaSecureUserToken, $ephemeral, $requestOptions);
 
         return $response->getData();
     }
@@ -490,11 +492,12 @@ class AgentStudioClient
      * @param string $agentId        The agentId. (required)
      * @param string $startDate      Filter conversations created after this date (format: YYYY-MM-DD). (optional)
      * @param string $endDate        Filter conversations created before this date (format: YYYY-MM-DD). (optional)
+     * @param bool   $ephemeral      Filter by ephemeral (not retained) conversations; omit to include both. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      */
-    public function deleteAgentConversations($agentId, $startDate = null, $endDate = null, $requestOptions = [])
+    public function deleteAgentConversations($agentId, $startDate = null, $endDate = null, $ephemeral = null, $requestOptions = [])
     {
-        $response = $this->deleteAgentConversationsWithHttpInfo($agentId, $startDate, $endDate, $requestOptions);
+        $response = $this->deleteAgentConversationsWithHttpInfo($agentId, $startDate, $endDate, $ephemeral, $requestOptions);
 
         return $response->getData();
     }
@@ -590,13 +593,14 @@ class AgentStudioClient
      * @param string $agentId        The agentId. (required)
      * @param string $startDate      Filter conversations created after this date (format: YYYY-MM-DD). (optional)
      * @param string $endDate        Filter conversations created before this date (format: YYYY-MM-DD). (optional)
+     * @param bool   $ephemeral      Filter by ephemeral (not retained) conversations; omit to include both. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|ConversationFullResponse[]
      */
-    public function exportConversations($agentId, $startDate = null, $endDate = null, $requestOptions = [])
+    public function exportConversations($agentId, $startDate = null, $endDate = null, $ephemeral = null, $requestOptions = [])
     {
-        $response = $this->exportConversationsWithHttpInfo($agentId, $startDate, $endDate, $requestOptions);
+        $response = $this->exportConversationsWithHttpInfo($agentId, $startDate, $endDate, $ephemeral, $requestOptions);
 
         return $response->getData();
     }
@@ -785,13 +789,14 @@ class AgentStudioClient
      * @param bool   $converted               Filter by conversations with at least one conversion. (optional)
      * @param bool   $hasAlgoliaSearch        Filter by conversations where the search tool was used. (optional)
      * @param string $xAlgoliaSecureUserToken The X-Algolia-Secure-User-Token. (optional)
+     * @param bool   $ephemeral               Filter by ephemeral (not retained) conversations; omit to include both. (optional)
      * @param array  $requestOptions          the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|PaginatedConversationsResponse
      */
-    public function listAgentConversations($agentId, $startDate = null, $endDate = null, $includeFeedback = null, $feedbackVote = null, $page = null, $limit = null, $includeImpactAnalytics = null, $clicked = null, $converted = null, $hasAlgoliaSearch = null, $xAlgoliaSecureUserToken = null, $requestOptions = [])
+    public function listAgentConversations($agentId, $startDate = null, $endDate = null, $includeFeedback = null, $feedbackVote = null, $page = null, $limit = null, $includeImpactAnalytics = null, $clicked = null, $converted = null, $hasAlgoliaSearch = null, $xAlgoliaSecureUserToken = null, $ephemeral = null, $requestOptions = [])
     {
-        $response = $this->listAgentConversationsWithHttpInfo($agentId, $startDate, $endDate, $includeFeedback, $feedbackVote, $page, $limit, $includeImpactAnalytics, $clicked, $converted, $hasAlgoliaSearch, $xAlgoliaSecureUserToken, $requestOptions);
+        $response = $this->listAgentConversationsWithHttpInfo($agentId, $startDate, $endDate, $includeFeedback, $feedbackVote, $page, $limit, $includeImpactAnalytics, $clicked, $converted, $hasAlgoliaSearch, $xAlgoliaSecureUserToken, $ephemeral, $requestOptions);
 
         return $response->getData();
     }
@@ -812,6 +817,23 @@ class AgentStudioClient
     public function listAgents($page = null, $limit = null, $providerId = null, $requestOptions = [])
     {
         $response = $this->listAgentsWithHttpInfo($page, $limit, $providerId, $requestOptions);
+
+        return $response->getData();
+    }
+
+    /**
+     * Live conversations counted against the per-application limit.
+     *
+     * Required API Key ACLs:
+     *  - logs
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|ConversationUsageResponse
+     */
+    public function listConversationUsage($requestOptions = [])
+    {
+        $response = $this->listConversationUsageWithHttpInfo($requestOptions);
 
         return $response->getData();
     }
@@ -1309,11 +1331,12 @@ class AgentStudioClient
      * @param bool                              $memory                  Set to false to disable memory (enabled by default). (optional)
      * @param bool                              $analytics               Set to false to skip analytics for this completion (default: true). Disables Agent Studio BigQuery analytics, Algolia search analytics, click analytics, and query-suggestions training. Useful for offline-eval workflows. (optional)
      * @param string                            $xAlgoliaSecureUserToken The X-Algolia-Secure-User-Token. (optional)
+     * @param bool                              $ephemeral               Set to true to not retain the conversation: it is processed and analyzed like any other, but removed by the next cleanup run instead of being kept in the history. Overrides the agent's ephemeralConversations setting; omit to use it. (optional)
      * @param array                             $requestOptions          Request options
      *
      * @return AlgoliaResponse
      */
-    public function createAgentCompletionWithHttpInfo($agentId, $compatibilityMode, $agentCompletionRequest, $stream = null, $cache = null, $memory = null, $analytics = null, $xAlgoliaSecureUserToken = null, $requestOptions = [])
+    public function createAgentCompletionWithHttpInfo($agentId, $compatibilityMode, $agentCompletionRequest, $stream = null, $cache = null, $memory = null, $analytics = null, $xAlgoliaSecureUserToken = null, $ephemeral = null, $requestOptions = [])
     {
         // verify the required parameter 'agentId' is set
         if (!isset($agentId)) {
@@ -1363,6 +1386,10 @@ class AgentStudioClient
 
         if (null !== $analytics) {
             $queryParameters['analytics'] = $analytics;
+        }
+
+        if (null !== $ephemeral) {
+            $queryParameters['ephemeral'] = $ephemeral;
         }
 
         // path params
@@ -1786,11 +1813,12 @@ class AgentStudioClient
      * @param string $agentId        The agentId. (required)
      * @param string $startDate      Filter conversations created after this date (format: YYYY-MM-DD). (optional)
      * @param string $endDate        Filter conversations created before this date (format: YYYY-MM-DD). (optional)
+     * @param bool   $ephemeral      Filter by ephemeral (not retained) conversations; omit to include both. (optional)
      * @param array  $requestOptions Request options
      *
      * @return AlgoliaResponse
      */
-    public function deleteAgentConversationsWithHttpInfo($agentId, $startDate = null, $endDate = null, $requestOptions = [])
+    public function deleteAgentConversationsWithHttpInfo($agentId, $startDate = null, $endDate = null, $ephemeral = null, $requestOptions = [])
     {
         // verify the required parameter 'agentId' is set
         if (!isset($agentId)) {
@@ -1816,6 +1844,10 @@ class AgentStudioClient
 
         if (null !== $endDate) {
             $queryParameters['endDate'] = $endDate;
+        }
+
+        if (null !== $ephemeral) {
+            $queryParameters['ephemeral'] = $ephemeral;
         }
 
         // path params
@@ -2110,11 +2142,12 @@ class AgentStudioClient
      * @param string $agentId        The agentId. (required)
      * @param string $startDate      Filter conversations created after this date (format: YYYY-MM-DD). (optional)
      * @param string $endDate        Filter conversations created before this date (format: YYYY-MM-DD). (optional)
+     * @param bool   $ephemeral      Filter by ephemeral (not retained) conversations; omit to include both. (optional)
      * @param array  $requestOptions Request options
      *
      * @return AlgoliaResponse
      */
-    public function exportConversationsWithHttpInfo($agentId, $startDate = null, $endDate = null, $requestOptions = [])
+    public function exportConversationsWithHttpInfo($agentId, $startDate = null, $endDate = null, $ephemeral = null, $requestOptions = [])
     {
         // verify the required parameter 'agentId' is set
         if (!isset($agentId)) {
@@ -2140,6 +2173,10 @@ class AgentStudioClient
 
         if (null !== $endDate) {
             $queryParameters['endDate'] = $endDate;
+        }
+
+        if (null !== $ephemeral) {
+            $queryParameters['ephemeral'] = $ephemeral;
         }
 
         // path params
@@ -2623,11 +2660,12 @@ class AgentStudioClient
      * @param bool   $converted               Filter by conversations with at least one conversion. (optional)
      * @param bool   $hasAlgoliaSearch        Filter by conversations where the search tool was used. (optional)
      * @param string $xAlgoliaSecureUserToken The X-Algolia-Secure-User-Token. (optional)
+     * @param bool   $ephemeral               Filter by ephemeral (not retained) conversations; omit to include both. (optional)
      * @param array  $requestOptions          Request options
      *
      * @return AlgoliaResponse
      */
-    public function listAgentConversationsWithHttpInfo($agentId, $startDate = null, $endDate = null, $includeFeedback = null, $feedbackVote = null, $page = null, $limit = null, $includeImpactAnalytics = null, $clicked = null, $converted = null, $hasAlgoliaSearch = null, $xAlgoliaSecureUserToken = null, $requestOptions = [])
+    public function listAgentConversationsWithHttpInfo($agentId, $startDate = null, $endDate = null, $includeFeedback = null, $feedbackVote = null, $page = null, $limit = null, $includeImpactAnalytics = null, $clicked = null, $converted = null, $hasAlgoliaSearch = null, $xAlgoliaSecureUserToken = null, $ephemeral = null, $requestOptions = [])
     {
         // verify the required parameter 'agentId' is set
         if (!isset($agentId)) {
@@ -2687,6 +2725,10 @@ class AgentStudioClient
             $queryParameters['hasAlgoliaSearch'] = $hasAlgoliaSearch;
         }
 
+        if (null !== $ephemeral) {
+            $queryParameters['ephemeral'] = $ephemeral;
+        }
+
         // path params
         if (null !== $agentId) {
             $resourcePath = str_replace(
@@ -2734,6 +2776,28 @@ class AgentStudioClient
         if (null !== $providerId) {
             $queryParameters['providerId'] = $providerId;
         }
+
+        return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Get Conversation Usage (with HTTP info).
+     *
+     * Returns the response with HTTP metadata (status code, headers, body)
+     * Live conversations counted against the per-application limit.
+     * Required API Key ACLs:
+     *  - logs
+     *
+     * @param array $requestOptions Request options
+     *
+     * @return AlgoliaResponse
+     */
+    public function listConversationUsageWithHttpInfo($requestOptions = [])
+    {
+        $resourcePath = '/agent-studio/1/configuration/conversation-usage';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
 
         return $this->sendRequestWithHttpInfo('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }

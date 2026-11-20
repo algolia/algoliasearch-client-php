@@ -37,6 +37,7 @@ class ConversationBaseResponse extends AbstractModel implements ModelInterface, 
         'conversationMetadata' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ConversationMetadata',
         'feedback' => '\Algolia\AlgoliaSearch\Model\AgentStudio\FeedbackResponse[]',
         'impactAnalytics' => '\Algolia\AlgoliaSearch\Model\AgentStudio\ImpactAnalytics',
+        'isEphemeral' => 'bool',
     ];
 
     /**
@@ -60,6 +61,7 @@ class ConversationBaseResponse extends AbstractModel implements ModelInterface, 
         'conversationMetadata' => null,
         'feedback' => null,
         'impactAnalytics' => null,
+        'isEphemeral' => null,
     ];
 
     /**
@@ -84,6 +86,7 @@ class ConversationBaseResponse extends AbstractModel implements ModelInterface, 
         'conversationMetadata' => 'conversationMetadata',
         'feedback' => 'feedback',
         'impactAnalytics' => 'impactAnalytics',
+        'isEphemeral' => 'isEphemeral',
     ];
 
     /**
@@ -107,6 +110,7 @@ class ConversationBaseResponse extends AbstractModel implements ModelInterface, 
         'conversationMetadata' => 'setConversationMetadata',
         'feedback' => 'setFeedback',
         'impactAnalytics' => 'setImpactAnalytics',
+        'isEphemeral' => 'setIsEphemeral',
     ];
 
     /**
@@ -130,6 +134,7 @@ class ConversationBaseResponse extends AbstractModel implements ModelInterface, 
         'conversationMetadata' => 'getConversationMetadata',
         'feedback' => 'getFeedback',
         'impactAnalytics' => 'getImpactAnalytics',
+        'isEphemeral' => 'getIsEphemeral',
     ];
 
     /**
@@ -190,6 +195,9 @@ class ConversationBaseResponse extends AbstractModel implements ModelInterface, 
         }
         if (isset($data['impactAnalytics'])) {
             $this->container['impactAnalytics'] = $data['impactAnalytics'];
+        }
+        if (isset($data['isEphemeral'])) {
+            $this->container['isEphemeral'] = $data['isEphemeral'];
         }
     }
 
@@ -636,6 +644,30 @@ class ConversationBaseResponse extends AbstractModel implements ModelInterface, 
     public function setImpactAnalytics($impactAnalytics)
     {
         $this->container['impactAnalytics'] = $impactAnalytics;
+
+        return $this;
+    }
+
+    /**
+     * Gets isEphemeral.
+     *
+     * @return null|bool
+     */
+    public function getIsEphemeral()
+    {
+        return $this->container['isEphemeral'] ?? null;
+    }
+
+    /**
+     * Sets isEphemeral.
+     *
+     * @param null|bool $isEphemeral isEphemeral
+     *
+     * @return self
+     */
+    public function setIsEphemeral($isEphemeral)
+    {
+        $this->container['isEphemeral'] = $isEphemeral;
 
         return $this;
     }

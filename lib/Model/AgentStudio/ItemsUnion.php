@@ -380,7 +380,7 @@ class ItemsUnion extends AbstractModel implements ModelInterface, \ArrayAccess, 
     /**
      * Sets description.
      *
-     * @param string $description description
+     * @param string $description What the tool does, as the agent reads it. Leave unset to use the default description.
      *
      * @return self
      */

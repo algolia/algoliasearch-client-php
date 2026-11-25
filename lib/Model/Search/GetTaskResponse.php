@@ -21,6 +21,7 @@ class GetTaskResponse extends AbstractModel implements ModelInterface, \ArrayAcc
      */
     protected static $modelTypes = [
         'status' => '\Algolia\AlgoliaSearch\Model\Search\TaskStatus',
+        'pendingTask' => 'bool',
     ];
 
     /**
@@ -30,6 +31,7 @@ class GetTaskResponse extends AbstractModel implements ModelInterface, \ArrayAcc
      */
     protected static $modelFormats = [
         'status' => null,
+        'pendingTask' => null,
     ];
 
     /**
@@ -40,6 +42,7 @@ class GetTaskResponse extends AbstractModel implements ModelInterface, \ArrayAcc
      */
     protected static $attributeMap = [
         'status' => 'status',
+        'pendingTask' => 'pendingTask',
     ];
 
     /**
@@ -49,6 +52,7 @@ class GetTaskResponse extends AbstractModel implements ModelInterface, \ArrayAcc
      */
     protected static $setters = [
         'status' => 'setStatus',
+        'pendingTask' => 'setPendingTask',
     ];
 
     /**
@@ -58,6 +62,7 @@ class GetTaskResponse extends AbstractModel implements ModelInterface, \ArrayAcc
      */
     protected static $getters = [
         'status' => 'getStatus',
+        'pendingTask' => 'getPendingTask',
     ];
 
     /**
@@ -76,6 +81,9 @@ class GetTaskResponse extends AbstractModel implements ModelInterface, \ArrayAcc
     {
         if (isset($data['status'])) {
             $this->container['status'] = $data['status'];
+        }
+        if (isset($data['pendingTask'])) {
+            $this->container['pendingTask'] = $data['pendingTask'];
         }
     }
 
@@ -177,6 +185,34 @@ class GetTaskResponse extends AbstractModel implements ModelInterface, \ArrayAcc
     public function setStatus($status)
     {
         $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets pendingTask.
+     *
+     * @return null|bool
+     *
+     * @deprecated
+     */
+    public function getPendingTask()
+    {
+        return $this->container['pendingTask'] ?? null;
+    }
+
+    /**
+     * Sets pendingTask.
+     *
+     * @param null|bool $pendingTask Indicates whether the index has pending tasks. This value is deprecated and always `false`. Don't use it.
+     *
+     * @return self
+     *
+     * @deprecated
+     */
+    public function setPendingTask($pendingTask)
+    {
+        $this->container['pendingTask'] = $pendingTask;
 
         return $this;
     }

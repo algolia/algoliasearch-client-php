@@ -4675,7 +4675,11 @@ class SearchClient
                 'moveOperationResponse' => $moveOperationResponse,
             ];
         } catch (\Throwable $e) {
-            $this->deleteIndex($tmpIndexName, $searchRequestOptions);
+            try {
+                $this->deleteIndex($tmpIndexName, $searchRequestOptions);
+            } catch (\Throwable $deleteException) {
+                // best effort cleanup, the original error is rethrown below
+            }
 
             throw $e;
         }

@@ -6,6 +6,7 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\IngestionConfig;
+use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
 use Algolia\AlgoliaSearch\Exceptions\ExceededRetriesException;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Model\Ingestion\Authentication;
@@ -4583,18 +4584,27 @@ class IngestionClient
         $logger->info('Algolia API client: Batch operation started: '.$action.' on '.$indexName);
 
         // Polls every task in the `[$start, $end)` window of `$responses` until it completes.
-        $waitForBatch = function ($start, $end) use (&$responses, $maxRetries) {
+        $waitForBatch = function ($start, $end) use (&$responses, $maxRetries, $indexName) {
             foreach (array_slice($responses, $start, $end - $start) as $response) {
                 $retry = 0;
                 $ok = false;
 
                 while ($retry < $maxRetries) {
                     try {
-                        $this->getEvent($response['runID'], $response['eventID']);
+                        $event = $this->getEvent($response['runID'], $response['eventID']);
+                        $status = $event['status'] ?? null;
 
-                        $ok = true;
+                        if (in_array($status, ['created', 'started', 'retried'], true)) {
+                            // still in progress, poll again
+                        } elseif (null === $status || 'succeeded' === $status) {
+                            $ok = true;
 
-                        break;
+                            break;
+                        } else {
+                            $message = $event['data']['message'] ?? null;
+
+                            throw new AlgoliaException('ingestion push to index '.$indexName.' did not succeed: event '.$response['eventID'].' of run '.$response['runID'].' has status '.$status.(is_string($message) && '' !== $message ? ': '.$message : ''));
+                        }
                     } catch (NotFoundException $e) {
                         // just retry
                     }
